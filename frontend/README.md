@@ -1,6 +1,6 @@
 # About This Repository
 
-Wrap and unwrap your ETH with this simple React frontend dapp that connects to your metamask and uses the WETH contract
+Buy your electricity using smart contract integration
 
 # How To Run This Project On Your Local Machine
 1. In root folder: Install all dependencies with `npm install`
