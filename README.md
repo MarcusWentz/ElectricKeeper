@@ -17,4 +17,3 @@ Diode Current Equation: https://www.pveducation.org/pvcdrom/pn-junctions/diode-e
 
 Project Name Ideas: ElectricalEthereum , KeepGrid, KeepElectric  
 
-Javascript scripts are more likely for production ad Python is experimental / optional. 
