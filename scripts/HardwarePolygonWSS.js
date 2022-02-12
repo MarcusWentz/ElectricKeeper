@@ -7,7 +7,7 @@ const contractDefined_JS = new web3.eth.Contract(contractABI_JS, contractAddress
 
 //https://github.com/sarfata/pi-blaster
 //Build and install directly from source
-// var piblaster = require('pi-blaster.js');
+var piblaster = require('pi-blaster.js');
 const timeMilliSec = 1000;
 const pulseWidthMin = 0.00;
 const pulseWidthMax = 0.35;
@@ -22,17 +22,17 @@ function checkValueLatest() { //get() contract value,
 
 	if(balance == 1){
 	   	console.log("RED, BLUE RED AND GREEN LEDS ON!")
-		// piblaster.setPwm(LED_RED, pulseWidthMax);
-		// piblaster.setPwm(LED_GREEN, pulseWidthMax);
-		// piblaster.setPwm(LED_YELLOW, pulseWidthMax);
-		// piblaster.setPwm(LED_BLUE, pulseWidthMax);
+		piblaster.setPwm(LED_RED, pulseWidthMax);
+		piblaster.setPwm(LED_GREEN, pulseWidthMax);
+		piblaster.setPwm(LED_YELLOW, pulseWidthMax);
+		piblaster.setPwm(LED_BLUE, pulseWidthMax);
 	}
 	else{
 	   	console.log("RED, BLUE RED AND GREEN LEDS OFF!")
-	  // piblaster.setPwm(LED_RED, pulseWidthMin);
-		// piblaster.setPwm(LED_GREEN, pulseWidthMin);
-		// piblaster.setPwm(LED_YELLOW, pulseWidthMin);
-		// piblaster.setPwm(LED_BLUE, pulseWidthMin);
+	  	piblaster.setPwm(LED_RED, pulseWidthMin);
+		piblaster.setPwm(LED_GREEN, pulseWidthMin);
+		piblaster.setPwm(LED_YELLOW, pulseWidthMin);
+		piblaster.setPwm(LED_BLUE, pulseWidthMin);
 	}
 	setTimeout(() => {}, timeMilliSec);
   })
