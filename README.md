@@ -6,9 +6,13 @@ Animation test (source): https://sfecdn.s3.amazonaws.com/tutorialimages/Pulse_LE
 
 <img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/animation.gif" alt="Test"/>
 
-!!!!Idea:!!!!
+__________ Next step _______
 
-Chainlink Pricefeeds to keep track of fixed cost based on USD pair of MSG.VALUE while keeping subscription rate counter
+-Write a basic contract changing states
+
+____ Ideas ___
+
+-Chainlink Pricefeeds to keep track of fixed cost based on USD pair of MSG.VALUE while keeping subscription rate counter
 
 Hardware: 
 
@@ -23,5 +27,5 @@ The LED is used to show a connection is powered while the 330 ohm resistor in se
 Diode Current Equation: https://www.allaboutcircuits.com/technical-articles/understanding-i-v-curves-of-non-linear-devices/
 <img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/diode_graph.png" alt="Wiring"/>
 
-Project Name Ideas: ElectricalEthereum , KeepGrid, KeepElectric  
+__________ Project Name Ideas: ElectricalEthereum , KeepGrid, KeepElectric  _____________
 
