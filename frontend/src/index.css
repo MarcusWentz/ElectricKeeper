@@ -1,0 +1,139 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Prompt", sans-serif;
+}
+
+body {
+  margin: 0;
+  background: -webkit-radial-gradient(
+    top,
+    circle cover,
+    #3c3b52 0%,
+    #000000 80%
+  );
+  /*Fix height: 100% or something instead, this is no good fix*/
+  height: 1000px;
+  font-family: "Prompt", sans-serif;
+}
+
+main {
+  margin-top: 7rem;
+  height: 100%;
+  text-align: center;
+  top: 20px;
+}
+
+.btn-light {
+  color: #fff;
+  background-color: #0e1340;
+  border-color: #0e1340;
+  margin-left: 20px;
+  width: 140px;
+}
+.btn-light:hover {
+  color: #fff;
+  background-color: #3c4278;
+  border-color: #0e1340;
+}
+
+h1,
+h2,
+h3,
+p {
+  color: white;
+}
+
+.gradient-text {
+  background: linear-gradient(45deg, #d36100, yellow);
+  background-size: 150% 150%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.modal-content {
+  background-color: white;
+  color: #0e1340;
+  border-radius: 15px;
+  border: 2px solid #3c4278;
+}
+.closeButton {
+  color: white !important;
+}
+
+.metamask-addr-container {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  font-size: 12px;
+}
+
+/*Navbar styles below*/
+
+.navbar {
+  width: 100%;
+  max-width: 100%;
+  min-height: 10vh;
+  position: fixed;
+  top: 0;
+  background-color: transparent;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.logo {
+  max-width: 100%;
+  width: 200px;
+  height: auto;
+}
+.nav-ul {
+  width: 50%;
+  height: 7vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(3px);
+}
+.nav-li {
+  list-style-type: none;
+}
+.nav-li a {
+  position: relative;
+  font-size: 17px;
+  font-weight: 600;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+.nav-li a::after {
+  content: "";
+  position: absolute;
+  bottom: -1.6vh;
+  left: 0;
+  height: 1px;
+  width: 0%;
+  background-color: white;
+  transition: 0.3s ease;
+}
+.nav-li a:hover::after {
+  width: 100%;
+}
+.sr-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.mobile-toggle {
+  display: none;
+}
+
+/*Navbar styles ended*/
