@@ -1,6 +1,7 @@
 # ElectricalEthereum
 
-An automated electrical grid powered by a hybrid smart contract using Chainlink Keepers. 
+An automated electrical grid.
+Powered by a Raspberry Pi 4, which is controlled by a hybrid smart contract using Chainlink Keepers to automate turning off LEDs for electrical bill expirations. 
 
 Hardware: 
 
