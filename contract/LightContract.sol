@@ -13,12 +13,12 @@ contract LightContract {
     }
 
     modifier onlyOwner() {
-        require(msg.sender == Owner);
+        require(msg.sender == Owner, "ONLY_OWNER_WALLET_ADDRESS_HAS_ACCESS.");
         _;
     }
 
     function BuyElectricity() public payable {
-        require(msg.value == 1*(10**18) && VoltageState == 0);
+        require(msg.value == 1*(10**18) && VoltageState == 0, "MSG.VALUE_MUST_BE_1_ETH_AND_VOLTAGE_STATE_MUST_BE_0.");
         VoltageState = 1;
         LatestRenewalTime = block.timestamp;
         payable(Owner).transfer(1 ether);
@@ -26,7 +26,7 @@ contract LightContract {
     }
 
     function OwnerManualTurnOffElectricity() public onlyOwner {
-        require(VoltageState == 1);
+        require(VoltageState == 1, "VOLTAGE_STATE_MUST_BE_1.");
         VoltageState = 0;
         LatestRenewalTime = 0;
         emit VoltageChange(VoltageState);
