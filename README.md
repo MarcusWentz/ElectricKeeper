@@ -15,7 +15,7 @@ Hardware:
 
 -330 ohm resistor [Quantity: 1]
 
-The LED is used to show a connection is powered while the 330 ohm resistor limits current (divides voltage away from LED which exponetinally increases current).
+The LED is used to show a connection is powered while the 330 ohm resistor in series with the LED limits current (divides voltage away from LED which exponetinally increases current).
 
 Diode Current Equation: https://www.allaboutcircuits.com/technical-articles/understanding-i-v-curves-of-non-linear-devices/
 <img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/diode_graph.png" alt="Wiring"/>
