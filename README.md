@@ -18,6 +18,7 @@ Hardware:
 The LED is used to show a connection is powered while the 330 ohm resistor limits current (divides voltage away from LED which exponetinally increases current).
 
 Diode Current Equation: https://www.pveducation.org/pvcdrom/pn-junctions/diode-equation
+<img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/Images/DIODE_VOLTAGE.png" alt="Wiring"/>
 
 Project Name Ideas: ElectricalEthereum , KeepGrid, KeepElectric  
 
