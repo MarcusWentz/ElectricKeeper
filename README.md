@@ -15,4 +15,4 @@ The LED is used to show a connection is powered while the 330 ohm resistor limit
 
 Diode Current Equation: https://www.pveducation.org/pvcdrom/pn-junctions/diode-equation
 
-Project NNames: ElectricalEthereum , KeepGrid, KeepElectric  
+Project Name Ideas: ElectricalEthereum , KeepGrid, KeepElectric  
