@@ -1,16 +1,7 @@
-//Source material: https://www.dappuniversity.com/articles/web3-js-intro
-//Need to import web3 Linux:
-//sudo npm install web3
-//HIDE KEYS WITH "Linux Environment Variables" https://www.youtube.com/watch?v=himEMfYQJ1w
-
-//Connect to Web3.
-const Web3 = require('web3')
-//Use WSS to get live event data instead of polling constantly,
-const rpcURL = "wss://ws-matic-mumbai.chainstacklabs.com" // Your RPC URL goes here
-//Connect to Web3 with Infura WSS.
+const Web3 = require('web3') //HIDE KEYS WITH "Linux Environment Variables" https://www.youtube.com/watch?v=himEMfYQJ1w "vim .bashrc" > "i" > update > "esc" > ":w" enter
+const rpcURL =  process.env.PolygonMumbaiTestnetSubscribeAlchemyWSS //Use WSS to get live event data instead of polling constantly,
 const web3 = new Web3(rpcURL)
-//Define contract
-const contractAddress_JS = '0x6B63D45981A5c444004358D6feeaccB6aD8f584A'
+const contractAddress_JS = '0x807D55FD8D068E18D4E2B4FF1fC5506e52C133C1'
 const contractABI_JS = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"State","type":"uint256"}],"name":"VoltageChange","type":"event"},{"inputs":[],"name":"BuyElectricity","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"LatestRenewalTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"Owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"OwnerManualTurnOffElectricity","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"VoltageState","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]
 const contractDefined_JS = new web3.eth.Contract(contractABI_JS, contractAddress_JS)
 
@@ -25,8 +16,7 @@ const LED_GREEN = 22;
 const LED_YELLOW = 23;
 const LED_BLUE = 27;
 
-//get() contract value,
-function checkValueLatest() {
+function checkValueLatest() { //get() contract value,
   contractDefined_JS.methods.VoltageState().call((err, balance) => {
   	console.log(balance)
 
@@ -39,7 +29,7 @@ function checkValueLatest() {
 	}
 	else{
 	   	console.log("RED, BLUE RED AND GREEN LEDS OFF!")
-	  //  	piblaster.setPwm(LED_RED, pulseWidthMin);
+	  // piblaster.setPwm(LED_RED, pulseWidthMin);
 		// piblaster.setPwm(LED_GREEN, pulseWidthMin);
 		// piblaster.setPwm(LED_YELLOW, pulseWidthMin);
 		// piblaster.setPwm(LED_BLUE, pulseWidthMin);
@@ -51,15 +41,12 @@ function checkValueLatest() {
 console.log("Contract starting value:")
 checkValueLatest();
 
-//Subscribe to event.
-contractDefined_JS.events.VoltageChange({
+contractDefined_JS.events.VoltageChange({ //Subscribe to event.
      fromBlock: 'latest'
  }, function(error, eventResult){})
  .on('data', function(eventResult){
-    //console.log(eventResult)
-   //Call the get function to get the most accurate present state for the value.
    console.log("EVENT DETECTED! NEW STATE VALUE: ")
-   checkValueLatest();
+   checkValueLatest();  //Call the get function to get the most accurate present state for the value.
    })
  .on('changed', function(eventResult){
      // remove event from local database
