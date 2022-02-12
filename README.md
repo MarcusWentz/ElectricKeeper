@@ -3,6 +3,7 @@
 An automated electrical grid powered by a hybrid smart contract using Chainlink Keepers. 
 
 Hardware: 
+
 -Raspberry Pi 4 [Quantity: 1]
 
 -LED (Red) [Quantity: 1]
