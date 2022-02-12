@@ -1,4 +1,4 @@
-# ElectricalEthereum
+# ElectricalEthereum WORK IN PROGRESS
 
 An automated electrical grid.
 Powered by a Raspberry Pi 4, which is controlled by a hybrid smart contract using Chainlink Keepers to automate turning off LEDs for electrical bill expirations.
@@ -6,13 +6,6 @@ Animation test (source): https://sfecdn.s3.amazonaws.com/tutorialimages/Pulse_LE
 
 <img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/animation.gif" alt="Test"/>
 
-__________ Next step _______
-
--Write a basic contract changing states
-
-____ Ideas ___
-
--Chainlink Pricefeeds to keep track of fixed cost based on USD pair of MSG.VALUE while keeping subscription rate counter
 
 Hardware: 
 
