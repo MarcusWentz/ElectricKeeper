@@ -27,7 +27,7 @@ contract ElectricEthereum {
             ExpirationTimeUNIX[ledValue] += (60*minutesToHaveOn); 
         }
         emit VoltageChange(VoltageStates);
-        payable(Owner).transfer(1 ether);
+        payable(Owner).transfer(address(this).balance);
     }
 
     function OwnerManualTurnOffElectricity() public onlyOwner {
