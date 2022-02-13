@@ -17,25 +17,40 @@ contract ElectricEthereum {
         _;
     }
 
-    function BuyElectricityTimeOn(uint ledValue) public payable {
+    function BuyElectricityTimeOn(uint ledValue, uint minutesToHaveOn) public payable {
         require(ledValue >= 0 && ledValue < 4);
-        require(msg.value == 1*(10**18), "MSG.VALUE_MUST_BE_1_ETH.");
+        require(msg.value == minutesToHaveOn*1*(10**18), "MSG.VALUE_MUST_BE_1_ETH.");
         if(ExpirationTimeUNIX[ledValue] == 0) {
             VoltageStates[ledValue] = 1;
-            ExpirationTimeUNIX[ledValue] = block.timestamp + 60; 
+            ExpirationTimeUNIX[ledValue] = block.timestamp + (60*minutesToHaveOn); 
         } else {
-            ExpirationTimeUNIX[ledValue] += 60; 
+            ExpirationTimeUNIX[ledValue] += (60*minutesToHaveOn); 
         }
         emit VoltageChange(VoltageStates);
         payable(Owner).transfer(1 ether);
     }
 
-    function OwnerManualTurnOffElectricity(uint ledValue) public onlyOwner {
-        require(ledValue >= 0 && ledValue < 4);
-        require(block.timestamp > ExpirationTimeUNIX[ledValue] && VoltageStates[ledValue] == 1, "NOT_EXPIRED_YET_AND_VOLTAGE_STATE_MUST_BE_1.");
-        //NEED TO BREAK INTO 4 SECTIONS 
-        VoltageStates[ledValue] = 0;
-        ExpirationTimeUNIX[ledValue] = 0;
+    function OwnerManualTurnOffElectricity() public onlyOwner {
+        require( (block.timestamp > ExpirationTimeUNIX[0] && VoltageStates[0] == 1) || 
+                 (block.timestamp > ExpirationTimeUNIX[1] && VoltageStates[1] == 1) || 
+                 (block.timestamp > ExpirationTimeUNIX[2] && VoltageStates[2] == 1) || 
+                 (block.timestamp > ExpirationTimeUNIX[3] && VoltageStates[3] == 1)   , "NO_EXPIRATION_YET.");
+        if(block.timestamp > ExpirationTimeUNIX[0] && VoltageStates[0] == 1){
+            VoltageStates[0] = 0;
+            ExpirationTimeUNIX[0] = 0;
+        }
+        if(block.timestamp > ExpirationTimeUNIX[1] && VoltageStates[1] == 1){
+            VoltageStates[1] = 0;
+            ExpirationTimeUNIX[1] = 0;
+        }
+        if(block.timestamp > ExpirationTimeUNIX[2] && VoltageStates[2] == 1){
+            VoltageStates[2] = 0;
+            ExpirationTimeUNIX[2] = 0;
+        }
+        if(block.timestamp > ExpirationTimeUNIX[3] && VoltageStates[3] == 1){
+            VoltageStates[3] = 0;
+            ExpirationTimeUNIX[3] = 0;
+        }
         emit VoltageChange(VoltageStates);
     }
 }
