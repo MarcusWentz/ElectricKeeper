@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.11;
 
-contract LightContract {
+contract ElectricEthereum {
 
     uint public VoltageState;
-    uint public LatestRenewalTime;
+    uint public ExpirationTimeUNIX;
     address public immutable Owner;
     event VoltageChange (uint State);
 
@@ -20,15 +20,15 @@ contract LightContract {
     function BuyElectricity() public payable {
         require(msg.value == 1*(10**18) && VoltageState == 0, "MSG.VALUE_MUST_BE_1_ETH_AND_VOLTAGE_STATE_MUST_BE_0.");
         VoltageState = 1;
-        LatestRenewalTime = block.timestamp;
+        ExpirationTimeUNIX = block.timestamp + 60;
         payable(Owner).transfer(1 ether);
         emit VoltageChange(VoltageState);
     }
 
     function OwnerManualTurnOffElectricity() public onlyOwner {
-        require(VoltageState == 1, "VOLTAGE_STATE_MUST_BE_1.");
+        require(block.timestamp > ExpirationTimeUNIX && VoltageState == 1, "NOT_EXPIRED_YET_AND_VOLTAGE_STATE_MUST_BE_1.");
         VoltageState = 0;
-        LatestRenewalTime = 0;
+        ExpirationTimeUNIX = 0;
         emit VoltageChange(VoltageState);
     }
 
