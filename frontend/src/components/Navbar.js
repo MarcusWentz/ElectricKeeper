@@ -4,7 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import classes from "./Navbar.module.css";
 
-const Navbar = () => {
+
+const Navbar = ({}) => {
   return (
     <header className={classes.header}>
       {/*       <nav>
@@ -85,6 +86,24 @@ const Navbar = () => {
             >
               About
             </NavLink>{" "}
+          </li>
+          <li class="nav-li">
+ {/*            <div className="metamask-addr-container">
+              <button
+                className="btn btn-light mm"
+                onClick={handleConnectMetamask}
+              >
+                <img
+                  width="30"
+                  height="30"
+                  style={{ marginRight: 5 }}
+                  src="https://cdn.discordapp.com/attachments/908513230714982410/913132016365633596/aaaaa.png"
+                ></img>
+                {connectedAddrValue !== ""
+                  ? connectedAddrValue
+                  : "Connect Metamask"}
+              </button>
+            </div> */}
           </li>
         </ul>
         <button

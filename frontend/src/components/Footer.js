@@ -3,6 +3,7 @@ import { faGift } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from 'react-router-dom';
 import EthLogo from "../assets/svg/eth_logo.svg";
+import { faBolt } from "@fortawesome/free-solid-svg-icons";
 
 
 
@@ -16,6 +17,7 @@ const Footer = () => {
           <ul class="box">
             <li class="link_name">Wrap ETH</li>
             <li>
+
               <img width="20%" src={EthLogo} />
             </li>
           </ul>

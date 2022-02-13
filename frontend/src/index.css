@@ -13,11 +13,11 @@ body {
   background: -webkit-radial-gradient(
     top,
     circle cover,
-    #3c3b52 0%,
-    #000000 80%
+    #52493b 0%,
+    #000000 70%
   );
   /*Fix height: 100% or something instead, this is no good fix*/
-  height: 1000px;
+  height: 700px;
   font-family: "Prompt", sans-serif;
 }
 
@@ -45,7 +45,7 @@ h1,
 h2,
 h3,
 p {
-  color: white;
+  color: #dfb25e;
 }
 
 .gradient-text {
@@ -106,7 +106,7 @@ p {
   position: relative;
   font-size: 17px;
   font-weight: 600;
-  color: white;
+  color: #ffdd9e;
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 1.5px;
