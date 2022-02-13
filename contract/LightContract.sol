@@ -32,4 +32,14 @@ contract LightContract {
         emit VoltageChange(VoltageState);
     }
 
+    function checkUpkeep(bytes calldata) external override returns (bool upkeepNeeded, bytes memory) {
+        require (VoltageState == 1 && block.timestamp - LatestRenewalTime >= 60)
+        
+    } 
+
+    function performUpkeep(bytes calldata) external override {
+        VoltageState = 0;
+        emit VoltageChange(VoltageState);
+    }
+
 }
