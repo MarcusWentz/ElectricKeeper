@@ -1,4 +1,4 @@
-# ElectricalEthereum WORK IN PROGRESS
+# Project Name Ideas: KeepElectric, ElectricKeepers, ElectricalEthereum 
 
 An automated electrical grid.
 Powered by a Raspberry Pi 4, which is controlled by a hybrid smart contract using Chainlink Keepers to automate turning off LEDs for electric bill expirations.
@@ -21,5 +21,4 @@ Diode Current Equation: https://www.allaboutcircuits.com/technical-articles/unde
 
 <img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/diode_graph.png" alt="Graph"/>
 
-__________ Project Name Ideas: ElectricalEthereum , KeepGrid, KeepElectric  _____________
 
