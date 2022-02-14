@@ -34,7 +34,7 @@ contract ElectricEthereum { //679613 GAS
         require( (block.timestamp > LED[0].ExpirationTimeUNIX && LED[0].Voltage == 1) || 
                  (block.timestamp > LED[1].ExpirationTimeUNIX && LED[1].Voltage == 1) || 
                  (block.timestamp > LED[2].ExpirationTimeUNIX && LED[2].Voltage == 1) || 
-                 (block.timestamp > LED[3].ExpirationTimeUNIX && LED[3].ExpirationTimeUNIX == 1)   , "NO_EXPIRATION_YET.");
+                 (block.timestamp > LED[3].ExpirationTimeUNIX && LED[3].Voltage == 1)   , "NO_EXPIRATION_YET.");
         if(block.timestamp > LED[0].ExpirationTimeUNIX && LED[0].Voltage == 1){
             LED[0].Voltage  = 0;
             LED[0].ExpirationTimeUNIX = 0;
@@ -47,7 +47,7 @@ contract ElectricEthereum { //679613 GAS
             LED[2].Voltage  = 0;
             LED[2].ExpirationTimeUNIX = 0;
         }
-        if(block.timestamp > LED[3].ExpirationTimeUNIX && LED[3].ExpirationTimeUNIX == 1){
+        if(block.timestamp > LED[3].ExpirationTimeUNIX && LED[3].Voltage == 1){
             LED[3].Voltage  = 0;
             LED[3].ExpirationTimeUNIX = 0;
         }
