@@ -8,7 +8,7 @@ const contractDefined_JS = new web3.eth.Contract(contractABI_JS, contractAddress
 
 //https://github.com/sarfata/pi-blaster
 //Build and install directly from source
-// var piblaster = require('pi-blaster.js');
+var piblaster = require('pi-blaster.js');
 const timeMilliSec = 1000;
 const pulseWidthMin = 0.00;
 const pulseWidthMax = 0.35;
@@ -21,39 +21,38 @@ function checkValueLatest() { //get() contract value,
 
   for(let ledSlot = 0; ledSlot < 4; ledSlot++ ) {
     contractDefined_JS.methods.VoltageStates(ledSlot).call((err, balance) => {
-      // console.log("STATE: " + balance)
-
+    
       if(ledSlot == 0 && balance == 1){
         console.log("RED ON!")
-        // piblaster.setPwm(LED_RED, pulseWidthMax);
+        piblaster.setPwm(LED_RED, pulseWidthMax);
       }
       if(ledSlot == 0 && balance == 0){
         console.log("RED OFF!")
-        // piblaster.setPwm(LED_RED, pulseWidthMin);
+        piblaster.setPwm(LED_RED, pulseWidthMin);
       }
       if(ledSlot == 1 && balance == 1){
         console.log("BLUE ON!")
-        // piblaster.setPwm(LED_BLUE, pulseWidthMax);
+        piblaster.setPwm(LED_BLUE, pulseWidthMax);
       }
       if(ledSlot == 1 && balance == 0){
         console.log("BLUE OFF!")
-        // piblaster.setPwm(LED_BLUE, pulseWidthMin);
+        piblaster.setPwm(LED_BLUE, pulseWidthMin);
       }
       if(ledSlot == 2 && balance == 1){
         console.log("YELLOW ON!")
-        // piblaster.setPwm(LED_YELLOW, pulseWidthMax);
+        piblaster.setPwm(LED_YELLOW, pulseWidthMax);
       }
       if(ledSlot == 2 && balance == 0){
         console.log("YELLOW OFF!")
-        // piblaster.setPwm(LED_YELLOW, pulseWidthMin);
+        piblaster.setPwm(LED_YELLOW, pulseWidthMin);
       }
       if(ledSlot == 3 && balance == 1){
-          console.log("GREEN ON!")
-        // piblaster.setPwm(LED_GREEN, pulseWidthMax);
+        console.log("GREEN ON!")
+        piblaster.setPwm(LED_GREEN, pulseWidthMax);
       }
       if(ledSlot == 3 && balance == 0){
         console.log("GREEN OFF!")
-        // piblaster.setPwm(LED_GREEN, pulseWidthMin);
+        piblaster.setPwm(LED_GREEN, pulseWidthMin);
       }
     })
   }
