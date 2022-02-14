@@ -1,4 +1,4 @@
-# Project Name Ideas: KeepElectric, ElectricKeepers, ElectricalEthereum 
+# ETH DENVER 2022 Project Name Ideas: KeepElectric, ElectricKeepers, ElectricalEthereum 
 
 An automated electrical grid.
 Powered by a Raspberry Pi 4, which is controlled by a hybrid smart contract using Chainlink Keepers to automate turning off LEDs for electric bill expirations.
