@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.11;
 
-contract LightContract {
+import "@chainlink/contracts/src/v0.8/KeeperCompatible.sol";
+
+contract LightContract is KeeperCompatibleInterface {
 
     uint public VoltageState;
     uint public LatestRenewalTime;
@@ -33,13 +35,13 @@ contract LightContract {
     }
 
     function checkUpkeep(bytes calldata) external override returns (bool upkeepNeeded, bytes memory) {
-        require (VoltageState == 1 && block.timestamp - LatestRenewalTime >= 60)
-        
+        upkeepNeeded = ((VoltageState == 1) && (block.timestamp - LatestRenewalTime >= 60));
     } 
 
     function performUpkeep(bytes calldata) external override {
         VoltageState = 0;
         emit VoltageChange(VoltageState);
+        LatestRenewalTime = 0;
     }
 
 }
