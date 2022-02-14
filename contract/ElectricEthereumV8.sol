@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT 
 pragma solidity 0.8.11;
 
-contract ElectricEthereum { //679613 GAS
+contract ElectricEthereum { 
 
     struct STATE{ uint Voltage; uint ExpirationTimeUNIX; address LatestBuyer; }
     mapping(uint => STATE) public LED; 
@@ -23,10 +23,10 @@ contract ElectricEthereum { //679613 GAS
         if(LED[ledValue].Voltage == 0) {
             LED[ledValue].Voltage = 1;
             LED[ledValue].ExpirationTimeUNIX = block.timestamp + (60*minutesToHaveOn); 
-            LED[ledValue].LatestBuyer = msg.sender;
         } else {
             LED[ledValue].ExpirationTimeUNIX  += (60*minutesToHaveOn); 
         }
+        LED[ledValue].LatestBuyer = msg.sender;
         emit VoltageChange();
         payable(Owner).transfer(address(this).balance);
     }
