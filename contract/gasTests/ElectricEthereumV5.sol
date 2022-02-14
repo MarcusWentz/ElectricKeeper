@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.11;
 
-contract ElectricEthereum {
+contract ElectricEthereum { //770344 GAS
 
     uint[4] public VoltageStates;
     uint[4] public ExpirationTimeUNIX;
