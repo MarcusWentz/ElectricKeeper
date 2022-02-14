@@ -18,8 +18,8 @@ contract ElectricEthereum {
     }
 
     function BuyElectricityTimeOn(uint ledValue, uint minutesToHaveOn) public payable {
-        require(ledValue >= 0 && ledValue < 4);
-        require(msg.value == minutesToHaveOn*1*(10**18), "MSG.VALUE_MUST_BE_1_ETH.");
+        require(ledValue >= 0 && ledValue < 4, "LED_VALUES_ALLOWED_ARE_RED_0_BLUE_1_GREEN_2_YELLOW_3.");
+        require(msg.value == minutesToHaveOn && minutesToHaveOn > 0, "MSG.VALUE_MUST_BE_1_WEI_TIMES_MINUTES_AND_NOT_BE_ZERO.");
         if(ExpirationTimeUNIX[ledValue] == 0) {
             VoltageStates[ledValue] = 1;
             ExpirationTimeUNIX[ledValue] = block.timestamp + (60*minutesToHaveOn); 
