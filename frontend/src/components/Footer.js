@@ -13,7 +13,7 @@ const Footer = () => {
       <div className="container">
         <div class="link-boxes">
           <ul class="box">
-            <li class="link_name">Wrap ETH</li>
+            <li class="link_name">ElectricKeeper</li>
             <li>
               <img width="20%" src={EthLogo} />
             </li>
