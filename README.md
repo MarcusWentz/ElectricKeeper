@@ -6,7 +6,7 @@ Animation test (source): https://sfecdn.s3.amazonaws.com/tutorialimages/Pulse_LE
 
 <img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/animation.gif" alt="Test"/>
 <img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/fullstack.png" alt="Overview"/>
-<img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/WIRING.png" alt="Wiring"/>
+<img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/hardware_wiring.png" alt="Wiring"/>
 
 Hardware: 
 
