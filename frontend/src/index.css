@@ -16,8 +16,8 @@ body {
     #52493b 0%,
     #000000 70%
   );
-  /*Fix height: 100% or something instead, this is no good fix*/
-  height: 700px;
+  /* or something instead, this is no good fix */
+  height: 88vh;
   font-family: "Prompt", sans-serif;
 }
 

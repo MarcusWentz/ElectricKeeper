@@ -1,11 +1,12 @@
-# ElectricalEthereum WORK IN PROGRESS
+# ETH DENVER 2022 Project Name Ideas: KeepElectric, ElectricKeepers, ElectricalEthereum 
 
 An automated electrical grid.
 Powered by a Raspberry Pi 4, which is controlled by a hybrid smart contract using Chainlink Keepers to automate turning off LEDs for electric bill expirations.
 Animation test (source): https://sfecdn.s3.amazonaws.com/tutorialimages/Pulse_LED/pulse.gif
 
 <img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/animation.gif" alt="Test"/>
-<img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/WIRING.png" alt="Wiring"/>
+<img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/fullstack.png" alt="Overview"/>
+<img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/hardware_wiring.png" alt="Wiring"/>
 
 Hardware: 
 
@@ -21,5 +22,4 @@ Diode Current Equation: https://www.allaboutcircuits.com/technical-articles/unde
 
 <img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/diode_graph.png" alt="Graph"/>
 
-__________ Project Name Ideas: ElectricalEthereum , KeepGrid, KeepElectric  _____________
 
