@@ -35,9 +35,7 @@ function App() {
         )}
       </main>
 
-      {/*         <Footer />
-
- */}
+      <Footer />
     </DataContext.Provider>
   );
 }

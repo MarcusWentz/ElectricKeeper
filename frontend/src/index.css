@@ -85,19 +85,15 @@ p {
   justify-content: space-around;
   align-items: center;
 }
-.logo {
-  max-width: 100%;
-  width: 200px;
-  height: auto;
-}
+
 .nav-ul {
-  width: 50%;
+  width: 30%;
   height: 7vh;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(3px);
+  /*background-color: rgba(255, 255, 255, 0.1);*/
+  /*backdrop-filter: blur(3px)*/
 }
 .nav-li {
   list-style-type: none;
@@ -107,8 +103,9 @@ p {
   font-size: 17px;
   font-weight: 600;
   color: #ffdd9e;
+  font-family: inherit;
   text-decoration: none;
-  text-transform: uppercase;
+  text-transform: lowercase;
   letter-spacing: 1.5px;
 }
 .nav-li a::after {
@@ -116,9 +113,11 @@ p {
   position: absolute;
   bottom: -1.6vh;
   left: 0;
-  height: 1px;
+  height: 3px;
   width: 0%;
-  background-color: white;
+  background: linear-gradient(45deg, #d36100, yellow);
+  background-size: 100% 2px;
+
   transition: 0.3s ease;
 }
 .nav-li a:hover::after {
@@ -137,3 +136,20 @@ p {
 }
 
 /*Navbar styles ended*/
+
+
+.container-circle {
+  position: relative;
+  line-height: 50px;
+  text-align: center;
+}
+
+.container-circle .circle {
+   height: 200px;
+   width: 200px;
+   margin: 30px;
+   background: linear-gradient(45deg, #d36100, #882e99a6);
+   border-radius: 50%;
+   text-align: center;
+   display: inline-block;
+}

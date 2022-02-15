@@ -7,9 +7,10 @@
 }
 
 footer {
-	background: rgba(34, 33, 42, 1);
+	background: rgb(0, 0, 0);
 	width: 100%;
 	left: 0;
+	bottom: 0;
 	position: absolute;
 
 }
@@ -25,7 +26,7 @@ footer::before {
 footer .container {
 	max-width: 1250px;
 	margin: auto;
-	padding: 30px 40px 40px 40px;
+	padding: 30px 40px 0px 40px;
 }
 footer .container .top {
 	display: flex;
@@ -34,7 +35,7 @@ footer .container .top {
 	margin-bottom: 10px;
 }
 .container .top .logo-details {
-	color: #fff;
+	color: rgb(223 178 93);
 	font-size: 30px;
 }
 .container .top .media-icons {
@@ -47,7 +48,7 @@ footer .container .top {
 	border-radius: 50%;
 	text-align: center;
 	line-height: 40px;
-	color: #fff;
+	color: rgb(223 178 93);
 	font-size: 17px;
 	text-decoration: none;
 	transition: all 0.4s ease;
@@ -57,14 +58,14 @@ footer .container .top {
 }
 .top .media-icons a:nth-child(1):hover {
 	color: #4267b2;
-	background: #fff;
+	background: rgb(223 178 93);
 }
 .top .media-icons a:nth-child(2) {
 	background: #1da1f2;
 }
 .top .media-icons a:nth-child(2):hover {
 	color: #1da1f2;
-	background: #fff;
+	background: rgb(223 178 93);
 }
 .top .media-icons a:nth-child(3) {
 	background: #e1306c;
@@ -85,7 +86,7 @@ footer .container .top {
 }
 .top .media-icons a:nth-child(5):hover {
 	color: #ff0000;
-	background: #fff;
+	background: rgb(223 178 93);
 }
 footer .container .link-boxes {
 	width: 100%;
@@ -96,7 +97,7 @@ footer .container .link-boxes .box {
 	width: calc(100% / 5 - 10px);
 }
 .container .link-boxes .box .link_name {
-	color: #fff;
+	color: rgb(223 178 93);
 	font-size: 18px;
 	font-weight: 400;
 	margin-bottom: 10px;
@@ -109,14 +110,14 @@ footer .container .link-boxes .box {
 	bottom: -2px;
 	height: 2px;
 	width: 35px;
-	background: #fff;
+	background: rgb(223 178 93);
 }
 .container .link-boxes .box li {
 	margin: 6px 0;
 	list-style: none;
 }
 .container .link-boxes .box li a {
-	color: #fff;
+	color: rgb(252, 208, 126);
 	font-size: 14px;
 	font-weight: 400;
 	text-decoration: none;
@@ -139,7 +140,7 @@ footer .container .link-boxes .box {
 	border-radius: 4px;
 	padding: 0 15px;
 	font-size: 15px;
-	color: #fff;
+	color: rgb(223 178 93);
 	margin-top: 5px;
 }
 .link-boxes .input-box input::placeholder {
@@ -147,7 +148,7 @@ footer .container .link-boxes .box {
 	font-size: 16px;
 }
 .link-boxes .input-box input[type="button"] {
-	background: #fff;
+	background: rgb(223 178 93);
 	color: #140b5c;
 	border: none;
 	font-size: 18px;
@@ -175,7 +176,7 @@ footer .bottom-details .bottom_text {
 .bottom-details .bottom_text a {
 	font-size: 14px;
 	font-weight: 300;
-	color: #fff;
+	color: rgb(223 178 93);
 	opacity: 0.8;
 	text-decoration: none;
 }
