@@ -5,7 +5,7 @@ Powered by a Raspberry Pi 4, which is controlled by a hybrid smart contract usin
 Animation test (source): https://sfecdn.s3.amazonaws.com/tutorialimages/Pulse_LED/pulse.gif
 
 <img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/animation.gif" alt="Test"/>
-<img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/full_overview.png" alt="Overview"/>
+<img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/fullstack.png" alt="Overview"/>
 <img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/WIRING.png" alt="Wiring"/>
 
 Hardware: 
