@@ -36,7 +36,7 @@ contract ElectricEthereum {
                  (block.timestamp > LED[1].ExpirationTimeUNIX && LED[1].Voltage == 1) || 
                  (block.timestamp > LED[2].ExpirationTimeUNIX && LED[2].Voltage == 1) || 
                  (block.timestamp > LED[3].ExpirationTimeUNIX && LED[3].Voltage == 1)   , "NO_EXPIRATION_YET.");
-        if(block.timestamp > LED[0].ExpirationTimeUNIX && LED[0].Voltage == 1){
+        if(block.timestamp > LED[0].ExpirationTimeUNIX && LED[0].Voltage == 1){ //No for loop to save gas from updating counter. 
             LED[0].Voltage  = 0;
             LED[0].ExpirationTimeUNIX = 0;
             LED[0].LatestBuyer = 0x0000000000000000000000000000000000000000;
