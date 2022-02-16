@@ -18,7 +18,7 @@ body {
   );
   /* or something instead, this is no good fix */
   height: 88vh;
-  font-family: "Prompt", sans-serif; 
+  font-family: "Prompt", sans-serif;
 }
 
 main {
@@ -53,13 +53,27 @@ p {
   animation: flicker 2s linear;
 }
 @keyframes flicker {
-  0% {opacity: 0}
-  69% {opacity: 0.22;}
-  70% {opacity: 0.55;}
-  75% {opacity: 0;}
-  80% {opacity: 0.55;}
-  85% {opacity: 0%;}
-  90% {opacity: 0.22;}
+  0% {
+    opacity: 0;
+  }
+  69% {
+    opacity: 0.22;
+  }
+  70% {
+    opacity: 0.55;
+  }
+  75% {
+    opacity: 0;
+  }
+  80% {
+    opacity: 0.55;
+  }
+  85% {
+    opacity: 0%;
+  }
+  90% {
+    opacity: 0.22;
+  }
 }
 
 .gradient-text {
@@ -79,14 +93,27 @@ p {
   color: white !important;
 }
 
-.metamask-addr-container {
-  position: absolute;
-  top: 20px;
-  right: 40px;
-  font-size: 12px;
+/*Navbar styles below*/
+
+.btn-light.mm {
+  border: none;
+  color: #ffdd9e;
+  background: transparent;
+  font-size: 17px;
+  font-weight: 600;
+  font-family: inherit;
+  text-transform: lowercase;
+  letter-spacing: 1.5px;
+
+  width: 18vw;
+  padding: 0px;
+  margin: 0px 0px 0px 0px;
 }
 
-/*Navbar styles below*/
+ .btn-light.mm:hover:active:focus {
+  outline: none !important;
+  box-shadow: none !important;
+} 
 
 .navbar {
   width: 100%;
@@ -123,6 +150,7 @@ p {
   text-decoration: none;
   text-transform: lowercase;
   letter-spacing: 1.5px;
+  margin-left: 30px;
 }
 .nav-li a::after {
   content: "";
@@ -153,7 +181,6 @@ p {
 
 /*Navbar styles ended*/
 
-
 .container-circle {
   position: relative;
   line-height: 50px;
@@ -161,11 +188,11 @@ p {
 }
 
 .container-circle .circle {
-   height: 200px;
-   width: 200px;
-   margin: 30px;
-   background: linear-gradient(45deg, #d36100, #882e99a6);
-   border-radius: 50%;
-   text-align: center;
-   display: inline-block;
+  height: 200px;
+  width: 200px;
+  margin: 30px;
+  background: linear-gradient(45deg, #d36100, #882e99a6);
+  border-radius: 50%;
+  text-align: center;
+  display: inline-block;
 }
