@@ -10,8 +10,8 @@ const Home = () => {
             <br />
             <br />
             <h1 class="mb-5 flickerOn">
-              {/* <b> */} the only electrical grid running on ethereum smart
-              contract using the power of chainlink keepers {/* </b> */}
+              the only electrical grid running on ethereum smart contract using
+              the power of chainlink keepers
             </h1>
             <br />
             <h4 class="flickerOn"></h4>
@@ -19,14 +19,7 @@ const Home = () => {
         </div>
       </div>
       <div class="row" align="center"></div>
-      {/* <div class="col-sm" align="center"> */}
-      {/*   <div class="container-circle"> */}
-      {/*     <div class="circle">circle 1</div> */}
-      {/*     <div class="circle">circle 2</div> */}
-      {/*     <div class="circle">circle 2</div> */}
-      {/*   </div>{" "} */}
-      {/* </div> */}
-      {/* <div class="col-sm"></div>{" "} */}
+
       <img src={asset} className={"flickerOn"} alt="" width="800px" />
     </div>
   );

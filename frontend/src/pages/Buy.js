@@ -11,7 +11,7 @@ import { DataContext } from "../DataContext";
 //Dropdown for network switch statements
 
 export default function Buy({ degree, userLocation, basic }) {
-  const [wethContract, setWethContract] = useState(null);
+  const [maticPriceFeedContract, setMaticPriceFeedContract] = useState(null);
   const [wethBalance, setAvailableWethBalance] = useState(null);
   const [metamaskAddress, setMetamaskAddress] = useState("");
   const [inputAmount, setInputAmount] = useState("");
@@ -39,12 +39,13 @@ export default function Buy({ degree, userLocation, basic }) {
       setMetamaskAddress(userAccountAddress[0]);
 
       //Load the smart contract
-      const wethContract = new web3.eth.Contract(ABI, CONTRACT_ADDRESS);
-      setWethContract(wethContract);
-      console.log(wethContract, 'This is wethCONtract')
+      const maticPriceFeedContract = new web3.eth.Contract(ABI, CONTRACT_ADDRESS);
+      setMaticPriceFeedContract(maticPriceFeedContract);
+      console.log(maticPriceFeedContract, 'This is wethCONtract')
 
+      //TODO: Old method from weth contract, refactor this to suit pricefeed contract
       if (metamaskAddress) {
-        let availableWeth = await wethContract.methods
+        let availableWeth = await maticPriceFeedContract.methods
           .balanceOf(metamaskAddress)
           .call();
         setAvailableWethBalance(availableWeth);
