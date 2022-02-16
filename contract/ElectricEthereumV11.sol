@@ -33,17 +33,19 @@ contract ElectricEthereum {
 
     function OwnerManualTurnOffElectricity() public onlyOwner {
         require(expirationOccured() < 8, "NO_EXPIRATION_YET.");
+        for(uint ledValue = expirationOccured(); ledValue < 8; ledValue++) {
             if(block.timestamp > LED[expirationOccured()].ExpirationTimeUNIX && LED[expirationOccured()].Voltage == 1){
                 LED[expirationOccured()].Voltage  = 0;
                 LED[expirationOccured()].ExpirationTimeUNIX = 0;
                 LED[expirationOccured()].LatestBuyer = 0x0000000000000000000000000000000000000000;
             }
+        }
         emit VoltageChange();
     }
 
 
     function expirationOccured() public onlyOwner view returns(uint) {
-        for(uint ledValue; ledValue < 7; ledValue++ ) {
+        for(uint ledValue = 0; ledValue < 8; ledValue++ ) {
             if((block.timestamp > LED[ledValue].ExpirationTimeUNIX && LED[ledValue].Voltage == 1)){
                 return ledValue;
             }
