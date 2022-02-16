@@ -1,11 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap"); */
 
 * {
   box-sizing: border-box;
 }
 
 html {
-  font-family: "Prompt", sans-serif;
+  /* font-family: Roboto, "Prompt", sans-serif; */
 }
 
 body {
@@ -18,7 +18,7 @@ body {
   );
   /* or something instead, this is no good fix */
   height: 88vh;
-  font-family: "Prompt", sans-serif;
+  font-family: "Prompt", sans-serif; 
 }
 
 main {
@@ -45,7 +45,21 @@ h1,
 h2,
 h3,
 p {
+  /* color: #dfb25e; */
   color: #dfb25e;
+}
+
+.flickerOn {
+  animation: flicker 2s linear;
+}
+@keyframes flicker {
+  0% {opacity: 0}
+  69% {opacity: 0.22;}
+  70% {opacity: 0.55;}
+  75% {opacity: 0;}
+  80% {opacity: 0.55;}
+  85% {opacity: 0%;}
+  90% {opacity: 0.22;}
 }
 
 .gradient-text {
@@ -95,9 +109,11 @@ p {
   /*background-color: rgba(255, 255, 255, 0.1);*/
   /*backdrop-filter: blur(3px)*/
 }
+
 .nav-li {
   list-style-type: none;
 }
+
 .nav-li a {
   position: relative;
   font-size: 17px;

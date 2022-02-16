@@ -4,7 +4,7 @@ import { DataContext } from "./DataContext";
 import { isMobile } from "react-device-detect";
 import React, { Component, useEffect, useState } from "react";
 import Web3 from "web3";
-import HomeWrap from "./pages/HomeWrap";
+import Home from "./pages/Home";
 import Buy from "./pages/Buy";
 
 import About from "./pages/About";
@@ -27,7 +27,7 @@ function App() {
           <MobileDetected />
         ) : (
           <Routes>
-            <Route path="/" element={<HomeWrap />} />
+            <Route path="/" element={<Home />} />
             <Route path="/buy" element={<Buy />} />
             <Route path="/about" element={<About />} />
             <Route path="/error" element={<MobileDetected />} />
