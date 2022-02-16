@@ -263,8 +263,8 @@ p {
   background-image: linear-gradient(
     to right,
     #e1ea66,
-    #cabd00,
-    #f5c939,
+    #ca9b00,
+    #ddbc00,
     #ebc700
   );
 /*   box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
@@ -272,9 +272,9 @@ p {
 .btn-hover.color-red {
   background-image: linear-gradient(
     to right,
-    #da142e,
-    #af2311,
-    #d33429,
+    #ad0017,
+    #c23939,
+    #e96359,
     #861016
   );
 /*   box-shadow: 0 4px 15px 0 rgba(218, 51, 56, 0.75);
@@ -282,13 +282,13 @@ p {
 
 .input-matic{
   background-color: transparent;
-  background-image: linear-gradient(to right, #ffe600 0, #ff7101 70%);
+  background-image: linear-gradient(to right, #ffe600 0, #ff7101 50%);
   background-repeat: no-repeat;
   background-position: 0 calc(100% + 3px), 0 0;
   background-size: 100% 3px;
   box-shadow: none;
   border: 0;
-  border-bottom: 3px solid #79600f;
+  border-bottom: 3px solid #5a4709;
   color: #000;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
