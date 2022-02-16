@@ -12,18 +12,20 @@ const contractDefined_JS = new web3.eth.Contract(contractABI_JS, contractAddress
 const timeMilliSec = 1000;
 const pulseWidthMin = 0.00;
 const pulseWidthMax = 0.35;
-let pins =   { 0 : 17,    1 : 22,     2 : 23,       3 : 27};
-let colors = { 0 : "RED", 1 : "BLUE", 2 : "YELLOW", 3 : "GREEN"};
+
+let objectLED = {"pin":   [17   ,27    ,23      ,22     ,24      ,25      ,26    ,27     ],
+                 "color": ['RED','BLUE','YELLOW','GREEN','PURPLE','ORANGE','GREY','WHITE']}
+
 function checkValueLatest() { //get() contract value,
 
   for(let ledValue = 0; ledValue < 4; ledValue++ ) {
     contractDefined_JS.methods.LED(ledValue).call((err, balance) => {
       if(balance.Voltage == 1){
-        console.log("COLOR " + colors[ledValue] + " PIN " + pins[ledValue] + " ON!" )
+        console.log("COLOR " + objectLED['color'][ledValue] + " PIN " + objectLED['pin'][ledValue] + " ON!" )
         // piblaster.setPwm(LED_RED, pulseWidthMax);
       }
       if(balance.Voltage == 0){
-        console.log("COLOR " + colors[ledValue] + " PIN " + pins[ledValue] + " OFF!" )
+        console.log("COLOR " + objectLED['color'][ledValue]  + " PIN " +  objectLED['pin'][ledValue] + " OFF!" )
         // piblaster.setPwm(LED_RED, pulseWidthMin);
       }
     })
