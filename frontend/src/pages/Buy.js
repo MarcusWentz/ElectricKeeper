@@ -14,6 +14,7 @@ export default function Buy({ degree, userLocation, basic }) {
   const [wethContract, setWethContract] = useState(null);
   const [wethBalance, setAvailableWethBalance] = useState(null);
   const [metamaskAddress, setMetamaskAddress] = useState("");
+  const [inputAmount, setInputAmount] = useState("");
   const [showToast, setShowToast] = useState();
   const [errorMsg, setErrorMsg] = useState();
   const { userAccountAddress, setUserAccountAddress } =
@@ -52,20 +53,74 @@ export default function Buy({ degree, userLocation, basic }) {
     loadBlockchainData();
   }, [userAccountAddress[0]]);
 
+  const renderInputBox = () => {
+    return (
+      <>
+        <div
+          style={{
+            marginBottom: 150,
+            marginTop: 50,
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+        >
+          <input
+            type="number"
+            class="form-control"
+            min="0"
+            placeholder="Enter USD amount"
+            data-name="usd"
+            value={inputAmount}
+            onChange={(e) => setInputAmount(e.target.value)}
+            style={{ width: "50%" }}
+          ></input>
+          <br />
+          <div>
+            <button
+              className="btn btn-primary"
+              style={{ width: "18%", margin: "10px 10px 20px 10px" }}
+            >
+              Buy Blue
+            </button>
+            <button
+              className="btn btn-success"
+              style={{ width: "18%", margin: "10px 2% 20px 2%" }}
+            >
+              Buy Green
+            </button>
+            <button
+              className="btn btn-warning"
+              style={{ width: "18%", margin: "10px 2% 20px 2%" }}
+            >
+              Buy Yellow
+            </button>
+            <button
+              className="btn btn-danger"
+              style={{ width: "18%", margin: "10px 2% 20px 2%" }}
+            >
+              Buy Red
+            </button>
+          </div>
+          <p>
+            <b>Amount: </b> &nbsp;&nbsp;&nbsp;&nbsp; {"112"} matic
+          </p>
+        </div>
+      </>
+    );
+  };
+
   return (
     <div class="container">
       <div class="row">
-        <div class="col-5">
+        <div>
           <h1>
             <br></br>
             <b>Buy here </b>
           </h1>
           <p>Buy your electricity here {wethBalance}</p>
+          <div className="row">{renderInputBox()}</div>
         </div>
-        <div class="col-6">
-          <img src={EthLogo} style={{ width: "40%" }} />
-        </div>
-        <div class="col"></div>
       </div>
       {showToast ? (
         <ErrorModal
