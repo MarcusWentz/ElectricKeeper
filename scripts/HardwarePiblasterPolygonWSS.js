@@ -8,12 +8,12 @@ const contractDefined_JS = new web3.eth.Contract(contractABI_JS, contractAddress
 
 //https://github.com/sarfata/pi-blaster
 //Build and install directly from source
-// var piblaster = require('pi-blaster.js');
+var piblaster = require('pi-blaster.js');
 const timeMilliSec = 1000;
 const pulseWidthMin = 0.00;
 const pulseWidthMax = 0.35;
 
-let objectLED = {"pin":   [17   ,27    ,23      ,22     ,24      ,25      ,26    ,27     ],
+let objectLED = {"pin":   [17   ,27    ,23      ,22     ,24      ,25      ,18    ,21     ],
                  "color": ['RED','BLUE','YELLOW','GREEN','PURPLE','ORANGE','GREY','WHITE']}
 
 function checkValueLatest() { //get() contract value,
@@ -22,11 +22,11 @@ function checkValueLatest() { //get() contract value,
     contractDefined_JS.methods.LED(ledValue).call((err, balance) => {
       if(balance.Voltage == 1){
         console.log("COLOR " + objectLED['color'][ledValue] + " PIN " + objectLED['pin'][ledValue] + " ON!" )
-        // piblaster.setPwm(LED_RED, pulseWidthMax);
+        piblaster.setPwm(objectLED['pin'][ledValue], pulseWidthMax);
       }
       if(balance.Voltage == 0){
         console.log("COLOR " + objectLED['color'][ledValue]  + " PIN " +  objectLED['pin'][ledValue] + " OFF!" )
-        // piblaster.setPwm(LED_RED, pulseWidthMin);
+        piblaster.setPwm(objectLED['pin'][ledValue], pulseWidthMin);
       }
     })
   }
