@@ -41,6 +41,7 @@ export default function Buy({ degree, userLocation, basic }) {
       //Load the smart contract
       const wethContract = new web3.eth.Contract(ABI, CONTRACT_ADDRESS);
       setWethContract(wethContract);
+      console.log(wethContract, 'This is wethCONtract')
 
       if (metamaskAddress) {
         let availableWeth = await wethContract.methods
@@ -69,7 +70,7 @@ export default function Buy({ degree, userLocation, basic }) {
             type="number"
             class="input-matic"
             min="0"
-            placeholder="Enter USD amount"
+            placeholder="enter USD amount"
             data-name="usd"
             value={inputAmount}
             onChange={(e) => setInputAmount(e.target.value)}
@@ -84,7 +85,7 @@ export default function Buy({ degree, userLocation, basic }) {
           </div>
           <br />
           <p>
-            <b>Amount: </b> &nbsp;&nbsp;&nbsp;&nbsp; ≈ &nbsp; {"112"} matic
+            <b>Amount: </b> &nbsp;&nbsp;&nbsp;&nbsp; ≈ &nbsp; {wethBalance} matic
           </p>
         </div>
       </>
@@ -99,7 +100,7 @@ export default function Buy({ degree, userLocation, basic }) {
             <br></br>
             buy electricity
           </h1>
-          <p>enter a USD amount, and you will buy electricity with our smart contract grid{wethBalance}</p>
+          <p>enter a USD amount, and you will buy electricity with our smart contract grid </p>
           <div className="row">{renderInputBox()}</div>
         </div>
       </div>
