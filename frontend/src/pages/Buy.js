@@ -44,13 +44,13 @@ export default function Buy({ degree, userLocation, basic }) {
       console.log(maticPriceFeedContract, 'This is wethCONtract')
 
       //TODO: Old method from weth contract, refactor this to suit pricefeed contract
-      if (metamaskAddress) {
+/*       if (metamaskAddress) {
         let availableWeth = await maticPriceFeedContract.methods
           .balanceOf(metamaskAddress)
           .call();
         setAvailableWethBalance(availableWeth);
         console.log(availableWeth, "avail Weth:");
-      }
+      } */
     };
     loadBlockchainData();
   }, [userAccountAddress[0]]);
