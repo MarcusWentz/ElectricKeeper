@@ -76,34 +76,35 @@ export default function Buy({ degree, userLocation, basic }) {
             style={{ width: "50%" }}
           ></input>
           <br />
-          <div>
+          <div style={{ width: "80%" }}>
             <button
               className="btn btn-primary"
-              style={{ width: "18%", margin: "10px 10px 20px 10px" }}
+              style={{ width: "10%", margin: "10px 2% 20px 2%" }}
             >
-              Buy Blue
+              Blue
             </button>
             <button
               className="btn btn-success"
-              style={{ width: "18%", margin: "10px 2% 20px 2%" }}
+              style={{ width: "10%", margin: "10px 2% 20px 2%" }}
             >
-              Buy Green
+              Green
             </button>
             <button
               className="btn btn-warning"
-              style={{ width: "18%", margin: "10px 2% 20px 2%" }}
+              style={{ width: "10%", margin: "10px 2% 20px 2%" }}
             >
-              Buy Yellow
+              Yellow
             </button>
             <button
               className="btn btn-danger"
-              style={{ width: "18%", margin: "10px 2% 20px 2%" }}
+              style={{ width: "10%", margin: "10px 2% 20px 2%" }}
             >
-              Buy Red
+              Red
             </button>
           </div>
+          <br />
           <p>
-            <b>Amount: </b> &nbsp;&nbsp;&nbsp;&nbsp; {"112"} matic
+            <b>Amount: </b> &nbsp;&nbsp;&nbsp;&nbsp; ≈ &nbsp; {"112"} matic
           </p>
         </div>
       </>
