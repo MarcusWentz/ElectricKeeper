@@ -1,60 +1,18 @@
 import { NavLink } from "react-router-dom";
 import { faBolt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { DataContext } from "../DataContext";
+import React, { Component, useEffect, useState } from "react";
 
 import classes from "./Navbar.module.css";
 
+const Navbar = ({ handleConnectMetamask, connectedAddrValue }) => {
+  const { userAccountAddress, setUserAccountAddress } =
+    React.useContext(DataContext);
 
-const Navbar = ({}) => {
   return (
     <header className={classes.header}>
-      {/*       <nav>
-        <ul>
-          <div style={{ fontSize: "xx-large", marginRight: "50px" }}>
-            <div class="h-screen flex justify-center items-center bg-gray-800">
-              <h1 class="gradient-text font-sans font-black text-6xl">
-                <FontAwesomeIcon icon={faBolt} /> ETH-Electric
-              </h1>
-            </div>
-          </div>
-          <li>
-            <NavLink
-              className={(navObj) => (navObj.isActive ? classes.active : "")}
-              to="/"
-            >
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              className={(navObj) => (navObj.isActive ? classes.active : "")}
-              to="/wrap"
-            >
-              Wrap
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              className={(navObj) => (navObj.isActive ? classes.active : "")}
-              to="/about"
-            >
-              About
-            </NavLink>
-          </li>
-        </ul>
-        <Navbar2></Navbar2>
-      </nav>
- */}
-
       <nav class="navbar">
-        {/*        <a href="#">
-          <img
-            class="logo"
-            src=""
-            alt="logo"
-          />
-        </a> */}
-
         <div style={{ fontSize: "xx-large", marginRight: "50px" }}>
           <div class="h-screen flex justify-center items-center bg-gray-800">
             <h1 class="gradient-text font-sans font-black text-6xl">
@@ -85,10 +43,10 @@ const Navbar = ({}) => {
               to="/about"
             >
               About
-            </NavLink>{" "}
+            </NavLink>
           </li>
           <li class="nav-li">
- {/*            <div className="metamask-addr-container">
+            <a className={(navObj) => (navObj.isActive ? classes.active : "")}>
               <button
                 className="btn btn-light mm"
                 onClick={handleConnectMetamask}
@@ -103,7 +61,7 @@ const Navbar = ({}) => {
                   ? connectedAddrValue
                   : "Connect Metamask"}
               </button>
-            </div> */}
+            </a>
           </li>
         </ul>
         <button

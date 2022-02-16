@@ -17,11 +17,29 @@ function App() {
   const [userAccountAddress, setUserAccountAddress] = useState("");
   const [connectedAddrValue, setConnectedAddrValue] = useState("");
 
+  const handleConnectMetamask = async () => {
+    let that = this;
+    const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+    const network = await web3.eth.net.getNetworkType();
+    await window.ethereum.enable();
+    //Fetch account data:
+    const accountFromMetaMask = await web3.eth.getAccounts();
+    console.log(accountFromMetaMask, "account in app.js before set state");
+    setUserAccountAddress(accountFromMetaMask);
+    setConnectedAddrValue(
+      String(accountFromMetaMask).substr(0, 5) +
+        "..." +
+        String(accountFromMetaMask).substr(38, 4)
+    );
+
+    console.log(userAccountAddress, "user metamask address after set state");
+  };
+
   return (
     <DataContext.Provider
-      value={{ userAccountAddress: "propToSendInToAllRoutesHere" }}
+      value={{ userAccountAddress: userAccountAddress }}
     >
-      {isMobile ? "" : <Navbar />}
+      {isMobile ? "" : <Navbar handleConnectMetamask={handleConnectMetamask} connectedAddrValue={connectedAddrValue}/>}
       <main>
         {isMobile ? (
           <MobileDetected />
@@ -34,6 +52,7 @@ function App() {
           </Routes>
         )}
       </main>
+ 
 
       <Footer />
     </DataContext.Provider>
