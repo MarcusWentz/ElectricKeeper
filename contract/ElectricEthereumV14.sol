@@ -31,7 +31,7 @@ contract ElectricEthereum {
         payable(Owner).transfer(address(this).balance);
     }
 
-    function OwnerManualTurnOffElectricity() public onlyOwner {
+    function TurnOffElectricity() public onlyOwner {
         require(expirationOccured() < 8, "NO_EXPIRATION_YET.");
         for(uint ledValue = expirationOccured(); ledValue < 8; ledValue++) {
             if(block.timestamp > LED[ledValue].ExpirationTimeUNIX && LED[ledValue].Voltage == 1){
@@ -43,8 +43,7 @@ contract ElectricEthereum {
         emit VoltageChange();
     }
 
-
-    function expirationOccured() public onlyOwner view returns(uint) {
+    function expirationOccured() public view returns(uint) {
         for(uint ledValue = 0; ledValue < 8; ledValue++ ) {
             if((block.timestamp > LED[ledValue].ExpirationTimeUNIX && LED[ledValue].Voltage == 1)){
                 return ledValue;
@@ -53,4 +52,20 @@ contract ElectricEthereum {
         return 8;
     }
 
+}
+
+contract BuyTestAllColors {
+
+    ElectricEthereum electricEthereum;
+
+    constructor(ElectricEthereum _electricEthereum) {
+        electricEthereum = ElectricEthereum(_electricEthereum);
+    }
+
+    function BuyAllLEDs() public payable {
+    require(msg.value == 8);
+       for(uint ledValue = 0; ledValue < 8; ledValue++ ) {
+            electricEthereum.BuyElectricityTimeOn{value: 1}(ledValue,1);
+        }
+    }
 }
