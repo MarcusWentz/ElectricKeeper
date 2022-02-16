@@ -63,7 +63,7 @@ contract BuyTestAllColors {
     }
 
     function BuyAllLEDs() public payable {
-    require(msg.value == 8);
+    require(msg.value == 8, "NEED_8_WEI.");
        for(uint ledValue = 0; ledValue < 8; ledValue++ ) {
             electricEthereum.BuyElectricityTimeOn{value: 1}(ledValue,1);
         }
