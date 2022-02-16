@@ -41,7 +41,7 @@ export default function Buy({ degree, userLocation, basic }) {
       //Load the smart contract
       const maticPriceFeedContract = new web3.eth.Contract(ABI, CONTRACT_ADDRESS);
       setMaticPriceFeedContract(maticPriceFeedContract);
-      console.log(maticPriceFeedContract, 'This is wethCONtract')
+      console.log(maticPriceFeedContract, 'This is the matic price feed contract')
 
       //TODO: Old method from weth contract, refactor this to suit pricefeed contract
 /*       if (metamaskAddress) {
