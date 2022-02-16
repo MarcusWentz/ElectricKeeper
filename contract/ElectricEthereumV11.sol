@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT 
-pragma solidity 0.8.11;
+pragma solidity 0.8.12;
 
 contract ElectricEthereum { 
 
@@ -18,7 +18,7 @@ contract ElectricEthereum {
     }
 
     function BuyElectricityTimeOn(uint ledValue, uint minutesToHaveOn) public payable {
-        require(ledValue >= 0 && ledValue < 4, "LED_VALUES_ALLOWED_ARE_RED_0_BLUE_1_YELLOW_2_GREEN_3.");
+        require(ledValue >= 0 && ledValue < 8, "LED_VALUES_RED_0_BLUE_1_YELLOW_2_GREEN_3_PURPLE_4_ORANGE_5_GREY_6_WHITE_7.");
         require(msg.value == minutesToHaveOn && minutesToHaveOn > 0, "MSG.VALUE_MUST_BE_1_WEI_TIMES_MINUTES_AND_NOT_BE_ZERO.");
         if(LED[ledValue].Voltage == 0) {
             LED[ledValue].Voltage = 1;
@@ -32,30 +32,23 @@ contract ElectricEthereum {
     }
 
     function OwnerManualTurnOffElectricity() public onlyOwner {
-        require( (block.timestamp > LED[0].ExpirationTimeUNIX && LED[0].Voltage == 1) || 
-                 (block.timestamp > LED[1].ExpirationTimeUNIX && LED[1].Voltage == 1) || 
-                 (block.timestamp > LED[2].ExpirationTimeUNIX && LED[2].Voltage == 1) || 
-                 (block.timestamp > LED[3].ExpirationTimeUNIX && LED[3].Voltage == 1)   , "NO_EXPIRATION_YET.");
-        if(block.timestamp > LED[0].ExpirationTimeUNIX && LED[0].Voltage == 1){ //No for loop to save gas from updating counter. 
-            LED[0].Voltage  = 0;
-            LED[0].ExpirationTimeUNIX = 0;
-            LED[0].LatestBuyer = 0x0000000000000000000000000000000000000000;
-        }
-        if(block.timestamp > LED[1].ExpirationTimeUNIX && LED[1].Voltage == 1){
-            LED[1].Voltage  = 0;
-            LED[1].ExpirationTimeUNIX = 0;
-            LED[1].LatestBuyer = 0x0000000000000000000000000000000000000000;
-        }
-        if(block.timestamp > LED[2].ExpirationTimeUNIX && LED[2].Voltage == 1){
-            LED[2].Voltage  = 0;
-            LED[2].ExpirationTimeUNIX = 0;
-            LED[2].LatestBuyer = 0x0000000000000000000000000000000000000000;
-        }
-        if(block.timestamp > LED[3].ExpirationTimeUNIX && LED[3].Voltage == 1){
-            LED[3].Voltage  = 0;
-            LED[3].ExpirationTimeUNIX = 0;
-            LED[3].LatestBuyer = 0x0000000000000000000000000000000000000000;
-        }
+        require(expirationOccured() < 8, "NO_EXPIRATION_YET.");
+            if(block.timestamp > LED[expirationOccured()].ExpirationTimeUNIX && LED[expirationOccured()].Voltage == 1){
+                LED[expirationOccured()].Voltage  = 0;
+                LED[expirationOccured()].ExpirationTimeUNIX = 0;
+                LED[expirationOccured()].LatestBuyer = 0x0000000000000000000000000000000000000000;
+            }
         emit VoltageChange();
     }
+
+
+    function expirationOccured() public onlyOwner view returns(uint) {
+        for(uint ledValue; ledValue < 7; ledValue++ ) {
+            if((block.timestamp > LED[ledValue].ExpirationTimeUNIX && LED[ledValue].Voltage == 1)){
+                return ledValue;
+            }
+        }
+        return 8;
+    }
+
 }
