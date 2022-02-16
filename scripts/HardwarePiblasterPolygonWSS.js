@@ -12,46 +12,19 @@ const contractDefined_JS = new web3.eth.Contract(contractABI_JS, contractAddress
 const timeMilliSec = 1000;
 const pulseWidthMin = 0.00;
 const pulseWidthMax = 0.35;
-const LED_RED = 17;
-const LED_GREEN = 22;
-const LED_YELLOW = 23;
-const LED_BLUE = 27;
-
+let pins =   { 0 : 17,    1 : 22,     2 : 23,       3 : 27};
+let colors = { 0 : "RED", 1 : "BLUE", 2 : "YELLOW", 3 : "GREEN"};
 function checkValueLatest() { //get() contract value,
 
   for(let ledValue = 0; ledValue < 4; ledValue++ ) {
     contractDefined_JS.methods.LED(ledValue).call((err, balance) => {
-      if(ledValue == 0 && balance.Voltage == 1){
-        console.log("RED ON!")
+      if(balance.Voltage == 1){
+        console.log("COLOR " + colors[ledValue] + " PIN " + pins[ledValue] + " ON!" )
         // piblaster.setPwm(LED_RED, pulseWidthMax);
       }
-      if(ledValue == 0 && balance.Voltage == 0){
-        console.log("RED OFF!")
+      if(balance.Voltage == 0){
+        console.log("COLOR " + colors[ledValue] + " PIN " + pins[ledValue] + " OFF!" )
         // piblaster.setPwm(LED_RED, pulseWidthMin);
-      }
-      if(ledValue == 1 && balance.Voltage == 1){
-        console.log("BLUE ON!")
-        // piblaster.setPwm(LED_BLUE, pulseWidthMax);
-      }
-      if(ledValue == 1 && balance.Voltage == 0){
-        console.log("BLUE OFF!")
-        // piblaster.setPwm(LED_BLUE, pulseWidthMin);
-      }
-      if(ledValue == 2 && balance.Voltage == 1){
-        console.log("YELLOW ON!")
-        // piblaster.setPwm(LED_YELLOW, pulseWidthMax);
-      }
-      if(ledValue == 2 && balance.Voltage == 0){
-        console.log("YELLOW OFF!")
-        // piblaster.setPwm(LED_YELLOW, pulseWidthMin);
-      }
-      if(ledValue == 3 && balance.Voltage == 1){
-          console.log("GREEN ON!")
-        // piblaster.setPwm(LED_GREEN, pulseWidthMax);
-      }
-      if(ledValue == 3 && balance.Voltage == 0){
-        console.log("GREEN OFF!")
-        // piblaster.setPwm(LED_GREEN, pulseWidthMin);
       }
     })
   }
