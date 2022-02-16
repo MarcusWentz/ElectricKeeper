@@ -67,7 +67,7 @@ export default function Buy({ degree, userLocation, basic }) {
         >
           <input
             type="number"
-            class="form-control"
+            class="input-matic"
             min="0"
             placeholder="Enter USD amount"
             data-name="usd"
@@ -77,30 +77,10 @@ export default function Buy({ degree, userLocation, basic }) {
           ></input>
           <br />
           <div style={{ width: "80%" }}>
-            <button
-              className="btn btn-primary"
-              style={{ width: "10%", margin: "10px 2% 20px 2%" }}
-            >
-              Blue
-            </button>
-            <button
-              className="btn btn-success"
-              style={{ width: "10%", margin: "10px 2% 20px 2%" }}
-            >
-              Green
-            </button>
-            <button
-              className="btn btn-warning"
-              style={{ width: "10%", margin: "10px 2% 20px 2%" }}
-            >
-              Yellow
-            </button>
-            <button
-              className="btn btn-danger"
-              style={{ width: "10%", margin: "10px 2% 20px 2%" }}
-            >
-              Red
-            </button>
+            <button class="btn-hover color-blue">Blue</button>
+            <button class="btn-hover color-green">Green</button>
+            <button class="btn-hover color-yellow">Yellow</button>
+            <button class="btn-hover color-red">Red</button>
           </div>
           <br />
           <p>
@@ -117,9 +97,9 @@ export default function Buy({ degree, userLocation, basic }) {
         <div>
           <h1>
             <br></br>
-            <b>Buy here </b>
+            buy electricity
           </h1>
-          <p>Buy your electricity here {wethBalance}</p>
+          <p>enter a USD amount, and you will buy electricity with our smart contract grid{wethBalance}</p>
           <div className="row">{renderInputBox()}</div>
         </div>
       </div>

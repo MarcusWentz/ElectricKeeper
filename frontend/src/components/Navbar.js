@@ -16,7 +16,7 @@ const Navbar = ({ handleConnectMetamask, connectedAddrValue }) => {
         <div style={{ fontSize: "xx-large", marginRight: "50px" }}>
           <div class="h-screen flex justify-center items-center bg-gray-800">
             <h1 class="gradient-text font-sans font-black text-6xl">
-              <FontAwesomeIcon icon={faBolt} /> ElectricKeeper
+              <FontAwesomeIcon icon={faBolt} /> electricKeeper
             </h1>
           </div>
         </div>
