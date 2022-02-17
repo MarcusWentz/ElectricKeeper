@@ -89,9 +89,12 @@ export default function Buy({ degree, userLocation, basic }) {
     loadBlockchainData();
   }, [userAccountAddress[0]]);
 
+<<<<<<< HEAD
   useEffect(() => {
     console.log("matic Price Feed contract: ", maticPriceFeedContract);
   }, []);
+=======
+>>>>>>> a7577ea6bc16f0789244df298255cf9a5b43d7bf
 
   const estimatedMatic = () => {
     return latestPriceOfMatic_1p && inputAmount !== ""
@@ -196,7 +199,7 @@ export default function Buy({ degree, userLocation, basic }) {
         <div>
           <h1>
             <br></br>
-            buy electricity
+            Buy electricity
           </h1>
           <p>enter the amount of minutes of electricity you want to buy </p>
           <div className="row">{renderInputBox()}</div>
