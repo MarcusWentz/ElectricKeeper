@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: MIT 
 pragma solidity 0.8.12;
 
-contract ElectricEthereum { 
+import "@chainlink/contracts/src/v0.8/KeeperCompatible.sol";
+
+contract ElectricEthereum is KeeperCompatibleInterface { 
 
     struct STATE{ uint Voltage; uint ExpirationTimeUNIX; address LatestBuyer; }
     mapping(uint => STATE) public LED; 
@@ -52,6 +54,21 @@ contract ElectricEthereum {
         return false;
     }
 
+    function checkUpkeep(bytes calldata) external override returns (bool upkeepNeeded, bytes memory) {
+        upkeepNeeded = expirationOccured();
+    } 
+
+    function performUpkeep(bytes calldata) external override {
+        for(uint ledValue = 0; ledValue < 8; ledValue++) {
+            if(block.timestamp > LED[ledValue].ExpirationTimeUNIX && LED[ledValue].Voltage == 1){
+                LED[ledValue].Voltage  = 0;
+                LED[ledValue].ExpirationTimeUNIX = 0;
+                LED[ledValue].LatestBuyer = 0x0000000000000000000000000000000000000000;
+            }
+        }
+        emit VoltageChange();
+    }
+
 }
 
 contract BuyTestAllColors {
@@ -62,10 +79,17 @@ contract BuyTestAllColors {
         electricEthereum = ElectricEthereum(_electricEthereum);
     }
 
-    function BuyAllLEDs() public payable {
-    require(msg.value == 8, "NEED_8_WEI.");
+    function BuyAllSameDuration() public payable {
+       require(msg.value == 8, "NEED_8_WEI.");
        for(uint ledValue = 0; ledValue < 8; ledValue++ ) {
             electricEthereum.BuyElectricityTimeOn{value: 1}(ledValue,1);
+        }
+    }
+
+    function BuyAllTurnOffSlowly() public payable {
+       require(msg.value == 36, "NEED_36_WEI.");
+       for(uint ledValue = 0; ledValue < 8; ledValue++ ) {
+            electricEthereum.BuyElectricityTimeOn{value: ledValue+1}(ledValue,ledValue+1);
         }
     }
 }
