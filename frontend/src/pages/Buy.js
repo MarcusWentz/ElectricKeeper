@@ -68,9 +68,6 @@ export default function Buy({ degree, userLocation, basic }) {
     loadBlockchainData();
   }, [userAccountAddress[0]]);
 
-  useEffect(() => {
-    console.log("matic Price Feed contract: ", maticPriceFeedContract);
-  }, []); 
 
   const estimatedMatic = () => {
     return (
@@ -125,7 +122,7 @@ export default function Buy({ degree, userLocation, basic }) {
         <div>
           <h1>
             <br></br>
-            buy electricity
+            Buy electricity
           </h1>
           <p>enter a USD amount, and buy electricity with our smart contract grid </p>
           <div className="row">{renderInputBox()}</div>
