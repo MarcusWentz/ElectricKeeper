@@ -15,10 +15,13 @@ export default function Buy({ degree, userLocation, basic }) {
   const [wethBalance, setAvailableWethBalance] = useState(null);
   const [metamaskAddress, setMetamaskAddress] = useState("");
   const [inputAmount, setInputAmount] = useState("");
+  const [latestPriceOfMatic_1p, setLatestPriceOfMatic_1p] = useState("");
   const [showToast, setShowToast] = useState();
   const [errorMsg, setErrorMsg] = useState();
   const { userAccountAddress, setUserAccountAddress } =
     React.useContext(DataContext);
+  
+
 
   useEffect(() => {
     if (window.ethereum) {
@@ -43,6 +46,16 @@ export default function Buy({ degree, userLocation, basic }) {
       setMaticPriceFeedContract(maticPriceFeedContract);
       console.log(maticPriceFeedContract, 'This is the matic price feed contract')
 
+      if (maticPriceFeedContract !== null) {
+        maticPriceFeedContract.methods.getLatestPrice().call().then((data) => {
+          setLatestPriceOfMatic_1p(web3.utils.fromWei(data));
+          console.log(data);
+          console.log(web3.utils.fromWei(data));
+        }).catch((err) => {
+          console.log(err);
+        }); 
+      }
+
       //TODO: Old method from weth contract, refactor this to suit pricefeed contract
 /*       if (metamaskAddress) {
         let availableWeth = await maticPriceFeedContract.methods
@@ -54,6 +67,16 @@ export default function Buy({ degree, userLocation, basic }) {
     };
     loadBlockchainData();
   }, [userAccountAddress[0]]);
+
+  useEffect(() => {
+    console.log("matic Price Feed contract: ", maticPriceFeedContract);
+  }, []); 
+
+  const estimatedMatic = () => {
+    return (
+      latestPriceOfMatic_1p && inputAmount !== "" ? latestPriceOfMatic_1p * (100* inputAmount) : 0
+    );
+  }
 
   const renderInputBox = () => {
     return (
@@ -67,6 +90,8 @@ export default function Buy({ degree, userLocation, basic }) {
             flexDirection: "column",
           }}
         >
+          <div style={{ display: "flex", flexDirection: "column", width: "50%"}}>
+          <label style={{alignSelf: "start", color: "#ffdd9a", marginRight: "20px"}} htmlFor="usd">USD:</label>
           <input
             type="number"
             class="input-matic"
@@ -75,8 +100,9 @@ export default function Buy({ degree, userLocation, basic }) {
             data-name="usd"
             value={inputAmount}
             onChange={(e) => setInputAmount(e.target.value)}
-            style={{ width: "50%" }}
+            style={{ width: "100%" }}
           ></input>
+          </div>
           <br />
           <div style={{ width: "80%" }}>
             <button class="btn-hover color-blue">Blue</button>
@@ -86,7 +112,7 @@ export default function Buy({ degree, userLocation, basic }) {
           </div>
           <br />
           <p>
-            <b>Amount: </b> &nbsp;&nbsp;&nbsp;&nbsp; ≈ &nbsp; {wethBalance} matic
+            <b>Amount: </b> &nbsp;&nbsp;&nbsp;&nbsp; ≈ &nbsp; {estimatedMatic().toFixed(3)} matic
           </p>
         </div>
       </>
