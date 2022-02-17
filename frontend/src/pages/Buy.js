@@ -76,25 +76,13 @@ export default function Buy({ degree, userLocation, basic }) {
             console.log(err);
           });
       }
-
-      //TODO: Old method from weth contract, refactor this to suit pricefeed contract
-      /*       if (metamaskAddress) {
-        let availableWeth = await maticPriceFeedContract.methods
-          .balanceOf(metamaskAddress)
-          .call();
-        setAvailableWethBalance(availableWeth);
-        console.log(availableWeth, "avail Weth:");
-      } */
     };
     loadBlockchainData();
   }, [userAccountAddress[0]]);
 
-<<<<<<< HEAD
   useEffect(() => {
     console.log("matic Price Feed contract: ", maticPriceFeedContract);
   }, []);
-=======
->>>>>>> a7577ea6bc16f0789244df298255cf9a5b43d7bf
 
   const estimatedMatic = () => {
     return latestPriceOfMatic_1p && inputAmount !== ""
@@ -105,17 +93,19 @@ export default function Buy({ degree, userLocation, basic }) {
   const handleBuyButtonClick = (colorNumber) => {
     console.log("You chose the color:", colorNumber);
     console.log(inputAmount, "inputAmounnnttt");
-
-    console.log(userAccountAddress, 'Array or not?')
-    let web3 = new Web3(window.web3.currentProvider);
-    web3.eth.sendTransaction({
-      to: ELECTRICKEEPER_CONTRACT_ADDRESS,
-      data: electricKeeperContract.methods
-        .BuyElectricityTimeOn(colorNumber, inputAmount)
-        .encodeABI(),
-      value: web3.utils.toWei(inputAmount),
-      from: userAccountAddress[0],
-    });
+    try {
+      let web3 = new Web3(window.web3.currentProvider);
+      web3.eth.sendTransaction({
+        to: ELECTRICKEEPER_CONTRACT_ADDRESS,
+        data: electricKeeperContract.methods
+          .BuyElectricityTimeOn(colorNumber, inputAmount)
+          .encodeABI(),
+        value: web3.utils.toWei(inputAmount),
+        from: userAccountAddress[0],
+      });
+    } catch (err) {
+      console.log(err, "ERROR !! You have to connect to metamask!");
+    }
   };
 
   const renderInputBox = () => {
