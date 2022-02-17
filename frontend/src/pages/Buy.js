@@ -1,7 +1,12 @@
 import EthLogo from "../assets/svg/eth_logo.svg";
 import React, { Component, useEffect, useState } from "react";
 import Web3 from "web3";
-import { ABI, CONTRACT_ADDRESS } from "../config";
+import {
+  ABI,
+  CONTRACT_ADDRESS,
+  ELECTRICKEEPER_ABI,
+  ELECTRICKEEPER_CONTRACT_ADDRESS,
+} from "../config";
 import ErrorModal from "../components/ErrorModal";
 
 import { DataContext } from "../DataContext";
@@ -12,6 +17,8 @@ import { DataContext } from "../DataContext";
 
 export default function Buy({ degree, userLocation, basic }) {
   const [maticPriceFeedContract, setMaticPriceFeedContract] = useState(null);
+  const [electricKeeperContract, setElectricKeeperContract] = useState(null);
+
   const [wethBalance, setAvailableWethBalance] = useState(null);
   const [metamaskAddress, setMetamaskAddress] = useState("");
   const [inputAmount, setInputAmount] = useState("");
@@ -20,8 +27,6 @@ export default function Buy({ degree, userLocation, basic }) {
   const [errorMsg, setErrorMsg] = useState();
   const { userAccountAddress, setUserAccountAddress } =
     React.useContext(DataContext);
-  
-
 
   useEffect(() => {
     if (window.ethereum) {
@@ -42,22 +47,38 @@ export default function Buy({ degree, userLocation, basic }) {
       setMetamaskAddress(userAccountAddress[0]);
 
       //Load the smart contract
-      const maticPriceFeedContract = new web3.eth.Contract(ABI, CONTRACT_ADDRESS);
+      const maticPriceFeedContract = new web3.eth.Contract(
+        ABI,
+        CONTRACT_ADDRESS
+      );
+      const electricKeeperContract = new web3.eth.Contract(
+        ELECTRICKEEPER_ABI,
+        ELECTRICKEEPER_CONTRACT_ADDRESS
+      );
+      setElectricKeeperContract(electricKeeperContract);
       setMaticPriceFeedContract(maticPriceFeedContract);
-      console.log(maticPriceFeedContract, 'This is the matic price feed contract')
+      console.log(
+        maticPriceFeedContract,
+        "This is the matic price feed contract"
+      );
+      console.log(electricKeeperContract, "This is electric keeper contract");
 
       if (maticPriceFeedContract !== null) {
-        maticPriceFeedContract.methods.getLatestPrice().call().then((data) => {
-          setLatestPriceOfMatic_1p(web3.utils.fromWei(data));
-          console.log(data);
-          console.log(web3.utils.fromWei(data));
-        }).catch((err) => {
-          console.log(err);
-        }); 
+        maticPriceFeedContract.methods
+          .getLatestPrice()
+          .call()
+          .then((data) => {
+            setLatestPriceOfMatic_1p(web3.utils.fromWei(data));
+            console.log(data);
+            console.log(web3.utils.fromWei(data));
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
 
       //TODO: Old method from weth contract, refactor this to suit pricefeed contract
-/*       if (metamaskAddress) {
+      /*       if (metamaskAddress) {
         let availableWeth = await maticPriceFeedContract.methods
           .balanceOf(metamaskAddress)
           .call();
@@ -70,13 +91,29 @@ export default function Buy({ degree, userLocation, basic }) {
 
   useEffect(() => {
     console.log("matic Price Feed contract: ", maticPriceFeedContract);
-  }, []); 
+  }, []);
 
   const estimatedMatic = () => {
-    return (
-      latestPriceOfMatic_1p && inputAmount !== "" ? latestPriceOfMatic_1p * (100* inputAmount) : 0
-    );
-  }
+    return latestPriceOfMatic_1p && inputAmount !== ""
+      ? latestPriceOfMatic_1p * (100 * inputAmount)
+      : 0;
+  };
+
+  const handleBuyButtonClick = (colorNumber) => {
+    console.log("You chose the color:", colorNumber);
+    console.log(inputAmount, "inputAmounnnttt");
+
+    console.log(userAccountAddress, 'Array or not?')
+    let web3 = new Web3(window.web3.currentProvider);
+    web3.eth.sendTransaction({
+      to: ELECTRICKEEPER_CONTRACT_ADDRESS,
+      data: electricKeeperContract.methods
+        .BuyElectricityTimeOn(colorNumber, inputAmount)
+        .encodeABI(),
+      value: web3.utils.toWei(inputAmount),
+      from: userAccountAddress[0],
+    });
+  };
 
   const renderInputBox = () => {
     return (
@@ -90,29 +127,63 @@ export default function Buy({ degree, userLocation, basic }) {
             flexDirection: "column",
           }}
         >
-          <div style={{ display: "flex", flexDirection: "column", width: "50%"}}>
-          <label style={{alignSelf: "start", color: "#ffdd9a", marginRight: "20px"}} htmlFor="usd">USD:</label>
-          <input
-            type="number"
-            class="input-matic"
-            min="0"
-            placeholder="enter USD amount"
-            data-name="usd"
-            value={inputAmount}
-            onChange={(e) => setInputAmount(e.target.value)}
-            style={{ width: "100%" }}
-          ></input>
+          <div
+            style={{ display: "flex", flexDirection: "column", width: "50%" }}
+          >
+            <label
+              style={{
+                alignSelf: "start",
+                color: "#ffdd9a",
+                marginRight: "20px",
+              }}
+              htmlFor="minutes"
+            >
+              1 minute = 1 USD
+            </label>
+            <input
+              type="number"
+              class="input-matic"
+              min="0"
+              placeholder="enter amount of minutes"
+              data-name="minutes"
+              value={inputAmount}
+              onChange={(e) => setInputAmount(e.target.value)}
+              style={{ width: "100%" }}
+            ></input>
           </div>
+
           <br />
+          <p>pick LED color to buy </p>
           <div style={{ width: "80%" }}>
-            <button class="btn-hover color-blue">Blue</button>
-            <button class="btn-hover color-green">Green</button>
-            <button class="btn-hover color-yellow">Yellow</button>
-            <button class="btn-hover color-red">Red</button>
+            <button
+              class="btn-hover color-blue"
+              onClick={() => handleBuyButtonClick(0)}
+            >
+              Blue
+            </button>
+            <button
+              class="btn-hover color-green"
+              onClick={() => handleBuyButtonClick(1)}
+            >
+              Green
+            </button>
+            <button
+              class="btn-hover color-yellow"
+              onClick={() => handleBuyButtonClick(2)}
+            >
+              Yellow
+            </button>
+            <button
+              class="btn-hover color-red"
+              onClick={() => handleBuyButtonClick(3)}
+            >
+              Red
+            </button>
           </div>
           <br />
           <p>
-            <b>Amount: </b> &nbsp;&nbsp;&nbsp;&nbsp; ≈ &nbsp; {estimatedMatic().toFixed(3)} matic
+            <b>Amount: </b> &nbsp;&nbsp;&nbsp;&nbsp; ≈ &nbsp;{" "}
+            {estimatedMatic().toFixed(3)} matic
           </p>
         </div>
       </>
@@ -127,7 +198,7 @@ export default function Buy({ degree, userLocation, basic }) {
             <br></br>
             buy electricity
           </h1>
-          <p>enter a USD amount, and buy electricity with our smart contract grid </p>
+          <p>enter the amount of minutes of electricity you want to buy </p>
           <div className="row">{renderInputBox()}</div>
         </div>
       </div>
