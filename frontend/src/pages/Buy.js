@@ -127,7 +127,7 @@ export default function Buy({ degree, userLocation, basic }) {
             <br></br>
             buy electricity
           </h1>
-          <p>enter a USD amount, and you will buy electricity with our smart contract grid </p>
+          <p>enter a USD amount, and buy electricity with our smart contract grid </p>
           <div className="row">{renderInputBox()}</div>
         </div>
       </div>
