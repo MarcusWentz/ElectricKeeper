@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import { DataContext } from "./DataContext";
 
-import { useWeb3React, Web3ReactProvider } from "@web3-react/core";
-import { injected } from "./components/connectors";
-
+import { Web3ReactProvider, useWeb3React } from "@web3-react/core";
+import { InjectedConnector } from "@web3-react/injected-connector";
+import { Web3Provider } from "@ethersproject/providers";
 import { isMobile } from "react-device-detect";
 import React, { Component, useEffect, useState } from "react";
 import Web3 from "web3";
@@ -16,33 +16,25 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 const MyContext = React.createContext();
 
-function getLibrary(provider) {
-  return new Web3(provider);
-}
-
 function App() {
   const [userAccountAddress, setUserAccountAddress] = useState("");
   const [connectedAddrValue, setConnectedAddrValue] = useState("");
 
   const { active, account, library, connector, activate, deactivate } =
     useWeb3React();
+  const web3 = useWeb3React();
 
-  async function connect() {
+  const injected = new InjectedConnector({
+    supportedChainIds: [1, 3, 4, 5, 42, 80001],
+  });
+
+  const handleConnect = () => {
     try {
-      await activate(injected);
-    } catch (ex) {
-      console.log(ex);
+      web3.activate(injected, undefined, true);
+    } catch (error) {
+      console.error(error);
     }
-  }
-
-  async function disconnect() {
-    try {
-      deactivate();
-    } catch (ex) {
-      console.log(ex);
-    }
-  }
-
+  };
   const handleConnectMetamask = async () => {
     let that = this;
     const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
@@ -62,54 +54,38 @@ function App() {
   };
 
   return (
-    <Web3ReactProvider getLibrary={getLibrary}>
-      <DataContext.Provider value={{ userAccountAddress: userAccountAddress }}>
+    <DataContext.Provider value={{ userAccountAddress: userAccountAddress }}>
+      {isMobile ? (
+        ""
+      ) : (
+        <Navbar
+          handleConnectMetamask={handleConnectMetamask}
+          connectedAddrValue={connectedAddrValue}
+        />
+      )}
+      <main>
         {isMobile ? (
-          ""
+          <MobileDetected />
         ) : (
-          <Navbar
-            handleConnectMetamask={handleConnectMetamask}
-            connectedAddrValue={connectedAddrValue}
-          />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/buy" element={<Buy />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/error" element={<MobileDetected />} />
+          </Routes>
         )}
-        <main>
-          {isMobile ? (
-            <MobileDetected />
-          ) : (
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/buy" element={<Buy />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/error" element={<MobileDetected />} />
-            </Routes>
-          )}
-        </main>
+      </main>
 
-        <div className="flex flex-col items-center justify-center">
-          <button
-            onClick={connect}
-            className="py-2 mt-20 mb-4 text-lg font-bold text-white rounded-lg w-56 bg-blue-600 hover:bg-blue-800"
-          >
-            Connect to MetaMask
-          </button>
-          {active ? (
-            <span>
-              Connected with <b>{account}</b>
-            </span>
-          ) : (
-            <span>Not connected</span>
-          )}
-          <button
-            onClick={disconnect}
-            className="py-2 mt-20 mb-4 text-lg font-bold text-white rounded-lg w-56 bg-blue-600 hover:bg-blue-800"
-          >
-            Disconnect
-          </button>
-        </div>
+      <div>
+        <button onClick={handleConnect}>Connect</button>
+        <p>
+          <span>Status: {web3.active ? "🟢" : web3.error ? "🔴" : "🟠"}</span>
+        </p>
+        <pre>{console.log(account)}</pre>
+      </div>
 
-        <Footer />
-      </DataContext.Provider>
-    </Web3ReactProvider>
+      <Footer />
+    </DataContext.Provider>
   );
 }
 
