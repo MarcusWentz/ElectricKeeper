@@ -14,6 +14,13 @@ import About from "./pages/About";
 import MobileDetected from "./pages/MobileDetected";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import {
+  injected,
+  walletconnect,
+  resetWalletConnector,
+  walletlink,
+} from "./components/connectors";
+
 const MyContext = React.createContext();
 
 function App() {
@@ -24,10 +31,6 @@ function App() {
     useWeb3React();
   const web3 = useWeb3React();
 
-  const injected = new InjectedConnector({
-    supportedChainIds: [1, 3, 4, 5, 42, 80001],
-  });
-
   const handleConnect = () => {
     try {
       web3.activate(injected, undefined, true);
@@ -35,6 +38,15 @@ function App() {
       console.error(error);
     }
   };
+
+  const connectCoinbaseSimple = async () => {
+    try {
+      await web3.activate(walletlink);
+    } catch (ex) {
+      console.log(ex);
+    }
+  };
+
   const handleConnectMetamask = async () => {
     let that = this;
     const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
@@ -64,6 +76,24 @@ function App() {
         />
       )}
       <main>
+        <div>
+          <button onClick={handleConnect}>Connect Metamask Wallet</button>
+          <p>
+            <span>Status: {web3.active ? "🟢" : web3.error ? "🔴" : "🟠"}</span>
+          </p>
+          <pre>{(console.log(web3), account)}</pre>
+        </div>
+
+        <div>
+          <button onClick={connectCoinbaseSimple}>
+            Connect Coinbase Wallet
+          </button>
+          <p>
+            <span>Status: {web3.active ? "🟢" : web3.error ? "🔴" : "🟠"}</span>
+          </p>
+          <pre>{(console.log(web3), account)}</pre>
+        </div>
+
         {isMobile ? (
           <MobileDetected />
         ) : (
@@ -75,14 +105,6 @@ function App() {
           </Routes>
         )}
       </main>
-
-      <div>
-        <button onClick={handleConnect}>Connect</button>
-        <p>
-          <span>Status: {web3.active ? "🟢" : web3.error ? "🔴" : "🟠"}</span>
-        </p>
-        <pre>{console.log(account)}</pre>
-      </div>
 
       <Footer />
     </DataContext.Provider>
