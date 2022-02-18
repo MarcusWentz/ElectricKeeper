@@ -1,6 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import { DataContext } from "./DataContext";
 
+import { useWeb3React, Web3ReactProvider } from "@web3-react/core";
+import { injected } from "./components/connectors";
+
 import { isMobile } from "react-device-detect";
 import React, { Component, useEffect, useState } from "react";
 import Web3 from "web3";
@@ -13,9 +16,32 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 const MyContext = React.createContext();
 
+function getLibrary(provider) {
+  return new Web3(provider);
+}
+
 function App() {
   const [userAccountAddress, setUserAccountAddress] = useState("");
   const [connectedAddrValue, setConnectedAddrValue] = useState("");
+
+  const { active, account, library, connector, activate, deactivate } =
+    useWeb3React();
+
+  async function connect() {
+    try {
+      await activate(injected);
+    } catch (ex) {
+      console.log(ex);
+    }
+  }
+
+  async function disconnect() {
+    try {
+      deactivate();
+    } catch (ex) {
+      console.log(ex);
+    }
+  }
 
   const handleConnectMetamask = async () => {
     let that = this;
@@ -36,26 +62,54 @@ function App() {
   };
 
   return (
-    <DataContext.Provider
-      value={{ userAccountAddress: userAccountAddress }}
-    >
-      {isMobile ? "" : <Navbar handleConnectMetamask={handleConnectMetamask} connectedAddrValue={connectedAddrValue}/>}
-      <main>
+    <Web3ReactProvider getLibrary={getLibrary}>
+      <DataContext.Provider value={{ userAccountAddress: userAccountAddress }}>
         {isMobile ? (
-          <MobileDetected />
+          ""
         ) : (
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/buy" element={<Buy />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/error" element={<MobileDetected />} />
-          </Routes>
+          <Navbar
+            handleConnectMetamask={handleConnectMetamask}
+            connectedAddrValue={connectedAddrValue}
+          />
         )}
-      </main>
- 
+        <main>
+          {isMobile ? (
+            <MobileDetected />
+          ) : (
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/buy" element={<Buy />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/error" element={<MobileDetected />} />
+            </Routes>
+          )}
+        </main>
 
-      <Footer />
-    </DataContext.Provider>
+        <div className="flex flex-col items-center justify-center">
+          <button
+            onClick={connect}
+            className="py-2 mt-20 mb-4 text-lg font-bold text-white rounded-lg w-56 bg-blue-600 hover:bg-blue-800"
+          >
+            Connect to MetaMask
+          </button>
+          {active ? (
+            <span>
+              Connected with <b>{account}</b>
+            </span>
+          ) : (
+            <span>Not connected</span>
+          )}
+          <button
+            onClick={disconnect}
+            className="py-2 mt-20 mb-4 text-lg font-bold text-white rounded-lg w-56 bg-blue-600 hover:bg-blue-800"
+          >
+            Disconnect
+          </button>
+        </div>
+
+        <Footer />
+      </DataContext.Provider>
+    </Web3ReactProvider>
   );
 }
 
