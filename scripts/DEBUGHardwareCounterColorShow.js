@@ -1,15 +1,26 @@
 var piblaster = require('pi-blaster.js');
-const timeMilliSec = 100; //1000 is one second
+const timeMilliSec = 50; //1000 is one second
 const pulseWidthMin = 0.00;
 const pulseWidthMax = 0.35;
 
 let objectLED = {"pin":   [17   ,27    ,23      ,22     ,24      ,25      ,18    ,21     ],
                  "color": ['RED','BLUE','YELLOW','GREEN','PURPLE','ORANGE','GREY','WHITE']}
 
-function count() { //get() contract value,
+function timeout(ms) {
+	return new Promise(resolve => setTimeout(resolve,ms));
+}
+
+async function countUpThenDown() { //get() contract value,
+  while(true) {
     for(let i = 0; i < 256 ; i++) {
-      setTimeout(() => {bitCheck(i)}, i*timeMilliSec);
-      }
+      await timeout(timeMilliSec);
+      bitCheck(i);
+    }
+    for(let i = 255; i > -1 ; i--) {
+      await timeout(timeMilliSec);
+      bitCheck(i);
+    }
+  }
 }
 
 function bitCheck(i) {
@@ -25,4 +36,6 @@ function bitCheck(i) {
    }
 }
 
-count()
+countUpThenDown()
+
+
