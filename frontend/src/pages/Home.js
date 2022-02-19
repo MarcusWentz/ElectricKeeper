@@ -12,8 +12,8 @@ const Home = () => {
             <br />
             <br />
             <h1 class="mb-5 flickerOn">
-              The only electrical grid running on Ethereum smart contracts harnessing
-              the power of Chainlink Keepers
+              the only electrical grid running on ethereum smart contracts harnessing
+              the power of chainlink keepers
             </h1>
             <br />
             <h4 class="flickerOn"></h4>

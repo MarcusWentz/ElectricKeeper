@@ -129,13 +129,13 @@ export default function Buy({ degree, userLocation, basic }) {
           >
             <label
               style={{
-                alignSelf: "start",
                 color: "#ffdd9a",
                 marginRight: "20px",
+                fontSize: "10px",
               }}
               htmlFor="minutes"
             >
-              1 minute = 1 USD
+              price: $1/minute
             </label>
             <input
               type="number"
@@ -149,9 +149,16 @@ export default function Buy({ degree, userLocation, basic }) {
               style={{ width: "100%" }}
             ></input>
           </div>
-
           <br />
-          <p>pick LED color to buy </p>
+          <label
+            style={{
+              color: "#ffdd9a",
+              fontSize: "10px",
+            }}
+            htmlFor="minutes"
+          >
+            pick LED color to buy
+          </label>
           <div style={{ width: "80%" }}>
             <button
               class="btn-hover color-blue"
@@ -194,7 +201,7 @@ export default function Buy({ degree, userLocation, basic }) {
         <div>
           <h1>
             <br></br>
-            Buy electricity
+            buy electricity
           </h1>
           <p>enter the amount of minutes of electricity you want to buy </p>
           <div className="row">{renderInputBox()}</div>
