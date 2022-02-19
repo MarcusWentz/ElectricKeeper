@@ -7,6 +7,7 @@ import {
   ELECTRICKEEPER_ABI,
   ELECTRICKEEPER_CONTRACT_ADDRESS,
 } from "../config";
+import { BUTTON_OBJECT } from "./ButtonData";
 import ErrorModal from "../components/ErrorModal";
 import { Web3ReactProvider, useWeb3React } from "@web3-react/core";
 
@@ -106,6 +107,24 @@ export default function Buy({ degree, userLocation, basic }) {
     }
   };
 
+  const renderButtons = () => {
+    console.log("Hello?????", BUTTON_OBJECT);
+    return (
+      <div>
+        <p>HAAAJ</p>
+        {BUTTON_OBJECT.map((i) => {
+          console.log(i.title, "TIIITEL");
+          <button
+            className="hi"
+            onClick={() => handleBuyButtonClick(i.buttonClickValue)}
+          >
+            Titel
+          </button>;
+        })}
+      </div>
+    );
+  };
+
   const renderInputBox = () => {
     return (
       <>
@@ -153,30 +172,14 @@ export default function Buy({ degree, userLocation, basic }) {
             pick LED color to buy
           </label>
           <div style={{ width: "80%" }}>
-            <button
-              class="btn-hover color-blue"
-              onClick={() => handleBuyButtonClick(0)}
-            >
-              Blue
-            </button>
-            <button
-              class="btn-hover color-green"
-              onClick={() => handleBuyButtonClick(1)}
-            >
-              Green
-            </button>
-            <button
-              class="btn-hover color-yellow"
-              onClick={() => handleBuyButtonClick(2)}
-            >
-              Yellow
-            </button>
-            <button
-              class="btn-hover color-red"
-              onClick={() => handleBuyButtonClick(3)}
-            >
-              Red
-            </button>
+            {BUTTON_OBJECT.map((i) => (
+              <button
+                className={i.styleClass}
+                onClick={() => handleBuyButtonClick(i.buttonClickValue)}
+              >
+                {i.title}
+              </button>
+            ))}
           </div>
           <br />
           <p>

@@ -280,6 +280,54 @@ p {
  */
 }
 
+.btn-hover.color-white {
+  background-image: linear-gradient(
+    to right,
+    #f5ddc3,
+    #b9b8b7,
+    #acacac,
+    #e2dbd6
+  );
+  /*   box-shadow: 0 4px 15px 0 rgba(218, 51, 56, 0.75);
+ */
+}
+
+.btn-hover.color-grey {
+  background-image: linear-gradient(
+    to right,
+    #929292,
+    #616161,
+    #918c8c,
+    #a3a3a3
+  );
+  /*   box-shadow: 0 4px 15px 0 rgba(218, 51, 56, 0.75);
+ */
+}
+
+.btn-hover.color-purple {
+  background-image: linear-gradient(
+    to right,
+    #c44ba0,
+    #911a7d,
+    #d859e9,
+    #66084a
+  );
+  /*   box-shadow: 0 4px 15px 0 rgba(218, 51, 56, 0.75);
+ */
+}
+
+.btn-hover.color-orange {
+  background-image: linear-gradient(
+    to right,
+    #ad5c00,
+    #fca400,
+    #af4600,
+    #dd7a29
+  );
+  /*   box-shadow: 0 4px 15px 0 rgba(218, 51, 56, 0.75);
+ */
+}
+
 .input-matic {
   background-color: transparent;
   background-image: linear-gradient(to right, #ffe600 0, #ff7101 50%);
