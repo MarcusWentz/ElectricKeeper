@@ -66,7 +66,7 @@ function App() {
   };
 
   return (
-    <DataContext.Provider value={{ userAccountAddress: userAccountAddress }}>
+    <DataContext.Provider value={{ userAccountAddress: userAccountAddress, errorMsg: "" }}>
       {isMobile ? (
         ""
       ) : (
@@ -76,7 +76,6 @@ function App() {
         />
       )}
       <main>
-   
 
         {isMobile ? (
           <MobileDetected />
@@ -88,7 +87,9 @@ function App() {
             <Route path="/error" element={<MobileDetected />} />
           </Routes>
         )}
+
       </main>
+
 
       <Footer />
     </DataContext.Provider>

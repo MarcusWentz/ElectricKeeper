@@ -11,6 +11,8 @@ import {
   walletlink,
 } from "./connectors";
 
+import {DataContext} from "../DataContext";
+
 export default function ConnectWalletModal({
   showToastFromProp,
   errorMsg,
@@ -38,7 +40,7 @@ export default function ConnectWalletModal({
 
   const handleConnect = () => {
     try {
-      web3.activate(injected, undefined, true);
+      web3.activate(injected, undefined, true).catch(err => window.location.reload());
     } catch (error) {
       console.error(error);
     }
