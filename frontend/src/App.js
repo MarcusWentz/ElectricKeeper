@@ -76,23 +76,7 @@ function App() {
         />
       )}
       <main>
-        <div>
-          <button onClick={handleConnect}>Connect Metamask Wallet</button>
-          <p>
-            <span>Status: {web3.active ? "🟢" : web3.error ? "🔴" : "🟠"}</span>
-          </p>
-          <pre>{(console.log(web3), account)}</pre>
-        </div>
-
-        <div>
-          <button onClick={connectCoinbaseSimple}>
-            Connect Coinbase Wallet
-          </button>
-          <p>
-            <span>Status: {web3.active ? "🟢" : web3.error ? "🔴" : "🟠"}</span>
-          </p>
-          <pre>{(console.log(web3), account)}</pre>
-        </div>
+   
 
         {isMobile ? (
           <MobileDetected />

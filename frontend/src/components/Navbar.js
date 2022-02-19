@@ -3,15 +3,27 @@ import { faBolt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DataContext } from "../DataContext";
 import React, { Component, useEffect, useState } from "react";
-
+import { useWeb3React } from "@web3-react/core";
 import classes from "./Navbar.module.css";
+import ConnectWalletModal from "./ConnectWalletModal";
 
 const Navbar = ({ handleConnectMetamask, connectedAddrValue }) => {
   const { userAccountAddress, setUserAccountAddress } =
     React.useContext(DataContext);
+  const [showModal, setShowModal] = useState(false);
+
+  const { active, account, library, connector, activate, deactivate } =
+    useWeb3React();
+  const shortAddress = account
+    ? String(account).substr(0, 5) + "..." + String(account).substr(38, 4)
+    : "";
 
   return (
     <header className={classes.header}>
+      <ConnectWalletModal
+        onClose={() => setShowModal(false)}
+        showToastFromProp={showModal}
+      ></ConnectWalletModal>
       <nav class="navbar">
         <div style={{ fontSize: "xx-large", marginRight: "50px" }}>
           <div class="h-screen flex justify-center items-center bg-gray-800">
@@ -49,7 +61,7 @@ const Navbar = ({ handleConnectMetamask, connectedAddrValue }) => {
             <a className={(navObj) => (navObj.isActive ? classes.active : "")}>
               <button
                 className="btn btn-light mm"
-                onClick={handleConnectMetamask}
+                onClick={() => setShowModal(true)}
               >
                 <img
                   width="30"
@@ -57,9 +69,7 @@ const Navbar = ({ handleConnectMetamask, connectedAddrValue }) => {
                   style={{ marginRight: 5 }}
                   src="https://cdn.discordapp.com/attachments/908513230714982410/913132016365633596/aaaaa.png"
                 ></img>
-                {connectedAddrValue !== ""
-                  ? connectedAddrValue
-                  : "Connect Metamask"}
+                {shortAddress !== "" ? shortAddress : "Connect Metamask"}
               </button>
             </a>
           </li>
