@@ -7,7 +7,7 @@ import {
   ELECTRICKEEPER_ABI,
   ELECTRICKEEPER_CONTRACT_ADDRESS,
 } from "../config";
-import { BUTTON_OBJECT } from "./ButtonData";
+import { BUTTON_OBJECT_4_LAST, BUTTON_OBJECT_4_FIRST } from "./ButtonData";
 import ErrorModal from "../components/ErrorModal";
 import { Web3ReactProvider, useWeb3React } from "@web3-react/core";
 
@@ -49,7 +49,7 @@ export default function Buy({ degree, userLocation, basic }) {
       console.log(chainId);
       if (chainId !== 80001) {
         setErrorMsg("Must be on the Mumbai test network");
-      };
+      }
 
       //Load the smart contract
       const maticPriceFeedContract = new web3.eth.Contract(
@@ -115,23 +115,7 @@ export default function Buy({ degree, userLocation, basic }) {
     }
   };
 
-  const renderButtons = () => {
-    console.log("Hello?????", BUTTON_OBJECT);
-    return (
-      <div>
-        <p>HAAAJ</p>
-        {BUTTON_OBJECT.map((i) => {
-          console.log(i.title, "TIIITEL");
-          <button
-            className="hi"
-            onClick={() => handleBuyButtonClick(i.buttonClickValue)}
-          >
-            Titel
-          </button>;
-        })}
-      </div>
-    );
-  };
+
 
   const renderInputBox = () => {
     return (
@@ -152,7 +136,7 @@ export default function Buy({ degree, userLocation, basic }) {
               style={{
                 color: "#ffdd9a",
                 marginRight: "20px",
-                fontSize: "10px",
+                fontSize: "13px",
               }}
               htmlFor="minutes"
             >
@@ -174,14 +158,23 @@ export default function Buy({ degree, userLocation, basic }) {
           <label
             style={{
               color: "#ffdd9a",
-              fontSize: "10px",
+              fontSize: "13px",
             }}
             htmlFor="minutes"
           >
             pick LED color to buy
           </label>
           <div style={{ width: "80%" }}>
-            {BUTTON_OBJECT.map((i) => (
+            {BUTTON_OBJECT_4_FIRST.map((i) => (
+              <button
+                className={i.styleClass}
+                onClick={() => handleBuyButtonClick(i.buttonClickValue)}
+              >
+                {i.title}
+              </button>
+            ))}
+            <br></br>
+            {BUTTON_OBJECT_4_LAST.map((i) => (
               <button
                 className={i.styleClass}
                 onClick={() => handleBuyButtonClick(i.buttonClickValue)}

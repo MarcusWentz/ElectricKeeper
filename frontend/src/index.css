@@ -107,7 +107,6 @@ p {
   font-family: inherit;
   text-transform: lowercase;
   letter-spacing: 1.5px;
-
   width: 18vw;
   padding: 0px;
   margin: 0px 0px 0px 0px;
@@ -204,12 +203,12 @@ p {
 
 .btn-hover {
   width: 13%;
-  margin: 10px 2% 20px 2%;
-  font-size: 16px;
-  font-weight: 600;
+  margin: 20px 2% 15px 2%;
+  font-size: 13px;
+  font-weight: 700;
   color: #fff;
   cursor: pointer;
-  height: 55px;
+  height: 50px;
   text-align: center;
   border: none;
   background-size: 300% 100%;
