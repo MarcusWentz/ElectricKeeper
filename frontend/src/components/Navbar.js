@@ -70,7 +70,7 @@ const Navbar = ({ handleConnectMetamask, connectedAddrValue }) => {
                   src=""
                 ></img> */}
 
-                {shortAddress !== "" ? shortAddress : "Connect Metamask"}
+                {shortAddress !== "" ? shortAddress : "Connect wallet"}
               </button>
             </a>
           </li>
