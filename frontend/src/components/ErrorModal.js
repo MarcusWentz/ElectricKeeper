@@ -31,8 +31,12 @@ export default function ErrorModal({ showToastFromProp, errorMsg, onClose }) {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Header>Warning</Modal.Header>
-        <Modal.Body>
+        <Modal.Header
+        style={{border: "3px solid #dfb25e", borderRadius: "15px 15px 0 0"}}
+        >Warning</Modal.Header>
+        <Modal.Body 
+        style={{border: "2px solid #dfb25e", borderRadius: "0 0 15px 15px"}}
+        >
           <div className="inv-toast-body">{errorMsg}</div>
         </Modal.Body>
       </Modal>

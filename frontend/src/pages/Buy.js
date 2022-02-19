@@ -25,7 +25,9 @@ export default function Buy({ degree, userLocation, basic }) {
   const [inputAmount, setInputAmount] = useState("");
   const [latestPriceOfMatic_1p, setLatestPriceOfMatic_1p] = useState("");
   const [showToast, setShowToast] = useState();
-  const [errorMsg, setErrorMsg] = useState();
+  const [errorMsg, setErrorMsg] = useState("");
+  const { userAccountAddress, setUserAccountAddress } =
+    React.useContext(DataContext);
 
   const { account } = useWeb3React();
 
@@ -44,6 +46,10 @@ export default function Buy({ degree, userLocation, basic }) {
       //await window.ethereum.enable();
       //const addressFromMetamask = await web3.eth.getAccounts();
       const chainId = await web3.eth.getChainId();
+      console.log(chainId);
+      if (chainId !== 80001) {
+        setErrorMsg("Must be on the Mumbai test network");
+      };
 
       //Load the smart contract
       const maticPriceFeedContract = new web3.eth.Contract(
@@ -103,7 +109,9 @@ export default function Buy({ degree, userLocation, basic }) {
         from: account,
       });
     } catch (err) {
-      console.log(err, "ERROR !! You have to connect to metamask!");
+      const msg = "Connect your wallet to buy";
+      console.log(err, msg);
+      setErrorMsg(msg);
     }
   };
 
@@ -154,6 +162,7 @@ export default function Buy({ degree, userLocation, basic }) {
               type="number"
               class="input-matic"
               min="0"
+              step="1"
               placeholder="enter amount of minutes"
               data-name="minutes"
               value={inputAmount}
@@ -203,10 +212,10 @@ export default function Buy({ degree, userLocation, basic }) {
           <div className="row">{renderInputBox()}</div>
         </div>
       </div>
-      {showToast ? (
+      {errorMsg !== "" ? (
         <ErrorModal
-          showToastFromProp={showToast}
-          onClose={() => setShowToast(false)}
+          showToastFromProp={errorMsg !== ""}
+          onClose={() => setErrorMsg("")}
           errorMsg={errorMsg}
         ></ErrorModal>
       ) : null}
