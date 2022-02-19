@@ -20,7 +20,6 @@ body {
   height: 88vh;
   letter-spacing: 1.5px;
   font-family: inherit;
-
 }
 
 main {
@@ -201,7 +200,6 @@ p {
 
 /*Buy page styling*/
 
-
 .btn-hover {
   width: 13%;
   margin: 10px 2% 20px 2%;
@@ -216,8 +214,6 @@ p {
   text-transform: lowercase;
   letter-spacing: 1.5px;
   font-family: inherit;
-
-
 
   border-radius: 40px;
   moz-transition: all 0.4s ease-in-out;
@@ -246,8 +242,9 @@ p {
     #4a77bb,
     #0fafff
   );
-/*   box-shadow: 0 4px 15px 0 rgba(49, 76, 196, 0.75);
- */}
+  /*   box-shadow: 0 4px 15px 0 rgba(49, 76, 196, 0.75);
+ */
+}
 
 .btn-hover.color-green {
   background-image: linear-gradient(
@@ -257,8 +254,9 @@ p {
     #4ba86a,
     #2a8b3f
   );
-/*   box-shadow: 0 4px 15px 0 rgba(17, 229, 10, 0.75);
- */}
+  /*   box-shadow: 0 4px 15px 0 rgba(17, 229, 10, 0.75);
+ */
+}
 .btn-hover.color-yellow {
   background-image: linear-gradient(
     to right,
@@ -267,8 +265,9 @@ p {
     #ddbc00,
     #ebc700
   );
-/*   box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
- */}
+  /*   box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
+ */
+}
 .btn-hover.color-red {
   background-image: linear-gradient(
     to right,
@@ -277,10 +276,11 @@ p {
     #e96359,
     #861016
   );
-/*   box-shadow: 0 4px 15px 0 rgba(218, 51, 56, 0.75);
- */}
+  /*   box-shadow: 0 4px 15px 0 rgba(218, 51, 56, 0.75);
+ */
+}
 
-.input-matic{
+.input-matic {
   background-color: transparent;
   background-image: linear-gradient(to right, #ffe600 0, #ff7101 50%);
   background-repeat: no-repeat;
@@ -299,11 +299,10 @@ p {
   transition: border-color 0.2s linear;
   width: 300px;
   text-align: center;
-  color:#ffdd9e;
-  background-color: #ffffff22;
-
-
+  color: #ffdd9e;
+  background-color: rgba(53, 53, 53, 0.5);
 }
+
 .input-matic:hover,
 .input-matic:focus {
   border-color: transparent;
@@ -315,7 +314,8 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #ffdd9e;
   opacity: 50%; /* Firefox */
 }

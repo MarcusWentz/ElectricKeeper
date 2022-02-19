@@ -8,6 +8,7 @@ import {
   ELECTRICKEEPER_CONTRACT_ADDRESS,
 } from "../config";
 import ErrorModal from "../components/ErrorModal";
+import { Web3ReactProvider, useWeb3React } from "@web3-react/core";
 
 import { DataContext } from "../DataContext";
 
@@ -20,13 +21,12 @@ export default function Buy({ degree, userLocation, basic }) {
   const [electricKeeperContract, setElectricKeeperContract] = useState(null);
 
   const [wethBalance, setAvailableWethBalance] = useState(null);
-  const [metamaskAddress, setMetamaskAddress] = useState("");
   const [inputAmount, setInputAmount] = useState("");
   const [latestPriceOfMatic_1p, setLatestPriceOfMatic_1p] = useState("");
   const [showToast, setShowToast] = useState();
   const [errorMsg, setErrorMsg] = useState();
-  const { userAccountAddress, setUserAccountAddress } =
-    React.useContext(DataContext);
+
+  const { account } = useWeb3React();
 
   useEffect(() => {
     if (window.ethereum) {
@@ -43,8 +43,6 @@ export default function Buy({ degree, userLocation, basic }) {
       //await window.ethereum.enable();
       //const addressFromMetamask = await web3.eth.getAccounts();
       const chainId = await web3.eth.getChainId();
-
-      setMetamaskAddress(userAccountAddress[0]);
 
       //Load the smart contract
       const maticPriceFeedContract = new web3.eth.Contract(
@@ -78,7 +76,7 @@ export default function Buy({ degree, userLocation, basic }) {
       }
     };
     loadBlockchainData();
-  }, [userAccountAddress[0]]);
+  }, [account]);
 
   useEffect(() => {
     console.log("matic Price Feed contract: ", maticPriceFeedContract);
@@ -92,7 +90,7 @@ export default function Buy({ degree, userLocation, basic }) {
 
   const handleBuyButtonClick = (colorNumber) => {
     console.log("You chose the color:", colorNumber);
-    console.log(inputAmount, "inputAmounnnttt");
+    console.log(account, "account in BUY handle click");
     try {
       let web3 = new Web3(window.web3.currentProvider);
       web3.eth.sendTransaction({
@@ -101,7 +99,7 @@ export default function Buy({ degree, userLocation, basic }) {
           .BuyElectricityTimeOn(colorNumber, inputAmount)
           .encodeABI(),
         value: web3.utils.toWei(inputAmount),
-        from: userAccountAddress[0],
+        from: account,
       });
     } catch (err) {
       console.log(err, "ERROR !! You have to connect to metamask!");
