@@ -21,7 +21,6 @@ export default function ConnectWalletModal({
     useWeb3React();
   const web3 = useWeb3React();
 
-
   const _closeModal = () => {
     setShowModal(false);
     onClose();
@@ -64,25 +63,32 @@ export default function ConnectWalletModal({
         <Modal.Body>
           <div className="col-md-12">Hello</div>
           <div>
-            <button onClick={handleConnect}>Connect Metamask Wallet</button>
-            <p>
-              <span>
-                Status: {web3.active ? "🟢" : web3.error ? "🔴" : "🟠"}
-              </span>
-            </p>
-            <pre>{(console.log(web3), account)}</pre>
-          </div>
+            <div style={{ width: "500%" }}>
+              <button class="btn-hover color-electric" onClick={handleConnect}>
+                Connect Metamask
+              </button>
+              <p>
+                <span>
+                  Status: {web3.active ? "🟢" : web3.error ? "🔴" : "🟠"}
+                </span>
+              </p>
+              <pre>{(console.log(web3), account)}</pre>
 
-          <div>
-            <button onClick={connectCoinbaseSimple}>
-              Connect Coinbase Wallet
-            </button>
-            <p>
-              <span>
-                Status: {web3.active ? "🟢" : web3.error ? "🔴" : "🟠"}
-              </span>
-            </p>
-            <pre>{(console.log(web3), account)}</pre>
+              <div>
+                <button
+                  class="btn-hover color-electric"
+                  onClick={connectCoinbaseSimple}
+                >
+                  Connect Coinbase Wallet
+                </button>
+                <p>
+                  <span>
+                    Status: {web3.active ? "🟢" : web3.error ? "🔴" : "🟠"}
+                  </span>
+                </p>
+                <pre>{(console.log(web3), account)}</pre>
+              </div>
+            </div>
           </div>
         </Modal.Body>
         <Modal.Footer>
