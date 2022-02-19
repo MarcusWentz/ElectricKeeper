@@ -63,12 +63,13 @@ const Navbar = ({ handleConnectMetamask, connectedAddrValue }) => {
                 className="btn btn-light mm"
                 onClick={() => setShowModal(true)}
               >
-                <img
+             {/*    <img
                   width="30"
                   height="30"
                   style={{ marginRight: 5 }}
-                  src="https://cdn.discordapp.com/attachments/908513230714982410/913132016365633596/aaaaa.png"
-                ></img>
+                  src=""
+                ></img> */}
+
                 {shortAddress !== "" ? shortAddress : "Connect Metamask"}
               </button>
             </a>

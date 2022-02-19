@@ -74,9 +74,8 @@ export default function ConnectWalletModal({
   const renderConnectWalletModal = () => {
     console.log(showModal, "showtoast t or f?");
     return (
-
       <Modal show={showToastFromProp} onHide={_closeModal}>
-        <div style={{ marginTop: "20px", textAlign: 'center' }}>
+        <div style={{ marginTop: "20px", textAlign: "center" }}>
           <Modal.Title>
             <p>Connect a wallet</p>
           </Modal.Title>
@@ -84,31 +83,52 @@ export default function ConnectWalletModal({
         <Modal.Body>
           <div className="col-md-12"></div>
           <div>
-              <p className="short-address-modal"> {account ? shortAddress : " "}</p>
-           
-            
-              <button class="btn-hover color-electric" onClick={handleConnect}>
-                Connect Metamask
+            <p className="short-address-modal">
+              {" "}
+              {account ? shortAddress : " "}
+            </p>
+
+            <button class="btn-hover color-electric" onClick={handleConnect}>
+              <img
+                width="30"
+                height="30"
+                style={{ marginRight: 20 }}
+                src="https://cdn.discordapp.com/attachments/908513230714982410/913132016365633596/aaaaa.png"
+              ></img>
+              Connect Metamask Wallet
+            </button>
+            <pre></pre>
+            <div>
+              <button
+                class="btn-hover color-electric"
+                onClick={connectCoinbaseSimple}
+              >
+                <img
+                  width="30"
+                  height="30"
+                  style={{ marginRight: 20 }}
+                  src="https://cdn.freelogovectors.net/wp-content/uploads/2021/12/coinbase-logo-freelogovectors.net_.png
+                  "
+                ></img>
+                Connect Coinbase Wallet
               </button>
               <pre></pre>
-              <div>
-                <button
-                  class="btn-hover color-electric"
-                  onClick={connectCoinbaseSimple}
-                >
-                  Connect Coinbase Wallet
-                </button>
-                <pre></pre>
-              </div>
-              <div>
-                <button
-                  class="btn-hover color-electric"
-                  onClick={connectWalletConnectSimple}
-                >
-                  Connect walletconnect
-                </button>
-                <pre></pre>
-              </div>
+            </div>
+            <div>
+              <button
+                class="btn-hover color-electric"
+                onClick={connectWalletConnectSimple}
+              >
+                <img
+                  width="30"
+                  height="30"
+                  style={{ marginRight: 20 }}
+                  src="https://docs.walletconnect.com/img/walletconnect-logo.svg"
+                ></img>
+                Connect walletconnect
+              </button>
+              <pre></pre>
+            </div>
           </div>
         </Modal.Body>
       </Modal>
