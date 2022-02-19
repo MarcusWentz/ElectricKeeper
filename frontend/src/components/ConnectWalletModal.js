@@ -17,9 +17,19 @@ export default function ConnectWalletModal({
   onClose,
 }) {
   const [showModal, setShowModal] = useState();
-  const { active, account, library, connector, activate, deactivate } =
-    useWeb3React();
+  const {
+    active,
+    account,
+    library,
+    connector,
+    activate,
+    deactivate,
+    web3reactContext,
+  } = useWeb3React();
   const web3 = useWeb3React();
+  const shortAddress = account
+    ? String(account).substr(0, 5) + "..." + String(account).substr(38, 4)
+    : "";
 
   const _closeModal = () => {
     setShowModal(false);
@@ -31,6 +41,14 @@ export default function ConnectWalletModal({
       web3.activate(injected, undefined, true);
     } catch (error) {
       console.error(error);
+    }
+  };
+  const connectWalletConnectSimple = async () => {
+    try {
+      resetWalletConnector(walletconnect);
+      await activate(walletconnect);
+    } catch (ex) {
+      console.log(ex);
     }
   };
 
@@ -56,24 +74,23 @@ export default function ConnectWalletModal({
   const renderConnectWalletModal = () => {
     console.log(showModal, "showtoast t or f?");
     return (
+
       <Modal show={showToastFromProp} onHide={_closeModal}>
-        <div style={{ margin: "10px" }}>
-          <Modal.Title>Titel</Modal.Title>
+        <div style={{ marginTop: "20px", textAlign: 'center' }}>
+          <Modal.Title>
+            <p>Connect a wallet</p>
+          </Modal.Title>
         </div>
         <Modal.Body>
-          <div className="col-md-12">Hello</div>
+          <div className="col-md-12"></div>
           <div>
-            <div style={{ width: "500%" }}>
+              <p className="short-address-modal"> {account ? shortAddress : " "}</p>
+           
+            
               <button class="btn-hover color-electric" onClick={handleConnect}>
                 Connect Metamask
               </button>
-              <p>
-                <span>
-                  Status: {web3.active ? "🟢" : web3.error ? "🔴" : "🟠"}
-                </span>
-              </p>
-              <pre>{(console.log(web3), account)}</pre>
-
+              <pre></pre>
               <div>
                 <button
                   class="btn-hover color-electric"
@@ -81,24 +98,19 @@ export default function ConnectWalletModal({
                 >
                   Connect Coinbase Wallet
                 </button>
-                <p>
-                  <span>
-                    Status: {web3.active ? "🟢" : web3.error ? "🔴" : "🟠"}
-                  </span>
-                </p>
-                <pre>{(console.log(web3), account)}</pre>
+                <pre></pre>
               </div>
-            </div>
+              <div>
+                <button
+                  class="btn-hover color-electric"
+                  onClick={connectWalletConnectSimple}
+                >
+                  Connect walletconnect
+                </button>
+                <pre></pre>
+              </div>
           </div>
         </Modal.Body>
-        <Modal.Footer>
-          <button className="btn btn-danger" onClick="">
-            Btn
-          </button>
-          <button className="btn btn-primary" onClick="">
-            Btn
-          </button>
-        </Modal.Footer>
       </Modal>
     );
   };

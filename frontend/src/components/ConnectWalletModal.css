@@ -1,14 +1,8 @@
 .modal-content {
   color: #ebd9a8;
   border-radius: 15px;
-  border: 2px solid #ebd9a8;
-  background: -webkit-radial-gradient(
-    top,
-    circle cover,
-    #52493b 0%,
-    #000000 70%
-  );
-  /* or something instead, this is no good fix */
+  border: 0;
+  background-color: #11100d;
   letter-spacing: 1.5px;
   font-family: inherit;
 }
@@ -17,15 +11,38 @@
 }
 
 .btn-hover.color-electric {
-    color: #000000; 
-    background-image: linear-gradient(
-      to right,
-      #f5d362,
-      #c27510,
-      #b46a15,
-      #f8aa00
-    );
-    /*   box-shadow: 0 4px 15px 0 rgba(17, 229, 10, 0.75);
+  width: 60%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  color: #000000;
+  background-image: linear-gradient(
+    to right,
+    #f5d362,
+    #c27510,
+    #b46a15,
+    #f8aa00
+  );
+  /*   box-shadow: 0 4px 15px 0 rgba(17, 229, 10, 0.75);
    */
-  }
- 
+}
+
+.short-address-modal {
+  background-image: linear-gradient(to right, #ffe600 0, #ff7101 60%);
+  background-repeat: no-repeat;
+  background-size: 100% 3px;
+  box-shadow: none;
+  border: 0;
+  color: #000;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  font-size: 20px;
+  padding: 0.45rem 0;
+  transition: border-color 0.2s linear;
+  width: 300px;
+  text-align: center;
+  color: #ffdd9e;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
