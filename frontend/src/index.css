@@ -90,7 +90,7 @@ p {
 
   border-radius: 15px;
 
-  border:5px solid #d36100; 
+  border: 5px solid #d36100;
 }
 .closeButton {
   color: white !important;
@@ -368,4 +368,14 @@ input::-webkit-inner-spin-button {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #ffdd9e;
   opacity: 50%; /* Firefox */
+}
+
+.buy-electricity-container {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgb(17 16 13 / 50%);
+  border-radius: 40px;
+  height: 20%;
+  width: 88vh;
 }

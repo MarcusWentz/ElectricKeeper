@@ -196,7 +196,7 @@ export default function Buy({ degree, userLocation, basic }) {
   return (
     <div class="container">
       <div class="row">
-        <div>
+        <div className="buy-electricity-container">
           <h1>
             <br></br>
             buy electricity
