@@ -1,5 +1,5 @@
 var piblaster = require('pi-blaster.js');
-const timeMilliSec = 50; //1000 is one second
+const timeMilliSec = 25; //1000 is one second
 const pulseWidthMin = 0.00;
 const pulseWidthMax = 0.35;
 
