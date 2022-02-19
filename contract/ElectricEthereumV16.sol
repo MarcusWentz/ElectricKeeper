@@ -36,7 +36,7 @@ contract ElectricEthereum is KeeperCompatibleInterface {
     function TurnOffElectricity() public onlyOwner {
         require(expirationOccured() , "NO_EXPIRATION_YET.");
         for(uint ledValue = 0; ledValue < 8; ledValue++) {
-            if(block.timestamp > LED[ledValue].ExpirationTimeUNIX && LED[ledValue].Voltage == 1){
+            if(LED[ledValue].Voltage == 1 && block.timestamp > LED[ledValue].ExpirationTimeUNIX){
                 LED[ledValue].Voltage  = 0;
                 LED[ledValue].ExpirationTimeUNIX = 0;
                 LED[ledValue].LatestBuyer = 0x0000000000000000000000000000000000000000;
@@ -47,7 +47,7 @@ contract ElectricEthereum is KeeperCompatibleInterface {
 
     function expirationOccured() public view returns(bool) {
         for(uint ledValue = 0; ledValue < 8; ledValue++ ) {
-            if((block.timestamp > LED[ledValue].ExpirationTimeUNIX && LED[ledValue].Voltage == 1)){
+            if((LED[ledValue].Voltage == 1 && block.timestamp > LED[ledValue].ExpirationTimeUNIX)){
                 return true;
             }
         }
@@ -60,7 +60,7 @@ contract ElectricEthereum is KeeperCompatibleInterface {
 
     function performUpkeep(bytes calldata) external override {
         for(uint ledValue = 0; ledValue < 8; ledValue++) {
-            if(block.timestamp > LED[ledValue].ExpirationTimeUNIX && LED[ledValue].Voltage == 1){
+            if(LED[ledValue].Voltage == 1 && block.timestamp > LED[ledValue].ExpirationTimeUNIX){
                 LED[ledValue].Voltage  = 0;
                 LED[ledValue].ExpirationTimeUNIX = 0;
                 LED[ledValue].LatestBuyer = 0x0000000000000000000000000000000000000000;
