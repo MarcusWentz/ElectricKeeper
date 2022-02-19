@@ -77,7 +77,7 @@ export default function ConnectWalletModal({
       <Modal show={showToastFromProp} onHide={_closeModal}>
         <div style={{ marginTop: "20px", textAlign: "center" }}>
           <Modal.Title>
-            <p>Connect a wallet</p>
+            <p>connect a wallet</p>
           </Modal.Title>
         </div>
         <Modal.Body>

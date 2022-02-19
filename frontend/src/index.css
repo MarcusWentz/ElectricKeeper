@@ -289,6 +289,7 @@ p {
   box-shadow: none;
   border: 0;
   border-bottom: 3px solid #5a4709;
+  margin-top: 5px;
   color: #000;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
