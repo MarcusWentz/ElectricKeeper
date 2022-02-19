@@ -86,12 +86,11 @@ p {
 
 .modal-content {
   background-color: white;
-  color: #0e1340;
   /* border: 2px solid #ffdd9e; */
 
   border-radius: 15px;
 
-  border:5px solid #d36100; /*2*/
+  border:5px solid #d36100; 
 }
 .closeButton {
   color: white !important;

@@ -108,7 +108,9 @@ export default function Buy({ degree, userLocation, basic }) {
         from: account,
       });
     } catch (err) {
-      console.log(err, "ERROR !! You have to connect to metamask!");
+      const msg = "Connect your wallet to buy";
+      console.log(err, msg);
+      setErrorMsg(msg);
     }
   };
 
