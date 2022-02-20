@@ -29,16 +29,16 @@ export const BUTTON_OBJECT_4_LAST = [
   {
     title: "Purple",
     styleClass: "btn-hover color-purple",
-    buttonClickValue: 0,
+    buttonClickValue: 5,
   },
   {
     title: "Grey",
     styleClass: "btn-hover color-grey",
-    buttonClickValue: 0,
+    buttonClickValue: 6,
   },
   {
     title: "White",
     styleClass: "btn-hover color-white",
-    buttonClickValue: 0,
+    buttonClickValue: 7,
   },
 ];

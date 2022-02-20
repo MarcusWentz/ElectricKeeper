@@ -21,7 +21,6 @@ export default function Buy({ degree, userLocation, basic }) {
   const [maticPriceFeedContract, setMaticPriceFeedContract] = useState(null);
   const [electricKeeperContract, setElectricKeeperContract] = useState(null);
 
-  const [wethBalance, setAvailableWethBalance] = useState(null);
   const [inputAmount, setInputAmount] = useState("");
   const [latestPriceOfMatic_1p, setLatestPriceOfMatic_1p] = useState("");
   const [showToast, setShowToast] = useState();
@@ -91,8 +90,8 @@ export default function Buy({ degree, userLocation, basic }) {
 
   const estimatedMatic = () => {
     return latestPriceOfMatic_1p && inputAmount !== ""
-      ? latestPriceOfMatic_1p * (100 * inputAmount)
-      : 0;
+      ? (latestPriceOfMatic_1p * (10 *  inputAmount)).toFixed(3).toString()
+      : "0";
   };
 
   const handleBuyButtonClick = (colorNumber) => {
@@ -100,12 +99,14 @@ export default function Buy({ degree, userLocation, basic }) {
     console.log(account, "account in BUY handle click");
     try {
       let web3 = new Web3(window.web3.currentProvider);
+      let amountOfMaticToPay = estimatedMatic();
+      console.log(amountOfMaticToPay);
       web3.eth.sendTransaction({
         to: ELECTRICKEEPER_CONTRACT_ADDRESS,
         data: electricKeeperContract.methods
-          .BuyElectricityTimeOn(colorNumber, inputAmount)
+          .BuyElectricityTimeOn(colorNumber, web3.utils.toWei(amountOfMaticToPay))
           .encodeABI(),
-        value: web3.utils.toWei(inputAmount),
+        value: web3.utils.toWei(amountOfMaticToPay),
         from: account,
       });
     } catch (err) {
@@ -140,7 +141,7 @@ export default function Buy({ degree, userLocation, basic }) {
               }}
               htmlFor="minutes"
             >
-              price: $1/minute
+              price: $0.10/minute
             </label>
             <input
               type="number"
@@ -186,7 +187,7 @@ export default function Buy({ degree, userLocation, basic }) {
           <br />
           <p>
             <b>Amount: </b> &nbsp;&nbsp;&nbsp;&nbsp; ≈ &nbsp;{" "}
-            {estimatedMatic().toFixed(3)} matic
+            {estimatedMatic()} matic
           </p>
         </div>
       </>
