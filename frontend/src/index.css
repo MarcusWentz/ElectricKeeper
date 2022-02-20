@@ -84,16 +84,53 @@ p {
   -webkit-text-fill-color: transparent;
 }
 
-.modal-content {
-  background-color: white;
-  /* border: 2px solid #ffdd9e; */
+.module-border-wrap {
+  max-width: 250px;
+  padding: 1rem;
+  position: relative;
+  background: linear-gradient(to right, red, purple);
+  padding: 3px;
+}
 
-  border-radius: 15px;
+.modal-content {  transition: border-color 0.2s linear;
 
-  border:5px solid #d36100; 
+  background: #222;
+  padding: 2rem;
+  background-repeat: no-repeat;
+  background-size: 100% 3px;
+  box-shadow: none;
+  color: #000;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  font-size: 16px;
+  padding: 0.45rem 0;
+  width: 100%;
+  text-align: center;
+  color: #ffdd9e;
+ 
 }
 .closeButton {
   color: white !important;
+}
+
+.modal-header {
+  background-image: linear-gradient(to right, #ffe600 0, #ff7101 60%);
+  background-repeat: no-repeat;
+  background-size: 100% 3px;
+  box-shadow: none;
+  border-bottom: 3px solid orange;
+  color: #000;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  font-size: 20px;
+  padding: 0.45 rem 0;
+  transition: border-color 0.2s linear;
+  width: 100%;
+  text-align: center;
+  color: #ffdd9e;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /*Navbar styles below*/

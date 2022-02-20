@@ -24,22 +24,21 @@ export default function ErrorModal({ showToastFromProp, errorMsg, onClose }) {
 
   const _renderInviteToast = () => {
     console.log(showToast, "showtoast t or f?");
+
     return (
-      <Modal
-        show={showToast}
-        onHide={_closeToast}
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header
-        style={{border: "3px solid #dfb25e", borderRadius: "15px 15px 0 0"}}
-        >Warning</Modal.Header>
-        <Modal.Body 
-        style={{border: "2px solid #dfb25e", borderRadius: "0 0 15px 15px"}}
+      <div className="module-border-wrap">
+        <Modal
+          show={showToast}
+          onHide={_closeToast}
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
         >
-          <div className="inv-toast-body">{errorMsg}</div>
-        </Modal.Body>
-      </Modal>
+          <Modal.Header>Warning</Modal.Header>
+          <Modal.Body>
+            <div className="inv-toast-body">{errorMsg}</div>
+          </Modal.Body>
+        </Modal>
+      </div>
     );
   };
   return <div> {_renderInviteToast()}</div>;
