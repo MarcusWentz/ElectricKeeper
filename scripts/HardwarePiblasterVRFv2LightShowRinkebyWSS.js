@@ -22,9 +22,9 @@ function timeout(ms) {
 }
 
 async function updateLights() {
+ while(true){
   for(let randomNumbers = 0; randomNumbers < 2; randomNumbers++ ) {
     contractDefined_JS.methods.s_randomWords(randomNumbers).call((err, balance) => {
-      // arrayStoredLocally.push(balance)
       console.log(balance)
       for(let i = 0 ; i < 1 ; i++) {
         for(let ledValue = 0; ledValue < 8; ledValue++ ) {
@@ -40,6 +40,7 @@ async function updateLights() {
     })
     await timeout(timeMilliSec)
   }
+ }
 }
 
 console.log("Contract starting value:")
