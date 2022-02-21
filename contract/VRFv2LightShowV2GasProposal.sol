@@ -9,7 +9,6 @@ contract VRFv2LightShow is VRFConsumerBaseV2 {
   VRFCoordinatorV2Interface COORDINATOR;
   LinkTokenInterface LINKTOKEN;
 
-  //NEED TO REVIEW WE ARE FITTING PROPERLY IN 32 BYTE SLOTS SMOOTHLY
   uint256[] public twoRandomWords;
   uint256 requestId; 
   event lightShowUpdate();
