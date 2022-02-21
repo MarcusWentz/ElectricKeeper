@@ -10,7 +10,7 @@ const contractDefined_JS = new web3.eth.Contract(contractABI_JS, contractAddress
 //https://github.com/sarfata/pi-blaster
 //Build and install directly from source
 // var piblaster = require('pi-blaster.js');
-const timeMilliSec = 1000;
+const timeMilliSec = 2000; //2 seconds per value
 const pulseWidthMin = 0.00;
 const pulseWidthMax = 0.35;
 
@@ -21,42 +21,39 @@ function timeout(ms) {
 	return new Promise(resolve => setTimeout(resolve,ms));
 }
 
-async function checkValueLatest() { //get() contract value,
-
+async function updateLights() {
   for(let randomNumbers = 0; randomNumbers < 2; randomNumbers++ ) {
     contractDefined_JS.methods.s_randomWords(randomNumbers).call((err, balance) => {
+      // arrayStoredLocally.push(balance)
       console.log(balance)
+      for(let i = 0 ; i < 1 ; i++) {
+        for(let ledValue = 0; ledValue < 8; ledValue++ ) {
+            if(  (balance&(2**(ledValue))) == (2**(ledValue)) ){
+              console.log("COLOR " + objectLED['color'][ledValue] + " PIN " + objectLED['pin'][ledValue] + " ON!" )
+              // piblaster.setPwm(objectLED['pin'][j], pulseWidthMax);
+            } else {
+              console.log("COLOR " + objectLED['color'][ledValue]  + " PIN " +  objectLED['pin'][ledValue] + " OFF!" )
+              // piblaster.setPwm(objectLED['pin'][j], pulseWidthMin);
+            }
+        }
+      }
     })
-    await timeout(3000)
+    await timeout(timeMilliSec)
   }
-  // }
-    //
-    // for(let ledValue = 0; ledValue < 8; ledValue++ ) {
-    //   contractDefined_JS.methods.LED(ledValue).call((err, balance) => {
-    //     if(balance.Voltage == 1){
-    //       console.log("COLOR " + objectLED['color'][ledValue] + " PIN " + objectLED['pin'][ledValue] + " ON!" )
-    //       // piblaster.setPwm(objectLED['pin'][ledValue], pulseWidthMax);
-    //     }
-    //     if(balance.Voltage == 0){
-    //       console.log("COLOR " + objectLED['color'][ledValue]  + " PIN " +  objectLED['pin'][ledValue] + " OFF!" )
-    //       // piblaster.setPwm(objectLED['pin'][ledValue], pulseWidthMin);
-    //     }
-    //   })
-    // }
-
 }
 
 console.log("Contract starting value:")
-checkValueLatest();
-//
-// contractDefined_JS.events.VoltageChange({ //Subscribe to event.
-//      fromBlock: 'latest'
-//  }, function(error, eventResult){})
-//  .on('data', function(eventResult){
-//    console.log("EVENT DETECTED! NEW STATE VALUE: ")
-//    checkValueLatest();  //Call the get function to get the most accurate present state for the value.
-//    })
-//  .on('changed', function(eventResult){
-//      // remove event from local database
-//  })
-//  .on('error', console.error);
+// getLatestArray()
+updateLights()
+
+contractDefined_JS.events.lightShowUpdate({ //Subscribe to event.
+     fromBlock: 'latest'
+ }, function(error, eventResult){})
+ .on('data', function(eventResult){
+   console.log("EVENT DETECTED! NEW STATE VALUE: ")
+   getLatestArray();  //Call the get function to get the most accurate present state for the value.
+   })
+ .on('changed', function(eventResult){
+     // remove event from local database
+ })
+ .on('error', console.error);
