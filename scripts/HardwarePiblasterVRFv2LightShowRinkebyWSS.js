@@ -47,14 +47,14 @@ console.log("Contract starting value:")
 // getLatestArray()
 updateLights()
 
-contractDefined_JS.events.lightShowUpdate({ //Subscribe to event.
-     fromBlock: 'latest'
- }, function(error, eventResult){})
- .on('data', function(eventResult){
-   console.log("EVENT DETECTED! NEW STATE VALUE: ")
-   getLatestArray();  //Call the get function to get the most accurate present state for the value.
-   })
- .on('changed', function(eventResult){
-     // remove event from local database
- })
- .on('error', console.error);
+// contractDefined_JS.events.lightShowUpdate({ //Subscribe to event.
+//      fromBlock: 'latest'
+//  }, function(error, eventResult){})
+//  .on('data', function(eventResult){
+//    console.log("EVENT DETECTED! NEW STATE VALUE: ")
+//    updateLights();  //Call the get function to get the most accurate present state for the value.
+//    })
+//  .on('changed', function(eventResult){
+//      // remove event from local database
+//  })
+//  .on('error', console.error);
