@@ -30,7 +30,7 @@ contract VRFv2LightShow is VRFConsumerBaseV2 {
   
   function fulfillRandomWords(uint256,  uint256[] memory randomWords) internal override {
     for (uint i = 0; i < randomWords.length; i++){
-      twoRandomWords[i] = (randomWords[i] % 255); //0 to 255
+      twoRandomWords.push(randomWords[i] % 255); //0 to 255
     }
     emit lightShowUpdate();
   }
