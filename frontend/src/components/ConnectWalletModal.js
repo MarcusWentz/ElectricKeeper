@@ -96,8 +96,9 @@ export default function ConnectWalletModal({
                 height="30"
                 style={{ marginRight: 20 }}
                 src="https://cdn.discordapp.com/attachments/908513230714982410/913132016365633596/aaaaa.png"
+                alt="metamask"
               ></img>
-              Connect Metamask Wallet
+              MetaMask
             </button>
             <pre></pre>
             <div>
@@ -109,10 +110,12 @@ export default function ConnectWalletModal({
                   width="30"
                   height="30"
                   style={{ marginRight: 20 }}
-                  src="https://cdn.freelogovectors.net/wp-content/uploads/2021/12/coinbase-logo-freelogovectors.net_.png
-                  "
+                  // src="https://cdn.freelogovectors.net/wp-content/uploads/2021/12/coinbase-logo-freelogovectors.net_.png
+                  // "
+                  src="https://cdn.discordapp.com/attachments/939936820051968000/945443349186347048/18060234.png"
+                  alt="coinbase wallet"
                 ></img>
-                Connect Coinbase Wallet
+                Coinbase Wallet
               </button>
               <pre></pre>
             </div>
@@ -126,8 +129,9 @@ export default function ConnectWalletModal({
                   height="30"
                   style={{ marginRight: 20 }}
                   src="https://docs.walletconnect.com/img/walletconnect-logo.svg"
+                  alt="walletconnect"
                 ></img>
-                Connect walletconnect
+                WalletConnect
               </button>
               <pre></pre>
             </div>

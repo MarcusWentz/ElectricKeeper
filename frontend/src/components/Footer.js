@@ -19,22 +19,22 @@ const Footer = () => {
             </li>
           </ul>
           <ul class="box">
+            {/* <li class="link_name">support</li>
+            <li>
+              <a href="https://weth.io/" target="_blank">
+                FAQ
+              </a>
+            </li> */}
+          </ul>
+          <ul class="box">
             <li class="link_name">project</li>
             <li>
               {" "}
               <a
-                href="https://github.com/johannafransn/WETH-Frontend/graphs/contributors"
+                href="https://github.com/MarcusWentz/ElectricKeeper/graphs/contributors"
                 target="_blank"
               >
                 team
-              </a>
-            </li>
-          </ul>
-          <ul class="box">
-            <li class="link_name">support</li>
-            <li>
-              <a href="https://weth.io/" target="_blank">
-                FAQ
               </a>
             </li>
           </ul>
@@ -43,7 +43,7 @@ const Footer = () => {
             <li>
               <a
                 target="_blank"
-                href="https://github.com/johannafransn/WETH-Frontend"
+                href="https://github.com/MarcusWentz/ElectricKeeper"
               >
                 github
               </a>
