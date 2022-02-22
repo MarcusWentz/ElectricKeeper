@@ -23,12 +23,22 @@ function timeout(ms) {
 
 async function VoltageAlert() {
     player.play('VoltageAlert.mp3', function(err){if (err) throw err})
+		for(let ledValue = 0; ledValue < 8; ledValue++ ) {
+			contractDefined_JS.methods.LED(ledValue).call((err, balance) => {
+		if(balance.Voltage == 1){
+			console.log("COLOR " + objectLED['color'][ledValue] + " PIN " + objectLED['pin'][ledValue] + " ON!" )
+			// piblaster.setPwm(objectLED['pin'][ledValue], pulseWidthMax);
+		} else {
+			console.log("COLOR " + objectLED['color'][ledValue]  + " PIN " +  objectLED['pin'][ledValue] + " OFF!" )
+			// piblaster.setPwm(objectLED['pin'][ledValue], pulseWidthMin);
+		}
+	})
+}
     await timeout(1500)
 }
 
 console.log("Contract starting value:")
 VoltageAlert()
-
 
 contractDefined_JS.events.VoltageChange({ //Subscribe to event.
      fromBlock: 'latest'
