@@ -14,8 +14,8 @@ const timeMilliSec = 2000; //2 seconds per value
 const pulseWidthMin = 0.00;
 const pulseWidthMax = 0.35;
 
-let objectLED = {"pin":   [17   ,27    ,23      ,22     ,24      ,25      ,18    ,21     ],
-                 "color": ['RED','BLUE','YELLOW','GREEN','PURPLE','ORANGE','GREY','WHITE']}
+let objectLED = {"pin":   [21   ,25    ,23      ,22     ,24      ,27      ,17    ,18     ],
+                 "color": ['RED','BLUE','YELLOW','GREEN','PURPLE','ORANGE','PINK','WHITE']}
 
 function timeout(ms) {
 	return new Promise(resolve => setTimeout(resolve,ms));
