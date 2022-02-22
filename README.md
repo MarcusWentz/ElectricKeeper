@@ -6,7 +6,7 @@ Powered by a Raspberry Pi 4, which is controlled by a hybrid smart contract usin
 Video demo: https://www.youtube.com/watch?v=949bsTmufhI
 
 <img src="https://github.com/MarcusWentz/ElectricKeeper/blob/main/images/animation4.gif" alt="Test"/>
-<img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/fullstack.png" alt="Overview"/>
+<img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/overview2.png" alt="Overview"/>
 <img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/wiring2.png" alt="Wiring"/>
 
 Hardware: 
