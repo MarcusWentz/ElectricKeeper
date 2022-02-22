@@ -73,14 +73,14 @@ contract ElectricEthereum is KeeperCompatibleInterface {
         emit VoltageChange();
     }
 
-    function OwnerEmergencyOff(uint ledValue) public onlyOwner validLEDvalues(ledValue) {
+    function OwnerEmergencyDangerOff(uint ledValue) public onlyOwner validLEDvalues(ledValue) {
         require(LED[ledValue].Voltage == 1, "VOLTAGE_NOT_ON.");
         LED[ledValue].Voltage  = 2;
         LED[ledValue].ExpirationTimeUNIX -= block.timestamp;
         emit VoltageChange();
     }
 
-    function OwnerRestoreOn(uint ledValue) public onlyOwner validLEDvalues(ledValue) {
+    function OwnerEmergencySafeOn(uint ledValue) public onlyOwner validLEDvalues(ledValue) {
         require(LED[ledValue].Voltage == 2, "VOLTAGE_NOT_IN_EMERGENCY_OFF_STATE.");
         LED[ledValue].Voltage  = 1;
         LED[ledValue].ExpirationTimeUNIX += block.timestamp;
