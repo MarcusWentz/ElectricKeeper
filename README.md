@@ -4,7 +4,8 @@ An automated electric grid.
 Powered by a Raspberry Pi 4, which is controlled by a hybrid smart contract using Chainlink Keepers to automate turning off LEDs for electric bill expirations.
 
 Video demo: https://www.youtube.com/watch?v=949bsTmufhI
-Website hosted on Fleek [IPFS+Filecoin]: ______WORK IN PROGRESS______
+
+Website hosted on Fleek [IPFS+Filecoin]: ____ WORK IN PROGRESS _____
 
 <img src="https://github.com/MarcusWentz/ElectricKeeper/blob/main/images/animation4.gif" alt="Test"/>
 <img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/overview2.png" alt="Overview"/>
