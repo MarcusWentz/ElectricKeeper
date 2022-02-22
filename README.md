@@ -7,7 +7,7 @@ Video demo: https://www.youtube.com/watch?v=949bsTmufhI
 
 <img src="https://github.com/MarcusWentz/ElectricKeeper/blob/main/images/animation4.gif" alt="Test"/>
 <img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/fullstack.png" alt="Overview"/>
-<img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/WIRING_8_LEDS.png" alt="Wiring"/>
+<img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/wiring2.png" alt="Wiring"/>
 
 Hardware: 
 
