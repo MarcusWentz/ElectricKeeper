@@ -16,23 +16,24 @@ const pulseWidthMax = 0.35;
 let objectLED = {"pin":   [21   ,25    ,23      ,22     ,24      ,27      ,17    ,18     ],
                  "color": ['RED','BLUE','YELLOW','GREEN','PURPLE','ORANGE','PINK','WHITE']}
 
-function checkValueLatest() { //get() contract value,
+function timeout(ms) {
+	return new Promise(resolve => setTimeout(resolve,ms));
+}
+
+async function checkValueLatest() { //get() contract value,
 
   for(let ledValue = 0; ledValue < 8; ledValue++ ) {
     contractDefined_JS.methods.LED(ledValue).call((err, balance) => {
       if(balance.Voltage == 1){
         console.log("COLOR " + objectLED['color'][ledValue] + " PIN " + objectLED['pin'][ledValue] + " ON!" )
         piblaster.setPwm(objectLED['pin'][ledValue], pulseWidthMax);
-      }
-      if(balance.Voltage == 0){
+      } else {
         console.log("COLOR " + objectLED['color'][ledValue]  + " PIN " +  objectLED['pin'][ledValue] + " OFF!" )
         piblaster.setPwm(objectLED['pin'][ledValue], pulseWidthMin);
       }
     })
   }
-
-  setTimeout(() => {}, timeMilliSec);
-
+  await timeout(timeMilliSec)
 }
 
 console.log("Contract starting value:")
