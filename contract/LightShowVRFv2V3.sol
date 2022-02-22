@@ -21,7 +21,7 @@ contract VRFv2LightShow is VRFConsumerBaseV2 {
   function requestRandomWords() external {
       requestId = COORDINATOR.requestRandomWords(
       0xd89b2bf150e3b9e13446986e571fb9cab24b13cea0a43ea20a6049a85cc807cc, //keyHash
-      436,    //subscriptionId
+      529,    //subscriptionId [Get your ID here https://vrf.chain.link/]
       3,      //Confirmations
       100000, //callbackGasLimit
       2       //numWords
@@ -29,9 +29,7 @@ contract VRFv2LightShow is VRFConsumerBaseV2 {
   }
   
   function fulfillRandomWords(uint256,  uint256[] memory randomWords) internal override {
-    for (uint i = 0; i < randomWords.length; i++){
-      twoRandomWords.push(randomWords[i] % 255); //0 to 255
-    }
+    twoRandomWords = randomWords;
     emit lightShowUpdate();
   }
 
