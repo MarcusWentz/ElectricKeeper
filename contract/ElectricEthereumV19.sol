@@ -19,8 +19,12 @@ contract ElectricEthereum is KeeperCompatibleInterface {
         _;
     }
 
-    function BuyElectricityTimeOn(uint ledValue, uint minutesToHaveOn) public payable {
+    modifier validLEDvalues(uint ledValue) {
         require(ledValue >= 0 && ledValue < 8, "LED_VALUES_RED_0_BLUE_1_YELLOW_2_GREEN_3_PURPLE_4_ORANGE_5_PINK_6_WHITE_7.");
+        _;
+    }
+
+    function BuyElectricityTimeOn(uint ledValue, uint minutesToHaveOn) public payable validLEDvalues(ledValue) {
         require(msg.value == minutesToHaveOn && minutesToHaveOn > 0, "MSG.VALUE_MUST_BE_1_WEI_TIMES_MINUTES_AND_NOT_BE_ZERO.");
         if(LED[ledValue].Voltage == 0) {
             LED[ledValue].Voltage = 1;
@@ -69,15 +73,17 @@ contract ElectricEthereum is KeeperCompatibleInterface {
         emit VoltageChange();
     }
 
-    function OwnerEmergencyOff(uint _ledValue) public onlyOwner {
-        LED[_ledValue].Voltage  = 2;
-        LED[_ledValue].ExpirationTimeUNIX -= block.timestamp;
+    function OwnerEmergencyOff(uint ledValue) public onlyOwner validLEDvalues(ledValue) {
+        require(LED[ledValue].Voltage == 1, "VOLTAGE_NOT_ON.");
+        LED[ledValue].Voltage  = 2;
+        LED[ledValue].ExpirationTimeUNIX -= block.timestamp;
         emit VoltageChange();
     }
 
-    function OwnerRestoreOn(uint _ledValue) public onlyOwner {
-        LED[_ledValue].Voltage  = 1;
-        LED[_ledValue].ExpirationTimeUNIX += block.timestamp;
+    function OwnerRestoreOn(uint ledValue) public onlyOwner validLEDvalues(ledValue) {
+        require(LED[ledValue].Voltage == 2, "VOLTAGE_NOT_IN_EMERGENCY_OFF_STATE.");
+        LED[ledValue].Voltage  = 1;
+        LED[ledValue].ExpirationTimeUNIX += block.timestamp;
         emit VoltageChange();
     }
 
