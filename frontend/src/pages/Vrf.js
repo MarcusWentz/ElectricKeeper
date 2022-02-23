@@ -1,7 +1,7 @@
 import EthLogo from "../assets/svg/eth_logo.svg";
 import { useState, useEffect } from "react";
 import Web3 from "web3";
-import {  useWeb3React } from "@web3-react/core";
+import { useWeb3React } from "@web3-react/core";
 
 //const rpcURL = process.env.REACT_APP_rinkebyWebSocketSecureEventsInfuraAPIKey; //Use WSS to get live event data instead of polling constantly,
 // const rpcURL = "wss://rinkeby.infura.io/ws/v3/f63336cd46ea40d68f1577991e1135cf"
@@ -49,11 +49,10 @@ const contractDefined_JS = new web3.eth.Contract(
   contractAddress_JS
 );
 
-export default function Vrf({  }) {
+export default function Vrf({}) {
   const [colorSet1, setColourSet1] = useState();
   const [colorSet2, setColourSet2] = useState();
   const { account } = useWeb3React();
-
 
   let ArrayStorage = [];
 
@@ -87,15 +86,11 @@ export default function Vrf({  }) {
       if (chainId !== 4) {
         //Error message here
       }
-
       //Load the smart contract
-  
       eventListener();
-      
     };
-
     loadBlockchainData();
-  }, []);
+  }, [colorSet1, colorSet2]);
 
   /*   contractDefined_JS.events
     .lightShowUpdate(
@@ -117,17 +112,21 @@ export default function Vrf({  }) {
  */
 
   const eventListener = () => {
+    console.log(colorSet1, colorSet2, "States Before event");
     contractDefined_JS.events
       .lightShowUpdate(
         {
           fromBlock: "latest",
         },
-        function (error, eventResult) {}
+        function (error, eventResult) {
+        }
       )
       .on("data", function (eventResult) {
         //Call the get function to get the most accurate present state for the value.
 
         //Do a wait 30s here
+        updateLights();
+        console.log(colorSet1, colorSet2, "States After event");
         console.log("eventlistner triggered!");
       })
       .on("changed", function (eventResult) {
@@ -151,13 +150,16 @@ export default function Vrf({  }) {
     }
   };
 
-  const colorSetInColor = (colorSet) => {
-    let chars = Array.from(colorSet.toString(2));
+  const renderColorSetInColor = (colorSet) => {
+    var n = colorSet.toString(2);
+    n = "00000000".substr(n.length) + n;
+    let chars = Array.from(n);
+
     console.log(chars);
     // return colorSet.toString(2);
     return (
       <>
-        <em
+        <div
           style={{
             backgroundColor: "grey",
             fontStyle: "normal",
@@ -174,7 +176,7 @@ export default function Vrf({  }) {
           <em style={{ color: "yellow", fontStyle: "normal" }}>{chars[5]}</em>
           <em style={{ color: "blue", fontStyle: "normal" }}>{chars[6]}</em>
           <em style={{ color: "red", fontStyle: "normal" }}>{chars[7]}</em>
-        </em>
+        </div>
       </>
     );
   };
@@ -194,7 +196,7 @@ export default function Vrf({  }) {
                 &nbsp;&nbsp;&nbsp;
                 {colorSet1}
                 &nbsp;&nbsp;&nbsp;
-                {colorSetInColor(colorSet1)}
+                {renderColorSetInColor(colorSet1)}
               </p>
               <p>
                 <b>Colour Set 2: </b>
@@ -202,7 +204,7 @@ export default function Vrf({  }) {
                 {colorSet2}
                 &nbsp;&nbsp;&nbsp;
                 {/* {colorSet2.toString(2)} */}
-                {colorSetInColor(colorSet2)}
+                {renderColorSetInColor(colorSet2)}
               </p>
             </>
           ) : (
@@ -211,7 +213,13 @@ export default function Vrf({  }) {
           {/* <p><b></b>{colorSet2}</p> */}
           <p></p>
           <br></br>
-          <button onClick={() => handleRandomNrCall()}></button>
+          <button
+            style={{ width: 400 }}
+            className="btn-hover color-electric"
+            onClick={() => handleRandomNrCall()}
+          >
+            Request 2 random VRFv2 numbers
+          </button>
         </div>
         <div class="col-6">
           <img src={EthLogo} style={{ width: "40%" }} />
