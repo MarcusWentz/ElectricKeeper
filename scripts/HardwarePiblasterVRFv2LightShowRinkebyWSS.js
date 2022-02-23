@@ -28,7 +28,7 @@ async function updateLights() {
      for(let randomNumbers = 0; randomNumbers < 2; randomNumbers++ ) {
        console.log("API CALL")
        contractDefined_JS.methods.twoRandomWords(randomNumbers).call((err, balance) => {
-          ArrayStorage.push(balance%255)
+          ArrayStorage.push((balance%255)+1)
         })
         await timeout(timeMilliSec)
       }
