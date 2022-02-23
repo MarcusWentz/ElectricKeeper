@@ -48,13 +48,14 @@ const contractDefined_JS = new web3.eth.Contract(
   contractABI_JS,
   contractAddress_JS
 );
+var ArrayStorage = [];
+
 
 export default function Vrf({}) {
-  const [colorSet1, setColourSet1] = useState();
-  const [colorSet2, setColourSet2] = useState();
-  const { account } = useWeb3React();
+  const [colorSet1, setColourSet1] = useState(-1);
+  const [colorSet2, setColourSet2] = useState(-1);
 
-  let ArrayStorage = [];
+  const { account } = useWeb3React();
 
   async function updateLights() {
     if (ArrayStorage.length == 0) {
@@ -64,16 +65,13 @@ export default function Vrf({}) {
           .twoRandomWords(randomNumbers)
           .call((err, balance) => {
             ArrayStorage.push((balance % 255) + 1);
+            console.log(ArrayStorage[0].toString(2));
+            setColourSet1(ArrayStorage[0]);
+            setColourSet2(ArrayStorage[1]);
           });
       }
-      console.log(ArrayStorage[0].toString(2));
-      setColourSet1(ArrayStorage[0]);
-      setColourSet2(ArrayStorage[1]);
     }
   }
-
-  console.log("Contract starting value:");
-  updateLights();
 
   useEffect(() => {
     const loadBlockchainData = async () => {
@@ -87,6 +85,7 @@ export default function Vrf({}) {
         //Error message here
       }
       //Load the smart contract
+      updateLights();
       eventListener();
     };
     loadBlockchainData();
@@ -118,8 +117,7 @@ export default function Vrf({}) {
         {
           fromBlock: "latest",
         },
-        function (error, eventResult) {
-        }
+        function (error, eventResult) {}
       )
       .on("data", function (eventResult) {
         //Call the get function to get the most accurate present state for the value.
