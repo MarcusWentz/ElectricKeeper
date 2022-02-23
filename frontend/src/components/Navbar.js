@@ -58,6 +58,14 @@ const Navbar = ({ handleConnectMetamask, connectedAddrValue }) => {
             </NavLink>
           </li>
           <li class="nav-li">
+            <NavLink
+              className={(navObj) => (navObj.isActive ? classes.active : "")}
+              to="/vrf"
+            >
+              lightshow
+            </NavLink>
+          </li>
+          <li class="nav-li">
             <a className={(navObj) => (navObj.isActive ? classes.active : "")}>
               <button
                 className="btn btn-light mm"
