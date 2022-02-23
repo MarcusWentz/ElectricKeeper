@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import Buy from "./pages/Buy";
 
 import About from "./pages/About";
+import VRF from "./pages/Vrf";
 import MobileDetected from "./pages/MobileDetected";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -84,6 +85,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/buy" element={<Buy />} />
             <Route path="/about" element={<About />} />
+            <Route path="/vrf" element={<VRF />} />
             <Route path="/error" element={<MobileDetected />} />
           </Routes>
         )}
