@@ -79,7 +79,6 @@ const Vrf = () => {
     // return colorSet.toString(2);
     return (
       <>
-
         <em style={{backgroundColor: "grey", fontStyle: "normal", fontSize: "26px", padding: "4px 8px", borderRadius:"10px"}}>
           <em style={{color: "white", fontStyle: "normal"}}>{chars[0]}</em>
           <em style={{color: "pink", fontStyle: "normal"}}>{chars[1]}</em>
