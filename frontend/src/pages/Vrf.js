@@ -73,6 +73,26 @@ const Vrf = () => {
     .on("error", console.error);
 
 
+  const colorSetInColor = (colorSet) => {
+    let chars = Array.from(colorSet.toString(2));
+    console.log(chars);
+    // return colorSet.toString(2);
+    return (
+      <>
+
+        <em style={{backgroundColor: "grey", fontStyle: "normal", padding: "3px 6px"}}>
+          <em style={{color: "white", fontStyle: "normal"}}>{chars[0]}</em>
+          <em style={{color: "pink", fontStyle: "normal"}}>{chars[1]}</em>
+          <em style={{color: "orange", fontStyle: "normal"}}>{chars[2]}</em>
+          <em style={{color: "purple", fontStyle: "normal"}}>{chars[3]}</em>
+          <em style={{color: "green", fontStyle: "normal"}}>{chars[4]}</em>
+          <em style={{color: "yellow", fontStyle: "normal"}}>{chars[5]}</em>
+          <em style={{color: "blue", fontStyle: "normal"}}>{chars[6]}</em>
+          <em style={{color: "red", fontStyle: "normal"}}>{chars[7]}</em>
+        </em>
+      </>
+    );
+  }
 
   return (
     <div class="container">
@@ -81,11 +101,29 @@ const Vrf = () => {
         <h1><br></br>
           <b>VRF</b>
         </h1>
-        <p><b>Colour Set 1: </b> &nbsp;&nbsp;&nbsp;{colorSet1}&nbsp;&nbsp;&nbsp;{colorSet1.toString(2)}</p>
-        <p><b>Colour Set 2: </b> &nbsp;&nbsp;&nbsp;{colorSet2}&nbsp;&nbsp;&nbsp;{colorSet2.toString(2)}</p>
+        {colorSet1 && colorSet2 ? (
+          <>
+              <p>
+                <b>Colour Set 1: </b> 
+                &nbsp;&nbsp;&nbsp;
+                {colorSet1}
+                &nbsp;&nbsp;&nbsp;
+                {colorSetInColor(colorSet1)}
+              </p>
+              <p>
+                <b>Colour Set 2: </b> 
+                &nbsp;&nbsp;&nbsp;
+                {colorSet2}
+                &nbsp;&nbsp;&nbsp;
+                {/* {colorSet2.toString(2)} */}
+                {colorSetInColor(colorSet2)}
+              </p>
+          </>
+        ): ''}
+        {/* <p><b></b>{colorSet2}</p> */}
         <p></p>
           <br></br>
-       </div>
+        </div>
       <div class="col-6">
         <img src={EthLogo} style={{ width: "40%" }} />
       </div>
