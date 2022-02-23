@@ -80,7 +80,7 @@ const Vrf = () => {
     return (
       <>
 
-        <em style={{backgroundColor: "grey", fontStyle: "normal", padding: "3px 6px"}}>
+        <em style={{backgroundColor: "grey", fontStyle: "normal", fontSize: "26px", padding: "4px 8px", borderRadius:"10px"}}>
           <em style={{color: "white", fontStyle: "normal"}}>{chars[0]}</em>
           <em style={{color: "pink", fontStyle: "normal"}}>{chars[1]}</em>
           <em style={{color: "orange", fontStyle: "normal"}}>{chars[2]}</em>
