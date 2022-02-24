@@ -2,7 +2,7 @@ const { Wallet } = require('zksync');
 const { ethers } = require('ethers');
 let zksync = require('zksync')
 
-async function depositRinkebyETHtoZKsync() {
+async function depositAndWithdrawETHRinkebyzkSync() {
   const syncProvider = await zksync.getDefaultProvider('rinkeby');
   // console.log(syncProvider)
   const ethersProvider = ethers.getDefaultProvider('rinkeby');
@@ -33,8 +33,8 @@ async function depositRinkebyETHtoZKsync() {
   await changePubkey.awaitReceipt();
 }
 
-  const committedETHBalance = await syncWallet.getBalance('ETH');
-  console.log(committedETHBalance)
+  const committedETHBalance1 = await syncWallet.getBalance('ETH');
+  console.log(committedETHBalance1)
 
   const withdraw = await syncWallet.withdrawFromSyncToEthereum({
     ethAddress: ethWallet.address,
@@ -44,8 +44,8 @@ async function depositRinkebyETHtoZKsync() {
 
   await withdraw.awaitVerifyReceipt();
 
-  // const committedETHBalance = await syncWallet.getBalance('ETH');
-  // console.log(committedETHBalance)
+  const committedETHBalance2 = await syncWallet.getBalance('ETH');
+  console.log(committedETHBalance2)
 }
 
-depositRinkebyETHtoZKsync()
+depositAndWithdrawETHRinkebyzkSync()
