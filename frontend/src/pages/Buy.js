@@ -6,6 +6,8 @@ import {
   CONTRACT_ADDRESS,
   ELECTRICKEEPER_ABI,
   ELECTRICKEEPER_CONTRACT_ADDRESS,
+  BUY_DEMO_EIGHT_MINUTES_ABI,
+  BUY_DEMO_EIGHT_MINUTES_CONTRACT_ADDRESS
 } from "../config";
 import { BUTTON_OBJECT_4_LAST, BUTTON_OBJECT_4_FIRST } from "./ButtonData";
 import ErrorModal from "../components/ErrorModal";
