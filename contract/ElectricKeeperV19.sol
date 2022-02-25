@@ -3,7 +3,7 @@ pragma solidity 0.8.12;
 
 import "@chainlink/contracts/src/v0.8/KeeperCompatible.sol";
 
-contract ElectricEthereum is KeeperCompatibleInterface { 
+contract ElectricKeeper is KeeperCompatibleInterface { 
 
     struct STATE{ uint Voltage; uint ExpirationTimeUNIX; address LatestBuyer; }
     mapping(uint => STATE) public LED; 
