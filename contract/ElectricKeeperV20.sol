@@ -3,7 +3,7 @@ pragma solidity 0.8.12;
 
 import "@chainlink/contracts/src/v0.8/KeeperCompatible.sol";
 
-contract ElectricEthereum is KeeperCompatibleInterface { 
+contract ElectricKeeper is KeeperCompatibleInterface { 
 
     struct STATE{ uint Voltage; uint ExpirationTimeUNIX; address LatestBuyer; }
     mapping(uint => STATE) public LED; 
@@ -89,25 +89,18 @@ contract ElectricEthereum is KeeperCompatibleInterface {
 
 }
 
-contract BuyTestAllColors {
+contract BuyDemoEightMinutes {
 
-    ElectricEthereum electricEthereum;
+    ElectricKeeper electricKeeperInstance;
 
-    constructor(ElectricEthereum _electricEthereum) {
-        electricEthereum = ElectricEthereum(_electricEthereum);
+    constructor(ElectricKeeper electricKeeperAddress) {
+        electricKeeperInstance = ElectricKeeper(electricKeeperAddress);
     }
 
-    function BuyAllSameDuration() public payable {
-       require(msg.value == 8, "NEED_8_WEI.");
-       for(uint ledValue = 0; ledValue < 8; ledValue++ ) {
-            electricEthereum.BuyElectricityTimeOn{value: 1}(ledValue,1);
-        }
-    }
-
-    function BuyAllTurnOffSlowly() public payable {
+    function BuyTestEightMinuteCountdown() public payable {
        require(msg.value == 36, "NEED_36_WEI.");
        for(uint ledValue = 0; ledValue < 8; ledValue++ ) {
-            electricEthereum.BuyElectricityTimeOn{value: ledValue+1}(ledValue,ledValue+1);
+            electricKeeperInstance.BuyElectricityTimeOn{value: ledValue+1}(ledValue,ledValue+1);
         }
     }
 }

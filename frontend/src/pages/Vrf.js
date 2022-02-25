@@ -80,10 +80,6 @@ export default function Vrf({  }) {
 
   useEffect(() => {
     const loadBlockchainData = async () => {
-      //const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
-      //const network = await web3.eth.net.getNetworkType();
-      //await window.ethereum.enable();
-      //const addressFromMetamask = await web3.eth.getAccounts();
       const chainId = await web3.eth.getChainId();
       console.log(chainId);
       if (chainId !== 4) {
@@ -98,24 +94,6 @@ export default function Vrf({  }) {
     loadBlockchainData();
   }, []);
 
-  /*   contractDefined_JS.events
-    .lightShowUpdate(
-      {
-        //Subscribe to event.
-        fromBlock: "latest",
-      },
-      function (error, eventResult) {}
-    )
-    .on("data", function (eventResult) {
-      console.log("EVENT DETECTED! NEW STATE VALUE: ");
-      ArrayStorage = []; //WIPE LAST VALUES THEN UPDATE AGAIN.
-      updateLights(); //Call the get function to get the most accurate present state for the value.
-    })
-    .on("changed", function (eventResult) {
-      // remove event from local database
-    })
-    .on("error", console.error);
- */
 
   const eventListener = () => {
     contractDefined_JS.events
