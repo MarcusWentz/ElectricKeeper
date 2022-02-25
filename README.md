@@ -7,7 +7,7 @@ Video demo: https://www.youtube.com/watch?v=949bsTmufhI
 
 Website hosted on Fleek [IPFS+Filecoin]: ____ WORK IN PROGRESS _____
 
-zkSync event counter example: [1 WEI = 1 EVENT DETECTED]:
+zkSync [Rinkeby] event counter example: [1 WEI = 1 EVENT DETECTED]:
 https://rinkeby.zkscan.io/explorer/transactions/0x42d6f786023160c1b6980f3993b75702007be00d2575c97034f6831067e78227
 
 <img src="https://github.com/MarcusWentz/ElectricKeeper/blob/main/images/animation4.gif" alt="Test"/>
