@@ -14,7 +14,7 @@ Bonus project: Chainlink VRFv2 lightshow, with events logged on zkSync with 1 WE
 
 Website hosted on Fleek [IPFS+Filecoin]: ____ WORK IN PROGRESS _____
 
-zkSync [Rinkeby] event counter example: [1 WEI = 1 Event Detected]:
+zkSync [Rinkeby] event counter example: [1 WEI = 1 event]:
 https://rinkeby.zkscan.io/explorer/transactions/0x42d6f786023160c1b6980f3993b75702007be00d2575c97034f6831067e78227
 
 <img src="https://github.com/MarcusWentz/ElectricKeeper/blob/main/images/animation4.gif" alt="Test"/>
@@ -35,4 +35,4 @@ Diode Current Equation: https://www.allaboutcircuits.com/technical-articles/unde
 
 <img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/diode_graph.png" alt="Graph"/>
 
-
+Presentation slides: https://docs.google.com/presentation/d/1cRC4lI-hXJ0S35Tm_BWMym4Wqitvkxw0HylvKsHX4m4/edit?usp=sharing
