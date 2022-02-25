@@ -60,7 +60,7 @@ export default function Vrf({  }) {
   let ArrayStorage = [];
 
   async function updateLights() {
-    if (ArrayStorage.length == 0) {
+    if (ArrayStorage.length === 0) {
       for (let randomNumbers = 0; randomNumbers < 2; randomNumbers++) {
         console.log("API CALL");
         await contractDefined_JS.methods
