@@ -89,7 +89,7 @@ contract ElectricKeeper is KeeperCompatibleInterface {
 
 }
 
-contract BuyTestAllColors {
+contract BuyDemoEightMinutes {
 
     ElectricKeeper electricKeeperInstance;
 
@@ -97,7 +97,7 @@ contract BuyTestAllColors {
         electricKeeperInstance = ElectricKeeper(electricKeeperAddress);
     }
 
-    function BuyAllTurnOffSlowly() public payable {
+    function BuyTestEightMinuteCountdown() public payable {
        require(msg.value == 36, "NEED_36_WEI.");
        for(uint ledValue = 0; ledValue < 8; ledValue++ ) {
             electricKeeperInstance.BuyElectricityTimeOn{value: ledValue+1}(ledValue,ledValue+1);
