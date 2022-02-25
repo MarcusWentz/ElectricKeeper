@@ -17,7 +17,7 @@ body {
     #000000 70%
   );
   /* or something instead, this is no good fix */
-  height: 88vh;
+  height: 110vh;
   letter-spacing: 1.5px;
   font-family: inherit;
 }
