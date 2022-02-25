@@ -2,6 +2,7 @@ import EthLogo from "../assets/svg/eth_logo.svg";
 import { useState, useEffect } from "react";
 import Web3 from "web3";
 import {  useWeb3React } from "@web3-react/core";
+import ErrorModal from "../components/ErrorModal";
 
 //const rpcURL = process.env.REACT_APP_rinkebyWebSocketSecureEventsInfuraAPIKey; //Use WSS to get live event data instead of polling constantly,
 // const rpcURL = "wss://rinkeby.infura.io/ws/v3/f63336cd46ea40d68f1577991e1135cf"
@@ -52,6 +53,7 @@ const contractDefined_JS = new web3.eth.Contract(
 export default function Vrf({  }) {
   const [colorSet1, setColourSet1] = useState();
   const [colorSet2, setColourSet2] = useState();
+  const [errorMsg, setErrorMsg] = useState("");
   const { account } = useWeb3React();
 
 
@@ -85,6 +87,7 @@ export default function Vrf({  }) {
       const chainId = await web3.eth.getChainId();
       console.log(chainId);
       if (chainId !== 4) {
+        setErrorMsg("Must be on the Rinkeby test network");
         //Error message here
       }
 
@@ -146,17 +149,18 @@ export default function Vrf({  }) {
     } catch (err) {
       const msg = "Connect your wallet to buy";
       console.log(err, msg);
-      // setErrorMsg(msg);
+      setErrorMsg(msg);
     }
   };
 
   const colorSetInColor = (colorSet) => {
-    let chars = Array.from(colorSet.toString(2));
+    var n = colorSet.toString(2);
+    n = "00000000".substr(n.length) + n;
+    let chars = Array.from(n);
     console.log(chars);
-    // return colorSet.toString(2);
     return (
       <>
-        <em
+        <div
           style={{
             backgroundColor: "grey",
             fontStyle: "normal",
@@ -173,7 +177,7 @@ export default function Vrf({  }) {
           <em style={{ color: "yellow", fontStyle: "normal" }}>{chars[5]}</em>
           <em style={{ color: "blue", fontStyle: "normal" }}>{chars[6]}</em>
           <em style={{ color: "red", fontStyle: "normal" }}>{chars[7]}</em>
-        </em>
+        </div>
       </>
     );
   };
@@ -210,13 +214,26 @@ export default function Vrf({  }) {
           {/* <p><b></b>{colorSet2}</p> */}
           <p></p>
           <br></br>
-          <button onClick={() => handleRandomNrCall()}></button>
+        <button
+          style={{ width: 400 }}
+          className="btn-hover color-electric"
+          onClick={() => handleRandomNrCall()}
+        >
+          Request 2 random VRFv2 numbers
+        </button>
         </div>
         <div class="col-6">
           <img src={EthLogo} style={{ width: "40%" }} />
         </div>
         <div class="col"></div>
       </div>
+      {errorMsg !== "" ? (
+              <ErrorModal
+                showToastFromProp={errorMsg !== ""}
+                onClose={() => setErrorMsg("")}
+                errorMsg={errorMsg}
+              ></ErrorModal>
+            ) : null}
     </div>
   );
 }
