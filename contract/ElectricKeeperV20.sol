@@ -91,23 +91,23 @@ contract ElectricKeeper is KeeperCompatibleInterface {
 
 contract BuyTestAllColors {
 
-    ElectricEthereum electricEthereum;
+    ElectricKeeper electricKeeperInstance;
 
-    constructor(ElectricEthereum _electricEthereum) {
-        electricEthereum = ElectricEthereum(_electricEthereum);
+    constructor(ElectricKeeper electricKeeperAddress) {
+        electricKeeperInstance = ElectricKeeper(electricKeeperAddress);
     }
 
     function BuyAllSameDuration() public payable {
        require(msg.value == 8, "NEED_8_WEI.");
        for(uint ledValue = 0; ledValue < 8; ledValue++ ) {
-            electricEthereum.BuyElectricityTimeOn{value: 1}(ledValue,1);
+            electricKeeperInstance.BuyElectricityTimeOn{value: 1}(ledValue,1);
         }
     }
 
     function BuyAllTurnOffSlowly() public payable {
        require(msg.value == 36, "NEED_36_WEI.");
        for(uint ledValue = 0; ledValue < 8; ledValue++ ) {
-            electricEthereum.BuyElectricityTimeOn{value: ledValue+1}(ledValue,ledValue+1);
+            electricKeeperInstance.BuyElectricityTimeOn{value: ledValue+1}(ledValue,ledValue+1);
         }
     }
 }
