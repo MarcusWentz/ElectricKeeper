@@ -7,7 +7,7 @@ import {
   ELECTRICKEEPER_ABI,
   ELECTRICKEEPER_CONTRACT_ADDRESS,
   BUY_DEMO_EIGHT_MINUTES_ABI,
-  BUY_DEMO_EIGHT_MINUTES_CONTRACT_ADDRESS
+  BUY_DEMO_EIGHT_MINUTES_CONTRACT_ADDRESS,
 } from "../config";
 import { BUTTON_OBJECT_4_LAST, BUTTON_OBJECT_4_FIRST } from "./ButtonData";
 import ErrorModal from "../components/ErrorModal";
@@ -22,6 +22,8 @@ import { DataContext } from "../DataContext";
 export default function Buy({ degree, userLocation, basic }) {
   const [maticPriceFeedContract, setMaticPriceFeedContract] = useState(null);
   const [electricKeeperContract, setElectricKeeperContract] = useState(null);
+  const [buyDemoEightMinutesContract, setBuyDemoEightMinutesContract] =
+    useState(null);
 
   const [inputAmount, setInputAmount] = useState("");
   const [latestPriceOfMatic_1p, setLatestPriceOfMatic_1p] = useState("");
@@ -52,7 +54,7 @@ export default function Buy({ degree, userLocation, basic }) {
         setErrorMsg("Must be on the Mumbai test network");
       }
 
-      //Load the smart contract
+      //Load the smart contract(s)
       const maticPriceFeedContract = new web3.eth.Contract(
         ABI,
         CONTRACT_ADDRESS
@@ -61,13 +63,16 @@ export default function Buy({ degree, userLocation, basic }) {
         ELECTRICKEEPER_ABI,
         ELECTRICKEEPER_CONTRACT_ADDRESS
       );
+      const buyDemoEightMinutesContract = new web3.eth.Contract(
+        BUY_DEMO_EIGHT_MINUTES_ABI,
+        BUY_DEMO_EIGHT_MINUTES_CONTRACT_ADDRESS
+      );
+      //Save smart contract(s) in react state
       setElectricKeeperContract(electricKeeperContract);
       setMaticPriceFeedContract(maticPriceFeedContract);
-      console.log(
-        maticPriceFeedContract,
-        "This is the matic price feed contract"
-      );
-      console.log(electricKeeperContract, "This is electric keeper contract");
+      setBuyDemoEightMinutesContract(buyDemoEightMinutesContract);
+
+      console.log(buyDemoEightMinutesContract, 'This is DEMO contract')
 
       if (maticPriceFeedContract !== null) {
         maticPriceFeedContract.methods
@@ -92,7 +97,7 @@ export default function Buy({ degree, userLocation, basic }) {
 
   const estimatedMatic = () => {
     return latestPriceOfMatic_1p && inputAmount !== ""
-      ? (latestPriceOfMatic_1p * (10 *  inputAmount)).toFixed(3).toString()
+      ? (latestPriceOfMatic_1p * (10 * inputAmount)).toFixed(3).toString()
       : "0";
   };
 
@@ -106,7 +111,10 @@ export default function Buy({ degree, userLocation, basic }) {
       web3.eth.sendTransaction({
         to: ELECTRICKEEPER_CONTRACT_ADDRESS,
         data: electricKeeperContract.methods
-          .BuyElectricityTimeOn(colorNumber, web3.utils.toWei(amountOfMaticToPay))
+          .BuyElectricityTimeOn(
+            colorNumber,
+            web3.utils.toWei(amountOfMaticToPay)
+          )
           .encodeABI(),
         value: web3.utils.toWei(amountOfMaticToPay),
         from: account,
@@ -117,8 +125,6 @@ export default function Buy({ degree, userLocation, basic }) {
       setErrorMsg(msg);
     }
   };
-
-
 
   const renderInputBox = () => {
     return (
@@ -188,8 +194,8 @@ export default function Buy({ degree, userLocation, basic }) {
           </div>
           <br />
           <p>
-            <b>Amount: </b> &nbsp;&nbsp;&nbsp;&nbsp; ≈ &nbsp;{" "}
-            {estimatedMatic()} matic
+            <b>Amount: </b> &nbsp;&nbsp;&nbsp;&nbsp; ≈ &nbsp; {estimatedMatic()}{" "}
+            matic
           </p>
         </div>
       </>
