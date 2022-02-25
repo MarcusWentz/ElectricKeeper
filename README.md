@@ -3,7 +3,7 @@
 An automated electric grid.
 Powered by a Raspberry Pi 4, which is controlled by a hybrid smart contract using Chainlink Keepers to automate turning off LEDs for electric bill expirations.
 
-Video demo: https://www.youtube.com/watch?v=949bsTmufhI
+Video demo [early demo]: https://www.youtube.com/watch?v=949bsTmufhI
 
 Website hosted on Fleek [IPFS+Filecoin]: ____ WORK IN PROGRESS _____
 
