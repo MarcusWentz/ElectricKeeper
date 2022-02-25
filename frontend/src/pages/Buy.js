@@ -72,7 +72,7 @@ export default function Buy({ degree, userLocation, basic }) {
       setMaticPriceFeedContract(maticPriceFeedContract);
       setBuyDemoEightMinutesContract(buyDemoEightMinutesContract);
 
-      console.log(buyDemoEightMinutesContract, 'This is DEMO contract')
+      console.log(buyDemoEightMinutesContract, "This is DEMO contract");
 
       if (maticPriceFeedContract !== null) {
         maticPriceFeedContract.methods
@@ -90,10 +90,6 @@ export default function Buy({ degree, userLocation, basic }) {
     };
     loadBlockchainData();
   }, [account]);
-
-  useEffect(() => {
-    console.log("matic Price Feed contract: ", maticPriceFeedContract);
-  }, []);
 
   const estimatedMatic = () => {
     return latestPriceOfMatic_1p && inputAmount !== ""
@@ -117,6 +113,27 @@ export default function Buy({ degree, userLocation, basic }) {
           )
           .encodeABI(),
         value: web3.utils.toWei(amountOfMaticToPay),
+        from: account,
+      });
+    } catch (err) {
+      const msg = "Connect your wallet to buy";
+      console.log(err, msg);
+      setErrorMsg(msg);
+    }
+  };
+
+  const handleBuyDemoEightMinutes = () => {
+    console.log(account, "account in BUY handle click");
+    try {
+      let web3 = new Web3(window.web3.currentProvider);
+      let amountOfMaticToPay = estimatedMatic();
+      console.log(amountOfMaticToPay);
+      web3.eth.sendTransaction({
+        to: BUY_DEMO_EIGHT_MINUTES_CONTRACT_ADDRESS,
+        data: buyDemoEightMinutesContract.methods
+          .BuyTestEightMinuteCountdown()
+          .encodeABI(),
+        value: 36,
         from: account,
       });
     } catch (err) {
@@ -197,6 +214,13 @@ export default function Buy({ degree, userLocation, basic }) {
             <b>Amount: </b> &nbsp;&nbsp;&nbsp;&nbsp; ≈ &nbsp; {estimatedMatic()}{" "}
             matic
           </p>
+          <button
+            style={{ width: 400 }}
+            className="btn-hover color-electric"
+            onClick={() => handleBuyDemoEightMinutes()}
+          >
+            buy 8 minute demo
+          </button>
         </div>
       </>
     );
