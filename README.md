@@ -1,13 +1,20 @@
 # ElectricKeeper (ETH DENVER 2022)
 
 An automated electric grid.
-Powered by a Raspberry Pi 4, which is controlled by a hybrid smart contract using Chainlink Keepers to automate turning off LEDs for electric bill expirations.
 
-Video demo [early demo]: https://www.youtube.com/watch?v=949bsTmufhI
+Video demo [__NEED TO RECORD AGAIN WITH FRONTEND AND HALF LIFE SOUNDS ___]: https://www.youtube.com/watch?v=949bsTmufhI
+
+
+Powered by a Raspberry Pi 4, which is controlled by a hybrid smart contract using Chainlink Keepers to automate turning off LEDs for electric bill expirations 
+
+[with sound alerts using Half Life's VOX (Black Mesa Announcement System) [___ VIDEO DEMO COMING SOON! ____].
+
+Bonus project: Chainlink VRFv2 lightshow, with events logged on zkSync with 1 WEI deposits [ ___ VIDEO DEMO COMING SOON! ____].
+
 
 Website hosted on Fleek [IPFS+Filecoin]: ____ WORK IN PROGRESS _____
 
-zkSync [Rinkeby] event counter example: [1 WEI = 1 EVENT DETECTED]:
+zkSync [Rinkeby] event counter example: [1 WEI = 1 Event Detected]:
 https://rinkeby.zkscan.io/explorer/transactions/0x42d6f786023160c1b6980f3993b75702007be00d2575c97034f6831067e78227
 
 <img src="https://github.com/MarcusWentz/ElectricKeeper/blob/main/images/animation4.gif" alt="Test"/>
