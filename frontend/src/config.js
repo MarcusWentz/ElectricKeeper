@@ -129,3 +129,34 @@ export const BUY_DEMO_EIGHT_MINUTES_ABI = [
     type: "function",
   },
 ];
+
+
+
+export const DOMINO_CONTRACT_ADDRESS = "0x3ba893c2d184411b6776d5830865e895af264f5a";
+export const DOMINO_CONTRACT_ABI = [
+  {
+    inputs: [
+      {
+        internalType: "contractElectricEthereum",
+        name: "_electricEthereum",
+        type: "address",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "constructor",
+  },
+  {
+    inputs: [],
+    name: "BuyAllSameDuration",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "BuyAllTurnOffSlowly",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
+  },
+];

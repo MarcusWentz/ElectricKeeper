@@ -10,8 +10,9 @@ footer {
 	background: transparent;
 	width: 100%;
 	left: 0;
-	bottom: 100px;
+	bottom: 30%;
 	position: relative;
+	
 
 }
 footer::before {
