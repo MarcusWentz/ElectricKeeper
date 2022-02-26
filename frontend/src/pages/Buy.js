@@ -11,6 +11,7 @@ import {
 } from "../config";
 import { BUTTON_OBJECT_4_LAST, BUTTON_OBJECT_4_FIRST } from "./ButtonData";
 import ErrorModal from "../components/ErrorModal";
+import FlashSuccess from "../components/flashSuccess";
 import { Web3ReactProvider, useWeb3React } from "@web3-react/core";
 
 import { DataContext } from "../DataContext";
@@ -24,11 +25,12 @@ export default function Buy({ degree, userLocation, basic }) {
   const [electricKeeperContract, setElectricKeeperContract] = useState(null);
   const [buyDemoEightMinutesContract, setBuyDemoEightMinutesContract] =
     useState(null);
-
   const [inputAmount, setInputAmount] = useState("");
   const [latestPriceOfMatic_1p, setLatestPriceOfMatic_1p] = useState("");
   const [showToast, setShowToast] = useState();
   const [errorMsg, setErrorMsg] = useState("");
+  const [successMsg, setSuccessMsg] = useState("");
+
   const { userAccountAddress, setUserAccountAddress } =
     React.useContext(DataContext);
 
@@ -97,6 +99,37 @@ export default function Buy({ degree, userLocation, basic }) {
       : "0";
   };
 
+  const colorNumberToColor = (colorNumber) => {
+    switch (colorNumber) {
+      case 0:
+        return "blue";
+        break;
+      case 1:
+        return "green";
+        break;
+      case 2:
+        return "yellow";
+        break;
+      case 3:
+        return "red";
+        break;
+      case 4:
+        return "orange";
+        break;
+      case 5:
+        return "purple";
+        break;
+      case 6:
+        return "grey";
+        break;
+      case 7:
+        return "white";
+        break;
+      default:
+        console.log("not a valid num");
+    }
+  }
+
   const handleBuyButtonClick = (colorNumber) => {
     console.log("You chose the color:", colorNumber);
     console.log(account, "account in BUY handle click");
@@ -114,6 +147,11 @@ export default function Buy({ degree, userLocation, basic }) {
           .encodeABI(),
         value: web3.utils.toWei(amountOfMaticToPay),
         from: account,
+      }).then(() => {
+        setSuccessMsg(
+          `Bought ${inputAmount === '1' ? '1' + " min" : inputAmount + " mins" } of electricity 
+          for the ${colorNumberToColor(colorNumber)} LED`
+          );
       });
     } catch (err) {
       const msg = "Connect your wallet to buy";
@@ -135,6 +173,8 @@ export default function Buy({ degree, userLocation, basic }) {
           .encodeABI(),
         value: 36,
         from: account,
+      }).then(() => {
+        setSuccessMsg("8 Minute Demo Starting!");
       });
     } catch (err) {
       const msg = "Connect your wallet to buy";
@@ -245,6 +285,10 @@ export default function Buy({ degree, userLocation, basic }) {
           errorMsg={errorMsg}
         ></ErrorModal>
       ) : null}
+
+        {successMsg? (
+        <FlashSuccess show msg={successMsg} onClose={() => setSuccessMsg("")}/>
+      ): ""}
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Web3 from "web3";
 import {  useWeb3React } from "@web3-react/core";
 import ErrorModal from "../components/ErrorModal";
+import FlashSuccess from "../components/flashSuccess";
 
 //const rpcURL = process.env.REACT_APP_rinkebyWebSocketSecureEventsInfuraAPIKey; //Use WSS to get live event data instead of polling constantly,
 // const rpcURL = "wss://rinkeby.infura.io/ws/v3/f63336cd46ea40d68f1577991e1135cf"
@@ -54,6 +55,7 @@ export default function Vrf({  }) {
   const [colorSet1, setColourSet1] = useState();
   const [colorSet2, setColourSet2] = useState();
   const [errorMsg, setErrorMsg] = useState("");
+  const [successMsg, setSuccessMsg] = useState("");
   const { account } = useWeb3React();
 
 
@@ -123,6 +125,9 @@ export default function Vrf({  }) {
         to: contractAddress_JS,
         data: contractDefined_JS.methods.requestRandomWords().encodeABI(),
         from: account,
+      }).then(() => {
+        console.log("vrf request sent");
+        setSuccessMsg("VRF request sent!");
       });
     } catch (err) {
       const msg = "Connect your wallet to buy";
@@ -212,6 +217,14 @@ export default function Vrf({  }) {
                 errorMsg={errorMsg}
               ></ErrorModal>
             ) : null}
+
+          <p style={{color: "white"}}>{successMsg}</p>
+
+          {successMsg? (
+            <FlashSuccess show msg={successMsg} onClose={() => setSuccessMsg("")}/>
+          ): ""}
+
+            
     </div>
   );
 }

@@ -2,8 +2,8 @@ import EthLogo from "../assets/svg/eth_logo.svg";
 import asset from "../assets/asset1.png";
 
 
-
 const Home = () => {
+
   return (
     <div class="container">
       <div class="container">
