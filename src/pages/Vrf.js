@@ -136,22 +136,32 @@ export default function Vrf({}) {
     }
   };
 
-  const colorSetInColor = (colorSet) => {
+  const renderColorSetInColor = (colorSet) => {
     var n = colorSet.toString(2);
     n = "00000000".substr(n.length) + n;
     let chars = Array.from(n);
     console.log(chars);
     return (
       <>
-        <div style={{float:'left'}}>
-          <p className="vrf-numbers color-white">{chars[0]}</p>
-          <p className="vrf-numbers color-pink">{chars[1]}</p>
-          <p className="vrf-numbers color-orange">{chars[2]}</p>
-          <p className="vrf-numbers color-purple">{chars[3]}</p>
-          <p className="vrf-numbers color-green">{chars[4]}</p>
-          <p className="vrf-numbers color-yellow">{chars[5]}</p>
-          <p className="vrf-numbers color-blue">{chars[6]}</p>
-          <p className="vrf-numbers color-red">{chars[7]}</p>
+        <div
+          style={{
+            marginBottom: 50,
+            marginTop: 10,
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+        >
+          <div style={{ float: "left" }}>
+            <p className="vrf-numbers color-white">{chars[0]}</p>
+            <p className="vrf-numbers color-pink">{chars[1]}</p>
+            <p className="vrf-numbers color-orange">{chars[2]}</p>
+            <p className="vrf-numbers color-purple">{chars[3]}</p>
+            <p className="vrf-numbers color-green">{chars[4]}</p>
+            <p className="vrf-numbers color-yellow">{chars[5]}</p>
+            <p className="vrf-numbers color-blue">{chars[6]}</p>
+            <p className="vrf-numbers color-red">{chars[7]}</p>
+          </div>
         </div>
       </>
     );
@@ -162,16 +172,25 @@ export default function Vrf({}) {
       <div class="row">
         <h1>
           <br></br>
-          <b>VRF</b>
+          <b>Chainlink VRF v2 </b>
         </h1>
+        <div style={{marginBottom: 50}}>
+        <button
+          style={{ width: 400 }}
+          className="btn-hover color-electric"
+          onClick={() => handleRandomNrCall()}
+        >
+          Request 2 random VRF v2 numbers
+        </button>
+        </div>
         {colorSet1 && colorSet2 ? (
-          <>
+          <div>
             <p>
               <b>Color Set 1: </b>
               &nbsp;&nbsp;&nbsp;
               {colorSet1}
               &nbsp;&nbsp;&nbsp;
-              {colorSetInColor(colorSet1)}
+              {renderColorSetInColor(colorSet1)}
             </p>
             <p>
               <b>Color Set 2: </b>
@@ -179,22 +198,15 @@ export default function Vrf({}) {
               {colorSet2}
               &nbsp;&nbsp;&nbsp;
               {/* {colorSet2.toString(2)} */}
-              {colorSetInColor(colorSet2)}
+              {renderColorSetInColor(colorSet2)}
             </p>
-          </>
+          </div>
         ) : (
           ""
         )}
         {/* <p><b></b>{colorSet2}</p> */}
         <p></p>
         <br></br>
-        <button
-          style={{ width: 400 }}
-          className="btn-hover color-electric"
-          onClick={() => handleRandomNrCall()}
-        >
-          Request 2 random VRFv2 numbers
-        </button>
       </div>
       {errorMsg !== "" ? (
         <ErrorModal
