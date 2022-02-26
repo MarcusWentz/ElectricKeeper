@@ -2,12 +2,11 @@
 
 An automated electric grid.
 
-Video demo [__NEED TO RECORD AGAIN WITH FRONTEND AND HALF LIFE SOUNDS ___]: https://www.youtube.com/watch?v=949bsTmufhI
+Video demo [__NEED TO RECORD AGAIN WITH FRONTEND AND HALF LIFE VOX SOUNDS ___]: https://www.youtube.com/watch?v=949bsTmufhI
 
 
 Powered by a Raspberry Pi 4, which is controlled by a hybrid smart contract using Chainlink Keepers to automate turning off LEDs for electric bill expirations 
-
-[with sound alerts using Half Life's VOX (Black Mesa Announcement System) [___ VIDEO DEMO COMING SOON! ____].
+[with sound alerts using Half Life's VOX (Black Mesa Announcement System).
 
 Bonus project: Chainlink VRFv2 lightshow, with events logged on zkSync with 1 WEI deposits [ ___ VIDEO DEMO COMING SOON! ____].
 
