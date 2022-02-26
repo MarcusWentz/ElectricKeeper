@@ -1,7 +1,7 @@
 import EthLogo from "../assets/svg/eth_logo.svg";
 import { useState, useEffect } from "react";
 import Web3 from "web3";
-import {  useWeb3React } from "@web3-react/core";
+import { useWeb3React } from "@web3-react/core";
 import ErrorModal from "../components/ErrorModal";
 import FlashSuccess from "../components/flashSuccess";
 
@@ -51,13 +51,12 @@ const contractDefined_JS = new web3.eth.Contract(
   contractAddress_JS
 );
 
-export default function Vrf({  }) {
+export default function Vrf({}) {
   const [colorSet1, setColorSet1] = useState();
   const [colorSet2, setColorSet2] = useState();
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
   const { account } = useWeb3React();
-
 
   let ArrayStorage = [];
 
@@ -90,12 +89,11 @@ export default function Vrf({  }) {
       }
 
       //Load the smart contract
-  
+
       eventListener();
     };
     loadBlockchainData();
   }, []);
-
 
   const eventListener = () => {
     contractDefined_JS.events
@@ -121,14 +119,16 @@ export default function Vrf({  }) {
   const handleRandomNrCall = () => {
     console.log(account, "account in BUY handle click", contractAddress_JS);
     try {
-      web3.eth.sendTransaction({
-        to: contractAddress_JS,
-        data: contractDefined_JS.methods.requestRandomWords().encodeABI(),
-        from: account,
-      }).then(() => {
-        console.log("vrf request sent");
-        setSuccessMsg("VRF request sent!");
-      });
+      web3.eth
+        .sendTransaction({
+          to: contractAddress_JS,
+          data: contractDefined_JS.methods.requestRandomWords().encodeABI(),
+          from: account,
+        })
+        .then(() => {
+          console.log("vrf request sent");
+          setSuccessMsg("VRF request sent!");
+        });
     } catch (err) {
       const msg = "Connect your wallet to buy";
       console.log(err, msg);
@@ -143,23 +143,15 @@ export default function Vrf({  }) {
     console.log(chars);
     return (
       <>
-        <div
-          style={{
-            backgroundColor: "grey",
-            fontStyle: "normal",
-            fontSize: "26px",
-            padding: "4px 8px",
-            borderRadius: "10px",
-          }}
-        >
-          <em style={{ color: "white", fontStyle: "normal" }}>{chars[0]}</em>
-          <em style={{ color: "pink", fontStyle: "normal" }}>{chars[1]}</em>
-          <em style={{ color: "orange", fontStyle: "normal" }}>{chars[2]}</em>
-          <em style={{ color: "purple", fontStyle: "normal" }}>{chars[3]}</em>
-          <em style={{ color: "green", fontStyle: "normal" }}>{chars[4]}</em>
-          <em style={{ color: "yellow", fontStyle: "normal" }}>{chars[5]}</em>
-          <em style={{ color: "blue", fontStyle: "normal" }}>{chars[6]}</em>
-          <em style={{ color: "red", fontStyle: "normal" }}>{chars[7]}</em>
+        <div style={{float:'left'}}>
+          <p className="vrf-numbers color-white">{chars[0]}</p>
+          <p className="vrf-numbers color-pink">{chars[1]}</p>
+          <p className="vrf-numbers color-orange">{chars[2]}</p>
+          <p className="vrf-numbers color-purple">{chars[3]}</p>
+          <p className="vrf-numbers color-green">{chars[4]}</p>
+          <p className="vrf-numbers color-yellow">{chars[5]}</p>
+          <p className="vrf-numbers color-blue">{chars[6]}</p>
+          <p className="vrf-numbers color-red">{chars[7]}</p>
         </div>
       </>
     );
@@ -168,35 +160,34 @@ export default function Vrf({  }) {
   return (
     <div class="container">
       <div class="row">
-        <div class="col-5">
-          <h1>
-            <br></br>
-            <b>VRF</b>
-          </h1>
-          {colorSet1 && colorSet2 ? (
-            <>
-              <p>
-                <b>Color Set 1: </b>
-                &nbsp;&nbsp;&nbsp;
-                {colorSet1}
-                &nbsp;&nbsp;&nbsp;
-                {colorSetInColor(colorSet1)}
-              </p>
-              <p>
-                <b>Color Set 2: </b>
-                &nbsp;&nbsp;&nbsp;
-                {colorSet2}
-                &nbsp;&nbsp;&nbsp;
-                {/* {colorSet2.toString(2)} */}
-                {colorSetInColor(colorSet2)}
-              </p>
-            </>
-          ) : (
-            ""
-          )}
-          {/* <p><b></b>{colorSet2}</p> */}
-          <p></p>
+        <h1>
           <br></br>
+          <b>VRF</b>
+        </h1>
+        {colorSet1 && colorSet2 ? (
+          <>
+            <p>
+              <b>Color Set 1: </b>
+              &nbsp;&nbsp;&nbsp;
+              {colorSet1}
+              &nbsp;&nbsp;&nbsp;
+              {colorSetInColor(colorSet1)}
+            </p>
+            <p>
+              <b>Color Set 2: </b>
+              &nbsp;&nbsp;&nbsp;
+              {colorSet2}
+              &nbsp;&nbsp;&nbsp;
+              {/* {colorSet2.toString(2)} */}
+              {colorSetInColor(colorSet2)}
+            </p>
+          </>
+        ) : (
+          ""
+        )}
+        {/* <p><b></b>{colorSet2}</p> */}
+        <p></p>
+        <br></br>
         <button
           style={{ width: 400 }}
           className="btn-hover color-electric"
@@ -204,27 +195,22 @@ export default function Vrf({  }) {
         >
           Request 2 random VRFv2 numbers
         </button>
-        </div>
-        <div class="col-6">
-          <img src={EthLogo} style={{ width: "40%" }} />
-        </div>
-        <div class="col"></div>
       </div>
       {errorMsg !== "" ? (
-              <ErrorModal
-                showToastFromProp={errorMsg !== ""}
-                onClose={() => setErrorMsg("")}
-                errorMsg={errorMsg}
-              ></ErrorModal>
-            ) : null}
+        <ErrorModal
+          showToastFromProp={errorMsg !== ""}
+          onClose={() => setErrorMsg("")}
+          errorMsg={errorMsg}
+        ></ErrorModal>
+      ) : null}
 
-          <p style={{color: "white"}}>{successMsg}</p>
+      <p style={{ color: "white" }}>{successMsg}</p>
 
-          {successMsg? (
-            <FlashSuccess show msg={successMsg} onClose={() => setSuccessMsg("")}/>
-          ): ""}
-
-            
+      {successMsg ? (
+        <FlashSuccess show msg={successMsg} onClose={() => setSuccessMsg("")} />
+      ) : (
+        ""
+      )}
     </div>
   );
 }

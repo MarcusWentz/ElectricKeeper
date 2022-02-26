@@ -84,8 +84,8 @@ p {
   -webkit-text-fill-color: transparent;
 }
 
-
-.modal-content {  transition: border-color 0.2s linear;
+.modal-content {
+  transition: border-color 0.2s linear;
 
   background: #222;
   padding: 2rem;
@@ -100,7 +100,6 @@ p {
   width: 100%;
   text-align: center;
   color: #ffdd9e;
- 
 }
 .closeButton {
   color: white !important;
@@ -400,13 +399,85 @@ input::-webkit-inner-spin-button {
   opacity: 50%; /* Firefox */
 }
 
-
-input[type=number]::-webkit-outer-spin-button,
-input[type=number]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-input[type=number] {
-    -moz-appearance:textfield;
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/*VRF Page styles*/
+.vrf-numbers.color-white {
+  float: left;
+  font-size: 70px;
+  background: linear-gradient(45deg, #e4f1f7, #a5a5a5);
+  background-size: 150% 150%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.vrf-numbers.color-pink {
+  float: left;
+  font-size: 70px;
+  background: linear-gradient(45deg, #ee99d2, #e25fac);
+  background-size: 150% 150%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.vrf-numbers.color-orange {
+  float: left;
+  font-size: 70px;
+  background: linear-gradient(45deg, #ffc188, #d8621d);
+  background-size: 150% 150%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.vrf-numbers.color-purple {
+  float: left;
+  font-size: 70px;
+  background: linear-gradient(45deg, #d859e9, #66084a);
+  background-size: 150% 150%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.vrf-numbers.color-green {
+  float: left;
+  font-size: 70px;
+  background: linear-gradient(45deg, #86f58f, #2c9722);
+  background-size: 150% 150%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.vrf-numbers.color-yellow {
+  float: left;
+  font-size: 70px;
+  background: linear-gradient(45deg, #e7e959, #ffd51c);
+  background-size: 150% 150%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.vrf-numbers.color-blue {
+  float: left;
+  font-size: 70px;
+  background: linear-gradient(45deg, #5963e9, #08438f);
+  background-size: 150% 150%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.vrf-numbers.color-red {
+  float: left;
+  font-size: 70px;
+  background: linear-gradient(45deg, #e9596c, #660808);
+  background-size: 150% 150%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
