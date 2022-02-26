@@ -30,6 +30,10 @@ export default function Buy({ degree, userLocation, basic }) {
   const [showToast, setShowToast] = useState();
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
+  const [
+    voltageExpirationAndLatestBuyerObject,
+    setVoltageExpirationAndLatestBuyerObject,
+  ] = useState({});
 
   const { userAccountAddress, setUserAccountAddress } =
     React.useContext(DataContext);
@@ -75,6 +79,20 @@ export default function Buy({ degree, userLocation, basic }) {
       setBuyDemoEightMinutesContract(buyDemoEightMinutesContract);
 
       console.log(buyDemoEightMinutesContract, "This is DEMO contract");
+
+      if (account) {
+        let voltageExpirationAndLatestBuyerObject =
+          await electricKeeperContract.methods.LED(account).call();
+
+        setVoltageExpirationAndLatestBuyerObject(
+          voltageExpirationAndLatestBuyerObject
+        );
+        console.log(voltageExpirationAndLatestBuyerObject, "VOOOOLT OBJ");
+        console.log(
+          "ONLY one expir",
+          voltageExpirationAndLatestBuyerObject.ExpirationTimeUNIX
+        );
+      }
 
       if (maticPriceFeedContract !== null) {
         maticPriceFeedContract.methods
@@ -128,7 +146,7 @@ export default function Buy({ degree, userLocation, basic }) {
       default:
         console.log("not a valid num");
     }
-  }
+  };
 
   const handleBuyButtonClick = (colorNumber) => {
     console.log("You chose the color:", colorNumber);
@@ -137,22 +155,26 @@ export default function Buy({ degree, userLocation, basic }) {
       let web3 = new Web3(window.web3.currentProvider);
       let amountOfMaticToPay = estimatedMatic();
       console.log(amountOfMaticToPay);
-      web3.eth.sendTransaction({
-        to: ELECTRICKEEPER_CONTRACT_ADDRESS,
-        data: electricKeeperContract.methods
-          .BuyElectricityTimeOn(
-            colorNumber,
-            web3.utils.toWei(amountOfMaticToPay)
-          )
-          .encodeABI(),
-        value: web3.utils.toWei(amountOfMaticToPay),
-        from: account,
-      }).then(() => {
-        setSuccessMsg(
-          `Bought ${inputAmount === '1' ? '1' + " min" : inputAmount + " mins" } of electricity 
+      web3.eth
+        .sendTransaction({
+          to: ELECTRICKEEPER_CONTRACT_ADDRESS,
+          data: electricKeeperContract.methods
+            .BuyElectricityTimeOn(
+              colorNumber,
+              web3.utils.toWei(amountOfMaticToPay)
+            )
+            .encodeABI(),
+          value: web3.utils.toWei(amountOfMaticToPay),
+          from: account,
+        })
+        .then(() => {
+          setSuccessMsg(
+            `Bought ${
+              inputAmount === "1" ? "1" + " min" : inputAmount + " mins"
+            } of electricity 
           for the ${colorNumberToColor(colorNumber)} LED`
           );
-      });
+        });
     } catch (err) {
       const msg = "Connect your wallet to buy";
       console.log(err, msg);
@@ -166,16 +188,18 @@ export default function Buy({ degree, userLocation, basic }) {
       let web3 = new Web3(window.web3.currentProvider);
       let amountOfMaticToPay = estimatedMatic();
       console.log(amountOfMaticToPay);
-      web3.eth.sendTransaction({
-        to: BUY_DEMO_EIGHT_MINUTES_CONTRACT_ADDRESS,
-        data: buyDemoEightMinutesContract.methods
-          .BuyTestEightMinuteCountdown()
-          .encodeABI(),
-        value: 36,
-        from: account,
-      }).then(() => {
-        setSuccessMsg("8 Minute Demo Starting!");
-      });
+      web3.eth
+        .sendTransaction({
+          to: BUY_DEMO_EIGHT_MINUTES_CONTRACT_ADDRESS,
+          data: buyDemoEightMinutesContract.methods
+            .BuyTestEightMinuteCountdown()
+            .encodeABI(),
+          value: 36,
+          from: account,
+        })
+        .then(() => {
+          setSuccessMsg("8 Minute Demo Starting!");
+        });
     } catch (err) {
       const msg = "Connect your wallet to buy";
       console.log(err, msg);
@@ -261,6 +285,22 @@ export default function Buy({ degree, userLocation, basic }) {
           >
             buy 8 minute demo
           </button>
+          <p>
+            Expiration time:{" "}
+            {voltageExpirationAndLatestBuyerObject.ExpirationTimeUNIX}
+            <b></b>
+            <b></b>
+          </p>
+          <p>
+            {" "}
+            Latest Buyer: {voltageExpirationAndLatestBuyerObject.LatestBuyer}
+            <b></b>
+          </p>
+          <p>
+            {" "}
+            Voltage: {voltageExpirationAndLatestBuyerObject.Voltage}
+            <b></b>
+          </p>
         </div>
       </>
     );
@@ -286,9 +326,11 @@ export default function Buy({ degree, userLocation, basic }) {
         ></ErrorModal>
       ) : null}
 
-        {successMsg? (
-        <FlashSuccess show msg={successMsg} onClose={() => setSuccessMsg("")}/>
-      ): ""}
+      {successMsg ? (
+        <FlashSuccess show msg={successMsg} onClose={() => setSuccessMsg("")} />
+      ) : (
+        ""
+      )}
     </div>
   );
 }
