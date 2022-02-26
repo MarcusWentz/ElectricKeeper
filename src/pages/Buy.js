@@ -161,7 +161,7 @@ export default function Buy({ degree, userLocation, basic }) {
   };
 
   const handleBuyDemoEightMinutes = () => {
-    console.log(account, "account in BUY handle click");
+    console.log(buyDemoEightMinutesContract, "account in BUY handle click");
     try {
       let web3 = new Web3(window.web3.currentProvider);
       let amountOfMaticToPay = estimatedMatic();

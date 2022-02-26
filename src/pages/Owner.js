@@ -81,30 +81,6 @@ export default function Owner({}) {
 
   useEffect(() => {}, []);
 
-  const handleDominoButtonClick = () => {
-    console.log(
-      "contract adr",
-      DOMINO_CONTRACT_ADDRESS,
-      "My acc:",
-      account,
-      ""
-    );
-    try {
-      let web3 = new Web3(window.web3.currentProvider);
-
-      web3.eth.sendTransaction({
-        to: DOMINO_CONTRACT_ADDRESS,
-        data: dominoContract.methods.BuyAllTurnOffSlowly().encodeABI(),
-        value: 36,
-        from: account,
-      });
-    } catch (err) {
-      const msg = "Connect your wallet to buy";
-      console.log(err, msg);
-      setErrorMsg(msg);
-    }
-  };
-
   const handleManualExpirationOff = () => {
     try {
       let web3 = new Web3(window.web3.currentProvider);
@@ -125,36 +101,35 @@ export default function Owner({}) {
 
   const handleEmergencySafeAndDangerOffAndOn = (ledValue, safeOrDanger) => {
     console.log(ledValue, "ledvaaaaaaaal");
-    if(ledValue >= 0 && ledValue <= 7){
-    var functionToCall;
-    if (safeOrDanger === "safe") {
-      functionToCall = electricKeeperContract.methods
-        .OwnerEmergencySafeOn(ledValue)
-        .encodeABI();
-    } else {
-      functionToCall = electricKeeperContract.methods
-        .OwnerEmergencyDangerOff(ledValue)
-        .encodeABI();
-    }
-    try {
-      let web3 = new Web3(window.web3.currentProvider);
+    if (ledValue >= 0 && ledValue <= 7) {
+      var functionToCall;
+      if (safeOrDanger === "safe") {
+        functionToCall = electricKeeperContract.methods
+          .OwnerEmergencySafeOn(ledValue)
+          .encodeABI();
+      } else {
+        functionToCall = electricKeeperContract.methods
+          .OwnerEmergencyDangerOff(ledValue)
+          .encodeABI();
+      }
+      try {
+        let web3 = new Web3(window.web3.currentProvider);
 
-      web3.eth.sendTransaction({
-        to: ELECTRICKEEPER_CONTRACT_ADDRESS,
-        data: functionToCall,
-        from: account,
-      });
-    } catch (err) {
-      const msg = "Connect your wallet to buy";
-      console.log(err, msg);
+        web3.eth.sendTransaction({
+          to: ELECTRICKEEPER_CONTRACT_ADDRESS,
+          data: functionToCall,
+          from: account,
+        });
+      } catch (err) {
+        const msg = "Connect your wallet to buy";
+        console.log(err, msg);
+        setErrorMsg(msg);
+      }
+    } else {
+      const msg = "You need to put an LED value between 0-7";
+      console.log(msg);
       setErrorMsg(msg);
     }
-  }
-  else {
-    const msg = "You need to put an LED value between 0-7";
-    console.log(msg);
-    setErrorMsg(msg);
-  }
   };
 
   //READ/GET value only:expirationOccured();
@@ -171,13 +146,6 @@ export default function Owner({}) {
             flexDirection: "column",
           }}
         >
-          <button
-            style={{ width: 400 }}
-            className="btn-hover color-electric"
-            onClick={() => handleDominoButtonClick()}
-          >
-            request domino demo
-          </button>
           <label
             style={{
               color: "#ffdd9a",
@@ -219,14 +187,18 @@ export default function Owner({}) {
           <button
             style={{ width: 400 }}
             className="btn-hover color-electric"
-            onClick={() => handleEmergencySafeAndDangerOffAndOn(LEDValue, 'safe')}
+            onClick={() =>
+              handleEmergencySafeAndDangerOffAndOn(LEDValue, "safe")
+            }
           >
             emergency safe on
           </button>{" "}
           <button
             style={{ width: 400 }}
             className="btn-hover color-electric"
-            onClick={() => handleEmergencySafeAndDangerOffAndOn(LEDValue, 'danger')}
+            onClick={() =>
+              handleEmergencySafeAndDangerOffAndOn(LEDValue, "danger")
+            }
           >
             emergency danger off
           </button>
