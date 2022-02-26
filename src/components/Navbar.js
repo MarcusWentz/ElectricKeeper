@@ -6,6 +6,7 @@ import React, { Component, useEffect, useState } from "react";
 import { useWeb3React } from "@web3-react/core";
 import classes from "./Navbar.module.css";
 import ConnectWalletModal from "./ConnectWalletModal";
+import EthLogo from "../assets/svg/eth_logo.svg";
 
 const Navbar = ({ handleConnectMetamask, connectedAddrValue }) => {
   const { userAccountAddress, setUserAccountAddress } =
@@ -28,8 +29,12 @@ const Navbar = ({ handleConnectMetamask, connectedAddrValue }) => {
         <div style={{ fontSize: "xx-large", marginRight: "50px" }}>
           <div class="h-screen flex justify-center items-center bg-gray-800">
             <h1 class="gradient-text font-sans font-black text-6xl">
-              <FontAwesomeIcon icon={faBolt} /> electricKeeper
-            </h1>
+              <img width="6%" src={EthLogo} />{" "}
+              <NavLink
+              to="/"
+            >
+               electricKeeper
+            </NavLink>            </h1>
           </div>
         </div>
         <ul id="ul-navigation" class="nav-ul" data-visible="false">
@@ -49,12 +54,20 @@ const Navbar = ({ handleConnectMetamask, connectedAddrValue }) => {
               Buy
             </NavLink>{" "}
           </li>
-          <li class="nav-li">
+          {/*    <li class="nav-li">
             <NavLink
               className={(navObj) => (navObj.isActive ? classes.active : "")}
               to="/about"
             >
               About
+            </NavLink>
+          </li> */}
+          <li class="nav-li">
+            <NavLink
+              className={(navObj) => (navObj.isActive ? classes.active : "")}
+              to="/owner"
+            >
+              owner
             </NavLink>
           </li>
           <li class="nav-li">
@@ -66,20 +79,12 @@ const Navbar = ({ handleConnectMetamask, connectedAddrValue }) => {
             </NavLink>
           </li>
           <li class="nav-li">
-            <NavLink
-              className={(navObj) => (navObj.isActive ? classes.active : "")}
-              to="/owner"
-            >
-              owner
-            </NavLink>
-          </li>
-          <li class="nav-li">
             <a className={(navObj) => (navObj.isActive ? classes.active : "")}>
               <button
                 className="btn btn-light mm"
                 onClick={() => setShowModal(true)}
               >
-             {/*    <img
+                {/*    <img
                   width="30"
                   height="30"
                   style={{ marginRight: 5 }}
