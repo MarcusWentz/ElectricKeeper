@@ -12,7 +12,7 @@ Powered by a Raspberry Pi 4, which is controlled by a hybrid smart contract usin
 Bonus project: Chainlink VRFv2 lightshow, with events logged on zkSync with 1 WEI deposits [ ___ VIDEO DEMO COMING SOON! ____].
 
 
-Website hosted on Fleek [IPFS+Filecoin]: ____ WORK IN PROGRESS _____
+Website hosted on Fleek [IPFS+Filecoin]: https://electrickeeper.on.fleek.co/#/
 
 Skynet backup site: https://10009tgoq1i5qfk2fgnasv7m8ngk78or2e63n7aee6slpdd83bdiu38.siasky.net/#/
 
