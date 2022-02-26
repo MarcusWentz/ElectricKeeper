@@ -14,6 +14,8 @@ Bonus project: Chainlink VRFv2 lightshow, with events logged on zkSync with 1 WE
 
 Website hosted on Fleek [IPFS+Filecoin]: ____ WORK IN PROGRESS _____
 
+Skynet backup site: https://10009tgoq1i5qfk2fgnasv7m8ngk78or2e63n7aee6slpdd83bdiu38.siasky.net/#/
+
 zkSync [Rinkeby] event counter example: [1 WEI = 1 event]:
 https://rinkeby.zkscan.io/explorer/transactions/0x42d6f786023160c1b6980f3993b75702007be00d2575c97034f6831067e78227
 
