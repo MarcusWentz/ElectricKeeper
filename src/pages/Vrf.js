@@ -52,8 +52,8 @@ const contractDefined_JS = new web3.eth.Contract(
 );
 
 export default function Vrf({  }) {
-  const [colorSet1, setColourSet1] = useState();
-  const [colorSet2, setColourSet2] = useState();
+  const [colorSet1, setColorSet1] = useState();
+  const [colorSet2, setColorSet2] = useState();
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
   const { account } = useWeb3React();
@@ -72,8 +72,8 @@ export default function Vrf({  }) {
           });
       }
       console.log(ArrayStorage[0].toString(2));
-      setColourSet1(ArrayStorage[0]);
-      setColourSet2(ArrayStorage[1]);
+      setColorSet1(ArrayStorage[0]);
+      setColorSet2(ArrayStorage[1]);
     }
   }
 
@@ -176,14 +176,14 @@ export default function Vrf({  }) {
           {colorSet1 && colorSet2 ? (
             <>
               <p>
-                <b>Colour Set 1: </b>
+                <b>Color Set 1: </b>
                 &nbsp;&nbsp;&nbsp;
                 {colorSet1}
                 &nbsp;&nbsp;&nbsp;
                 {colorSetInColor(colorSet1)}
               </p>
               <p>
-                <b>Colour Set 2: </b>
+                <b>Color Set 2: </b>
                 &nbsp;&nbsp;&nbsp;
                 {colorSet2}
                 &nbsp;&nbsp;&nbsp;

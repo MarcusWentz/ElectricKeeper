@@ -19,25 +19,52 @@ const Footer = () => {
             </li>
           </ul>
           <ul class="box">
-            {/* <li class="link_name">support</li>
+            <li class="link_name">hackathon</li>
             <li>
-              <a href="https://weth.io/" target="_blank">
-                FAQ
+              <a href="https://www.ethdenver.com/" target="_blank">
+                eth denver 2022
               </a>
-            </li> */}
+            </li>
           </ul>
           <ul class="box">
-            <li class="link_name">project</li>
+            <li class="link_name">team</li>
+            <li>
+              <a
+                href="https://www.linkedin.com/in/marcus-wentz-a91351102/"
+                target="_blank"
+              >
+                marcus
+              </a>
+            </li>
             <li>
               {" "}
               <a
                 href="https://github.com/MarcusWentz/ElectricKeeper/graphs/contributors"
                 target="_blank"
               >
-                team
+                jonathan
+              </a>
+            </li>
+            <li>
+              {" "}
+              <a
+                href="https://github.com/MarcusWentz/ElectricKeeper/graphs/contributors"
+                target="_blank"
+              >
+                kieran
+              </a>
+            </li>
+            <li>
+              {" "}
+              <a
+                href="https://www.linkedin.com/in/franssonjohanna/"
+                target="_blank"
+              >
+                johanna
               </a>
             </li>
           </ul>
+
           <ul class="box">
             <li class="link_name">social</li>
             <li>
