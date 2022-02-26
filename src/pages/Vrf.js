@@ -146,7 +146,6 @@ export default function Vrf({}) {
         <div
           style={{
             marginBottom: 50,
-            marginTop: 10,
             display: "flex",
             alignItems: "center",
             flexDirection: "column",
@@ -172,7 +171,7 @@ export default function Vrf({}) {
       <div class="row">
         <h1>
           <br></br>
-          <b>Chainlink VRF v2 </b>
+          chainlink VRF v2 
         </h1>
         <div style={{marginBottom: 50}}>
         <button
@@ -186,16 +185,17 @@ export default function Vrf({}) {
         {colorSet1 && colorSet2 ? (
           <div>
             <p>
-              <b>Color Set 1: </b>
+              first color set 
               &nbsp;&nbsp;&nbsp;
-              {colorSet1}
+             <b>{colorSet1}</b> 
               &nbsp;&nbsp;&nbsp;
               {renderColorSetInColor(colorSet1)}
             </p>
             <p>
-              <b>Color Set 2: </b>
+              second color set 
               &nbsp;&nbsp;&nbsp;
-              {colorSet2}
+              <b>{colorSet2}</b> 
+
               &nbsp;&nbsp;&nbsp;
               {/* {colorSet2.toString(2)} */}
               {renderColorSetInColor(colorSet2)}

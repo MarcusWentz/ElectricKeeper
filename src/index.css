@@ -412,6 +412,7 @@ input[type="number"] {
 /*VRF Page styles*/
 .vrf-numbers.color-white {
   float: left;
+  margin-right: 10px;
   font-size: 70px;
   background: linear-gradient(45deg, #e4f1f7, #a5a5a5);
   background-size: 150% 150%;
@@ -421,6 +422,8 @@ input[type="number"] {
 
 .vrf-numbers.color-pink {
   float: left;
+  margin-right: 10px;
+
   font-size: 70px;
   background: linear-gradient(45deg, #ee99d2, #e25fac);
   background-size: 150% 150%;
@@ -430,6 +433,8 @@ input[type="number"] {
 
 .vrf-numbers.color-orange {
   float: left;
+  margin-right: 10px;
+
   font-size: 70px;
   background: linear-gradient(45deg, #ffc188, #d8621d);
   background-size: 150% 150%;
@@ -439,6 +444,8 @@ input[type="number"] {
 
 .vrf-numbers.color-purple {
   float: left;
+  margin-right: 10px;
+
   font-size: 70px;
   background: linear-gradient(45deg, #d859e9, #66084a);
   background-size: 150% 150%;
@@ -448,6 +455,8 @@ input[type="number"] {
 
 .vrf-numbers.color-green {
   float: left;
+  margin-right: 10px;
+
   font-size: 70px;
   background: linear-gradient(45deg, #86f58f, #2c9722);
   background-size: 150% 150%;
@@ -457,6 +466,8 @@ input[type="number"] {
 
 .vrf-numbers.color-yellow {
   float: left;
+  margin-right: 10px;
+
   font-size: 70px;
   background: linear-gradient(45deg, #e7e959, #ffd51c);
   background-size: 150% 150%;
@@ -466,6 +477,8 @@ input[type="number"] {
 
 .vrf-numbers.color-blue {
   float: left;
+  margin-right: 10px;
+
   font-size: 70px;
   background: linear-gradient(45deg, #5963e9, #08438f);
   background-size: 150% 150%;
@@ -475,6 +488,8 @@ input[type="number"] {
 
 .vrf-numbers.color-red {
   float: left;
+  margin-right: 10px;
+
   font-size: 70px;
   background: linear-gradient(45deg, #e9596c, #660808);
   background-size: 150% 150%;
