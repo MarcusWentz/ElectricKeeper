@@ -1,12 +1,11 @@
-import EthLogo from "../eth_logo.svg";
+import EthLogo from "../assets/svg/eth_logo.svg";
 
 const MobileDetected = () => {
   return (
-    <div class="container">
+    <div class="container" style={{marginTop: "-70px"}}>
       <div class="row">
-        <div class="centre">
+        <div>
           <h1>
-            <br></br>
             <b>Mobile Detected :(</b>
           </h1>
           <p>
@@ -15,9 +14,9 @@ const MobileDetected = () => {
           </p>
         </div>
         <div class="row">
-          <div className="centre">
+          <div>
             <br />
-            <img src={EthLogo} style={{ height: "20vh" }} />
+            <img src={EthLogo} style={{ height: "20vh"}} />
             <br />
             <br />
           </div>
