@@ -291,11 +291,11 @@ export default function Buy({ degree, userLocation, basic }) {
             <b></b>
             <b></b>
           </p>
-          <p>
+          {/* <p>
             {" "}
             Latest Buyer: {voltageExpirationAndLatestBuyerObject.LatestBuyer}
             <b></b>
-          </p>
+          </p> */}
           <p>
             {" "}
             Voltage: {voltageExpirationAndLatestBuyerObject.Voltage}

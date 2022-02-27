@@ -92,7 +92,7 @@ function App() {
 
             <Route path="/error" element={<MobileDetected />} />
           </Routes>
-        )
+        
 
       </main>
 
