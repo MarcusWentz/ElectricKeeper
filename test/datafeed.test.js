@@ -1,9 +1,7 @@
 let assert = require("assert");
 let Web3 = require("web3");
 const web3 = new Web3(
-  new Web3.providers.HttpProvider(
-    "https://speedy-nodes-nyc.moralis.io/5b34833e0a70355555765b4f/polygon/mumbai"
-  )
+  new Web3.providers.HttpProvider(process.env.RPC_PROVIDER)
 );
 const CONTRACT_ADDRESS = "0x3231A32ed0B2234Ebe88A0b1476B2b00c75BA144";
 const ABI = [
