@@ -31,10 +31,12 @@ const Navbar = ({ handleConnectMetamask, connectedAddrValue }) => {
             <h1 class="gradient-text font-sans font-black text-6xl">
               <img width="6%" src={EthLogo} />{" "}
               <NavLink
-              to="/"
-            >
-               electricKeeper
-            </NavLink>            </h1>
+                to="/"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                electricKeeper
+              </NavLink>{" "}
+            </h1>
           </div>
         </div>
         <ul id="ul-navigation" class="nav-ul" data-visible="false">

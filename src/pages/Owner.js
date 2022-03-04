@@ -186,22 +186,22 @@ export default function Owner({}) {
           ></input>
           <button
             style={{ width: 400 }}
-            className="btn-hover color-electric"
-            onClick={() =>
-              handleEmergencySafeAndDangerOffAndOn(LEDValue, "safe")
-            }
-          >
-            emergency safe on
-          </button>{" "}
-          <button
-            style={{ width: 400 }}
-            className="btn-hover color-electric"
+            className="btn-hover color-red"
             onClick={() =>
               handleEmergencySafeAndDangerOffAndOn(LEDValue, "danger")
             }
           >
             emergency danger off
           </button>
+          <button
+            style={{ width: 400 }}
+            className="btn-hover color-green"
+            onClick={() =>
+              handleEmergencySafeAndDangerOffAndOn(LEDValue, "safe")
+            }
+          >
+            emergency safe on
+          </button>{" "}
         </div>
         <br />
       </>
@@ -216,7 +216,6 @@ export default function Owner({}) {
             <br></br>
             owner
           </h1>
-          <p>request 8 minute LED countdown</p>
           <div className="row">{renderButton()}</div>
         </div>
       </div>

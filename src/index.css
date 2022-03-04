@@ -6,10 +6,14 @@
 
 html {
   /* font-family: Roboto, "Prompt", sans-serif; */
+  height: 100vh;
 }
 
 body {
+  zoom: 80%;
   margin: 0;
+  margin-top: -112px;
+  padding-top: 100px;
   background: -webkit-radial-gradient(
     top,
     circle cover,
@@ -17,7 +21,7 @@ body {
     #000000 70%
   );
   /* or something instead, this is no good fix */
-  height: 128vh;
+  height: 100vh;
   letter-spacing: 1.5px;
   font-family: inherit;
 }
@@ -27,6 +31,10 @@ main {
   height: 100%;
   text-align: center;
   top: 20px;
+}
+
+.modal-backdrop {
+  width: 100%;
 }
 
 .btn-light {

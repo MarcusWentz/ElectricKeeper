@@ -10,9 +10,8 @@ footer {
 	background: transparent;
 	width: 100%;
 	left: 0;
-	bottom: 30%;
-	position: relative;
-	
+	bottom: 0;
+	position: absolute;
 
 }
 footer::before {
@@ -24,6 +23,25 @@ footer::before {
 	height: 1px;
 	width: 100%;
 }
+
+/* footer { */
+/* 	background: transparent; */
+/* 	width: 100%; */
+/* 	left: 0; */
+/* 	bottom: 30%; */
+/* 	/1* position: relative; *1/ */
+	
+
+/* } */
+/* footer::before { */
+/* 	content: ""; */
+/* 	position: absolute; */
+/* 	left: 0; */
+/* 	bottom: 0; */
+/* 	top: 100px; */
+/* 	height: 1px; */
+/* 	width: 100%; */
+/* } */
 footer .container {
 	max-width: 1250px;
 	margin: auto;
