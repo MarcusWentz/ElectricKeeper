@@ -16,10 +16,6 @@ import { Web3ReactProvider, useWeb3React } from "@web3-react/core";
 
 import { DataContext } from "../DataContext";
 
-//TODO: add ErrorModal
-//MetaMask wallet shown/button if connect
-//Dropdown for network switch statements
-
 export default function Buy({ degree, userLocation, basic }) {
   const [maticPriceFeedContract, setMaticPriceFeedContract] = useState(null);
   const [electricKeeperContract, setElectricKeeperContract] = useState(null);
@@ -113,7 +109,7 @@ export default function Buy({ degree, userLocation, basic }) {
 
   const estimatedMatic = () => {
     return latestPriceOfMatic_1p && inputAmount !== ""
-      ? (latestPriceOfMatic_1p * (10 * inputAmount)).toFixed(3).toString()
+      ? (latestPriceOfMatic_1p * inputAmount).toFixed(3).toString()
       : "0";
   };
 
@@ -121,28 +117,20 @@ export default function Buy({ degree, userLocation, basic }) {
     switch (colorNumber) {
       case 0:
         return "blue";
-        break;
       case 1:
         return "green";
-        break;
       case 2:
         return "yellow";
-        break;
       case 3:
         return "red";
-        break;
       case 4:
         return "orange";
-        break;
       case 5:
         return "purple";
-        break;
       case 6:
         return "grey";
-        break;
       case 7:
         return "white";
-        break;
       default:
         console.log("not a valid num");
     }
@@ -230,7 +218,7 @@ export default function Buy({ degree, userLocation, basic }) {
               }}
               htmlFor="minutes"
             >
-              price: $0.10/minute
+              price: $0.01/minute
             </label>
             <input
               type="number"
