@@ -366,6 +366,10 @@ p {
  */
 }
 
+input[placeholder] {
+  color: #ffffffaa !important;
+}
+
 .input-matic {
   background-color: transparent;
   background-image: linear-gradient(to right, #ffe600 0, #ff7101 50%);

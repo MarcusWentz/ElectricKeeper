@@ -25,7 +25,7 @@ const Navbar = ({ handleConnectMetamask, connectedAddrValue }) => {
         onClose={() => setShowModal(false)}
         showToastFromProp={showModal}
       ></ConnectWalletModal>
-      <nav class="navbar">
+      <nav class="navbar" style={{ marginTop: "10px" }}>
         <div style={{ fontSize: "xx-large", marginRight: "50px" }}>
           <div class="h-screen flex justify-center items-center bg-gray-800">
             <h1 class="gradient-text font-sans font-black text-6xl">
