@@ -45,24 +45,33 @@ const Footer = () => {
                 jonathan
               </a>
             </li>
-            <li>
-              {" "}
-              <a
-                href="https://github.com/MarcusWentz/ElectricKeeper/graphs/contributors"
-                target="_blank"
-              >
-                kieran
-              </a>
-            </li>
-            <li>
-              {" "}
-              <a
-                href="https://www.linkedin.com/in/franssonjohanna/"
-                target="_blank"
-              >
-                johanna
-              </a>
-            </li>
+            <div
+              style={{
+                position: "relative",
+                left: "90px",
+                bottom: "60px",
+                marginBottom: "-60px",
+              }}
+            >
+              <li>
+                {" "}
+                <a
+                  href="https://github.com/MarcusWentz/ElectricKeeper/graphs/contributors"
+                  target="_blank"
+                >
+                  kieran
+                </a>
+              </li>
+              <li>
+                {" "}
+                <a
+                  href="https://www.linkedin.com/in/franssonjohanna/"
+                  target="_blank"
+                >
+                  johanna
+                </a>
+              </li>
+            </div>
           </ul>
 
           <ul class="box">

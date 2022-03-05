@@ -9,10 +9,11 @@
 footer {
 	background: transparent;
 	width: 100%;
+  /* height: 220px; */
 	left: 0;
 	bottom: 0;
 	position: absolute;
-
+  /* transform: translateY(70px); */
 }
 footer::before {
 	content: "";
