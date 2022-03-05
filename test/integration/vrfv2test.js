@@ -7,7 +7,7 @@ let assert = require("assert");
 let Web3 = require("web3");
 const web3 = new Web3(
   //new Web3.providers.HttpProvider(process.env.RPC_PROVIDER)
-  new Web3.providers.HttpProvider("https://eth-rinkeby.alchemyapi.io/v2/XLpN55iO6dicvdHGFq9uBavwXms06WLG")
+  new Web3.providers.HttpProvider("RPC_PROVIDER_API_KEY")
 );
 const CONTRACT_ADDRESS = "0xDBA94e656c9f5A05FEe286f6A31C90c587B82ebf";
 const ABI = [
@@ -85,19 +85,16 @@ const ABI = [
 ]
 
 
-const VRFv2LightShowContract = web3.eth.contract(ABI, CONTRACT_ADDRESS);
+const VRFv2LightShowContract = new web3.eth.Contract(ABI, CONTRACT_ADDRESS);
 
 describe("Light Show contract consumer that requests two randomly generated words from a Chainlink VRFv2 subscriber", () => {
   	it("Both randomly generated numbers are greater than zero and have been successfully returned", async () => {
-    	//await VRFv2LightShowContract.methods.requestRandomWords().call();
-		//await new Promise(resolve => setTimeout(resolve, 300000))
-		//let randomWords = await VRFv2LightShowContract.methods.twoRandomWords(0).call();
-		//console.log(randomWords)
-		VRFv2LightShowContract.methods.twoRandomWords(0).call((err, balance) => {
-			console.log((balance%255)+1)
-		})
-    	//assert(randomWords[0] > 0 && randomWords[1] > 0)
+    	await VRFv2LightShowContract.methods.requestRandomWords().call();
+		await new Promise(resolve => setTimeout(resolve, 3000000))
+		let firstRandomWord = await VRFv2LightShowContract.methods.twoRandomWords(0).call();
+		let secondRandomWord = await VRFv2LightShowContract.methods.twoRandomWords(1).call();
+		console.log("First Random Number: " + firstRandomWord)
+		console.log("Second Random Number: " + secondRandomWord)
+    	assert(firstRandomWord > 0 && secondRandomWord > 0)
   	});
-	  //console.log('randomWords: ' + new ethers.BigNumber.from(randomWords[0]._hex).toString() + new ethers.BigNumber.from(randomWords[1]._hex).toString())
-	  //expect((new ethers.BigNumber.from(resultETH._hex).toString())).to.be.a.bignumber.that.is.greaterThan(new ethers.BigNumber.from('0').toString())
 });
