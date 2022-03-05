@@ -6,7 +6,7 @@ var chai = require('chai');
 const BN = require('bn.js');
 chai.use(require('chai-bn')(BN));
 
-describe("Volcano Insurance Buyer Tests:", function () {
+describe("Electric Keeper Buyer Tests:", function () {
 
       let ElectricKeeper;
       let electricKeeperDeployed;
