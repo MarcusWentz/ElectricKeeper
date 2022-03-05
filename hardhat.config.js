@@ -1,27 +1,22 @@
-
-
-require('dotenv').config()
 require("@nomiclabs/hardhat-ethers");
-require("./tasks/MyContractTasks.js")
-require('solidity-coverage')
-
-
-const KOVAN_RPC_URL = process.env.KOVAN_RPC_URL
-const PRIVATE_KEY = process.env.PRIVATE_KEY
+require("@nomiclabs/hardhat-waffle");
+require('solidity-coverage');
+require('dotenv').config();
 
 module.exports = {
-  defaultNetwork: "hardhat",
+  defaultNetwork: "rinkeby",
   networks: {
     hardhat: {
     },
-    kovan: {
-      url: KOVAN_RPC_URL,
-      accounts: [PRIVATE_KEY]
+    rinkeby: {
+      url: process.env.RINKEBY_RPC_URL,
+      accounts: [process.env.PRIVATE_KEY]
     }
   },
   solidity: {
     compilers: [{version: "0.8.0"},
     {version: "0.8.7"},
+    {version: "0.8.10"},
     {version: "0.6.6"}],
     settings: {
       optimizer: {
