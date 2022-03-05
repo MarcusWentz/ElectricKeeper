@@ -27,9 +27,16 @@ const Navbar = ({ handleConnectMetamask, connectedAddrValue }) => {
       ></ConnectWalletModal>
       <nav class="navbar" style={{ marginTop: "10px" }}>
         <div style={{ fontSize: "xx-large", marginRight: "50px" }}>
-          <div class="h-screen flex justify-center items-center bg-gray-800">
+          <div
+            style={{
+              width: "400px",
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+            }}
+          >
+            <img width="10%" src={EthLogo} alt={"eth logo"} />{" "}
             <h1 class="gradient-text font-sans font-black text-6xl">
-              <img width="6%" src={EthLogo} />{" "}
               <NavLink
                 to="/"
                 style={{ textDecoration: "none", color: "inherit" }}
@@ -40,14 +47,14 @@ const Navbar = ({ handleConnectMetamask, connectedAddrValue }) => {
           </div>
         </div>
         <ul id="ul-navigation" class="nav-ul" data-visible="false">
-          <li class="nav-li">
-            <NavLink
-              className={(navObj) => (navObj.isActive ? classes.active : "")}
-              to="/"
-            >
-              Home
-            </NavLink>
-          </li>
+          {/* <li class="nav-li"> */}
+          {/*   <NavLink */}
+          {/*     className={(navObj) => (navObj.isActive ? classes.active : "")} */}
+          {/*     to="/" */}
+          {/*   > */}
+          {/*     Home */}
+          {/*   </NavLink> */}
+          {/* </li> */}
           <li class="nav-li">
             <NavLink
               className={(navObj) => (navObj.isActive ? classes.active : "")}
