@@ -13,6 +13,7 @@ footer {
 	left: 0;
 	bottom: 0;
 	position: absolute;
+  zoom: 0.9;
   /* transform: translateY(70px); */
 }
 footer::before {
