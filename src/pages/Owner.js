@@ -2,6 +2,7 @@ import React, { Component, useEffect, useState } from "react";
 import Web3 from "web3";
 
 import ErrorModal from "../components/ErrorModal";
+import FlashSuccess from "../components/flashSuccess";
 import { Web3ReactProvider, useWeb3React } from "@web3-react/core";
 import {
   DOMINO_CONTRACT_ADDRESS,
@@ -24,6 +25,7 @@ export default function Owner({}) {
   const [expirationOccurred, setExpirationOccurred] = useState();
 
   const [errorMsg, setErrorMsg] = useState("");
+  const [successMsg, setSuccessMsg] = useState("");
   const { userAccountAddress, setUserAccountAddress } =
     React.useContext(DataContext);
 
@@ -85,13 +87,17 @@ export default function Owner({}) {
     try {
       let web3 = new Web3(window.web3.currentProvider);
 
-      web3.eth.sendTransaction({
-        to: ELECTRICKEEPER_CONTRACT_ADDRESS,
-        data: electricKeeperContract.methods
-          .OwnerManualExpirationOff()
-          .encodeABI(),
-        from: account,
-      });
+      web3.eth
+        .sendTransaction({
+          to: ELECTRICKEEPER_CONTRACT_ADDRESS,
+          data: electricKeeperContract.methods
+            .OwnerManualExpirationOff()
+            .encodeABI(),
+          from: account,
+        })
+        .then(() => {
+          setSuccessMsg("Manual expiration off");
+        });
     } catch (err) {
       const msg = "Connect your wallet to buy";
       console.log(err, msg);
@@ -115,11 +121,19 @@ export default function Owner({}) {
       try {
         let web3 = new Web3(window.web3.currentProvider);
 
-        web3.eth.sendTransaction({
-          to: ELECTRICKEEPER_CONTRACT_ADDRESS,
-          data: functionToCall,
-          from: account,
-        });
+        web3.eth
+          .sendTransaction({
+            to: ELECTRICKEEPER_CONTRACT_ADDRESS,
+            data: functionToCall,
+            from: account,
+          })
+          .then(() => {
+            setSuccessMsg(
+              safeOrDanger === "safe"
+                ? "Emergancy turn off executed"
+                : "Emergency turn on executed"
+            );
+          });
       } catch (err) {
         const msg = "Connect your wallet to buy";
         console.log(err, msg);
@@ -226,6 +240,11 @@ export default function Owner({}) {
           errorMsg={errorMsg}
         ></ErrorModal>
       ) : null}
+      {successMsg ? (
+        <FlashSuccess show msg={successMsg} onClose={() => setSuccessMsg("")} />
+      ) : (
+        ""
+      )}
     </div>
   );
 }
