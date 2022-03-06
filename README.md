@@ -1,4 +1,4 @@
-# ElectricKeeper (ETH DENVER 2022)
+# ElectricKeeper (ETHDenver 2022)
 
 An automated electric grid.
 
