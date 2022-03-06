@@ -2,8 +2,11 @@
 pragma solidity 0.8.12;
 
 import "@chainlink/contracts/src/v0.8/KeeperCompatible.sol";
+import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
 contract ElectricKeeper is KeeperCompatibleInterface { 
+
+    AggregatorV3Interface internal priceFeed;
 
     struct STATE{ uint Voltage; uint ExpirationTimeUNIX; }
     mapping(uint => STATE) public LED; 
@@ -12,6 +15,7 @@ contract ElectricKeeper is KeeperCompatibleInterface {
 
     constructor() {
         Owner = msg.sender;
+        priceFeed = AggregatorV3Interface(0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada);
     }
 
     modifier onlyOwner() {
@@ -24,8 +28,22 @@ contract ElectricKeeper is KeeperCompatibleInterface {
         _;
     }
 
+    function onePennyUSDinMatic() public view returns (uint) {
+        (uint80 roundID, int price, uint startedAt, uint timeStamp, uint80 answeredInRound) = priceFeed.latestRoundData();
+        return uint( (10**24) / price );
+    }
+
+    function expirationOccured() public view returns(bool) {
+        for(uint ledValue = 0; ledValue < 8; ledValue++ ) {
+            if((LED[ledValue].Voltage == 1 && block.timestamp > LED[ledValue].ExpirationTimeUNIX)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     function BuyElectricityTimeOn(uint ledValue, uint minutesToHaveOn) public payable validLEDvalues(ledValue) {
-        require(msg.value == minutesToHaveOn && minutesToHaveOn > 0, "MSG.VALUE_MUST_BE_1_WEI_TIMES_MINUTES_AND_NOT_BE_ZERO.");
+        require(minutesToHaveOn > 0 && msg.value == (minutesToHaveOn*onePennyUSDinMatic()), "MUST_HAVE_MINUTES_GREATER_THAN_0_AND_MSG_VALUE=MINUTES*FEE.");
         if(LED[ledValue].Voltage == 0) {
             LED[ledValue].Voltage = 1;
             LED[ledValue].ExpirationTimeUNIX = block.timestamp + (60*minutesToHaveOn); 
@@ -48,15 +66,6 @@ contract ElectricKeeper is KeeperCompatibleInterface {
             }
         }
         emit VoltageChange();
-    }
-
-    function expirationOccured() public view returns(bool) {
-        for(uint ledValue = 0; ledValue < 8; ledValue++ ) {
-            if((LED[ledValue].Voltage == 1 && block.timestamp > LED[ledValue].ExpirationTimeUNIX)){
-                return true;
-            }
-        }
-        return false;
     }
 
     function OwnerManualExpirationOff() public onlyOwner {
