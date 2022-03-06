@@ -104,9 +104,9 @@ contract BuyDemoEightMinutes {
     }
 
     function BuyTestEightMinuteCountdown() public payable {
-       require(msg.value == 36, "NEED_36_WEI.");
+       require(msg.value == 36*electricKeeperInstance.onePennyUSDinMatic(), "MUST_HAVE_MSG_VALUE=36*FEE.");
        for(uint ledValue = 0; ledValue < 8; ledValue++ ) {
-            electricKeeperInstance.BuyElectricityTimeOn{value: ledValue+1}(ledValue,ledValue+1);
+            electricKeeperInstance.BuyElectricityTimeOn{value: (ledValue+1)*electricKeeperInstance.onePennyUSDinMatic()}(ledValue,ledValue+1);
         }
     }
 }
