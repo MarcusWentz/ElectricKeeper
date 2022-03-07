@@ -240,7 +240,7 @@ export default function Buy({ degree, userLocation, basic }) {
             }}
             htmlFor="minutes"
           >
-            pick LED color to buy
+            click apartment number (LED color) to buy
           </label>
           <div style={{ width: "80%" }}>
             {BUTTON_OBJECT_4_FIRST.map((i) => (
