@@ -26,9 +26,9 @@ Hardware:
 
 -Raspberry Pi 4 [Quantity: 1]
 
--LED (Red, Blue, Green, Yellow) [Quantity: 1 each]
+-LED (Red, Blue, Green, Yellow, Purple, Orange, Pink, White) [Quantity: 1 each]
 
--330 ohm resistor [Quantity: 4]
+-330 ohm resistor [Quantity: 8]
 
 The LED is used to show a connection is powered while the 330 ohm resistor in series with the LED limits current (divides voltage away from LED which exponetinally increases current).
 
