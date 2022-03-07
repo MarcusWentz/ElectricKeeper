@@ -185,7 +185,7 @@ export default function Owner({}) {
             }}
             htmlFor="minutes"
           >
-            pick LED value:
+            emergency LED value:
           </label>
           <input
             type="number"
