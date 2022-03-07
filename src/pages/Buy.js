@@ -302,7 +302,7 @@ export default function Buy({ degree, userLocation, basic }) {
             <br></br>
             buy electricity
           </h1>
-          <p>enter the amount of minutes of electricity you want to buy </p>
+          <p>minutes to buy</p>
           <div className="row">{renderInputBox()}</div>
         </div>
       </div>
