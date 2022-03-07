@@ -16,7 +16,6 @@ import Owner from "./pages/Owner";
 import VRF from "./pages/Vrf";
 import MobileDetected from "./pages/MobileDetected";
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
 import {
   injected,
   walletconnect,
@@ -98,7 +97,6 @@ function App() {
       </main>
 
 
-      <Footer />
     </DataContext.Provider>
   );
 }
