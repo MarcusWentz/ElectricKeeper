@@ -1,15 +1,12 @@
-//const { expect } = require('chai');
-//var chai = require('chai');
-//const BN = require('bn.js');
-//chai.use(require('chai-bn')(BN));
-//const { ethers } = require("hardhat");
+var Tx = require("ethereumjs-tx").Transaction
 let assert = require("assert");
 let Web3 = require("web3");
 const web3 = new Web3(
-  //new Web3.providers.HttpProvider(process.env.RPC_PROVIDER)
-  new Web3.providers.HttpProvider("RPC_PROVIDER_API_KEY")
+  new Web3.providers.HttpProvider(process.env.RPC_PROVIDER)
 );
 const CONTRACT_ADDRESS = "0xDBA94e656c9f5A05FEe286f6A31C90c587B82ebf";
+const REQUESTOR_ADDRESS = "0x91459F3a89698e208b2e9A737b3C5790084A2EF6";
+const devTestnetPrivateKey = Buffer.from(process.env.devTestnetPrivateKey, 'hex')
 const ABI = [
 	{
 		"inputs": [],
@@ -84,17 +81,36 @@ const ABI = [
 	}
 ]
 
-
 const VRFv2LightShowContract = new web3.eth.Contract(ABI, CONTRACT_ADDRESS);
 
-describe("Light Show contract consumer that requests two randomly generated words from a Chainlink VRFv2 subscriber", () => {
-  	it("Both randomly generated numbers are greater than zero and have been successfully returned", async () => {
-    	await VRFv2LightShowContract.methods.requestRandomWords().call();
-		await new Promise(resolve => setTimeout(resolve, 3000000))
-		let firstRandomWord = await VRFv2LightShowContract.methods.twoRandomWords(0).call();
-		let secondRandomWord = await VRFv2LightShowContract.methods.twoRandomWords(1).call();
+describe("Light Show contract consumer that requests two randomly generated words from a Chainlink VRFv2 subscriber", function() {
+  	it("Both randomly generated numbers are greater than zero and have been successfully returned", async function() {
+		this.timeout(1000000);
+		let firstRandomWord = 0;
+		let secondRandomWord = 0;
+		await web3.eth.getTransactionCount(REQUESTOR_ADDRESS, (err, txCount) => {
+			const txObject = {
+				nonce: web3.utils.toHex(txCount),
+				to: CONTRACT_ADDRESS,
+				from: REQUESTOR_ADDRESS,
+				gasLimit: web3.utils.toHex(300000), 
+        			gasPrice: web3.utils.toHex(web3.utils.toWei('10', 'gwei')),
+				data: VRFv2LightShowContract.methods.requestRandomWords().encodeABI(),
+			}	
+			const tx = new Tx(txObject, {chain:'rinkeby'})
+			tx.sign(devTestnetPrivateKey)
+			const serializedTx = tx.serialize()
+			const raw = '0x' + serializedTx.toString('hex')
+			web3.eth.sendSignedTransaction(raw, (err, txHash) => {
+				console.log('err:', err, 'txHash:', txHash)
+			})
+		})
+		await new Promise(resolve => setTimeout(resolve,300000));
+		console.log("Light Show Updated!");
+		firstRandomWord = await VRFv2LightShowContract.methods.twoRandomWords(0).call();
+		secondRandomWord = await VRFv2LightShowContract.methods.twoRandomWords(1).call();
 		console.log("First Random Number: " + firstRandomWord)
 		console.log("Second Random Number: " + secondRandomWord)
-    	assert(firstRandomWord > 0 && secondRandomWord > 0)
+		assert(firstRandomWord > 0 && secondRandomWord > 0)
   	});
 });
