@@ -29,7 +29,7 @@ describe("Electric Keeper Buyer Tests:", function () {
           });
        });
 
-/*        describe("mockOwnerAddFunds", function () {
+      describe("mockOwnerAddFunds", function () {
          it("msg.sender == Owner", async function () {
            await expect(electricKeeperDeployed.connect(buyer1).mockOwnerAddFunds()).to.be.revertedWith("Only contract owner can interact with this contract");
          });
@@ -37,7 +37,7 @@ describe("Electric Keeper Buyer Tests:", function () {
            await expect(electricKeeperDeployed.mockOwnerAddFunds()).to.be.revertedWith("You must send one ETH for msg.value");
          });
         });
-
+/*  
       describe("BuyerCreatePolicy", function () {
         it("Day<0.", async function () {
           await expect(electricKeeperDeployed.BuyerCreatePolicy(500,-500)).to.be.revertedWith("Present time not recorded yet by oracle.");

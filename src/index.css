@@ -1,11 +1,13 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap"); 
 
 * {
-  box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Poppins", sans-serif;
 }
 
 html {
-  /* font-family: Roboto, "Prompt", sans-serif; */
   height: 100vh;
 }
 
@@ -23,7 +25,6 @@ body {
   /* or something instead, this is no good fix */
   height: 100vh;
   letter-spacing: 1.5px;
-  font-family: inherit;
 }
 
 main {
@@ -103,7 +104,7 @@ p {
   color: #000;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
-  font-size: 16px;
+  font-size: 18px;
   padding: 0.45rem 0;
   width: 100%;
   text-align: center;
@@ -122,7 +123,7 @@ p {
   color: #000;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
-  font-size: 20px;
+  font-size: 22px;
   padding: 0.45 rem 0;
   transition: border-color 0.2s linear;
   width: 100%;
@@ -139,11 +140,10 @@ p {
   border: none;
   color: #ffdd9e;
   background: transparent;
-  font-size: 17px;
+  font-size: 23px;
   font-weight: 600;
-  font-family: inherit;
   text-transform: lowercase;
-  letter-spacing: 1.5px;
+  letter-spacing: 2.5px;
   width: 18vw;
   padding: 0px;
   margin: 0px 0px 0px 0px;
@@ -182,10 +182,9 @@ p {
 
 .nav-li a {
   position: relative;
-  font-size: 17px;
+  font-size: 23px;
   font-weight: 600;
   color: #ffdd9e;
-  font-family: inherit;
   text-decoration: none;
   text-transform: lowercase;
   letter-spacing: 1.5px;
@@ -241,7 +240,7 @@ p {
 .btn-hover {
   width: 13%;
   margin: 20px 2% 15px 2%;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
   color: #fff;
   cursor: pointer;
@@ -251,7 +250,6 @@ p {
   background-size: 300% 100%;
   text-transform: lowercase;
   letter-spacing: 1.5px;
-  font-family: inherit;
 
   border-radius: 40px;
   moz-transition: all 0.4s ease-in-out;
@@ -383,7 +381,7 @@ input[placeholder] {
   color: #000;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
-  font-size: 20px;
+  font-size: 22px;
   line-height: 1.5;
   outline: 0 none;
   padding: 0.25rem 0;
