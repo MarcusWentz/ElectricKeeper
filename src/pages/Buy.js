@@ -274,6 +274,11 @@ export default function Buy({ degree, userLocation, basic }) {
             buy 8 minute demo
           </button>
           <p>
+            {" "}
+            Voltage: {voltageExpirationAndLatestBuyerObject.Voltage}
+            <b></b>
+          </p>
+          <p>
             Expiration time:{" "}
             {voltageExpirationAndLatestBuyerObject.ExpirationTimeUNIX}
             <b></b>
@@ -284,11 +289,6 @@ export default function Buy({ degree, userLocation, basic }) {
             Latest Buyer: {voltageExpirationAndLatestBuyerObject.LatestBuyer}
             <b></b>
           </p> */}
-          <p>
-            {" "}
-            Voltage: {voltageExpirationAndLatestBuyerObject.Voltage}
-            <b></b>
-          </p>
         </div>
       </>
     );
