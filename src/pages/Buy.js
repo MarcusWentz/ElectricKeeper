@@ -141,7 +141,7 @@ export default function Buy({ degree, userLocation, basic }) {
           data: electricKeeperContract.methods
             .BuyElectricityTimeOn(
               colorNumber,
-              web3.utils.toWei(amountOfMaticToPay)
+              inputAmount
             )
             .encodeABI(),
           value: web3.utils.toWei(amountOfMaticToPay),
