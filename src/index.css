@@ -328,13 +328,13 @@ p {
  */
 }
 
-.btn-hover.color-grey {
+.btn-hover.color-pink {
   background-image: linear-gradient(
     to right,
-    #929292,
-    #616161,
-    #918c8c,
-    #525252
+    #ff00ff,
+    #911a7d,
+    #d859e9,
+    #66084a
   );
   /*   box-shadow: 0 4px 15px 0 rgba(218, 51, 56, 0.75);
  */
