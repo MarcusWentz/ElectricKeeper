@@ -76,9 +76,9 @@ export default function Buy({ degree, userLocation, basic }) {
 
       console.log(buyDemoEightMinutesContract, "This is DEMO contract");
 
-      if (account) {
+      //if (account) {
         let voltageExpirationAndLatestBuyerObject =
-          await electricKeeperContract.methods.LED(account).call();
+          await electricKeeperContract.methods.LED(0).call();
 
         setVoltageExpirationAndLatestBuyerObject(
           voltageExpirationAndLatestBuyerObject
@@ -88,7 +88,7 @@ export default function Buy({ degree, userLocation, basic }) {
           "ONLY one expir",
           voltageExpirationAndLatestBuyerObject.ExpirationTimeUNIX
         );
-      }
+      //}
 
       if (maticPriceFeedContract !== null) {
         maticPriceFeedContract.methods
