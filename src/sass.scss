@@ -1,0 +1,26 @@
+@use 'custom' as *;
+
+
+.gradiantbkg{
+    background:linear-gradient(to bottom, rgba(#f8f9fa,0.95), rgba(white,0.95));
+}
+
+//button
+.gradiant{
+    background:linear-gradient(to bottom, rgba(#a0b841,0.95), rgba( #cfe383,0.95)); 
+}
+
+.gradiantorange{
+    background:linear-gradient(to bottom, rgba(#f8aa03,0.95), rgba(#fbc34a,0.95));
+}
+
+.big{
+    max-width:96%;
+    padding: 15px 15% 15px 15%;
+    color:#fff;
+    font-weight: 700;
+}
+
+.gradiantred{
+    background:linear-gradient(to bottom, rgba(#dc3545,0.95), rgba(#F86D6D,0.95));
+}

@@ -1,6 +1,6 @@
 import EthLogo from "../assets/svg/eth_logo.svg";
 
-const About = () => {
+const Status = () => {
   return (
     <div class="container">
     <div class="row">
@@ -20,4 +20,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default Status;

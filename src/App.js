@@ -10,7 +10,7 @@ import Web3 from "web3";
 import Home from "./pages/Home";
 import Buy from "./pages/Buy";
 
-import About from "./pages/About";
+import Status from "./pages/Status";
 import Owner from "./pages/Owner";
 
 import VRF from "./pages/Vrf";
@@ -85,9 +85,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/buy" element={<Buy />} />
-            <Route path="/about" element={<About />} />
+            <Route path="/status" element={<Status />} />
             <Route path="/vrf" element={<VRF />} />
             <Route path="/owner" element={<Owner />} />
+
 
             <Route path="/error" element={<MobileDetected />} />
           </Routes>
