@@ -275,11 +275,11 @@ export default function Buy({ degree, userLocation, basic }) {
           </button>
           <p>
             {" "}
-            Voltage: {voltageExpirationAndLatestBuyerObject.Voltage}
+            LED 0 Voltage: {voltageExpirationAndLatestBuyerObject.Voltage}
             <b></b>
           </p>
           <p>
-            Expiration time:{" "}
+            LED 0 ExpirationTimeUNIX:{" "}
             {voltageExpirationAndLatestBuyerObject.ExpirationTimeUNIX}
             <b></b>
             <b></b>
