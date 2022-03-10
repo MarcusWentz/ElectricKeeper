@@ -271,6 +271,7 @@ p {
 }
 
 .btn-hover.color-blue {
+  color:black;
   background-image: linear-gradient(
     to right,
     #25aae1,
@@ -283,6 +284,7 @@ p {
 }
 
 .btn-hover.color-green {
+  color:black;
   background-image: linear-gradient(
     to right,
     #62f576,
@@ -294,6 +296,7 @@ p {
  */
 }
 .btn-hover.color-yellow {
+  color:black;
   background-image: linear-gradient(
     to right,
     #e1ea66,
@@ -305,6 +308,7 @@ p {
  */
 }
 .btn-hover.color-red {
+  color:black;
   background-image: linear-gradient(
     to right,
     #ad0017,
@@ -330,6 +334,7 @@ p {
 }
 
 .btn-hover.color-pink {
+  color:black;
   background-image: linear-gradient(
     to right,
     #ff00ff,
@@ -342,6 +347,7 @@ p {
 }
 
 .btn-hover.color-purple {
+  color:black;
   background-image: linear-gradient(
     to right,
     #c44ba0,
@@ -354,6 +360,7 @@ p {
 }
 
 .btn-hover.color-orange {
+  color:black;
   background-image: linear-gradient(
     to right,
     #ad5c00,
