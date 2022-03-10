@@ -128,7 +128,7 @@ export default function Buy({ degree, userLocation, basic }) {
       case 5:
         return "orange";
       case 6:
-        return "grey";
+        return "pink";
       case 7:
         return "white";
       default:
