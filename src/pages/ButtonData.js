@@ -1,13 +1,11 @@
 export const BUTTON_OBJECT_4_FIRST = [
   {
     title: "0",
-    color: "black",
     styleClass: "btn-hover color-red",
     buttonClickValue: 0,
   },
   {
     title: "1",
-    color: "black",
     styleClass: "btn-hover color-blue",
     buttonClickValue: 1,
   },
