@@ -116,17 +116,17 @@ export default function Buy({ degree, userLocation, basic }) {
   const colorNumberToColor = (colorNumber) => {
     switch (colorNumber) {
       case 0:
-        return "blue";
+        return "red";
       case 1:
-        return "green";
+        return "blue";
       case 2:
         return "yellow";
       case 3:
-        return "red";
+        return "green";
       case 4:
-        return "orange";
-      case 5:
         return "purple";
+      case 5:
+        return "orange";
       case 6:
         return "grey";
       case 7:
