@@ -2,8 +2,6 @@ import EthLogo from "../assets/svg/eth_logo.svg";
 import React, { Component, useEffect, useState } from "react";
 import Web3 from "web3";
 import {
-  ABI,
-  CONTRACT_ADDRESS,
   ELECTRICKEEPER_ABI,
   ELECTRICKEEPER_CONTRACT_ADDRESS,
   BUY_DEMO_EIGHT_MINUTES_ABI,
@@ -17,7 +15,6 @@ import { Web3ReactProvider, useWeb3React } from "@web3-react/core";
 import { DataContext } from "../DataContext";
 
 export default function Buy({ degree, userLocation, basic }) {
-  const [maticPriceFeedContract, setMaticPriceFeedContract] = useState(null);
   const [electricKeeperContract, setElectricKeeperContract] = useState(null);
   const [buyDemoEightMinutesContract, setBuyDemoEightMinutesContract] =
     useState(null);
@@ -57,10 +54,6 @@ export default function Buy({ degree, userLocation, basic }) {
       }
 
       //Load the smart contract(s)
-      const maticPriceFeedContract = new web3.eth.Contract(
-        ABI,
-        CONTRACT_ADDRESS
-      );
       const electricKeeperContract = new web3.eth.Contract(
         ELECTRICKEEPER_ABI,
         ELECTRICKEEPER_CONTRACT_ADDRESS
@@ -71,7 +64,6 @@ export default function Buy({ degree, userLocation, basic }) {
       );
       //Save smart contract(s) in react state
       setElectricKeeperContract(electricKeeperContract);
-      setMaticPriceFeedContract(maticPriceFeedContract);
       setBuyDemoEightMinutesContract(buyDemoEightMinutesContract);
 
       console.log(buyDemoEightMinutesContract, "This is DEMO contract");
@@ -90,9 +82,9 @@ export default function Buy({ degree, userLocation, basic }) {
         );
       //}
 
-      if (maticPriceFeedContract !== null) {
-        maticPriceFeedContract.methods
-          .getLatestPrice()
+      if (electricKeeperContract !== null) {
+        electricKeeperContract.methods
+          .onePennyUSDinMatic()
           .call()
           .then((data) => {
             setLatestPriceOfMatic_1p(web3.utils.fromWei(data));
