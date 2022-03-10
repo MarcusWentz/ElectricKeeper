@@ -317,6 +317,7 @@ p {
 }
 
 .btn-hover.color-white {
+  color:black;
   background-image: linear-gradient(
     to right,
     #f5ddc3,
