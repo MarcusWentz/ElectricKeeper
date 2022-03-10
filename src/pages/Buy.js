@@ -101,7 +101,7 @@ export default function Buy({ degree, userLocation, basic }) {
 
   const estimatedMatic = () => {
     return latestPriceOfMatic_1p && inputAmount !== ""
-      ? (latestPriceOfMatic_1p * inputAmount).toFixed(3).toString()
+      ? (latestPriceOfMatic_1p * inputAmount)
       : "0";
   };
 
