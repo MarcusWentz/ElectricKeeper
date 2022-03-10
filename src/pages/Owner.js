@@ -5,8 +5,6 @@ import ErrorModal from "../components/ErrorModal";
 import FlashSuccess from "../components/flashSuccess";
 import { Web3ReactProvider, useWeb3React } from "@web3-react/core";
 import {
-  DOMINO_CONTRACT_ADDRESS,
-  DOMINO_CONTRACT_ABI,
   ELECTRICKEEPER_ABI,
   ELECTRICKEEPER_CONTRACT_ADDRESS,
 } from "../config";
@@ -18,7 +16,6 @@ import { DataContext } from "../DataContext";
 //Dropdown for network switch statements
 
 export default function Owner({}) {
-  const [dominoContract, setDominoContract] = useState(null);
   const [electricKeeperContract, setElectricKeeperContract] = useState(null);
 
   const [LEDValue, setLEDValue] = useState();
@@ -51,16 +48,10 @@ export default function Owner({}) {
         setErrorMsg("Must be on the Mumbai test network");
       }
 
-      //Load the smart contract
-      const dominoContract = new web3.eth.Contract(
-        DOMINO_CONTRACT_ABI,
-        DOMINO_CONTRACT_ADDRESS
-      );
       const electricKeeperContract = new web3.eth.Contract(
         ELECTRICKEEPER_ABI,
         ELECTRICKEEPER_CONTRACT_ADDRESS
       );
-      setDominoContract(dominoContract);
       setElectricKeeperContract(electricKeeperContract);
 
       console.log(electricKeeperContract, "This is electric contract");
