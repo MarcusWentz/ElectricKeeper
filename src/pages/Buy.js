@@ -174,7 +174,7 @@ export default function Buy({ degree, userLocation, basic }) {
           data: buyDemoEightMinutesContract.methods
             .BuyTestEightMinuteCountdown()
             .encodeABI(),
-          value: 36,
+          value: web3.utils.toWei(amountOfMaticToPay*36),
           from: account,
         })
         .then(() => {
