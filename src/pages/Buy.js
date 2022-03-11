@@ -84,7 +84,7 @@ export default function Buy({ degree, userLocation, basic }) {
 
       if (electricKeeperContract !== null) {
         electricKeeperContract.methods
-          .onePennyUSDinMatic()
+          .onePennyUSDinMatic(inputAmount)
           .call()
           .then((data) => {
             setLatestPriceOfMatic_1p(web3.utils.fromWei(data));
@@ -101,7 +101,7 @@ export default function Buy({ degree, userLocation, basic }) {
 
   const estimatedMatic = () => {
     return latestPriceOfMatic_1p && inputAmount !== ""
-      ? (latestPriceOfMatic_1p * inputAmount).toString()
+      ? latestPriceOfMatic_1p.toString()
       : "0";
   };
 
@@ -174,7 +174,7 @@ export default function Buy({ degree, userLocation, basic }) {
           data: buyDemoEightMinutesContract.methods
             .BuyTestEightMinuteCountdown()
             .encodeABI(),
-          value: web3.utils.toWei(amountOfMaticToPay*36),
+          value: web3.utils.toWei(amountOfMaticToPay),
           from: account,
         })
         .then(() => {
@@ -263,7 +263,7 @@ export default function Buy({ degree, userLocation, basic }) {
             className="btn-hover color-electric"
             onClick={() => handleBuyDemoEightMinutes()}
           >
-            buy 8 minute demo
+            buy 8 minute demo (NEED TO FIX PUT 36 MINUTES MANUALLY FOR NOW)
           </button>
           <p>
             {" "}
