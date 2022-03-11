@@ -524,3 +524,13 @@ input[type="number"] {
   );
 }
 
+thead,
+tbody,
+tfoot,
+tr,
+td,
+th {
+  border-color: inherit;
+  border-style: none !important;
+  border-width: 0;
+}
