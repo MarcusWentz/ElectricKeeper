@@ -99,30 +99,31 @@ export default function Buy({ degree, userLocation, basic }) {
     loadBlockchainData();
   }, [account]);
  
-  async function estimatedMatic() {
-//     await updateScaledMaticPrice() 
-//     return latestPriceOfMatic_1p && inputAmount !== ""
-//       ? latestPriceOfMatic_1p.toString()
-//       : "0";
-   console.log(inputAmount)
-   console.log(inputAmount !== "")
-   if(inputAmount !== ""){
-       let web3 = new Web3(window.web3.currentProvider);
-       electricKeeperContract.methods
-          .onePennyUSDinMatic(inputAmount)
-          .call()
-          .then((data) => {
-            setLatestPriceOfMatic_1p(web3.utils.fromWei(data));
-            console.log(data);
-            console.log(data.toString());
-            console.log(web3.utils.fromWei(data));
-            return data.toString()
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-   }
-   return "0"
+  const estimatedMatic = () => {
+    await updateScaledMaticPrice() 
+    return latestPriceOfMatic_1p && inputAmount !== ""
+      ? latestPriceOfMatic_1p.toString()
+      : "0";
+//    console.log(inputAmount)
+//    console.log(inputAmount !== "")
+//    if(inputAmount !== ""){
+//        let web3 = new Web3(window.web3.currentProvider);
+//        electricKeeperContract.methods
+//           .onePennyUSDinMatic(inputAmount)
+//           .call()
+//           .then((data) => {
+//             setLatestPriceOfMatic_1p(web3.utils.fromWei(data));
+//             console.log(data);
+//             console.log(data.toString());
+//             console.log(web3.utils.fromWei(data));
+//             return data.toString()
+//           })
+//           .catch((err) => {
+//             console.log(err);
+//           });
+//    }
+//    return "0"
+    
   };
 
   const colorNumberToColor = (colorNumber) => {
