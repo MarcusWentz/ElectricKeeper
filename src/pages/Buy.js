@@ -113,11 +113,11 @@ export default function Buy({ degree, userLocation, basic }) {
             setLatestPriceOfMatic_1p(web3.utils.fromWei(data));
             console.log(data);
             console.log(web3.utils.fromWei(data));
+            return data.toString()
           })
           .catch((err) => {
             console.log(err);
           });
-      return data.toString()
     }
     return "0"
   };
