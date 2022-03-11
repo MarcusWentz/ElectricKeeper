@@ -99,22 +99,22 @@ export default function Buy({ degree, userLocation, basic }) {
     loadBlockchainData();
   }, [account]);
    
-  async function updateScaledMaticPrice() {
-        electricKeeperContract.methods
-          .onePennyUSDinMatic(inputAmount)
-          .call()
-          .then((data) => {
-            setLatestPriceOfMatic_1p(web3.utils.fromWei(data));
-            console.log(data);
-            console.log(web3.utils.fromWei(data));
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-  }
+//   async function updateScaledMaticPrice() {
+//         electricKeeperContract.methods
+//           .onePennyUSDinMatic(inputAmount)
+//           .call()
+//           .then((data) => {
+//             setLatestPriceOfMatic_1p(web3.utils.fromWei(data));
+//             console.log(data);
+//             console.log(web3.utils.fromWei(data));
+//           })
+//           .catch((err) => {
+//             console.log(err);
+//           });
+//   }
 
   const estimatedMatic = () => {
-    await updateScaledMaticPrice() 
+//     await updateScaledMaticPrice() 
     return latestPriceOfMatic_1p && inputAmount !== ""
       ? latestPriceOfMatic_1p.toString()
       : "0";
