@@ -43,7 +43,7 @@ contract ElectricKeeper is KeeperCompatibleInterface {
     }
 
     function BuyElectricityTimeOn(uint ledValue, uint minutesToHaveOn) public payable validLEDvalues(ledValue) {
-        require(minutesToHaveOn > 0 && msg.value == (minutesToHaveOn*onePennyUSDinMatic(minutesToHaveOn)), "MUST_HAVE_MINUTES_GREATER_THAN_0_AND_MSG_VALUE=MINUTES*FEE.");
+        require(minutesToHaveOn > 0 && msg.value == (onePennyUSDinMatic(minutesToHaveOn)), "MUST_HAVE_MINUTES_GREATER_THAN_0_AND_MSG_VALUE=MINUTES*FEE.");
         if(LED[ledValue].Voltage == 0) {
             LED[ledValue].Voltage = 1;
             LED[ledValue].ExpirationTimeUNIX = block.timestamp + (60*minutesToHaveOn); 
