@@ -110,7 +110,7 @@ export default function Buy({ degree, userLocation, basic }) {
           .onePennyUSDinMatic(inputAmount)
           .call()
           .then((data) => {
-            return web3.utils.fromWei(data);
+            setLatestPriceOfMatic_1p(web3.utils.fromWei(data));
             console.log(data);
             console.log(web3.utils.fromWei(data));
           })
