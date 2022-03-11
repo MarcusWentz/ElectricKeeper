@@ -82,7 +82,7 @@ export default function Buy({ degree, userLocation, basic }) {
         );
       //}
 
-function updateScaledMaticPrice() {
+async function updateScaledMaticPrice() {
       if (electricKeeperContract !== null) {
         electricKeeperContract.methods
           .onePennyUSDinMatic(inputAmount)
@@ -102,7 +102,7 @@ function updateScaledMaticPrice() {
 }
             
   const estimatedMatic = () => {
-    updateScaledMaticPrice() 
+    await updateScaledMaticPrice() 
     return latestPriceOfMatic_1p && inputAmount !== ""
       ? latestPriceOfMatic_1p.toString()
       : "0";
