@@ -84,7 +84,7 @@ export default function Buy({ degree, userLocation, basic }) {
 
       if (electricKeeperContract !== null) {
         electricKeeperContract.methods
-          .onePennyUSDinMatic(inputAmount)
+          .onePennyUSDinMatic(0)
           .call()
           .then((data) => {
             setLatestPriceOfMatic_1p(web3.utils.fromWei(data));
