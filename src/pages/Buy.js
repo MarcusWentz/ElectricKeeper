@@ -110,9 +110,9 @@ export default function Buy({ degree, userLocation, basic }) {
           .onePennyUSDinMatic(inputAmount)
           .call()
           .then((data) => {
-            return web3.utils.fromWei(data).toString();
-            console.log(data.toString());
-            console.log(web3.utils.fromWei(data).toString());
+            return web3.utils.fromWei(data);
+            console.log(data);
+            console.log(web3.utils.fromWei(data));
           })
           .catch((err) => {
             console.log(err);
