@@ -148,7 +148,7 @@ export default function Buy({ degree, userLocation, basic }) {
     }
   };
 
-  async function handleBuyButtonClick(colorNumber) {
+  const handleBuyButtonClick = (colorNumber) => {
     console.log("You chose the color:", colorNumber);
     console.log(account, "account in BUY handle click");
     try {
@@ -182,11 +182,11 @@ export default function Buy({ degree, userLocation, basic }) {
     }
   };
 
-  async function handleBuyDemoEightMinutes() {
+  const handleBuyDemoEightMinutes = () => {
     console.log(buyDemoEightMinutesContract, "account in BUY handle click");
     try {
       let web3 = new Web3(window.web3.currentProvider);
-      let amountOfMaticToPay = await estimatedMatic();
+      let amountOfMaticToPay = estimatedMatic();
       console.log(amountOfMaticToPay);
       web3.eth
         .sendTransaction({
