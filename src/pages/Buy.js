@@ -2,8 +2,6 @@ import EthLogo from "../assets/svg/eth_logo.svg";
 import React, { Component, useEffect, useState } from "react";
 import Web3 from "web3";
 import {
-  ABI,
-  CONTRACT_ADDRESS,
   ELECTRICKEEPER_ABI,
   ELECTRICKEEPER_CONTRACT_ADDRESS,
   BUY_DEMO_EIGHT_MINUTES_ABI,
@@ -17,7 +15,6 @@ import { Web3ReactProvider, useWeb3React } from "@web3-react/core";
 import { DataContext } from "../DataContext";
 
 export default function Buy({ degree, userLocation, basic }) {
-  const [maticPriceFeedContract, setMaticPriceFeedContract] = useState(null);
   const [electricKeeperContract, setElectricKeeperContract] = useState(null);
   const [buyDemoEightMinutesContract, setBuyDemoEightMinutesContract] =
     useState(null);
@@ -57,10 +54,6 @@ export default function Buy({ degree, userLocation, basic }) {
       }
 
       //Load the smart contract(s)
-      const maticPriceFeedContract = new web3.eth.Contract(
-        ABI,
-        CONTRACT_ADDRESS
-      );
       const electricKeeperContract = new web3.eth.Contract(
         ELECTRICKEEPER_ABI,
         ELECTRICKEEPER_CONTRACT_ADDRESS
@@ -71,14 +64,13 @@ export default function Buy({ degree, userLocation, basic }) {
       );
       //Save smart contract(s) in react state
       setElectricKeeperContract(electricKeeperContract);
-      setMaticPriceFeedContract(maticPriceFeedContract);
       setBuyDemoEightMinutesContract(buyDemoEightMinutesContract);
 
       console.log(buyDemoEightMinutesContract, "This is DEMO contract");
 
-      if (account) {
+      //if (account) {
         let voltageExpirationAndLatestBuyerObject =
-          await electricKeeperContract.methods.LED(account).call();
+          await electricKeeperContract.methods.LED(0).call();
 
         setVoltageExpirationAndLatestBuyerObject(
           voltageExpirationAndLatestBuyerObject
@@ -88,11 +80,11 @@ export default function Buy({ degree, userLocation, basic }) {
           "ONLY one expir",
           voltageExpirationAndLatestBuyerObject.ExpirationTimeUNIX
         );
-      }
+      //}
 
-      if (maticPriceFeedContract !== null) {
-        maticPriceFeedContract.methods
-          .getLatestPrice()
+      if (electricKeeperContract !== null) {
+        electricKeeperContract.methods
+          .onePennyUSDinMatic()
           .call()
           .then((data) => {
             setLatestPriceOfMatic_1p(web3.utils.fromWei(data));
@@ -109,26 +101,26 @@ export default function Buy({ degree, userLocation, basic }) {
 
   const estimatedMatic = () => {
     return latestPriceOfMatic_1p && inputAmount !== ""
-      ? (latestPriceOfMatic_1p * inputAmount).toFixed(3).toString()
+      ? (latestPriceOfMatic_1p * inputAmount).toString()
       : "0";
   };
 
   const colorNumberToColor = (colorNumber) => {
     switch (colorNumber) {
       case 0:
-        return "blue";
+        return "red";
       case 1:
-        return "green";
+        return "blue";
       case 2:
         return "yellow";
       case 3:
-        return "red";
+        return "green";
       case 4:
-        return "orange";
-      case 5:
         return "purple";
+      case 5:
+        return "orange";
       case 6:
-        return "grey";
+        return "pink";
       case 7:
         return "white";
       default:
@@ -149,7 +141,7 @@ export default function Buy({ degree, userLocation, basic }) {
           data: electricKeeperContract.methods
             .BuyElectricityTimeOn(
               colorNumber,
-              web3.utils.toWei(amountOfMaticToPay)
+              inputAmount
             )
             .encodeABI(),
           value: web3.utils.toWei(amountOfMaticToPay),
@@ -182,7 +174,7 @@ export default function Buy({ degree, userLocation, basic }) {
           data: buyDemoEightMinutesContract.methods
             .BuyTestEightMinuteCountdown()
             .encodeABI(),
-          value: 36,
+          value: web3.utils.toWei(amountOfMaticToPay*36),
           from: account,
         })
         .then(() => {
@@ -274,7 +266,12 @@ export default function Buy({ degree, userLocation, basic }) {
             buy 8 minute demo
           </button>
           <p>
-            Expiration time:{" "}
+            {" "}
+            LED 0 Voltage: {voltageExpirationAndLatestBuyerObject.Voltage}
+            <b></b>
+          </p>
+          <p>
+            LED 0 ExpirationTimeUNIX:{" "}
             {voltageExpirationAndLatestBuyerObject.ExpirationTimeUNIX}
             <b></b>
             <b></b>
@@ -284,11 +281,6 @@ export default function Buy({ degree, userLocation, basic }) {
             Latest Buyer: {voltageExpirationAndLatestBuyerObject.LatestBuyer}
             <b></b>
           </p> */}
-          <p>
-            {" "}
-            Voltage: {voltageExpirationAndLatestBuyerObject.Voltage}
-            <b></b>
-          </p>
         </div>
       </>
     );

@@ -271,6 +271,7 @@ p {
 }
 
 .btn-hover.color-blue {
+  color:black;
   background-image: linear-gradient(
     to right,
     #25aae1,
@@ -283,6 +284,7 @@ p {
 }
 
 .btn-hover.color-green {
+  color:black;
   background-image: linear-gradient(
     to right,
     #62f576,
@@ -294,6 +296,7 @@ p {
  */
 }
 .btn-hover.color-yellow {
+  color:black;
   background-image: linear-gradient(
     to right,
     #e1ea66,
@@ -305,6 +308,7 @@ p {
  */
 }
 .btn-hover.color-red {
+  color:black;
   background-image: linear-gradient(
     to right,
     #ad0017,
@@ -317,6 +321,7 @@ p {
 }
 
 .btn-hover.color-white {
+  color:black;
   background-image: linear-gradient(
     to right,
     #f5ddc3,
@@ -328,19 +333,21 @@ p {
  */
 }
 
-.btn-hover.color-grey {
+.btn-hover.color-pink {
+  color:black;
   background-image: linear-gradient(
     to right,
-    #929292,
-    #616161,
-    #918c8c,
-    #525252
+    #ff00ff,
+    #911a7d,
+    #d859e9,
+    #66084a
   );
   /*   box-shadow: 0 4px 15px 0 rgba(218, 51, 56, 0.75);
  */
 }
 
 .btn-hover.color-purple {
+  color:black;
   background-image: linear-gradient(
     to right,
     #c44ba0,
@@ -353,6 +360,7 @@ p {
 }
 
 .btn-hover.color-orange {
+  color:black;
   background-image: linear-gradient(
     to right,
     #ad5c00,
