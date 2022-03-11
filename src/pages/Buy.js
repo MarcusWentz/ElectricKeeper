@@ -82,6 +82,7 @@ export default function Buy({ degree, userLocation, basic }) {
         );
       //}
 
+function updateScaledMaticPrice() {
       if (electricKeeperContract !== null) {
         electricKeeperContract.methods
           .onePennyUSDinMatic(inputAmount)
@@ -98,8 +99,10 @@ export default function Buy({ degree, userLocation, basic }) {
     };
     loadBlockchainData();
   }, [account]);
-
+}
+            
   const estimatedMatic = () => {
+    updateScaledMaticPrice() 
     return latestPriceOfMatic_1p && inputAmount !== ""
       ? latestPriceOfMatic_1p.toString()
       : "0";
