@@ -82,7 +82,6 @@ export default function Buy({ degree, userLocation, basic }) {
         );
       //}
 
-async function updateScaledMaticPrice() {
       if (electricKeeperContract !== null) {
         electricKeeperContract.methods
           .onePennyUSDinMatic(inputAmount)
@@ -99,8 +98,21 @@ async function updateScaledMaticPrice() {
     };
     loadBlockchainData();
   }, [account]);
-}
-            
+   
+  async function updateScaledMaticPrice() {
+        electricKeeperContract.methods
+          .onePennyUSDinMatic(inputAmount)
+          .call()
+          .then((data) => {
+            setLatestPriceOfMatic_1p(web3.utils.fromWei(data));
+            console.log(data);
+            console.log(web3.utils.fromWei(data));
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+  }
+
   const estimatedMatic = () => {
     await updateScaledMaticPrice() 
     return latestPriceOfMatic_1p && inputAmount !== ""
