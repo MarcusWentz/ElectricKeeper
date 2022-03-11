@@ -1,10 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap"); 
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap");
 
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
 html {
@@ -271,7 +271,7 @@ p {
 }
 
 .btn-hover.color-blue {
-  color:black;
+  color: black;
   background-image: linear-gradient(
     to right,
     #25aae1,
@@ -284,7 +284,7 @@ p {
 }
 
 .btn-hover.color-green {
-  color:black;
+  color: black;
   background-image: linear-gradient(
     to right,
     #62f576,
@@ -296,7 +296,7 @@ p {
  */
 }
 .btn-hover.color-yellow {
-  color:black;
+  color: black;
   background-image: linear-gradient(
     to right,
     #e1ea66,
@@ -308,7 +308,7 @@ p {
  */
 }
 .btn-hover.color-red {
-  color:black;
+  color: black;
   background-image: linear-gradient(
     to right,
     #ad0017,
@@ -321,7 +321,7 @@ p {
 }
 
 .btn-hover.color-white {
-  color:black;
+  color: black;
   background-image: linear-gradient(
     to right,
     #f5ddc3,
@@ -334,20 +334,20 @@ p {
 }
 
 .btn-hover.color-pink {
-  color:black;
+  color: black;
   background-image: linear-gradient(
     to right,
-    #ff00ff,
-    #911a7d,
-    #d859e9,
-    #66084a
+    #f73b93,
+    #f72889,
+    #f78cbe,
+    #f767a3
   );
   /*   box-shadow: 0 4px 15px 0 rgba(218, 51, 56, 0.75);
  */
 }
 
 .btn-hover.color-purple {
-  color:black;
+  color: black;
   background-image: linear-gradient(
     to right,
     #c44ba0,
@@ -360,7 +360,7 @@ p {
 }
 
 .btn-hover.color-orange {
-  color:black;
+  color: black;
   background-image: linear-gradient(
     to right,
     #ad5c00,
@@ -514,3 +514,13 @@ input[type="number"] {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.gradient-red {
+  background: radial-gradient(
+    circle,
+    rgba(255, 131, 133, 1) 0%,
+    rgba(255, 94, 97, 1) 56%,
+    rgba(235, 4, 9, 0.989233193277311) 100%
+  );
+}
+
