@@ -28,9 +28,9 @@ contract ElectricKeeper is KeeperCompatibleInterface {
         _;
     }
 
-    function onePennyUSDinMatic() public view returns (uint) {
+    function onePennyUSDinMatic(uint scaleMinutes) public view returns (uint) {
         (uint80 roundID, int price, uint startedAt, uint timeStamp, uint80 answeredInRound) = priceFeed.latestRoundData();
-        return uint( (10**24) / price );
+        return scaleMinutes*uint( (10**24) / price );
     }
 
     function expirationOccured() public view returns(bool) {
@@ -43,7 +43,7 @@ contract ElectricKeeper is KeeperCompatibleInterface {
     }
 
     function BuyElectricityTimeOn(uint ledValue, uint minutesToHaveOn) public payable validLEDvalues(ledValue) {
-        require(minutesToHaveOn > 0 && msg.value == (minutesToHaveOn*onePennyUSDinMatic()), "MUST_HAVE_MINUTES_GREATER_THAN_0_AND_MSG_VALUE=MINUTES*FEE.");
+        require(minutesToHaveOn > 0 && msg.value == (onePennyUSDinMatic(minutesToHaveOn)), "MUST_HAVE_MINUTES_GREATER_THAN_0_AND_MSG_VALUE=MINUTES*FEE.");
         if(LED[ledValue].Voltage == 0) {
             LED[ledValue].Voltage = 1;
             LED[ledValue].ExpirationTimeUNIX = block.timestamp + (60*minutesToHaveOn); 
@@ -104,9 +104,9 @@ contract BuyDemoEightMinutes {
     }
 
     function BuyTestEightMinuteCountdown() public payable {
-       require(msg.value == 36*electricKeeperInstance.onePennyUSDinMatic(), "MUST_HAVE_MSG_VALUE=36*FEE.");
+       require(msg.value == electricKeeperInstance.onePennyUSDinMatic(36), "MUST_HAVE_MSG_VALUE=36*FEE.");
        for(uint ledValue = 0; ledValue < 8; ledValue++ ) {
-            electricKeeperInstance.BuyElectricityTimeOn{value: (ledValue+1)*electricKeeperInstance.onePennyUSDinMatic()}(ledValue,ledValue+1);
+            electricKeeperInstance.BuyElectricityTimeOn{value: electricKeeperInstance.onePennyUSDinMatic(ledValue+1)}(ledValue,ledValue+1);
         }
     }
 }
