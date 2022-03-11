@@ -104,13 +104,14 @@ export default function Buy({ degree, userLocation, basic }) {
 //     return latestPriceOfMatic_1p && inputAmount !== ""
 //       ? latestPriceOfMatic_1p.toString()
 //       : "0";
+       let web3 = new Web3(window.web3.currentProvider);
        electricKeeperContract.methods
           .onePennyUSDinMatic(inputAmount)
           .call()
           .then((data) => {
-            return web3.utils.fromWei(data);
-            console.log(data);
-            console.log(web3.utils.fromWei(data));
+            return web3.utils.fromWei(data).toString();
+            console.log(data.toString());
+            console.log(web3.utils.fromWei(data).toString());
           })
           .catch((err) => {
             console.log(err);
