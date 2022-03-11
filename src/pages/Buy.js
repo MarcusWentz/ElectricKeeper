@@ -117,7 +117,7 @@ export default function Buy({ degree, userLocation, basic }) {
           .catch((err) => {
             console.log(err);
           });
-      return setLatestPriceOfMatic_1p.toString()
+      return web3.utils.fromWei(data).toString()
     }
     return "0"
   };
