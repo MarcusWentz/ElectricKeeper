@@ -99,7 +99,7 @@ export default function Buy({ degree, userLocation, basic }) {
     loadBlockchainData();
   }, [account]);
  
-  const estimatedMatic = () => {
+  async function estimatedMatic() {
 //     await updateScaledMaticPrice() 
 //     return latestPriceOfMatic_1p && inputAmount !== ""
 //       ? latestPriceOfMatic_1p.toString()
@@ -151,7 +151,7 @@ export default function Buy({ degree, userLocation, basic }) {
     console.log(account, "account in BUY handle click");
     try {
       let web3 = new Web3(window.web3.currentProvider);
-      let amountOfMaticToPay = estimatedMatic();
+      let amountOfMaticToPay = await estimatedMatic();
       console.log(amountOfMaticToPay);
       web3.eth
         .sendTransaction({
@@ -184,7 +184,7 @@ export default function Buy({ degree, userLocation, basic }) {
     console.log(buyDemoEightMinutesContract, "account in BUY handle click");
     try {
       let web3 = new Web3(window.web3.currentProvider);
-      let amountOfMaticToPay = estimatedMatic();
+      let amountOfMaticToPay = await estimatedMatic();
       console.log(amountOfMaticToPay);
       web3.eth
         .sendTransaction({
