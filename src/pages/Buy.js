@@ -146,7 +146,7 @@ export default function Buy({ degree, userLocation, basic }) {
     }
   };
 
-  async const handleBuyButtonClick = (colorNumber) => {
+  async function handleBuyButtonClick(colorNumber) {
     console.log("You chose the color:", colorNumber);
     console.log(account, "account in BUY handle click");
     try {
@@ -180,7 +180,7 @@ export default function Buy({ degree, userLocation, basic }) {
     }
   };
 
-  async const handleBuyDemoEightMinutes = () => {
+  async function handleBuyDemoEightMinutes() {
     console.log(buyDemoEightMinutesContract, "account in BUY handle click");
     try {
       let web3 = new Web3(window.web3.currentProvider);
