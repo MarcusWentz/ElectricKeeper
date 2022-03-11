@@ -100,7 +100,6 @@ export default function Buy({ degree, userLocation, basic }) {
   }, [account]);
  
   const estimatedMatic = () => {
-    await updateScaledMaticPrice() 
     return latestPriceOfMatic_1p && inputAmount !== ""
       ? latestPriceOfMatic_1p.toString()
       : "0";
