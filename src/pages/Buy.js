@@ -117,7 +117,7 @@ export default function Buy({ degree, userLocation, basic }) {
           .catch((err) => {
             console.log(err);
           });
-      return setLatestPriceOfMatic_1p
+      return setLatestPriceOfMatic_1p.toString()
     }
     return "0"
   };
