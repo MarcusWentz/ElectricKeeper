@@ -117,7 +117,7 @@ export default function Buy({ degree, userLocation, basic }) {
           .catch((err) => {
             console.log(err);
           });
-      return web3.utils.fromWei(data).toString()
+      return data.toString()
     }
     return "0"
   };
