@@ -47,14 +47,14 @@ const Navbar = ({ handleConnectMetamask, connectedAddrValue }) => {
           </div>
         </div>
         <ul id="ul-navigation" class="nav-ul" data-visible="false">
-          {/* <li class="nav-li"> */}
-          {/*   <NavLink */}
-          {/*     className={(navObj) => (navObj.isActive ? classes.active : "")} */}
-          {/*     to="/" */}
-          {/*   > */}
-          {/*     Home */}
-          {/*   </NavLink> */}
-          {/* </li> */}
+          <li class="nav-li">
+            <NavLink
+              className={(navObj) => (navObj.isActive ? classes.active : "")}
+              to="/status"
+            >
+              status
+            </NavLink>
+          </li>
           <li class="nav-li">
             <NavLink
               className={(navObj) => (navObj.isActive ? classes.active : "")}
@@ -63,14 +63,7 @@ const Navbar = ({ handleConnectMetamask, connectedAddrValue }) => {
               Buy
             </NavLink>{" "}
           </li>
-          {/*    <li class="nav-li">
-            <NavLink
-              className={(navObj) => (navObj.isActive ? classes.active : "")}
-              to="/about"
-            >
-              About
-            </NavLink>
-          </li> */}
+
           <li class="nav-li">
             <NavLink
               className={(navObj) => (navObj.isActive ? classes.active : "")}
@@ -87,14 +80,7 @@ const Navbar = ({ handleConnectMetamask, connectedAddrValue }) => {
               lightshow
             </NavLink>
           </li>
-          <li class="nav-li">
-            <NavLink
-              className={(navObj) => (navObj.isActive ? classes.active : "")}
-              to="/status"
-            >
-              status
-            </NavLink>
-          </li>
+
           <li class="nav-li">
             <a className={(navObj) => (navObj.isActive ? classes.active : "")}>
               <button
