@@ -84,7 +84,7 @@ export default function Buy({ degree, userLocation, basic }) {
 
       if (electricKeeperContract !== null) {
         electricKeeperContract.methods
-          .onePennyUSDinMatic(1)
+          .onePennyUSDinMatic(0)
           .call()
           .then((data) => {
             setLatestPriceOfMatic_1p(web3.utils.fromWei(data));
@@ -98,31 +98,33 @@ export default function Buy({ degree, userLocation, basic }) {
     };
     loadBlockchainData();
   }, [account]);
- 
+
   const estimatedMatic = () => {
-    return latestPriceOfMatic_1p && inputAmount !== ""
-      ? latestPriceOfMatic_1p.toString()
-      : "0";
-//    console.log(inputAmount)
-//    console.log(inputAmount !== "")
-//    if(inputAmount !== ""){
-//        let web3 = new Web3(window.web3.currentProvider);
-//        electricKeeperContract.methods
-//           .onePennyUSDinMatic(inputAmount)
-//           .call()
-//           .then((data) => {
-//             setLatestPriceOfMatic_1p(web3.utils.fromWei(data));
-//             console.log(data);
-//             console.log(data.toString());
-//             console.log(web3.utils.fromWei(data));
-//             return data.toString()
-//           })
-//           .catch((err) => {
-//             console.log(err);
-//           });
-//    }
-//    return "0"
-    
+    // return latestPriceOfMatic_1p && inputAmount !== ""
+    //   ? latestPriceOfMatic_1p.toString()
+    //   : "0";
+   console.log(inputAmount)
+   console.log(inputAmount !== "")
+   if(electricKeeperContract !== null && inputAmount !== ""){
+       let web3 = new Web3(window.web3.currentProvider);
+       // electricKeeperContract.methods
+       //    .onePennyUSDinMatic(1)
+       //    .call()
+       //    .then((data) => {
+       //      setLatestPriceOfMatic_1p(web3.utils.fromWei(data));
+       //      console.log("DATA: " + data.toString());
+       //      return data.toString()
+       //    })
+       //    .catch((err) => {
+       //      console.log(err);
+       //    });
+          return "good"
+   }
+   else{
+     console.log("WHO IS")
+     return "bad"
+   }
+
   };
 
   const colorNumberToColor = (colorNumber) => {
@@ -148,13 +150,13 @@ export default function Buy({ degree, userLocation, basic }) {
     }
   };
 
-  const handleBuyButtonClick = (colorNumber) => {
+  async function handleBuyButtonClick(colorNumber) {
     console.log("You chose the color:", colorNumber);
     console.log(account, "account in BUY handle click");
     try {
       let web3 = new Web3(window.web3.currentProvider);
-      let amountOfMaticToPay = estimatedMatic();
-      console.log(amountOfMaticToPay);
+      let amountOfMaticToPay = await estimatedMatic();
+      console.log("estimatedMatic " + amountOfMaticToPay);
       web3.eth
         .sendTransaction({
           to: ELECTRICKEEPER_CONTRACT_ADDRESS,
@@ -171,7 +173,7 @@ export default function Buy({ degree, userLocation, basic }) {
           setSuccessMsg(
             `Bought ${
               inputAmount === "1" ? "1" + " min" : inputAmount + " mins"
-            } of electricity 
+            } of electricity
           for the ${colorNumberToColor(colorNumber)} LED`
           );
         });
