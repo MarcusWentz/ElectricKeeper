@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 import EthLogo from "../assets/svg/eth_logo.svg";
 import { useState, useEffect } from "React";
 import Web3 from "web3";
@@ -16,7 +14,6 @@ import { Web3ReactProvider, useWeb3React } from "@web3-react/core";
 
 import { DataContext } from "../DataContext";
 
->>>>>>> c7757ffd7d3cfd2dfc962b791c159b2fbd1b3359
 const Status = () => {
   const [
     voltageExpirationAndLatestBuyerObject,
