@@ -277,7 +277,9 @@ export default function Buy({ degree, userLocation, basic }) {
             className="btn-hover color-electric"
             onClick={() => handleBuyDemoEightMinutes()}
           >
-            buy 8 minute demo (NEED TO FIX PUT 36 MINUTES MANUALLY FOR NOW)
+            Domino 8 minute demo
+            <br></br>
+            (input 36 minutes)
           </button>
           <p>
             {" "}
