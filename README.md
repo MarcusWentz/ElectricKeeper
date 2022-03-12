@@ -7,7 +7,7 @@ Video demo [__NEED TO RECORD AGAIN WITH FRONTEND AND HALF LIFE VOX SOUNDS ___]: 
 Powered by a Raspberry Pi 4, which is controlled by a hybrid smart contract using Chainlink Keepers to automate turning off LEDs for electric bill expirations 
 [with sound alerts using Half Life's VOX (Black Mesa Announcement System).
 
-ElectricKeeper verified Etherscan: [_____DO THIS AFTER ALL UNIT TESTING IS DONE ____]
+ElectricKeeper verified Etherscan (Mobile Device Interface): [_____DO THIS AFTER ALL UNIT TESTING IS DONE ____]
 
 Bonus project: Chainlink VRFv2 lightshow, with events logged on zkSync with 1 WEI deposits [ ___ VIDEO DEMO COMING SOON! ____].
 
