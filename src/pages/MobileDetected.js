@@ -1,5 +1,5 @@
 import EthLogo from "../assets/svg/eth_logo.svg";
-import asset from "../assets/homeScreenImg.png";
+import Footer from "../components/Footer";
 
 const MobileDetected = () => {
   return (
@@ -19,10 +19,10 @@ const MobileDetected = () => {
             <img src={EthLogo} style={{ height: "20vh"}} />
             <br />
             <br />
-            <img src={asset} className={"flickerOn"} alt="" width="800px" />
           </div>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 };
