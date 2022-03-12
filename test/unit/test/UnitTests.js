@@ -128,6 +128,8 @@ describe("Electric Keeper Buyer Tests:", function () {
       ).to.be.revertedWith("NO_EXPIRATION_YET");
     });
 
+    // test below does not work yet
+
     // it("owner user function call for OwnerManualExpirationOff after OwnerEmergencyDangerOff", async () => {
     //   let maticPrice =
     //     (await electricKeeperDeployed.onePennyUSDinMatic(1)) /
