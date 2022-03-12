@@ -8,7 +8,8 @@
 }
 
 html {
-  height: 100vh;
+  /* font-family: Roboto, "Prompt", sans-serif; */
+  height: 80vh;
 }
 
 body {
@@ -23,13 +24,17 @@ body {
     #000000 70%
   );
   /* or something instead, this is no good fix */
-  height: 100vh;
+  height: 100%;
   letter-spacing: 1.5px;
+  font-family: inherit;
 }
 
 main {
   margin-top: 7rem;
-  height: 100%;
+  height: 50%;
+  min-height: -moz-available;
+  /* min-height: -webkit-fill-available; /1* Mozilla-based browsers will ignore this. *1/ */
+  min-height: fill-available;
   text-align: center;
   top: 20px;
 }
@@ -104,7 +109,7 @@ p {
   color: #000;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
-  font-size: 18px;
+  font-size: 16px;
   padding: 0.45rem 0;
   width: 100%;
   text-align: center;
@@ -123,7 +128,7 @@ p {
   color: #000;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
-  font-size: 22px;
+  font-size: 20px;
   padding: 0.45 rem 0;
   transition: border-color 0.2s linear;
   width: 100%;
@@ -140,10 +145,11 @@ p {
   border: none;
   color: #ffdd9e;
   background: transparent;
-  font-size: 23px;
+  font-size: 17px;
   font-weight: 600;
+  font-family: inherit;
   text-transform: lowercase;
-  letter-spacing: 2.5px;
+  letter-spacing: 1.5px;
   width: 18vw;
   padding: 0px;
   margin: 0px 0px 0px 0px;
@@ -182,9 +188,10 @@ p {
 
 .nav-li a {
   position: relative;
-  font-size: 23px;
+  font-size: 17px;
   font-weight: 600;
   color: #ffdd9e;
+  font-family: inherit;
   text-decoration: none;
   text-transform: lowercase;
   letter-spacing: 1.5px;
@@ -240,7 +247,7 @@ p {
 .btn-hover {
   width: 13%;
   margin: 20px 2% 15px 2%;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 700;
   color: #fff;
   cursor: pointer;
@@ -250,6 +257,7 @@ p {
   background-size: 300% 100%;
   text-transform: lowercase;
   letter-spacing: 1.5px;
+  font-family: inherit;
 
   border-radius: 40px;
   moz-transition: all 0.4s ease-in-out;
@@ -389,7 +397,7 @@ input[placeholder] {
   color: #000;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
-  font-size: 22px;
+  font-size: 20px;
   line-height: 1.5;
   outline: 0 none;
   padding: 0.25rem 0;
