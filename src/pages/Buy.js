@@ -69,17 +69,17 @@ export default function Buy({ degree, userLocation, basic }) {
       console.log(buyDemoEightMinutesContract, "This is DEMO contract");
 
       //if (account) {
-        let voltageExpirationAndLatestBuyerObject =
-          await electricKeeperContract.methods.LED(0).call();
+      let voltageExpirationAndLatestBuyerObject =
+        await electricKeeperContract.methods.LED(0).call();
 
-        setVoltageExpirationAndLatestBuyerObject(
-          voltageExpirationAndLatestBuyerObject
-        );
-        console.log(voltageExpirationAndLatestBuyerObject, "VOOOOLT OBJ");
-        console.log(
-          "ONLY one expir",
-          voltageExpirationAndLatestBuyerObject.ExpirationTimeUNIX
-        );
+      setVoltageExpirationAndLatestBuyerObject(
+        voltageExpirationAndLatestBuyerObject
+      );
+      console.log(voltageExpirationAndLatestBuyerObject, "VOOOOLT OBJ");
+      console.log(
+        "ONLY one expir",
+        voltageExpirationAndLatestBuyerObject.ExpirationTimeUNIX
+      );
       //}
 
       if (electricKeeperContract !== null) {
@@ -153,10 +153,7 @@ export default function Buy({ degree, userLocation, basic }) {
         .sendTransaction({
           to: ELECTRICKEEPER_CONTRACT_ADDRESS,
           data: electricKeeperContract.methods
-            .BuyElectricityTimeOn(
-              colorNumber,
-              inputAmount
-            )
+            .BuyElectricityTimeOn(colorNumber, inputAmount)
             .encodeABI(),
           value: web3.utils.toWei(amountOfMaticToPay),
           from: account,
@@ -174,18 +171,18 @@ export default function Buy({ degree, userLocation, basic }) {
       console.log(err, msg);
       setErrorMsg(msg);
     }
-  };
+  }
 
   const handleBuyDemoEightMinutes = () => {
-    try{
-    console.log(buyDemoEightMinutesContract, "account in BUY handle click");
-    if (electricKeeperContract !== null) {
-      let web3 = new Web3(window.web3.currentProvider);
-      electricKeeperContract.methods
-        .onePennyUSDinMatic(36)
-        .call()
-        .then((data) => {
-            console.log(data)
+    try {
+      console.log(buyDemoEightMinutesContract, "account in BUY handle click");
+      if (electricKeeperContract !== null) {
+        let web3 = new Web3(window.web3.currentProvider);
+        electricKeeperContract.methods
+          .onePennyUSDinMatic(36)
+          .call()
+          .then((data) => {
+            console.log(data);
             try {
               let web3 = new Web3(window.web3.currentProvider);
               web3.eth
@@ -205,17 +202,14 @@ export default function Buy({ degree, userLocation, basic }) {
               console.log(err, msg);
               setErrorMsg(msg);
             }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    } catch (e) {
+      console.log("electricKeeperContract null! " + e);
     }
-  }
-  catch(e){
-    console.log("electricKeeperContract null! " + e )
-  }
-
-
   };
 
   const renderInputBox = () => {
@@ -263,11 +257,13 @@ export default function Buy({ degree, userLocation, basic }) {
             }}
             htmlFor="minutes"
           >
-          <p>
-            <b>Cost: <br></br> </b>
-            <b>{estimatedMatic()}{" "}</b>
-            <br></br>matic
-          </p>
+            <p>
+              <b>
+                Cost: <br></br>{" "}
+              </b>
+              <b>{estimatedMatic()} </b>
+              <br></br>matic
+            </p>
             click apartment number (LED color) to power
           </label>
           <div style={{ width: "80%" }}>
@@ -326,7 +322,7 @@ export default function Buy({ degree, userLocation, basic }) {
             <br></br>
             buy
           </h1>
-          <p>electricity minutes on</p>
+          <p>minutes of electricity</p>
           <div className="row">{renderInputBox()}</div>
         </div>
       </div>
