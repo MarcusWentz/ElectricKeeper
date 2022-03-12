@@ -4,7 +4,7 @@ pragma solidity 0.8.12;
 // import "@chainlink/contracts/src/v0.8/KeeperCompatible.sol";
 // import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
-contract ElectricKeeper { // {is KeeperCompatibleInterface { 
+contract ElectricKeeperMock { // {is KeeperCompatibleInterface { 
 
     // AggregatorV3Interface internal priceFeed;
 
@@ -99,12 +99,12 @@ contract ElectricKeeper { // {is KeeperCompatibleInterface {
 
 }
 
-contract BuyDemoEightMinutes {
+contract BuyDemoEightMinutesMock {
 
-    ElectricKeeper electricKeeperInstance;
+    ElectricKeeperMock electricKeeperInstance;
 
-    constructor(ElectricKeeper electricKeeperAddress) {
-        electricKeeperInstance = ElectricKeeper(electricKeeperAddress);
+    constructor(ElectricKeeperMock electricKeeperAddress) {
+        electricKeeperInstance = ElectricKeeperMock(electricKeeperAddress);
     }
 
     function BuyTestEightMinuteCountdown() public payable {
