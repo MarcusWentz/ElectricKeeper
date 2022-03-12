@@ -14,7 +14,7 @@ html {
 }
 
 body {
-  zoom: 80%;
+  zoom: 90%;
   height: 100%;
   margin: 0;
   margin-top: -112px;
@@ -38,7 +38,7 @@ body {
 }
 
 main {
-  -moz-transform: scale(0.8); /* Firefox */
+  -moz-transform: scale(0.9); /* Firefox */
   -moz-transform-origin: 50vw 0;
   margin-top: 7rem;
   /* height: 50%; */
@@ -171,7 +171,7 @@ p {
 }
 
 .navbar {
-  -moz-transform: scale(0.8); /* Firefox */
+  -moz-transform: scale(0.95); /* Firefox */
   -moz-transform-origin: 50vw 0;
   width: 100%;
   max-width: 100%;
