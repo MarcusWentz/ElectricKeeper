@@ -1,5 +1,3 @@
-import EthLogo from "../assets/svg/eth_logo.svg";
-
 const Status = () => {
   return (
     <div

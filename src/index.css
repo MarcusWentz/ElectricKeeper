@@ -28,6 +28,8 @@ body {
 }
 
 main {
+  -moz-transform: scale(0.8); /* Firefox */
+  -moz-transform-origin: 50vw 0;
   margin-top: 7rem;
   height: 100%;
   text-align: center;
@@ -155,6 +157,8 @@ p {
 }
 
 .navbar {
+  -moz-transform: scale(0.8); /* Firefox */
+  -moz-transform-origin: 50vw 0;
   width: 100%;
   max-width: 100%;
   min-height: 10vh;
