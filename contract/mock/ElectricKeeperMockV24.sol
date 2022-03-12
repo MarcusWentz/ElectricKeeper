@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT 
 pragma solidity 0.8.12;
 
-import "@chainlink/contracts/src/v0.8/KeeperCompatible.sol";
-import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+// import "@chainlink/contracts/src/v0.8/KeeperCompatible.sol";
+// import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
-contract ElectricKeeper is KeeperCompatibleInterface { 
+contract ElectricKeeperMock { // {is KeeperCompatibleInterface { 
 
-    AggregatorV3Interface internal priceFeed;
+    // AggregatorV3Interface internal priceFeed;
 
     struct STATE{ uint Voltage; uint ExpirationTimeUNIX; }
     mapping(uint => STATE) public LED; 
@@ -15,7 +15,7 @@ contract ElectricKeeper is KeeperCompatibleInterface {
 
     constructor() {
         Owner = msg.sender;
-        priceFeed = AggregatorV3Interface(0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada);
+        // priceFeed = AggregatorV3Interface(0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada);
     }
 
     modifier onlyOwner() {
@@ -28,9 +28,13 @@ contract ElectricKeeper is KeeperCompatibleInterface {
         _;
     }
 
-    function onePennyUSDinMatic() public view returns (uint) {
-        (uint80 roundID, int price, uint startedAt, uint timeStamp, uint80 answeredInRound) = priceFeed.latestRoundData();
-        return uint( (10**24) / price );
+    // function onePennyUSDinMatic(uint scaleMinutes) public view returns (uint) {
+    //     (uint80 roundID, int price, uint startedAt, uint timeStamp, uint80 answeredInRound) = priceFeed.latestRoundData();
+    //     return scaleMinutes*uint( (10**24) / price );
+    // }
+
+    function onePennyUSDinMatic(uint scaleMinutes) public view returns (uint) {
+        return scaleMinutes*uint(7*10**15);
     }
 
     function expirationOccured() public view returns(bool) {
@@ -43,7 +47,7 @@ contract ElectricKeeper is KeeperCompatibleInterface {
     }
 
     function BuyElectricityTimeOn(uint ledValue, uint minutesToHaveOn) public payable validLEDvalues(ledValue) {
-        require(minutesToHaveOn > 0 && msg.value == (minutesToHaveOn*onePennyUSDinMatic()), "MUST_HAVE_MINUTES_GREATER_THAN_0_AND_MSG_VALUE=MINUTES*FEE.");
+        require(minutesToHaveOn > 0 && msg.value == (onePennyUSDinMatic(minutesToHaveOn)), "MUST_HAVE_MINUTES_GREATER_THAN_0_AND_MSG_VALUE=MINUTES*FEE.");
         if(LED[ledValue].Voltage == 0) {
             LED[ledValue].Voltage = 1;
             LED[ledValue].ExpirationTimeUNIX = block.timestamp + (60*minutesToHaveOn); 
@@ -54,19 +58,19 @@ contract ElectricKeeper is KeeperCompatibleInterface {
         payable(Owner).transfer(address(this).balance);
     }
 
-    function checkUpkeep(bytes calldata) external override returns (bool upkeepNeeded, bytes memory) {
-        upkeepNeeded = expirationOccured();
-    } 
+    // function checkUpkeep(bytes calldata) external override returns (bool upkeepNeeded, bytes memory) {
+    //     upkeepNeeded = expirationOccured();
+    // } 
 
-    function performUpkeep(bytes calldata) external override {
-        for(uint ledValue = 0; ledValue < 8; ledValue++) {
-            if(LED[ledValue].Voltage == 1 && block.timestamp > LED[ledValue].ExpirationTimeUNIX){
-                LED[ledValue].Voltage  = 0;
-                LED[ledValue].ExpirationTimeUNIX = 0;
-            }
-        }
-        emit VoltageChange();
-    }
+    // function performUpkeep(bytes calldata) external override {
+    //     for(uint ledValue = 0; ledValue < 8; ledValue++) {
+    //         if(LED[ledValue].Voltage == 1 && block.timestamp > LED[ledValue].ExpirationTimeUNIX){
+    //             LED[ledValue].Voltage  = 0;
+    //             LED[ledValue].ExpirationTimeUNIX = 0;
+    //         }
+    //     }
+    //     emit VoltageChange();
+    // }
 
     function OwnerManualExpirationOff() public onlyOwner {
         require(expirationOccured() , "NO_EXPIRATION_YET.");
@@ -95,18 +99,18 @@ contract ElectricKeeper is KeeperCompatibleInterface {
 
 }
 
-contract BuyDemoEightMinutes {
+contract BuyDemoEightMinutesMock {
 
-    ElectricKeeper electricKeeperInstance;
+    ElectricKeeperMock electricKeeperInstance;
 
-    constructor(ElectricKeeper electricKeeperAddress) {
-        electricKeeperInstance = ElectricKeeper(electricKeeperAddress);
+    constructor(ElectricKeeperMock electricKeeperAddress) {
+        electricKeeperInstance = ElectricKeeperMock(electricKeeperAddress);
     }
 
     function BuyTestEightMinuteCountdown() public payable {
-       require(msg.value == 36*electricKeeperInstance.onePennyUSDinMatic(), "MUST_HAVE_MSG_VALUE=36*FEE.");
+       require(msg.value == electricKeeperInstance.onePennyUSDinMatic(36), "MUST_HAVE_MSG_VALUE=36*FEE.");
        for(uint ledValue = 0; ledValue < 8; ledValue++ ) {
-            electricKeeperInstance.BuyElectricityTimeOn{value: (ledValue+1)*electricKeeperInstance.onePennyUSDinMatic()}(ledValue,ledValue+1);
+            electricKeeperInstance.BuyElectricityTimeOn{value: electricKeeperInstance.onePennyUSDinMatic(ledValue+1)}(ledValue,ledValue+1);
         }
     }
 }

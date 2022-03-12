@@ -7,7 +7,7 @@ Video demo [__NEED TO RECORD AGAIN WITH FRONTEND AND HALF LIFE VOX SOUNDS ___]: 
 Powered by a Raspberry Pi 4, which is controlled by a hybrid smart contract using Chainlink Keepers to automate turning off LEDs for electric bill expirations 
 [with sound alerts using Half Life's VOX (Black Mesa Announcement System).
 
-ElectricKeeper verified Etherscan: [_____DO THIS AFTER ALL UNIT TESTING IS DONE ____]
+ElectricKeeper verified Etherscan (Mobile Device Interface): [_____DO THIS AFTER ALL UNIT TESTING IS DONE ____]
 
 Bonus project: Chainlink VRFv2 lightshow, with events logged on zkSync with 1 WEI deposits [ ___ VIDEO DEMO COMING SOON! ____].
 
@@ -28,12 +28,6 @@ Hardware:
 
 -LED (Red, Blue, Green, Yellow, Purple, Orange, Pink, White) [Quantity: 1 each]
 
--330 ohm resistor [Quantity: 8]
-
-The LED is used to show a connection is powered while the 330 ohm resistor in series with the LED limits current (divides voltage away from LED which exponetinally increases current).
-
-Diode Current Equation: https://www.allaboutcircuits.com/technical-articles/understanding-i-v-curves-of-non-linear-devices/
-
-<img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/diode_graph.png" alt="Graph"/>
+-330 ohm resistor (current limiting safety) [Quantity: 8]
 
 Presentation slides: https://docs.google.com/presentation/d/1cRC4lI-hXJ0S35Tm_BWMym4Wqitvkxw0HylvKsHX4m4/edit?usp=sharing

@@ -2,21 +2,32 @@ const { expect } = require("chai");
 const { ethers } = require("hardhat");
 provider = ethers.provider;
 
-var chai = require('chai');
-const BN = require('bn.js');
-chai.use(require('chai-bn')(BN));
+var chai = require("chai");
+const BN = require("bn.js");
+chai.use(require("chai-bn")(BN));
 
 describe("Electric Keeper Buyer Tests:", function () {
+  let ElectricKeeper;
+  let electricKeeperDeployed;
+  let owner;
+  let buyer1;
+  let buyer2;
+  let addrs;
 
-      let ElectricKeeper;
-      let electricKeeperDeployed;
-      let owner;
-      let buyer1;
-      let buyer2;
-      let addrs;
+  beforeEach(async function () {
+    ElectricKeeper = await ethers.getContractFactory("ElectricKeeperMock");
+    electricKeeperDeployed = await ElectricKeeper.deploy();
+    [owner, buyer1, buyer2, ...addrs] = await ethers.getSigners();
+    await electricKeeperDeployed.deployed();
+  });
 
-      beforeEach(async function () {
+  describe("Constructor", function () {
+    it("Owner is equal to default ethers.getSigners() address.", async function () {
+      expect(await electricKeeperDeployed.Owner()).to.equal(owner.address);
+    });
+  });
 
+<<<<<<< HEAD:test/unit/JohannasUnitsTest.js
         ElectricKeeper = await ethers.getContractFactory('ElectricKeeper');
         electricKeeperDeployed = await ElectricKeeper.deploy();
         [owner, buyer1, buyer2, ...addrs] = await ethers.getSigners();
@@ -38,6 +49,24 @@ describe("Electric Keeper Buyer Tests:", function () {
          });
         });
 
+=======
+  /* 
+  describe("mockOwnerAddFunds", function () {
+    it("msg.sender == Owner", async function () {
+      await expect(
+        electricKeeperDeployed.connect(buyer1).mockOwnerAddFunds()
+      ).to.be.revertedWith(
+        "Only contract owner can interact with this contract"
+      );
+    });
+    it("require(msg.value == 1*(10**18)", async function () {
+      await expect(
+        electricKeeperDeployed.mockOwnerAddFunds()
+      ).to.be.revertedWith("You must send one ETH for msg.value");
+    });
+  }); */
+  /*  
+>>>>>>> a011a2f69c63a333e3d8804991a8b44157a03dda:test/unit/test/JohannasUnitsTest.js
       describe("BuyerCreatePolicy", function () {
         it("Day<0.", async function () {
           await expect(electricKeeperDeployed.BuyerCreatePolicy(500,-500)).to.be.revertedWith("Present time not recorded yet by oracle.");
@@ -127,5 +156,4 @@ describe("Electric Keeper Buyer Tests:", function () {
             expect((new ethers.BigNumber.from(result1._hex).toString())).to.be.a.bignumber.that.is.equal(new ethers.BigNumber.from('0').toString())
           });
       }); */
-
 });

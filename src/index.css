@@ -1,7 +1,17 @@
+<<<<<<< HEAD
 /* @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap"); */
 
 * {
   box-sizing: border-box;
+=======
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+>>>>>>> a011a2f69c63a333e3d8804991a8b44157a03dda
 }
 
 html {
@@ -276,6 +286,7 @@ p {
 }
 
 .btn-hover.color-blue {
+  color: black;
   background-image: linear-gradient(
     to right,
     #25aae1,
@@ -288,6 +299,7 @@ p {
 }
 
 .btn-hover.color-green {
+  color: black;
   background-image: linear-gradient(
     to right,
     #62f576,
@@ -299,6 +311,7 @@ p {
  */
 }
 .btn-hover.color-yellow {
+  color: black;
   background-image: linear-gradient(
     to right,
     #e1ea66,
@@ -310,6 +323,7 @@ p {
  */
 }
 .btn-hover.color-red {
+  color: black;
   background-image: linear-gradient(
     to right,
     #ad0017,
@@ -322,6 +336,7 @@ p {
 }
 
 .btn-hover.color-white {
+  color: black;
   background-image: linear-gradient(
     to right,
     #f5ddc3,
@@ -333,19 +348,21 @@ p {
  */
 }
 
-.btn-hover.color-grey {
+.btn-hover.color-pink {
+  color: black;
   background-image: linear-gradient(
     to right,
-    #929292,
-    #616161,
-    #918c8c,
-    #525252
+    #f73b93,
+    #f72889,
+    #f78cbe,
+    #f767a3
   );
   /*   box-shadow: 0 4px 15px 0 rgba(218, 51, 56, 0.75);
  */
 }
 
 .btn-hover.color-purple {
+  color: black;
   background-image: linear-gradient(
     to right,
     #c44ba0,
@@ -358,6 +375,7 @@ p {
 }
 
 .btn-hover.color-orange {
+  color: black;
   background-image: linear-gradient(
     to right,
     #ad5c00,
@@ -510,4 +528,24 @@ input[type="number"] {
   background-size: 150% 150%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.gradient-red {
+  background: radial-gradient(
+    circle,
+    rgba(255, 131, 133, 1) 0%,
+    rgba(255, 94, 97, 1) 56%,
+    rgba(235, 4, 9, 0.989233193277311) 100%
+  );
+}
+
+thead,
+tbody,
+tfoot,
+tr,
+td,
+th {
+  border-color: inherit;
+  border-style: none !important;
+  border-width: 0;
 }

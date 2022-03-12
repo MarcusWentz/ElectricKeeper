@@ -25,17 +25,19 @@ const Navbar = ({ handleConnectMetamask, connectedAddrValue }) => {
         onClose={() => setShowModal(false)}
         showToastFromProp={showModal}
       ></ConnectWalletModal>
-      <nav class="navbar" style={{ marginTop: "10px" }}>
+      <nav className="navbar" style={{ marginTop: "10px" }}>
         <div style={{ fontSize: "xx-large", marginRight: "50px" }}>
           <div
             style={{
-              width: "400px",
+              // width: "800px",
               display: "flex",
               justifyContent: "space-around",
               alignItems: "center",
             }}
           >
-            <img width="10%" src={EthLogo} alt={"eth logo"} />{" "}
+            <a style={{ width: "50px", marginRight: "20px" }} href={"/#/"}>
+              <img width="100%" src={EthLogo} alt={"eth logo"} />{" "}
+            </a>
             <h1 class="gradient-text font-sans font-black text-6xl">
               <NavLink
                 to="/"
@@ -47,14 +49,14 @@ const Navbar = ({ handleConnectMetamask, connectedAddrValue }) => {
           </div>
         </div>
         <ul id="ul-navigation" class="nav-ul" data-visible="false">
-          {/* <li class="nav-li"> */}
-          {/*   <NavLink */}
-          {/*     className={(navObj) => (navObj.isActive ? classes.active : "")} */}
-          {/*     to="/" */}
-          {/*   > */}
-          {/*     Home */}
-          {/*   </NavLink> */}
-          {/* </li> */}
+          <li class="nav-li">
+            <NavLink
+              className={(navObj) => (navObj.isActive ? classes.active : "")}
+              to="/status"
+            >
+              status
+            </NavLink>
+          </li>
           <li class="nav-li">
             <NavLink
               className={(navObj) => (navObj.isActive ? classes.active : "")}
@@ -63,14 +65,7 @@ const Navbar = ({ handleConnectMetamask, connectedAddrValue }) => {
               Buy
             </NavLink>{" "}
           </li>
-          {/*    <li class="nav-li">
-            <NavLink
-              className={(navObj) => (navObj.isActive ? classes.active : "")}
-              to="/about"
-            >
-              About
-            </NavLink>
-          </li> */}
+
           <li class="nav-li">
             <NavLink
               className={(navObj) => (navObj.isActive ? classes.active : "")}
@@ -87,6 +82,7 @@ const Navbar = ({ handleConnectMetamask, connectedAddrValue }) => {
               lightshow
             </NavLink>
           </li>
+
           <li class="nav-li">
             <a className={(navObj) => (navObj.isActive ? classes.active : "")}>
               <button

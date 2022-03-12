@@ -1,43 +1,43 @@
 export const BUTTON_OBJECT_4_FIRST = [
   {
-    title: "Blue",
-    styleClass: "btn-hover color-blue",
+    title: "0",
+    styleClass: "btn-hover color-red",
     buttonClickValue: 0,
   },
   {
-    title: "Green",
-    styleClass: "btn-hover color-green",
+    title: "1",
+    styleClass: "btn-hover color-blue",
     buttonClickValue: 1,
   },
   {
-    title: "Yellow",
+    title: "2",
     styleClass: "btn-hover color-yellow",
     buttonClickValue: 2,
   },
   {
-    title: "Red",
-    styleClass: "btn-hover color-red",
+    title: "3",
+    styleClass: "btn-hover color-green",
     buttonClickValue: 3,
   },
 ];
 export const BUTTON_OBJECT_4_LAST = [
   {
-    title: "Orange",
-    styleClass: "btn-hover color-orange",
+    title: "4",
+    styleClass: "btn-hover color-purple",
     buttonClickValue: 4,
   },
   {
-    title: "Purple",
-    styleClass: "btn-hover color-purple",
+    title: "5",
+    styleClass: "btn-hover color-orange",
     buttonClickValue: 5,
   },
   {
-    title: "Grey",
-    styleClass: "btn-hover color-grey",
+    title: "6",
+    styleClass: "btn-hover color-pink",
     buttonClickValue: 6,
   },
   {
-    title: "White",
+    title: "7",
     styleClass: "btn-hover color-white",
     buttonClickValue: 7,
   },
