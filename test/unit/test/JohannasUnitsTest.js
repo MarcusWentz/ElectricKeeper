@@ -27,22 +27,75 @@ describe("Electric Keeper Buyer Tests:", function () {
     });
   });
 
-  /* 
-  describe("mockOwnerAddFunds", function () {
-    it("msg.sender == Owner", async function () {
+  describe("onePennyUSDinMatic", function () {
+    it("Expect 0 when input 0", async function () {
+      expect(
+        (await electricKeeperDeployed.onePennyUSDinMatic(0)).toString()
+      ).to.equal("0");
+    });
+    it("Expect > 0 when input > 0", async function () {
+      expect(
+        (await electricKeeperDeployed.onePennyUSDinMatic(1)).toString()
+      ).to.equal("7000000000000000");
+    });
+  });
+
+  describe("BuyElectricityTimeOn", function () {
+    it("ledValue >= 8", async function () {
       await expect(
-        electricKeeperDeployed.connect(buyer1).mockOwnerAddFunds()
+        electricKeeperDeployed.BuyElectricityTimeOn(8, 1)
       ).to.be.revertedWith(
-        "Only contract owner can interact with this contract"
+        "LED_VALUES_RED_0_BLUE_1_YELLOW_2_GREEN_3_PURPLE_4_ORANGE_5_PINK_6_WHITE_7."
       );
     });
-    it("require(msg.value == 1*(10**18)", async function () {
+    it("ledValue == 7", async function () {
       await expect(
-        electricKeeperDeployed.mockOwnerAddFunds()
-      ).to.be.revertedWith("You must send one ETH for msg.value");
+        electricKeeperDeployed.BuyElectricityTimeOn(7, 0)
+      ).to.be.revertedWith(
+        "MUST_HAVE_MINUTES_GREATER_THAN_0_AND_MSG_VALUE=MINUTES*FEE."
+      );
     });
-  }); */
-  /*  
+
+    it("ledValue == 7 && minutesToHaveOn == 1 && msg.value == 0", async function () {
+      await expect(
+        electricKeeperDeployed.BuyElectricityTimeOn(7, 1)
+      ).to.be.revertedWith(
+        "MUST_HAVE_MINUTES_GREATER_THAN_0_AND_MSG_VALUE=MINUTES*FEE."
+      );
+    });
+    it("Pass buy 1 LED value", async function () {
+      let maticPrice =
+        (await electricKeeperDeployed.onePennyUSDinMatic(1)) /
+        1000000000000000000;
+      console.log(maticPrice, "MATIC PRIIIICE");
+      const transaction = await electricKeeperDeployed
+        .connect(buyer1)
+        .BuyElectricityTimeOn(7, 1, {
+          value: ethers.utils.parseEther(maticPrice.toString()),
+        });
+      const tx_receipt = await transaction.wait();
+    });
+
+    it("Pass buy same LED renew", async function () {
+      let maticPrice =
+        (await electricKeeperDeployed.onePennyUSDinMatic(1)) /
+        1000000000000000000;
+      const transaction = await electricKeeperDeployed
+        .connect(buyer1)
+        .BuyElectricityTimeOn(7, 1, {
+          value: ethers.utils.parseEther(maticPrice.toString()),
+        });
+      const tx_receipt = await transaction.wait();
+      const transactionTwo = await electricKeeperDeployed
+        .connect(buyer1)
+        .BuyElectricityTimeOn(7, 1, {
+          value: ethers.utils.parseEther(maticPrice.toString()),
+        });
+      const tx_receiptTwo = await transactionTwo.wait();
+    });
+  });
+
+  /*
       describe("BuyerCreatePolicy", function () {
         it("Day<0.", async function () {
           await expect(electricKeeperDeployed.BuyerCreatePolicy(500,-500)).to.be.revertedWith("Present time not recorded yet by oracle.");
