@@ -82,7 +82,7 @@ export default function Buy({ degree, userLocation, basic }) {
         );
       //}
 
-      if (electricKeeperContract !== null) {
+      if (electricKeeperContract !== null && inputAmount == "") {
         electricKeeperContract.methods
           .onePennyUSDinMatic(0)
           .call()
@@ -95,36 +95,40 @@ export default function Buy({ degree, userLocation, basic }) {
             console.log(err);
           });
       }
+
+      if (electricKeeperContract !== null && inputAmount !== "") {
+        electricKeeperContract.methods
+          .onePennyUSDinMatic(inputAmount)
+          .call()
+          .then((data) => {
+            setLatestPriceOfMatic_1p(web3.utils.fromWei(data));
+            console.log(data);
+            console.log(web3.utils.fromWei(data));
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+      // electricKeeperContract.methods
+      //    .onePennyUSDinMatic(1)
+      //    .call()
+      //    .then((data) => {
+      //      setLatestPriceOfMatic_1p(web3.utils.fromWei(data));
+      //      console.log("DATA: " + data;
+      //      value = data
+      //    })
+      //    .catch((err) => {
+      //      console.log(err);
+      //    });
+
     };
     loadBlockchainData();
   }, [account]);
 
   const estimatedMatic = () => {
-    // return latestPriceOfMatic_1p && inputAmount !== ""
-    //   ? latestPriceOfMatic_1p.toString()
-    //   : "0";
-   console.log(inputAmount)
-   console.log(inputAmount !== "")
-   if(electricKeeperContract !== null && inputAmount !== ""){
-       let web3 = new Web3(window.web3.currentProvider);
-       // electricKeeperContract.methods
-       //    .onePennyUSDinMatic(1)
-       //    .call()
-       //    .then((data) => {
-       //      setLatestPriceOfMatic_1p(web3.utils.fromWei(data));
-       //      console.log("DATA: " + data.toString());
-       //      return data.toString()
-       //    })
-       //    .catch((err) => {
-       //      console.log(err);
-       //    });
-          return "good"
-   }
-   else{
-     console.log("WHO IS")
-     return "bad"
-   }
-
+    return latestPriceOfMatic_1p && inputAmount !== ""
+      ? latestPriceOfMatic_1p.toString()
+      : "0";
   };
 
   const colorNumberToColor = (colorNumber) => {
