@@ -1,133 +1,93 @@
-import EthLogo from "../assets/svg/eth_logo.svg";
-import { useState, useEffect } from "react";
+import React, { Component, useEffect, useState } from "react";
 import Web3 from "web3";
-import { useWeb3React } from "@web3-react/core";
+
 import ErrorModal from "../components/ErrorModal";
 import FlashSuccess from "../components/flashSuccess";
+import { Web3ReactProvider, useWeb3React } from "@web3-react/core";
+import {
+  ELECTRICKEEPER_ABI,
+  ELECTRICKEEPER_CONTRACT_ADDRESS,
+} from "../config";
 
-//const rpcURL = process.env.REACT_APP_rinkebyWebSocketSecureEventsInfuraAPIKey; //Use WSS to get live event data instead of polling constantly,
-// const rpcURL = "wss://rinkeby.infura.io/ws/v3/f63336cd46ea40d68f1577991e1135cf"
-//const web3 = new Web3(rpcURL);
-const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
-const contractAddress_JS = "0xD111A5E51034A17505f82547Ad3508EbCFc7c405";
-const contractABI_JS = [
-  {
-    inputs: [
-      { internalType: "address", name: "have", type: "address" },
-      { internalType: "address", name: "want", type: "address" },
-    ],
-    name: "OnlyCoordinatorCanFulfill",
-    type: "error",
-  },
-  { anonymous: false, inputs: [], name: "lightShowUpdate", type: "event" },
-  {
-    inputs: [
-      { internalType: "uint256", name: "requestId", type: "uint256" },
-      { internalType: "uint256[]", name: "randomWords", type: "uint256[]" },
-    ],
-    name: "rawFulfillRandomWords",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "requestRandomWords",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  { inputs: [], stateMutability: "nonpayable", type: "constructor" },
-  {
-    inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    name: "twoRandomWords",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-];
-const contractDefined_JS = new web3.eth.Contract(
-  contractABI_JS,
-  contractAddress_JS
-);
+import { DataContext } from "../DataContext";
 
-export default function Vrf({}) {
-  const [colorSet1, setColorSet1] = useState();
-  const [colorSet2, setColorSet2] = useState();
+//TODO: add ErrorModal
+//MetaMask wallet shown/button if connect
+//Dropdown for network switch statements
+
+export default function Owner({}) {
+  const [electricKeeperContract, setElectricKeeperContract] = useState(null);
+
+  const [LEDValue, setLEDValue] = useState();
+  const [expirationOccurred, setExpirationOccurred] = useState();
+
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
+  const { userAccountAddress, setUserAccountAddress } =
+    React.useContext(DataContext);
+
   const { account } = useWeb3React();
 
-  let ArrayStorage = [];
-
-  async function updateLights() {
-    if (ArrayStorage.length === 0) {
-      for (let randomNumbers = 0; randomNumbers < 2; randomNumbers++) {
-        console.log("API CALL");
-        await contractDefined_JS.methods
-          .twoRandomWords(randomNumbers)
-          .call((err, balance) => {
-            ArrayStorage.push((balance % 255) + 1);
-          });
-      }
-      console.log(ArrayStorage[0].toString(2));
-      setColorSet1(ArrayStorage[0]);
-      setColorSet2(ArrayStorage[1]);
-    }
-  }
-
-  console.log("Contract starting value:");
-  updateLights();
-
   useEffect(() => {
+    if (window.ethereum) {
+      window.ethereum.on("chainChanged", () => {
+        window.location.reload();
+      });
+      window.ethereum.on("accountsChanged", () => {
+        window.location.reload();
+      });
+    }
     const loadBlockchainData = async () => {
+      const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+      //const network = await web3.eth.net.getNetworkType();
+      //await window.ethereum.enable();
+      //const addressFromMetamask = await web3.eth.getAccounts();
       const chainId = await web3.eth.getChainId();
       console.log(chainId);
-      if (chainId !== 4) {
-        setErrorMsg("Must be on the Rinkeby test network");
-        //Error message here
+      if (chainId !== 80001) {
+        setErrorMsg("Must be on the Mumbai test network");
       }
 
-      //Load the smart contract
+      const electricKeeperContract = new web3.eth.Contract(
+        ELECTRICKEEPER_ABI,
+        ELECTRICKEEPER_CONTRACT_ADDRESS
+      );
+      setElectricKeeperContract(electricKeeperContract);
 
-      eventListener();
+      console.log(electricKeeperContract, "This is electric contract");
+
+      if (electricKeeperContract !== null) {
+        electricKeeperContract.methods
+          .expirationOccured()
+          .call()
+          .then((data) => {
+            console.log(data, "EXPIRATION OCC??????");
+            setExpirationOccurred(data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
     };
     loadBlockchainData();
-  }, []);
+  }, [account]);
 
-  const eventListener = () => {
-    contractDefined_JS.events
-      .lightShowUpdate(
-        {
-          fromBlock: "latest",
-        },
-        function (error, eventResult) {}
-      )
-      .on("data", function (eventResult) {
-        //Call the get function to get the most accurate present state for the value.
+  useEffect(() => {}, []);
 
-        //Do a wait 30s here
-        console.log("eventlistner triggered!");
-        window.location.reload();
-      })
-      .on("changed", function (eventResult) {
-        // remove event from local database
-      })
-      .on("error", console.error);
-  };
-
-  const handleRandomNrCall = () => {
-    console.log(account, "account in BUY handle click", contractAddress_JS);
+  const handleManualExpirationOff = () => {
     try {
+      let web3 = new Web3(window.web3.currentProvider);
+
       web3.eth
         .sendTransaction({
-          to: contractAddress_JS,
-          data: contractDefined_JS.methods.requestRandomWords().encodeABI(),
+          to: ELECTRICKEEPER_CONTRACT_ADDRESS,
+          data: electricKeeperContract.methods
+            .OwnerManualExpirationOff()
+            .encodeABI(),
           from: account,
         })
         .then(() => {
-          console.log("vrf request sent");
-          setSuccessMsg("VRF request sent!");
+          setSuccessMsg("Manual expiration off");
         });
     } catch (err) {
       const msg = "Connect your wallet to buy";
@@ -136,32 +96,119 @@ export default function Vrf({}) {
     }
   };
 
-  const renderColorSetInColor = (colorSet) => {
-    var n = colorSet.toString(2);
-    n = "00000000".substr(n.length) + n;
-    let chars = Array.from(n);
-    console.log(chars);
+  const handleEmergencySafeAndDangerOffAndOn = (ledValue, safeOrDanger) => {
+    console.log(ledValue, "ledvaaaaaaaal");
+    if (ledValue >= 0 && ledValue <= 7) {
+      var functionToCall;
+      if (safeOrDanger === "safe") {
+        functionToCall = electricKeeperContract.methods
+          .OwnerEmergencySafeOn(ledValue)
+          .encodeABI();
+      } else {
+        functionToCall = electricKeeperContract.methods
+          .OwnerEmergencyDangerOff(ledValue)
+          .encodeABI();
+      }
+      try {
+        let web3 = new Web3(window.web3.currentProvider);
+
+        web3.eth
+          .sendTransaction({
+            to: ELECTRICKEEPER_CONTRACT_ADDRESS,
+            data: functionToCall,
+            from: account,
+          })
+          .then(() => {
+            setSuccessMsg(
+              safeOrDanger === "safe"
+                ? "Emergancy turn off executed"
+                : "Emergency turn on executed"
+            );
+          });
+      } catch (err) {
+        const msg = "Connect your wallet to buy";
+        console.log(err, msg);
+        setErrorMsg(msg);
+      }
+    } else {
+      const msg = "You need to put an LED value between 0-7";
+      console.log(msg);
+      setErrorMsg(msg);
+    }
+  };
+
+  //READ/GET value only:expirationOccured();
+
+  const renderButton = () => {
     return (
       <>
         <div
           style={{
-            marginBottom: 50,
+            marginBottom: 150,
+            marginTop: 50,
             display: "flex",
             alignItems: "center",
             flexDirection: "column",
           }}
         >
-          <div style={{ float: "left" }}>
-            <p className="vrf-numbers color-white">{chars[0]}</p>
-            <p className="vrf-numbers color-pink">{chars[1]}</p>
-            <p className="vrf-numbers color-orange">{chars[2]}</p>
-            <p className="vrf-numbers color-purple">{chars[3]}</p>
-            <p className="vrf-numbers color-green">{chars[4]}</p>
-            <p className="vrf-numbers color-yellow">{chars[5]}</p>
-            <p className="vrf-numbers color-blue">{chars[6]}</p>
-            <p className="vrf-numbers color-red">{chars[7]}</p>
-          </div>
+          <label
+            style={{
+              color: "#ffdd9a",
+              marginRight: "20px",
+              fontSize: "13px",
+            }}
+            htmlFor="minutes"
+          >
+            expiration present: <br></br> {expirationOccurred ? "true" : "false"}
+          </label>
+          <button
+            style={{ width: 400 }}
+            className="btn-hover color-electric"
+            onClick={() => handleManualExpirationOff()}
+          >
+            manual expiration off
+          </button>{" "}
+          <label
+            style={{
+              color: "#ffdd9a",
+              marginRight: "20px",
+              fontSize: "13px",
+            }}
+            htmlFor="minutes"
+          >
+            emergency LED value:
+          </label>
+          <input
+            type="number"
+            class="input-matic"
+            min="0"
+            step="1"
+            placeholder="enter LED number"
+            data-name="minutes"
+            value={LEDValue}
+            onChange={(e) => setLEDValue(e.target.value)}
+            style={{ width: "400px" }}
+          ></input>
+          <button
+            style={{ width: 400 }}
+            className="btn-hover color-red"
+            onClick={() =>
+              handleEmergencySafeAndDangerOffAndOn(LEDValue, "danger")
+            }
+          >
+            emergency danger off
+          </button>
+          <button
+            style={{ width: 400 }}
+            className="btn-hover color-green"
+            onClick={() =>
+              handleEmergencySafeAndDangerOffAndOn(LEDValue, "safe")
+            }
+          >
+            emergency safe on
+          </button>{" "}
         </div>
+        <br />
       </>
     );
   };
@@ -169,42 +216,13 @@ export default function Vrf({}) {
   return (
     <div class="container">
       <div class="row">
-        <h1>
-          <br></br>
-          chainlink VRF v2
-        </h1>
-        <div style={{marginBottom: 50}}>
-        <button
-          style={{ width: 400 }}
-          className="btn-hover color-electric"
-          onClick={() => handleRandomNrCall()}
-        >
-          request 2 random VRFv2 numbers
-        </button>
+        <div>
+          <h1>
+            <br></br>
+            owner
+          </h1>
+          <div className="row">{renderButton()}</div>
         </div>
-        {colorSet1 && colorSet2 ? (
-          <div>
-            <p>
-              &nbsp;&nbsp;&nbsp;
-             <b>{colorSet1}</b>
-              &nbsp;&nbsp;&nbsp;
-              {renderColorSetInColor(colorSet1)}
-            </p>
-            <p>
-              &nbsp;&nbsp;&nbsp;
-              <b>{colorSet2}</b>
-
-              &nbsp;&nbsp;&nbsp;
-              {/* {colorSet2.toString(2)} */}
-              {renderColorSetInColor(colorSet2)}
-            </p>
-          </div>
-        ) : (
-          ""
-        )}
-        {/* <p><b></b>{colorSet2}</p> */}
-        <p></p>
-        <br></br>
       </div>
       {errorMsg !== "" ? (
         <ErrorModal
@@ -213,9 +231,6 @@ export default function Vrf({}) {
           errorMsg={errorMsg}
         ></ErrorModal>
       ) : null}
-
-      <p style={{ color: "white" }}>{successMsg}</p>
-
       {successMsg ? (
         <FlashSuccess show msg={successMsg} onClose={() => setSuccessMsg("")} />
       ) : (
