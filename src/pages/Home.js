@@ -12,7 +12,7 @@ const Home = () => {
             <br />
             <br />
             <h1 class="mb-5 flickerOn">
-    ElectricKeeper is a hybrid smart contract for electric grid policies. 
+    ElectricKeeper is a hybrid smart contract for electric grid policies.
     Chainlink Keepers automates policy expiration detection and state changes.
             </h1>
             <br />
@@ -23,7 +23,10 @@ const Home = () => {
       <div class="row" align="center"></div>
 
       <img src={asset} className={"flickerOn"} alt="" width="800px" />
-    </div>
+      <h1 class="mb-5 flickerOn">
+      https://github.com/MarcusWentz/ElectricKeeper
+      </h1>
+       </div>
   );
 };
 
