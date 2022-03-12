@@ -6,11 +6,10 @@ const MobileDetected = () => {
       <div class="row">
         <div>
           <h1>
-            <b>Mobile Detected :(</b>
+            <b>Mobile Device Detected</b>
           </h1>
           <p>
-            Unfortunately we are not currently mobile compatible. Feel free to
-            check us out on a desktop!
+            Visit https://github.com/MarcusWentz/ElectricKeeper or browse this site on desktop.
           </p>
         </div>
         <div class="row">
