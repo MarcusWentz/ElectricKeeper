@@ -98,31 +98,12 @@ describe("Electric Keeper Buyer Tests:", function () {
 
   describe("Manual Expiration", () => {
     it("non-owner user function call for OwnerManualExpirationOff fails", async () => {
-      let maticPrice =
-        (await electricKeeperDeployed.onePennyUSDinMatic(1)) /
-        1000000000000000000;
-      const transaction_buy = await electricKeeperDeployed
-        .connect(buyer1)
-        .BuyElectricityTimeOn(7, 1, {
-          value: ethers.utils.parseEther(maticPrice.toString()),
-        });
-      const tx_buy_receipt = await transaction_buy.wait();
       await expect(
         electricKeeperDeployed.connect(buyer1).OwnerManualExpirationOff()
       ).to.be.revertedWith("ONLY_OWNER_WALLET_ADDRESS_HAS_ACCESS.");
     });
 
     it("owner user function call for manual expiration before OwnerEmergencyDangerOff", async () => {
-      let maticPrice =
-        (await electricKeeperDeployed.onePennyUSDinMatic(1)) /
-        1000000000000000000;
-      const transaction_buy = await electricKeeperDeployed
-        .connect(buyer1)
-        .BuyElectricityTimeOn(7, 1, {
-          value: ethers.utils.parseEther(maticPrice.toString()),
-        });
-      const tx_buy_receipt = await transaction_buy.wait();
-
       await expect(
         electricKeeperDeployed.connect(owner).OwnerManualExpirationOff()
       ).to.be.revertedWith("NO_EXPIRATION_YET");
@@ -130,33 +111,25 @@ describe("Electric Keeper Buyer Tests:", function () {
 
     // test below does not work yet
 
-    // it("owner user function call for OwnerManualExpirationOff after OwnerEmergencyDangerOff", async () => {
-    //   let maticPrice =
-    //     (await electricKeeperDeployed.onePennyUSDinMatic(1)) /
-    //     1000000000000000000;
-    //   const transaction_buy = await electricKeeperDeployed
-    //     .connect(buyer1)
-    //     .BuyElectricityTimeOn(7, 1, {
-    //       value: ethers.utils.parseEther(maticPrice.toString()),
-    //     });
-    //   const tx_buy_receipt = await transaction_buy.wait();
+    it("owner user function call for OwnerManualExpirationOff after OwnerEmergencyDangerOff", async () => {
+      let maticPrice =
+        (await electricKeeperDeployed.onePennyUSDinMatic(1)) /
+        1000000000000000000;
+      const transaction_buy = await electricKeeperDeployed
+        .connect(buyer1)
+        .BuyElectricityTimeOn(7, 1, {
+          value: ethers.utils.parseEther(maticPrice.toString()),
+        });
+      const tx_buy_receipt = await transaction_buy.wait();
 
-    //   await provider.send("evm_increaseTime", [15]);
-    //   await provider.send("evm_mine");
+      await provider.send("evm_increaseTime", [75]);
+      await provider.send("evm_mine");
 
-    //   const transaction_ownerEmergencyDangerOff = await electricKeeperDeployed
-    //     .connect(owner)
-    //     .OwnerEmergencyDangerOff(7);
-    //   const tx_ownerEmergencyDangerOff_recipt =
-    //     await transaction_ownerEmergencyDangerOff.wait();
-
-    //   await provider.send("evm_increaseTime", [15]);
-    //   await provider.send("evm_mine");
-
-    //   await expect(
-    //     electricKeeperDeployed.connect(owner).OwnerManualExpirationOff()
-    //   ).to.be.revertedWith("NO_EXPIRATION_YET");
-    // });
+      const transaction = await electricKeeperDeployed
+        .connect(owner)
+        .OwnerManualExpirationOff();
+      const tx_receipt = await transaction.wait();
+    });
   });
 
   /*
