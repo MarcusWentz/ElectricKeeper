@@ -25,7 +25,7 @@ const Navbar = ({ handleConnectMetamask, connectedAddrValue }) => {
         onClose={() => setShowModal(false)}
         showToastFromProp={showModal}
       ></ConnectWalletModal>
-      <nav class="navbar" style={{ marginTop: "10px" }}>
+      <nav className="navbar" style={{ marginTop: "10px" }}>
         <div style={{ fontSize: "xx-large", marginRight: "50px" }}>
           <div
             style={{
@@ -35,11 +35,7 @@ const Navbar = ({ handleConnectMetamask, connectedAddrValue }) => {
               alignItems: "center",
             }}
           >
-            <a
-              href="/#"
-              style={{ textDecoration: "none", fontSize: 15 }}
-            >
-              
+            <a href="/#" style={{ textDecoration: "none", fontSize: 15 }}>
               <img width="50%" src={EthLogo} alt={"eth logo"} />{" "}
             </a>
             <h1 class="gradient-text font-sans font-black text-6xl">
