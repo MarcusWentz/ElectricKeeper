@@ -25,13 +25,13 @@ describe("Electric Keeper Buyer Tests:", function () {
     BuyDemoEightMinutesDeployed = await BuyDemoEightMinutes.deploy(electricKeeperDeployed.address);
   });
 
-  describe("Constructor", function () {
+  describe("constructor()", function () {
     it("Owner is equal to default ethers.getSigners() address.", async function () {
       expect(await electricKeeperDeployed.Owner()).to.equal(owner.address);
     });
   });
 
-  describe("onePennyUSDinMatic", function () {
+  describe("onePennyUSDinMatic()", function () {
     it("Expect 0 when input 0", async function () {
       expect(
         (await electricKeeperDeployed.onePennyUSDinMatic(0)).toString()
@@ -44,7 +44,7 @@ describe("Electric Keeper Buyer Tests:", function () {
     });
   });
 
-  describe("BuyElectricityTimeOn", function () {
+  describe("BuyElectricityTimeOn()", function () {
     it("ledValue >= 8", async function () {
       await expect(
         electricKeeperDeployed.BuyElectricityTimeOn(8, 1)
@@ -59,7 +59,6 @@ describe("Electric Keeper Buyer Tests:", function () {
         "MUST_HAVE_MINUTES_GREATER_THAN_0_AND_MSG_VALUE=MINUTES*FEE."
       );
     });
-
     it("ledValue == 7 && minutesToHaveOn == 1 && msg.value == 0", async function () {
       await expect(
         electricKeeperDeployed.BuyElectricityTimeOn(7, 1)
@@ -79,7 +78,6 @@ describe("Electric Keeper Buyer Tests:", function () {
         });
       const tx_receipt = await transaction.wait();
     });
-
     it("Pass buy same LED renew", async function () {
       let maticPrice =
         (await electricKeeperDeployed.onePennyUSDinMatic(1)) /
@@ -105,7 +103,6 @@ describe("Electric Keeper Buyer Tests:", function () {
         electricKeeperDeployed.connect(buyer1).OwnerManualExpirationOff()
       ).to.be.revertedWith("ONLY_OWNER_WALLET_ADDRESS_HAS_ACCESS.");
     });
-
     it("owner user function call for manual expiration before OwnerEmergencyDangerOff", async () => {
       await expect(
         electricKeeperDeployed.connect(owner).OwnerManualExpirationOff()
@@ -132,6 +129,26 @@ describe("Electric Keeper Buyer Tests:", function () {
     });
   });
 
+  describe("BuyTestEightMinuteCountdown()", function () {
+    it("Fail if MSG.VALUE=0.", async function () {
+      await expect(
+        BuyDemoEightMinutesDeployed.BuyTestEightMinuteCountdown()
+      ).to.be.revertedWith(
+        "MUST_HAVE_MSG_VALUE=36*FEE."
+      );
+    });
+    it("Pass if MSG.VALUE=onePennyUSDinMatic(36)", async function () {
+      let maticPrice =
+        (await electricKeeperDeployed.onePennyUSDinMatic(36)) /
+        1000000000000000000;
+      const transaction = await BuyDemoEightMinutesDeployed
+        .connect(buyer1)
+        .BuyTestEightMinuteCountdown({
+          value: ethers.utils.parseEther(maticPrice.toString()),
+        });
+      const tx_receipt = await transaction.wait();
+    });
+  });
   /*
       describe("BuyerCreatePolicy", function () {
         it("Day<0.", async function () {
