@@ -1,4 +1,50 @@
+<<<<<<< HEAD
+=======
+import EthLogo from "../assets/svg/eth_logo.svg";
+import { useState, useEffect } from "React";
+import Web3 from "web3";
+import {
+  ELECTRICKEEPER_ABI,
+  ELECTRICKEEPER_CONTRACT_ADDRESS,
+  BUY_DEMO_EIGHT_MINUTES_ABI,
+  BUY_DEMO_EIGHT_MINUTES_CONTRACT_ADDRESS,
+} from "../config";
+import { BUTTON_OBJECT_4_LAST, BUTTON_OBJECT_4_FIRST } from "./ButtonData";
+import ErrorModal from "../components/ErrorModal";
+import FlashSuccess from "../components/flashSuccess";
+import { Web3ReactProvider, useWeb3React } from "@web3-react/core";
+
+import { DataContext } from "../DataContext";
+
+>>>>>>> c7757ffd7d3cfd2dfc962b791c159b2fbd1b3359
 const Status = () => {
+  const [
+    voltageExpirationAndLatestBuyerObject,
+    setVoltageExpirationAndLatestBuyerObject,
+  ] = useState();
+
+  const { account } = useWeb3React();
+
+  useEffect(() => {
+    const loadBlockchainData = async () => {
+      const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+      const chainId = await web3.eth.getChainId();
+
+      //Load the smart contract(s)
+      const electricKeeperContract = new web3.eth.Contract(
+        ELECTRICKEEPER_ABI,
+        ELECTRICKEEPER_CONTRACT_ADDRESS
+      );
+
+      let voltageExpirationAndLatestBuyerObject =
+        await electricKeeperContract.methods.LED(0).call();
+
+      setVoltageExpirationAndLatestBuyerObject(
+        voltageExpirationAndLatestBuyerObject
+      );
+    };
+    loadBlockchainData();
+  }, [account]);
   return (
     <div
       class="row"

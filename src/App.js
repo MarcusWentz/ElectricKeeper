@@ -80,9 +80,9 @@ function App() {
       )}
       <main>
 
-        {isMobile ? (
+ {/*        {isMobile ? (
           <MobileDetected />
-        ) : (
+        ) : ( */}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/buy" element={<Buy />} />
@@ -93,7 +93,7 @@ function App() {
 
             <Route path="/error" element={<MobileDetected />} />
           </Routes>
-        )}
+    {/*     )} */}
         
 
       </main>
