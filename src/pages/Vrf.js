@@ -171,7 +171,7 @@ export default function Vrf({}) {
       <div class="row">
         <h1>
           <br></br>
-          chainlink VRF v2
+          lightshow
         </h1>
         <div style={{marginBottom: 50}}>
         <button
