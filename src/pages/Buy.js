@@ -257,6 +257,7 @@ export default function Buy({ degree, userLocation, basic }) {
             }}
             htmlFor="minutes"
           >
+            <br />
             <p>
               <b>
                 Cost: <br></br>{" "}
