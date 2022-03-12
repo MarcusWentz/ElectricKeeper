@@ -1,6 +1,7 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
-provider = ethers.provider;
+const provider = ethers.provider;
+const network = ethers.network;
 
 var chai = require("chai");
 const BN = require("bn.js");
@@ -63,11 +64,11 @@ describe("Electric Keeper Buyer Tests:", function () {
         "MUST_HAVE_MINUTES_GREATER_THAN_0_AND_MSG_VALUE=MINUTES*FEE."
       );
     });
+
     it("Pass buy 1 LED value", async function () {
       let maticPrice =
         (await electricKeeperDeployed.onePennyUSDinMatic(1)) /
         1000000000000000000;
-      console.log(maticPrice, "MATIC PRIIIICE");
       const transaction = await electricKeeperDeployed
         .connect(buyer1)
         .BuyElectricityTimeOn(7, 1, {
@@ -93,6 +94,67 @@ describe("Electric Keeper Buyer Tests:", function () {
         });
       const tx_receiptTwo = await transactionTwo.wait();
     });
+  });
+
+  describe("Manual Expiration", () => {
+    it("non-owner user function call for OwnerManualExpirationOff fails", async () => {
+      let maticPrice =
+        (await electricKeeperDeployed.onePennyUSDinMatic(1)) /
+        1000000000000000000;
+      const transaction_buy = await electricKeeperDeployed
+        .connect(buyer1)
+        .BuyElectricityTimeOn(7, 1, {
+          value: ethers.utils.parseEther(maticPrice.toString()),
+        });
+      const tx_buy_receipt = await transaction_buy.wait();
+      await expect(
+        electricKeeperDeployed.connect(buyer1).OwnerManualExpirationOff()
+      ).to.be.revertedWith("ONLY_OWNER_WALLET_ADDRESS_HAS_ACCESS.");
+    });
+
+    it("owner user function call for manual expiration before OwnerEmergencyDangerOff", async () => {
+      let maticPrice =
+        (await electricKeeperDeployed.onePennyUSDinMatic(1)) /
+        1000000000000000000;
+      const transaction_buy = await electricKeeperDeployed
+        .connect(buyer1)
+        .BuyElectricityTimeOn(7, 1, {
+          value: ethers.utils.parseEther(maticPrice.toString()),
+        });
+      const tx_buy_receipt = await transaction_buy.wait();
+
+      await expect(
+        electricKeeperDeployed.connect(owner).OwnerManualExpirationOff()
+      ).to.be.revertedWith("NO_EXPIRATION_YET");
+    });
+
+    // it("owner user function call for OwnerManualExpirationOff after OwnerEmergencyDangerOff", async () => {
+    //   let maticPrice =
+    //     (await electricKeeperDeployed.onePennyUSDinMatic(1)) /
+    //     1000000000000000000;
+    //   const transaction_buy = await electricKeeperDeployed
+    //     .connect(buyer1)
+    //     .BuyElectricityTimeOn(7, 1, {
+    //       value: ethers.utils.parseEther(maticPrice.toString()),
+    //     });
+    //   const tx_buy_receipt = await transaction_buy.wait();
+
+    //   await provider.send("evm_increaseTime", [15]);
+    //   await provider.send("evm_mine");
+
+    //   const transaction_ownerEmergencyDangerOff = await electricKeeperDeployed
+    //     .connect(owner)
+    //     .OwnerEmergencyDangerOff(7);
+    //   const tx_ownerEmergencyDangerOff_recipt =
+    //     await transaction_ownerEmergencyDangerOff.wait();
+
+    //   await provider.send("evm_increaseTime", [15]);
+    //   await provider.send("evm_mine");
+
+    //   await expect(
+    //     electricKeeperDeployed.connect(owner).OwnerManualExpirationOff()
+    //   ).to.be.revertedWith("NO_EXPIRATION_YET");
+    // });
   });
 
   /*

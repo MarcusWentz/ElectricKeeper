@@ -1,8 +1,8 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/home/johanna/Desktop/ElectricalEthereum/test/unit/contracts/ElectricKeeperMockV24.sol": {
-      "lastModificationDate": 1647100122145,
+    "/Users/kieranwilliams/Programming/ElectricKeeper/test/unit/contracts/ElectricKeeperMockV24.sol": {
+      "lastModificationDate": 1647101769400,
       "contentHash": "49c621b70a6bfa37e6fc87d6542f7953",
       "sourceName": "contracts/ElectricKeeperMockV24.sol",
       "solcConfig": {
@@ -25,9 +25,6 @@
                 "ast"
               ]
             }
-          },
-          "metadata": {
-            "useLiteralContent": false
           }
         }
       },

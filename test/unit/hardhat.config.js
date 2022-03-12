@@ -1,6 +1,6 @@
 require("@nomiclabs/hardhat-waffle");
 require("@nomiclabs/hardhat-ethers");
-require('solidity-coverage')
+require("solidity-coverage");
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -20,16 +20,18 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  */
 module.exports = {
   solidity: {
-    compilers: [{version: "0.8.0"},
-    {version: "0.8.7"},
-    {version: "0.8.11"},
-    {version: "0.8.12"},
-    {version: "0.6.11"}],
+    compilers: [
+      { version: "0.8.0" },
+      { version: "0.8.7" },
+      { version: "0.8.11" },
+      { version: "0.8.12" },
+      { version: "0.6.11" },
+    ],
     settings: {
       optimizer: {
         enabled: true,
-        runs: 200
-      }
-    }
+        runs: 200,
+      },
+    },
   },
 };
