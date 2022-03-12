@@ -432,6 +432,18 @@ input::-webkit-inner-spin-button {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #8f7b57;
 }
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #8f7b57;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #8f7b57;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #8f7b57;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #8f7b57;
+}
 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
