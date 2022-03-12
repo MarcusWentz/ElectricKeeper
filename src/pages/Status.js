@@ -1,6 +1,26 @@
 import EthLogo from "../assets/svg/eth_logo.svg";
 
 const Status = () => {
+  useEffect(() => {
+    const loadBlockchainData = async () => {
+      const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+      const chainId = await web3.eth.getChainId();
+
+      //Load the smart contract(s)
+      const electricKeeperContract = new web3.eth.Contract(
+        ELECTRICKEEPER_ABI,
+        ELECTRICKEEPER_CONTRACT_ADDRESS
+      );
+
+      let voltageExpirationAndLatestBuyerObject =
+        await electricKeeperContract.methods.LED(0).call();
+
+      setVoltageExpirationAndLatestBuyerObject(
+        voltageExpirationAndLatestBuyerObject
+      );
+    };
+    loadBlockchainData();
+  }, [account]);
   return (
     <div
       class="row"

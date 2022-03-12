@@ -75,6 +75,12 @@ export default function Buy({ degree, userLocation, basic }) {
         setVoltageExpirationAndLatestBuyerObject(
           voltageExpirationAndLatestBuyerObject
         );
+        console.log(voltageExpirationAndLatestBuyerObject, "VOOOOLT OBJ");
+        console.log(
+          "ONLY one expir",
+          voltageExpirationAndLatestBuyerObject.ExpirationTimeUNIX
+        );
+      //}
 
       if (electricKeeperContract !== null) {
         electricKeeperContract.methods
@@ -227,17 +233,6 @@ export default function Buy({ degree, userLocation, basic }) {
           <div
             style={{ display: "flex", flexDirection: "column", width: "50%" }}
           >
-          <p>
-            {" "}
-            Voltages
-            <br></br>
-            [Red only so far, show like VRFv2 format]:
-              <br></br>
-              {voltageExpirationAndLatestBuyerObject.Voltage}
-              <br></br>
-
-            <b></b>
-          </p>
             <label
               style={{
                 color: "#ffdd9a",
@@ -302,6 +297,17 @@ export default function Buy({ degree, userLocation, basic }) {
           >
             domino 8 minute demo
           </button>
+          <p>
+            {" "}
+            LED 0 Voltage: {voltageExpirationAndLatestBuyerObject.Voltage}
+            <b></b>
+          </p>
+          <p>
+            LED 0 ExpirationTimeUNIX:{" "}
+            {voltageExpirationAndLatestBuyerObject.ExpirationTimeUNIX}
+            <b></b>
+            <b></b>
+          </p>
           {/* <p>
             {" "}
             Latest Buyer: {voltageExpirationAndLatestBuyerObject.LatestBuyer}
