@@ -1,4 +1,5 @@
 import EthLogo from "../assets/svg/eth_logo.svg";
+import asset from "../assets/homeScreenImg.png";
 
 const MobileDetected = () => {
   return (
@@ -9,7 +10,7 @@ const MobileDetected = () => {
             <b>Mobile Device Detected</b>
           </h1>
           <p>
-            Visit https://github.com/MarcusWentz/ElectricKeeper or browse this site on desktop.
+            Visit our GitHub site below, or browse this site on desktop.
           </p>
         </div>
         <div class="row">
@@ -18,6 +19,7 @@ const MobileDetected = () => {
             <img src={EthLogo} style={{ height: "20vh"}} />
             <br />
             <br />
+            <img src={asset} className={"flickerOn"} alt="" width="800px" />
           </div>
         </div>
       </div>
