@@ -9,11 +9,13 @@
 
 html {
   /* font-family: Roboto, "Prompt", sans-serif; */
-  height: 80vh;
+  height: 100vh;
+  background-color: black;
 }
 
 body {
   zoom: 80%;
+  height: 100%;
   margin: 0;
   margin-top: -112px;
   padding-top: 100px;
@@ -23,8 +25,14 @@ body {
     #52493b 0%,
     #000000 70%
   );
-  /* or something instead, this is no good fix */
+  background-size: cover;
+ -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-repeat: no-repeat;
   height: 100%;
+  background-size: cover;
+  /* or something instead, this is no good fix */
   letter-spacing: 1.5px;
   font-family: inherit;
 }
@@ -33,9 +41,9 @@ main {
   -moz-transform: scale(0.8); /* Firefox */
   -moz-transform-origin: 50vw 0;
   margin-top: 7rem;
-  height: 50%;
+  /* height: 50%; */
   min-height: -moz-available;
-  /* min-height: -webkit-fill-available; /1* Mozilla-based browsers will ignore this. *1/ */
+  min-height: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
   min-height: fill-available;
   text-align: center;
   top: 20px;

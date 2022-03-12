@@ -1,5 +1,5 @@
 import EthLogo from "../assets/svg/eth_logo.svg";
-import { useState, useEffect } from "React";
+import { useState, useEffect } from "react";
 import Web3 from "web3";
 import {
   ELECTRICKEEPER_ABI,
