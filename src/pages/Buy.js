@@ -241,7 +241,7 @@ export default function Buy({ degree, userLocation, basic }) {
               }}
               htmlFor="minutes"
             >
-              price: $0.01/minute
+              $0.01/minute
             </label>
             <input
               type="number"
@@ -264,10 +264,11 @@ export default function Buy({ degree, userLocation, basic }) {
             htmlFor="minutes"
           >
           <p>
-            <b>Amount: </b> &nbsp;&nbsp;&nbsp;&nbsp; ≈ &nbsp; {estimatedMatic()}{" "}
-            matic
+            <b>Cost: <br></br> </b>
+            <b>{estimatedMatic()}{" "}</b>
+            <br></br>matic
           </p>
-            click apartment number (LED color) to buy
+            click apartment number (LED color) to power
           </label>
           <div style={{ width: "80%" }}>
             {BUTTON_OBJECT_4_FIRST.map((i) => (
@@ -323,9 +324,9 @@ export default function Buy({ degree, userLocation, basic }) {
         <div>
           <h1>
             <br></br>
-            buy electricity
+            buy
           </h1>
-          <p>minutes to buy</p>
+          <p>electricity minutes on</p>
           <div className="row">{renderInputBox()}</div>
         </div>
       </div>
