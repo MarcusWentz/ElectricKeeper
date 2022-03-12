@@ -10,6 +10,8 @@ chai.use(require("chai-bn")(BN));
 describe("Electric Keeper Buyer Tests:", function () {
   let ElectricKeeper;
   let electricKeeperDeployed;
+  let BuyDemoEightMinutes;
+  let BuyDemoEightMinutesDeployed;
   let owner;
   let buyer1;
   let buyer2;
@@ -19,7 +21,8 @@ describe("Electric Keeper Buyer Tests:", function () {
     ElectricKeeper = await ethers.getContractFactory("ElectricKeeperMock");
     electricKeeperDeployed = await ElectricKeeper.deploy();
     [owner, buyer1, buyer2, ...addrs] = await ethers.getSigners();
-    await electricKeeperDeployed.deployed();
+    BuyDemoEightMinutes = await ethers.getContractFactory("BuyDemoEightMinutesMock");
+    BuyDemoEightMinutesDeployed = await BuyDemoEightMinutes.deploy(electricKeeperDeployed.address);
   });
 
   describe("Constructor", function () {
@@ -96,7 +99,7 @@ describe("Electric Keeper Buyer Tests:", function () {
     });
   });
 
-  describe("Manual Expiration", () => {
+  describe("OwnerManualExpirationOff()", () => {
     it("non-owner user function call for OwnerManualExpirationOff fails", async () => {
       await expect(
         electricKeeperDeployed.connect(buyer1).OwnerManualExpirationOff()
@@ -108,10 +111,7 @@ describe("Electric Keeper Buyer Tests:", function () {
         electricKeeperDeployed.connect(owner).OwnerManualExpirationOff()
       ).to.be.revertedWith("NO_EXPIRATION_YET");
     });
-
-    // test below does not work yet
-
-    it("owner user function call for OwnerManualExpirationOff after OwnerEmergencyDangerOff", async () => {
+    it("owner user function call for OwnerManualExpirationOff", async () => {
       let maticPrice =
         (await electricKeeperDeployed.onePennyUSDinMatic(1)) /
         1000000000000000000;
@@ -169,7 +169,6 @@ describe("Electric Keeper Buyer Tests:", function () {
           await expect(electricKeeperDeployed.connect(buyer1).BuyerCreatePolicy(500,-500, { value: ethers.utils.parseEther("0.01") } ) ).to.be.revertedWith("Error: You've already purchased insurance");
         });
       });
-
       describe("BuyerClaimReward", function () {
           it("DayEruption>0.", async function () {
             await expect(electricKeeperDeployed.BuyerClaimReward()).to.be.revertedWith("DayEruption not recorded yet by oracle.");
