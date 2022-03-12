@@ -10,7 +10,7 @@ const MobileDetected = () => {
             <b>Mobile Device Detected</b>
           </h1>
           <p>
-            Visit our GitHub site below, or browse this site on desktop.
+            Visit our GitHub site below, <br></br> or browse this site on desktop.
           </p>
         </div>
         <div class="row">
