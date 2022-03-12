@@ -1,6 +1,6 @@
 import EthLogo from "../assets/svg/eth_logo.svg";
 import asset from "../assets/homeScreenImg.png";
-
+import Footer from "../components/Footer";
 
 const Home = () => {
 
@@ -23,9 +23,7 @@ const Home = () => {
       <div class="row" align="center"></div>
 
       <img src={asset} className={"flickerOn"} alt="" width="800px" />
-      <h1 class="mb-5 flickerOn">
-      https://github.com/MarcusWentz/ElectricKeeper
-      </h1>
+      <Footer></Footer>
        </div>
   );
 };

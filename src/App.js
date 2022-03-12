@@ -9,6 +9,7 @@ import React, { Component, useEffect, useState } from "react";
 import Web3 from "web3";
 import Home from "./pages/Home";
 import Buy from "./pages/Buy";
+import Footer from "./components/Footer";
 
 import Status from "./pages/Status";
 import Owner from "./pages/Owner";
@@ -96,6 +97,7 @@ function App() {
         
 
       </main>
+   
 
 
     </DataContext.Provider>

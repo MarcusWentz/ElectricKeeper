@@ -35,7 +35,13 @@ const Navbar = ({ handleConnectMetamask, connectedAddrValue }) => {
               alignItems: "center",
             }}
           >
-            <img width="10%" src={EthLogo} alt={"eth logo"} />{" "}
+            <a
+              href="/#"
+              style={{ textDecoration: "none", fontSize: 15 }}
+            >
+              
+              <img width="50%" src={EthLogo} alt={"eth logo"} />{" "}
+            </a>
             <h1 class="gradient-text font-sans font-black text-6xl">
               <NavLink
                 to="/"
