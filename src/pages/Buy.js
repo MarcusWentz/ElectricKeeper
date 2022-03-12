@@ -263,6 +263,10 @@ export default function Buy({ degree, userLocation, basic }) {
             }}
             htmlFor="minutes"
           >
+          <p>
+            <b>Amount: </b> &nbsp;&nbsp;&nbsp;&nbsp; ≈ &nbsp; {estimatedMatic()}{" "}
+            matic
+          </p>
             click apartment number (LED color) to buy
           </label>
           <div style={{ width: "80%" }}>
@@ -285,10 +289,6 @@ export default function Buy({ degree, userLocation, basic }) {
             ))}
           </div>
           <br />
-          <p>
-            <b>Amount: </b> &nbsp;&nbsp;&nbsp;&nbsp; ≈ &nbsp; {estimatedMatic()}{" "}
-            matic
-          </p>
           <button
             style={{ width: 400 }}
             className="btn-hover color-electric"
