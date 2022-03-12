@@ -171,7 +171,7 @@ export default function Vrf({}) {
       <div class="row">
         <h1>
           <br></br>
-          chainlink VRF v2 
+          chainlink VRF v2
         </h1>
         <div style={{marginBottom: 50}}>
         <button
@@ -179,22 +179,20 @@ export default function Vrf({}) {
           className="btn-hover color-electric"
           onClick={() => handleRandomNrCall()}
         >
-          Request 2 random VRF v2 numbers
+          request 2 random VRFv2 numbers
         </button>
         </div>
         {colorSet1 && colorSet2 ? (
           <div>
             <p>
-              first color set 
               &nbsp;&nbsp;&nbsp;
-             <b>{colorSet1}</b> 
+             <b>{colorSet1}</b>
               &nbsp;&nbsp;&nbsp;
               {renderColorSetInColor(colorSet1)}
             </p>
             <p>
-              second color set 
               &nbsp;&nbsp;&nbsp;
-              <b>{colorSet2}</b> 
+              <b>{colorSet2}</b>
 
               &nbsp;&nbsp;&nbsp;
               {/* {colorSet2.toString(2)} */}
