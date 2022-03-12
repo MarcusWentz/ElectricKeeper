@@ -82,21 +82,7 @@ export default function Buy({ degree, userLocation, basic }) {
         );
       //}
 
-      if (electricKeeperContract !== null && inputAmount == "") {
-        electricKeeperContract.methods
-          .onePennyUSDinMatic(0)
-          .call()
-          .then((data) => {
-            setLatestPriceOfMatic_1p(web3.utils.fromWei(data));
-            console.log(data);
-            console.log(web3.utils.fromWei(data));
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-
-      if (electricKeeperContract !== null && inputAmount !== "") {
+      if (electricKeeperContract !== null) {
         electricKeeperContract.methods
           .onePennyUSDinMatic(inputAmount)
           .call()
@@ -109,23 +95,25 @@ export default function Buy({ degree, userLocation, basic }) {
             console.log(err);
           });
       }
-      // electricKeeperContract.methods
-      //    .onePennyUSDinMatic(1)
-      //    .call()
-      //    .then((data) => {
-      //      setLatestPriceOfMatic_1p(web3.utils.fromWei(data));
-      //      console.log("DATA: " + data;
-      //      value = data
-      //    })
-      //    .catch((err) => {
-      //      console.log(err);
-      //    });
-
     };
     loadBlockchainData();
   }, [account]);
 
   const estimatedMatic = () => {
+    if (electricKeeperContract !== null && inputAmount !== "") {
+      let web3 = new Web3(window.web3.currentProvider);
+      electricKeeperContract.methods
+        .onePennyUSDinMatic(inputAmount)
+        .call()
+        .then((data) => {
+          setLatestPriceOfMatic_1p(web3.utils.fromWei(data));
+          console.log(data);
+          console.log(web3.utils.fromWei(data));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
     return latestPriceOfMatic_1p && inputAmount !== ""
       ? latestPriceOfMatic_1p.toString()
       : "0";
