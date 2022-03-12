@@ -177,28 +177,45 @@ export default function Buy({ degree, userLocation, basic }) {
   };
 
   const handleBuyDemoEightMinutes = () => {
+    try{
     console.log(buyDemoEightMinutesContract, "account in BUY handle click");
-    try {
+    if (electricKeeperContract !== null) {
       let web3 = new Web3(window.web3.currentProvider);
-      let amountOfMaticToPay = estimatedMatic();
-      console.log(amountOfMaticToPay);
-      web3.eth
-        .sendTransaction({
-          to: BUY_DEMO_EIGHT_MINUTES_CONTRACT_ADDRESS,
-          data: buyDemoEightMinutesContract.methods
-            .BuyTestEightMinuteCountdown()
-            .encodeABI(),
-          value: web3.utils.toWei(amountOfMaticToPay),
-          from: account,
+      electricKeeperContract.methods
+        .onePennyUSDinMatic(36)
+        .call()
+        .then((data) => {
+            console.log(data)
+            try {
+              let web3 = new Web3(window.web3.currentProvider);
+              web3.eth
+                .sendTransaction({
+                  to: BUY_DEMO_EIGHT_MINUTES_CONTRACT_ADDRESS,
+                  data: buyDemoEightMinutesContract.methods
+                    .BuyTestEightMinuteCountdown()
+                    .encodeABI(),
+                  value: data,
+                  from: account,
+                })
+                .then(() => {
+                  setSuccessMsg("8 Minute Demo Starting!");
+                });
+            } catch (err) {
+              const msg = "Connect your wallet to buy";
+              console.log(err, msg);
+              setErrorMsg(msg);
+            }
         })
-        .then(() => {
-          setSuccessMsg("8 Minute Demo Starting!");
+        .catch((err) => {
+          console.log(err);
         });
-    } catch (err) {
-      const msg = "Connect your wallet to buy";
-      console.log(err, msg);
-      setErrorMsg(msg);
     }
+  }
+  catch(e){
+    console.log("electricKeeperContract null! " + e )
+  }
+
+
   };
 
   const renderInputBox = () => {
@@ -277,9 +294,7 @@ export default function Buy({ degree, userLocation, basic }) {
             className="btn-hover color-electric"
             onClick={() => handleBuyDemoEightMinutes()}
           >
-            Domino 8 minute demo
-            <br></br>
-            (input 36 minutes)
+            domino 8 minute demo
           </button>
           <p>
             {" "}
