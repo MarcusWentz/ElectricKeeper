@@ -4,6 +4,7 @@ import Web3 from "web3";
 import { ELECTRICKEEPER_ABI, ELECTRICKEEPER_CONTRACT_ADDRESS } from "../config";
 import { Web3ReactProvider, useWeb3React } from "@web3-react/core";
 import { DataContext } from "../DataContext";
+import ErrorModal from "../components/ErrorModal";
 
 const Status = () => {
   const [voltageExpirationRed, setVoltageExpirationRed] = useState(-1);
@@ -14,6 +15,7 @@ const Status = () => {
   const [voltageExpirationOrange, setVoltageExpirationOrange] = useState(-1);
   const [voltageExpirationPink, setVoltageExpirationPink] = useState(-1);
   const [voltageExpirationWhite, setVoltageExpirationWhite] = useState(-1);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const { account } = useWeb3React();
 
@@ -21,6 +23,10 @@ const Status = () => {
     const loadBlockchainData = async () => {
       const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
       const chainId = await web3.eth.getChainId();
+      console.log(chainId);
+      if (chainId !== 80001) {
+        setErrorMsg("Must be on the Mumbai test network");
+      }
 
       //Load the smart contract(s)
       const electricKeeperContract = new web3.eth.Contract(
@@ -81,58 +87,76 @@ const Status = () => {
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Voltage</th>
-                <th scope="col">Expiration</th>
+                <th scope="col">Expiration UNIX</th>
               </tr>
             </thead>
             <tbody
               style={{ background: "white", borderRadius: 30, border: "none" }}
             >
               <tr className="btn-hover color-red">
-                <th scope="row">1</th>
+                <th scope="row">0</th>
                 <td>{voltageExpirationRed.Voltage}</td>
                 <td>{voltageExpirationRed.ExpirationTimeUNIX}</td>
               </tr>
               <tr className="btn-hover color-blue">
-                <th scope="row">2</th>
+                <th scope="row">1</th>
                 <td>{voltageExpirationBlue.Voltage}</td>
                 <td>{voltageExpirationBlue.ExpirationTimeUNIX}</td>
               </tr>
               <tr className="btn-hover color-yellow">
-                <th scope="row">3</th>
+                <th scope="row">2</th>
                 <td>{voltageExpirationYellow.Voltage}</td>
                 <td>{voltageExpirationYellow.ExpirationTimeUNIX}</td>
               </tr>
               <tr className="btn-hover color-green">
-                <th scope="row">4</th>
+                <th scope="row">3</th>
                 <td>{voltageExpirationGreen.Voltage}</td>
                 <td>{voltageExpirationGreen.ExpirationTimeUNIX}</td>
               </tr>
               <tr className="btn-hover color-purple">
-                <th scope="row">5</th>
+                <th scope="row">4</th>
                 <td>{voltageExpirationPurple.Voltage}</td>
                 <td>{voltageExpirationPurple.ExpirationTimeUNIX}</td>
               </tr>
               <tr className="btn-hover color-orange">
-                <th scope="row">6</th>
+                <th scope="row">5</th>
                 <td>{voltageExpirationOrange.Voltage}</td>
                 <td>{voltageExpirationOrange.ExpirationTimeUNIX}</td>
               </tr>
               <tr className="btn-hover color-pink">
-                <th scope="row">7</th>
+                <th scope="row">6</th>
                 <td>{voltageExpirationPink.Voltage}</td>
                 <td>{voltageExpirationPink.ExpirationTimeUNIX}</td>
               </tr>{" "}
               <tr className="btn-hover color-white">
-                <th scope="row">8</th>
+                <th scope="row">7</th>
                 <td>{voltageExpirationWhite.Voltage}</td>
                 <td>{voltageExpirationWhite.ExpirationTimeUNIX}</td>
               </tr>
             </tbody>
           </table>
         </div>
+        {errorMsg !== "" ? (
+          <ErrorModal
+            showToastFromProp={errorMsg !== ""}
+            onClose={() => setErrorMsg("")}
+            errorMsg={errorMsg}
+          ></ErrorModal>
+        ) : null}
       </div>
     );
-  } else return null;
+  } else
+    return (
+      <>
+        {errorMsg !== "" ? (
+          <ErrorModal
+            showToastFromProp={"Loading Data ..."}
+            onClose={() => setErrorMsg("")}
+            errorMsg={errorMsg}
+          ></ErrorModal>
+        ) : null}
+      </>
+    );
 };
 
 export default Status;
