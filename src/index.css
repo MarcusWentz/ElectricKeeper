@@ -25,7 +25,7 @@ body {
     #000000 70%
   );
   background-size: cover;
- -webkit-background-size: cover;
+  -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-repeat: no-repeat;
@@ -432,16 +432,20 @@ input::-webkit-inner-spin-button {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #8f7b57;
 }
-::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
   color: #8f7b57;
 }
-::-moz-placeholder { /* Firefox 19+ */
+::-moz-placeholder {
+  /* Firefox 19+ */
   color: #8f7b57;
 }
-:-ms-input-placeholder { /* IE 10+ */
+:-ms-input-placeholder {
+  /* IE 10+ */
   color: #8f7b57;
 }
-:-moz-placeholder { /* Firefox 18- */
+:-moz-placeholder {
+  /* Firefox 18- */
   color: #8f7b57;
 }
 
@@ -561,4 +565,43 @@ th {
   border-color: inherit;
   border-style: none !important;
   border-width: 0;
+}
+
+.gradiantbkg {
+  background: linear-gradient(
+    to bottom,
+    rgba(#f8f9fa, 0.95),
+    rgba(white, 0.95)
+  ) !important;
+}
+
+.gradiant {
+  background: linear-gradient(
+    to bottom,
+    rgba(#a0b841, 0.95),
+    rgba(#cfe383, 0.95)
+  );
+}
+
+.gradiantorange {
+  background: linear-gradient(
+    to bottom,
+    rgba(#f8aa03, 0.95),
+    rgba(#fbc34a, 0.95)
+  );
+}
+
+.big {
+  max-width: 96%;
+  padding: 15px 15% 15px 15%;
+  color: #fff;
+  font-weight: 700;
+}
+
+.gradiantred {
+  background: linear-gradient(
+    to bottom,
+    rgba(#dc3545, 0.95),
+    rgba(#f86d6d, 0.95)
+  );
 }
