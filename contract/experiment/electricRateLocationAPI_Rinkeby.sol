@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.7;
+pragma solidity 0.8.12;
 
 import "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
  
@@ -15,9 +15,9 @@ contract APIConsumer is ChainlinkClient {
      
     constructor() {
         setPublicChainlinkToken();
-       oracle = 0x3A56aE4a2831C3d3514b5D7Af5578E45eBDb7a40;
-       jobId = "3b7ca0d48c7a4b2da9268456665d11ae";
-        fee = 0.1 * 10 ** 18; // (Varies by network and job)
+       oracle = 0xF405B99ACa8578B9eb989ee2b69D518aaDb90c1F;
+       jobId = "c51694e71fa94217b0f4a71b2a6b565a";
+        fee = 1 * 10 ** 16; // (Varies by network and job)
     }
 
     function requestVolumeData() public returns (bytes32 requestId) 
@@ -36,4 +36,3 @@ contract APIConsumer is ChainlinkClient {
     }
 
 }
-
