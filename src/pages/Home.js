@@ -12,11 +12,12 @@ const Home = () => {
             <h1 className="mb-5 flickerOn">
               electricKeeper is a hybrid smart contract for electric grid
               policies
-            </h1>
-            <h1 className="mb-5 flickerOn">
+              <h3 className="mb-5 flickerOn">
               chainlink keepers automates policy expiration detection and state
               changes
+            </h3>
             </h1>
+         
             <br />
           </div>{" "}
         </div>
