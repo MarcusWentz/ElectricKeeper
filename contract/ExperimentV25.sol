@@ -7,11 +7,10 @@ import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
 contract ElectricKeeper is KeeperCompatibleInterface,ChainlinkClient { 
 
-
     using Chainlink for Chainlink.Request;
     AggregatorV3Interface internal priceFeed;
 
-    uint public electricRateTennessee; //Resolution is $0.0000
+    uint public ElectricRateTennessee; //Resolution is $0.0000
     struct STATE{ uint Voltage; uint ExpirationTimeUNIX; }
     mapping(uint => STATE) public LED; 
     address public immutable Owner;
@@ -33,7 +32,7 @@ contract ElectricKeeper is KeeperCompatibleInterface,ChainlinkClient {
         _;
     }
 
-    function requestVolumeData() public returns (bytes32 requestId) 
+    function requestElectricRateTennessee() public returns (bytes32 requestId) 
     {
         Chainlink.Request memory request = buildChainlinkRequest("c51694e71fa94217b0f4a71b2a6b565a", address(this), this.fulfill.selector); //UINT
         request.add("get", "https://developer.nrel.gov/api/utility_rates/v3.json?api_key=DEMO_KEY&lat=35&lon=-85");
@@ -45,13 +44,12 @@ contract ElectricKeeper is KeeperCompatibleInterface,ChainlinkClient {
     
     function fulfill(bytes32 _requestId, uint256 _electricRateTennessee) public recordChainlinkFulfillment(_requestId)
     {
-        electricRateTennessee = _electricRateTennessee;
+        ElectricRateTennessee = _electricRateTennessee;
     }
 
     function onePennyUSDinMatic(uint scaleMinutes) public view returns (uint) {
         (uint80 roundID, int price, uint startedAt, uint timeStamp, uint80 answeredInRound) = priceFeed.latestRoundData();
-        //        return electricRateTennessee*scaleMinutes*uint( (10**24) / price );
-        return scaleMinutes*uint( (10**24) / price );
+        return (ElectricRateTennessee*scaleMinutes*uint( (10**24) / price ))/(100);
     }
 
     function expirationOccured() public view returns(bool) {
@@ -64,7 +62,7 @@ contract ElectricKeeper is KeeperCompatibleInterface,ChainlinkClient {
     }
 
     function BuyElectricityTimeOn(uint ledValue, uint minutesToHaveOn) public payable validLEDvalues(ledValue) {
-        require(minutesToHaveOn*electricRateTennessee > 0 && msg.value == (onePennyUSDinMatic(minutesToHaveOn)), "MUST_HAVE_MINUTES_AND_API_GREATER_THAN_0_AND_MSG_VALUE=MINUTES*FEE.");
+        require(minutesToHaveOn*ElectricRateTennessee > 0 && msg.value == (onePennyUSDinMatic(minutesToHaveOn)), "MUST_HAVE_MINUTES_AND_API_GREATER_THAN_0_AND_MSG_VALUE=MINUTES*FEE.");
         if(LED[ledValue].Voltage == 0) {
             LED[ledValue].Voltage = 1;
             LED[ledValue].ExpirationTimeUNIX = block.timestamp + (60*minutesToHaveOn); 
