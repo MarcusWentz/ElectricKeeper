@@ -50,7 +50,7 @@ describe("Electric Keeper Buyer Tests:", function () {
         (await electricKeeperDeployed.onePennyUSDinMatic(0)).toString()
       ).to.equal("0");
     });
-    it("4052000000000000 (BigNum) 0 when input > 0 and ElectricRateTennessee > 0 ", async function () {
+    it("return 4052000000000000 when input == 1 and ElectricRateTennessee == 1013 ", async function () {
         const transactionCallAPI = await electricKeeperDeployed.ElectricRateTennesseeAPIMock();
         const tx_receiptCallAPI = await transactionCallAPI.wait();
         expect(
