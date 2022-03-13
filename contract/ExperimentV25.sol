@@ -50,8 +50,8 @@ contract ElectricKeeper is KeeperCompatibleInterface,ChainlinkClient {
 
     function onePennyUSDinMatic(uint scaleMinutes) public view returns (uint) {
         (uint80 roundID, int price, uint startedAt, uint timeStamp, uint80 answeredInRound) = priceFeed.latestRoundData();
-        return uint(price);
-        // return electricRateTennessee*scaleMinutes*uint( (10**24) / price );
+        //        return electricRateTennessee*scaleMinutes*uint( (10**24) / price );
+        return scaleMinutes*uint( (10**24) / price );
     }
 
     function expirationOccured() public view returns(bool) {
