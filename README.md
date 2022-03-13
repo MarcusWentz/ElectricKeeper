@@ -31,5 +31,3 @@ Hardware:
 -330 ohm resistor (current limiting safety) [Quantity: 8]
 
 Presentation slides: https://docs.google.com/presentation/d/1cRC4lI-hXJ0S35Tm_BWMym4Wqitvkxw0HylvKsHX4m4/edit?usp=sharing
-
-Note: we cut Polygon Mumbai from our project on V25 because we could not deploy Chainlink API contracts (not supported chain error on Remix and web3.js)
