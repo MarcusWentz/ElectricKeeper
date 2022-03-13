@@ -1,44 +1,8 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/Users/kieranwilliams/Programming/ElectricKeeper/test/unit/contracts/ElectricKeeperMockV24.sol": {
-      "lastModificationDate": 1647101769400,
-      "contentHash": "49c621b70a6bfa37e6fc87d6542f7953",
-      "sourceName": "contracts/ElectricKeeperMockV24.sol",
-      "solcConfig": {
-        "version": "0.8.12",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "0.8.12"
-      ],
-      "artifacts": [
-        "BuyDemoEightMinutesMock",
-        "ElectricKeeperMock"
-      ]
-    },
-    "/Users/kieranwilliams/Programming/new/ElectricKeeper/test/unit/contracts/ElectricKeeperMockV24.sol": {
-      "lastModificationDate": 1647114226244,
+    "/Users/jp/Documents/Solidity/ETHDenver/ElectricKeepers/ElectricKeeper/test/unit/contracts/ElectricKeeperMockV24.sol": {
+      "lastModificationDate": 1647184626163,
       "contentHash": "49c621b70a6bfa37e6fc87d6542f7953",
       "sourceName": "contracts/ElectricKeeperMockV24.sol",
       "solcConfig": {

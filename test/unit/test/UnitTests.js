@@ -149,6 +149,82 @@ describe("Electric Keeper Buyer Tests:", function () {
       const tx_receipt = await transaction.wait();
     });
   });
+
+  describe("OwnerEmergencyDangerOff()", function () {
+    it("Fail if not Owner", async function () {
+      await expect(
+        electricKeeperDeployed.connect(buyer1).OwnerEmergencyDangerOff(8)
+      ).to.be.revertedWith(
+        "ONLY_OWNER_WALLET_ADDRESS_HAS_ACCESS."
+      );
+    });
+    it("Fail if not a valid LED value", async function () {
+      await expect(
+        electricKeeperDeployed.OwnerEmergencyDangerOff(8)
+      ).to.be.revertedWith(
+        "LED_VALUES_RED_0_BLUE_1_YELLOW_2_GREEN_3_PURPLE_4_ORANGE_5_PINK_6_WHITE_7."
+      );
+    });
+    it("Fail if requested LED is not on", async function () {
+      await expect(
+        electricKeeperDeployed.OwnerEmergencyDangerOff(7)
+      ).to.be.revertedWith(
+        "VOLTAGE_NOT_ON."
+      );
+    });
+    it("Pass if requested LED is on", async function () {
+      let maticPrice =
+        (await electricKeeperDeployed.onePennyUSDinMatic(1)) /
+        1000000000000000000;
+      const transaction = await electricKeeperDeployed
+        .connect(buyer1)
+        .BuyElectricityTimeOn(7, 1, {
+          value: ethers.utils.parseEther(maticPrice.toString()),
+        });
+      const tx_receipt = await transaction.wait();
+      const transaction2 = await electricKeeperDeployed.OwnerEmergencyDangerOff(7)
+      const tx_receipt2 = await transaction2.wait();
+    });
+  });
+
+  describe("OwnerEmergencySafeOn()", function () {
+    it("Fail if not Owner", async function () {
+      await expect(
+        electricKeeperDeployed.connect(buyer1).OwnerEmergencySafeOn(8)
+      ).to.be.revertedWith(
+        "ONLY_OWNER_WALLET_ADDRESS_HAS_ACCESS."
+      );
+    });
+    it("Fail if not a valid LED value", async function () {
+      await expect(
+        electricKeeperDeployed.OwnerEmergencySafeOn(8)
+      ).to.be.revertedWith(
+        "LED_VALUES_RED_0_BLUE_1_YELLOW_2_GREEN_3_PURPLE_4_ORANGE_5_PINK_6_WHITE_7."
+      );
+    });
+    it("Fail if requested LED is in Emergency off state", async function () {
+      await expect(
+        electricKeeperDeployed.OwnerEmergencySafeOn(7)
+      ).to.be.revertedWith(
+        "VOLTAGE_NOT_IN_EMERGENCY_OFF_STATE."
+      );
+    });
+    it("Pass if requested LED is in Emeregency off state", async function () {
+      let maticPrice =
+        (await electricKeeperDeployed.onePennyUSDinMatic(1)) /
+        1000000000000000000;
+      const transaction = await electricKeeperDeployed
+        .connect(buyer1)
+        .BuyElectricityTimeOn(7, 1, {
+          value: ethers.utils.parseEther(maticPrice.toString()),
+        });
+      const tx_receipt = await transaction.wait();
+      const transaction2 = await electricKeeperDeployed.OwnerEmergencyDangerOff(7)
+      const tx_receipt2 = await transaction2.wait();
+      const transaction3 = await electricKeeperDeployed.OwnerEmergencySafeOn(7)
+      const tx_receipt3 = await transaction3.wait();
+    });
+  });
   /*
       describe("BuyerCreatePolicy", function () {
         it("Day<0.", async function () {
