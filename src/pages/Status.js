@@ -6,6 +6,8 @@ import { Web3ReactProvider, useWeb3React } from "@web3-react/core";
 import { DataContext } from "../DataContext";
 import ErrorModal from "../components/ErrorModal";
 
+import ErrorModal from "../components/ErrorModal";
+
 const Status = () => {
   const [voltageExpirationRed, setVoltageExpirationRed] = useState(-1);
   const [voltageExpirationBlue, setVoltageExpirationBlue] = useState(-1);
@@ -33,6 +35,10 @@ const Status = () => {
         ELECTRICKEEPER_ABI,
         ELECTRICKEEPER_CONTRACT_ADDRESS
       );
+
+      if (chainId !== 80001) {
+        setErrorMsg("Must be on the Mumbai test network");
+      }
 
       let red = await electricKeeperContract.methods.LED(0).call();
       let blue = await electricKeeperContract.methods.LED(1).call();
