@@ -17,7 +17,7 @@ contract ElectricKeeper is KeeperCompatibleInterface,ChainlinkClient {
     event VoltageChange();
 
     constructor() {
-        setPublicChainlinkToken();
+        setChainlinkToken(0x326C977E6efc84E512bB9C30f76E30c160eD06FB);
         Owner = msg.sender;
         priceFeed = AggregatorV3Interface(0x9326BFA02ADD2366b30bacB125260Af641031331); //ETH/USD on Kovan network.
     }
@@ -33,12 +33,12 @@ contract ElectricKeeper is KeeperCompatibleInterface,ChainlinkClient {
     }
 
     function requestElectricRateTennessee() public returns (bytes32 requestId) {
-        Chainlink.Request memory request = buildChainlinkRequest("c51694e71fa94217b0f4a71b2a6b565a", address(this), this.fulfill.selector); //UINT
+        Chainlink.Request memory request = buildChainlinkRequest("bbf0badad29d49dc887504bacfbb905b", address(this), this.fulfill.selector); //UINT
         request.add("get", "https://developer.nrel.gov/api/utility_rates/v3.json?api_key=DEMO_KEY&lat=35&lon=-85");
         request.add("path", "outputs.residential");
         int timesAmount = 10000;
         request.addInt("times", timesAmount);
-        return sendChainlinkRequestTo(0xF405B99ACa8578B9eb989ee2b69D518aaDb90c1F, request, 10**16); //0.01 LINK
+        return sendChainlinkRequestTo(0xc8D925525CA8759812d0c299B90247917d4d4b7C, request, 10**16); //0.01 LINK
     }
     
     function fulfill(bytes32 _requestId, uint256 _electricRateTennessee) public recordChainlinkFulfillment(_requestId) {
