@@ -44,18 +44,18 @@ describe("Electric Keeper Buyer Tests:", function () {
     });
   });
 
-  describe("onePennyUSDinMatic()", function () {
+  describe("feeInPenniesUSDinMatic()", function () {
     it("Expect 0 when input 0", async function () {
       expect(
-        (await electricKeeperDeployed.onePennyUSDinMatic(0)).toString()
+        (await electricKeeperDeployed.feeInPenniesUSDinMatic(0)).toString()
       ).to.equal("0");
     });
-    it("return 4052000000000000 when input == 1 and ElectricRateTennessee == 1013 ", async function () {
+    it("return 70910000000000000 MATIC WEI when input == 1 and ElectricRateTennessee == 1013 ", async function () {
         const transactionCallAPI = await electricKeeperDeployed.ElectricRateTennesseeAPIMock();
         const tx_receiptCallAPI = await transactionCallAPI.wait();
         expect(
-          (await electricKeeperDeployed.onePennyUSDinMatic(1)).toString()
-            ).to.equal("4052000000000000");
+          (await electricKeeperDeployed.feeInPenniesUSDinMatic(1)).toString()
+            ).to.equal("70910000000000000");
     });
   });
 
@@ -85,7 +85,7 @@ describe("Electric Keeper Buyer Tests:", function () {
       const transactionCallAPI = await electricKeeperDeployed.ElectricRateTennesseeAPIMock();
       const tx_receiptCallAPI = await transactionCallAPI.wait();
       let maticPrice =
-        (await electricKeeperDeployed.onePennyUSDinMatic(1)) /
+        (await electricKeeperDeployed.feeInPenniesUSDinMatic(1)) /
         1000000000000000000;
       const transaction = await electricKeeperDeployed
         .connect(buyer1)
@@ -98,7 +98,7 @@ describe("Electric Keeper Buyer Tests:", function () {
       const transactionCallAPI = await electricKeeperDeployed.ElectricRateTennesseeAPIMock();
       const tx_receiptCallAPI = await transactionCallAPI.wait();
       let maticPrice =
-        (await electricKeeperDeployed.onePennyUSDinMatic(1)) /
+        (await electricKeeperDeployed.feeInPenniesUSDinMatic(1)) /
         1000000000000000000;
       const transaction = await electricKeeperDeployed
         .connect(buyer1)
@@ -130,7 +130,7 @@ describe("Electric Keeper Buyer Tests:", function () {
       const transactionCallAPI = await electricKeeperDeployed.ElectricRateTennesseeAPIMock();
       const tx_receiptCallAPI = await transactionCallAPI.wait();
       let maticPrice =
-        (await electricKeeperDeployed.onePennyUSDinMatic(1)) /
+        (await electricKeeperDeployed.feeInPenniesUSDinMatic(1)) /
         1000000000000000000;
       const transaction_buy = await electricKeeperDeployed
         .connect(buyer1)
@@ -175,7 +175,7 @@ describe("Electric Keeper Buyer Tests:", function () {
       const transactionCallAPI = await electricKeeperDeployed.ElectricRateTennesseeAPIMock();
       const tx_receiptCallAPI = await transactionCallAPI.wait();
       let maticPrice =
-        (await electricKeeperDeployed.onePennyUSDinMatic(1)) /
+        (await electricKeeperDeployed.feeInPenniesUSDinMatic(1)) /
         1000000000000000000;
       const transaction = await electricKeeperDeployed
         .connect(buyer1)
@@ -214,7 +214,7 @@ describe("Electric Keeper Buyer Tests:", function () {
       const transactionCallAPI = await electricKeeperDeployed.ElectricRateTennesseeAPIMock();
       const tx_receiptCallAPI = await transactionCallAPI.wait();
       let maticPrice =
-        (await electricKeeperDeployed.onePennyUSDinMatic(1)) /
+        (await electricKeeperDeployed.feeInPenniesUSDinMatic(1)) /
         1000000000000000000;
       const transaction = await electricKeeperDeployed
         .connect(buyer1)
@@ -239,11 +239,11 @@ describe("Electric Keeper Buyer Tests:", function () {
         "MUST_HAVE_MSG_VALUE=36*FEE."
       );
     });
-    it("Pass if MSG.VALUE=onePennyUSDinMatic(36)", async function () {
+    it("Pass if MSG.VALUE=feeInPenniesUSDinMatic(36)", async function () {
       const transactionCallAPI = await electricKeeperDeployed.ElectricRateTennesseeAPIMock();
       const tx_receiptCallAPI = await transactionCallAPI.wait();
       let maticPrice =
-        (await electricKeeperDeployed.onePennyUSDinMatic(36)) /
+        (await electricKeeperDeployed.feeInPenniesUSDinMatic(36)) /
         1000000000000000000;
       const transaction = await BuyDemoEightMinutesDeployed
         .connect(buyer1)
