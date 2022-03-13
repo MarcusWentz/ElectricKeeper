@@ -32,6 +32,16 @@ contract ElectricKeeper { //is KeeperCompatibleInterface,ChainlinkClient {
         _;
     }
 
+    //    function requestElectricRateTennessee() public returns (bytes32 requestId) 
+//    {
+//        Chainlink.Request memory request = buildChainlinkRequest("c51694e71fa94217b0f4a71b2a6b565a", address(this), this.fulfill.selector); //UINT
+//        request.add("get", "https://developer.nrel.gov/api/utility_rates/v3.json?api_key=DEMO_KEY&lat=35&lon=-85");
+//        request.add("path", "outputs.residential");
+//        int timesAmount = 10000;
+//        request.addInt("times", timesAmount);
+//        return sendChainlinkRequestTo(0xF405B99ACa8578B9eb989ee2b69D518aaDb90c1F, request, 10**16); //0.01 LINK
+//    }
+
 //    function requestElectricRateTennessee() public returns (bytes32 requestId) 
 //    {
 //        Chainlink.Request memory request = buildChainlinkRequest("c51694e71fa94217b0f4a71b2a6b565a", address(this), this.fulfill.selector); //UINT
@@ -42,10 +52,9 @@ contract ElectricKeeper { //is KeeperCompatibleInterface,ChainlinkClient {
 //        return sendChainlinkRequestTo(0xF405B99ACa8578B9eb989ee2b69D518aaDb90c1F, request, 10**16); //0.01 LINK
 //    }
 //    
-//    function fulfill(bytes32 _requestId, uint256 _electricRateTennessee) public recordChainlinkFulfillment(_requestId)
-//    {
-//        ElectricRateTennessee = _electricRateTennessee;
-//    }
+   function ElectricRateTennesseeAPIMock() public {
+       ElectricRateTennessee = 1013;
+   }
 
     function onePennyUSDinMatic(uint scaleMinutes) public view returns (uint) {
         return (ElectricRateTennessee*scaleMinutes*uint(4*10**14))/(100);
