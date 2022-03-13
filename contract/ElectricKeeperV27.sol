@@ -19,7 +19,7 @@ contract ElectricKeeper is KeeperCompatibleInterface,ChainlinkClient {
     constructor() {
         setChainlinkToken(0x326C977E6efc84E512bB9C30f76E30c160eD06FB);
         Owner = msg.sender;
-        priceFeed = AggregatorV3Interface(0x9326BFA02ADD2366b30bacB125260Af641031331); //ETH/USD on Kovan network.
+        priceFeed = AggregatorV3Interface(0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada); //MATIC/USD on Polygon Testnet Mumbai network.
     }
 
     modifier onlyOwner() {
@@ -45,7 +45,7 @@ contract ElectricKeeper is KeeperCompatibleInterface,ChainlinkClient {
         ElectricRateTennessee = _electricRateTennessee;
     }
 
-    function onePennyUSDinMatic(uint scaleMinutes) public view returns (uint) {
+    function feeInPenniesUSDinMatic(uint scaleMinutes) public view returns (uint) {
         (uint80 roundID, int price, uint startedAt, uint timeStamp, uint80 answeredInRound) = priceFeed.latestRoundData();
         return (ElectricRateTennessee*scaleMinutes*uint( (10**24) / price ))/(100);
     }
@@ -60,7 +60,7 @@ contract ElectricKeeper is KeeperCompatibleInterface,ChainlinkClient {
     }
 
     function BuyElectricityTimeOn(uint ledValue, uint minutesToHaveOn) public payable validLEDvalues(ledValue) {
-        require(minutesToHaveOn*ElectricRateTennessee > 0 && msg.value == (onePennyUSDinMatic(minutesToHaveOn)), "MUST_HAVE_MINUTES_AND_API_GREATER_THAN_0_AND_MSG_VALUE=MINUTES*FEE.");
+        require(minutesToHaveOn*ElectricRateTennessee > 0 && msg.value == (feeInPenniesUSDinMatic(minutesToHaveOn)), "MUST_HAVE_MINUTES_AND_API_GREATER_THAN_0_AND_MSG_VALUE=MINUTES*FEE.");
         if(LED[ledValue].Voltage == 0) {
             LED[ledValue].Voltage = 1;
             LED[ledValue].ExpirationTimeUNIX = block.timestamp + (60*minutesToHaveOn); 
@@ -121,9 +121,9 @@ contract BuyDemoEightMinutes {
     }
 
     function BuyTestEightMinuteCountdown() public payable {
-       require(msg.value == electricKeeperInstance.onePennyUSDinMatic(36), "MUST_HAVE_MSG_VALUE=36*FEE.");
+       require(msg.value == electricKeeperInstance.feeInPenniesUSDinMatic(36), "MUST_HAVE_MSG_VALUE=36*FEE.");
        for(uint ledValue = 0; ledValue < 8; ledValue++ ) {
-            electricKeeperInstance.BuyElectricityTimeOn{value: electricKeeperInstance.onePennyUSDinMatic(ledValue+1)}(ledValue,ledValue+1);
+            electricKeeperInstance.BuyElectricityTimeOn{value: electricKeeperInstance.feeInPenniesUSDinMatic(ledValue+1)}(ledValue,ledValue+1);
         }
     }
 }
