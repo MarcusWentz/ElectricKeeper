@@ -6,8 +6,6 @@ import { Web3ReactProvider, useWeb3React } from "@web3-react/core";
 import { DataContext } from "../DataContext";
 import ErrorModal from "../components/ErrorModal";
 
-import ErrorModal from "../components/ErrorModal";
-
 const Status = () => {
   const [voltageExpirationRed, setVoltageExpirationRed] = useState(-1);
   const [voltageExpirationBlue, setVoltageExpirationBlue] = useState(-1);
@@ -93,7 +91,7 @@ const Status = () => {
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Voltage</th>
-                <th scope="col">Expiration UNIX</th>
+                <th scope="col">Expiration</th>
               </tr>
             </thead>
             <tbody
@@ -102,42 +100,74 @@ const Status = () => {
               <tr className="btn-hover color-red">
                 <th scope="row">0</th>
                 <td>{voltageExpirationRed.Voltage}</td>
-                <td>{voltageExpirationRed.ExpirationTimeUNIX}</td>
+                <td>
+                  {voltageExpirationRed.ExpirationTimeUNIX === "0"
+                    ? "expired"
+                    : timeConverter(voltageExpirationRed.ExpirationTimeUNIX)}
+                </td>
               </tr>
               <tr className="btn-hover color-blue">
                 <th scope="row">1</th>
                 <td>{voltageExpirationBlue.Voltage}</td>
-                <td>{voltageExpirationBlue.ExpirationTimeUNIX}</td>
+                <td>
+                  {voltageExpirationRed.ExpirationTimeUNIX === "0"
+                    ? "expired"
+                    : timeConverter(voltageExpirationBlue.ExpirationTimeUNIX)}
+                </td>
               </tr>
               <tr className="btn-hover color-yellow">
                 <th scope="row">2</th>
                 <td>{voltageExpirationYellow.Voltage}</td>
-                <td>{voltageExpirationYellow.ExpirationTimeUNIX}</td>
+                <td>
+                  {voltageExpirationYellow.ExpirationTimeUNIX === "0"
+                    ? "expired"
+                    : timeConverter(voltageExpirationYellow.ExpirationTimeUNIX)}
+                </td>
               </tr>
               <tr className="btn-hover color-green">
                 <th scope="row">3</th>
                 <td>{voltageExpirationGreen.Voltage}</td>
-                <td>{voltageExpirationGreen.ExpirationTimeUNIX}</td>
+                <td>
+                  {voltageExpirationGreen.ExpirationTimeUNIX === "0"
+                    ? "expired"
+                    : timeConverter(voltageExpirationGreen.ExpirationTimeUNIX)}
+                </td>
               </tr>
               <tr className="btn-hover color-purple">
                 <th scope="row">4</th>
                 <td>{voltageExpirationPurple.Voltage}</td>
-                <td>{voltageExpirationPurple.ExpirationTimeUNIX}</td>
+                <td>
+                  {voltageExpirationPurple.ExpirationTimeUNIX === "0"
+                    ? "expired"
+                    : timeConverter(voltageExpirationPurple.ExpirationTimeUNIX)}
+                </td>
               </tr>
               <tr className="btn-hover color-orange">
                 <th scope="row">5</th>
                 <td>{voltageExpirationOrange.Voltage}</td>
-                <td>{voltageExpirationOrange.ExpirationTimeUNIX}</td>
+                <td>
+                  {voltageExpirationOrange.ExpirationTimeUNIX === "0"
+                    ? "expired"
+                    : timeConverter(voltageExpirationOrange.ExpirationTimeUNIX)}
+                </td>
               </tr>
               <tr className="btn-hover color-pink">
                 <th scope="row">6</th>
                 <td>{voltageExpirationPink.Voltage}</td>
-                <td>{voltageExpirationPink.ExpirationTimeUNIX}</td>
+                <td>
+                  {voltageExpirationPink.ExpirationTimeUNIX === "0"
+                    ? "expired"
+                    : timeConverter(voltageExpirationPink.ExpirationTimeUNIX)}
+                </td>
               </tr>{" "}
               <tr className="btn-hover color-white">
                 <th scope="row">7</th>
                 <td>{voltageExpirationWhite.Voltage}</td>
-                <td>{voltageExpirationWhite.ExpirationTimeUNIX}</td>
+                <td>
+                  {voltageExpirationWhite.ExpirationTimeUNIX === "0"
+                    ? "expired"
+                    : timeConverter(voltageExpirationWhite.ExpirationTimeUNIX)}
+                </td>
               </tr>
             </tbody>
           </table>
@@ -165,4 +195,30 @@ const Status = () => {
     );
 };
 
+function timeConverter(UNIX_timestamp) {
+  var a = new Date(UNIX_timestamp * 1000);
+  var months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  var year = a.getFullYear();
+  var month = months[a.getMonth()];
+  var date = a.getDate();
+  var hour = a.getHours();
+  var min = a.getMinutes();
+  var sec = a.getSeconds();
+  var time =
+    date + " " + month + " " + year + " " + hour + ":" + min + ":" + sec;
+  return time;
+}
 export default Status;
