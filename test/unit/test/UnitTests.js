@@ -29,6 +29,17 @@ describe("Electric Keeper Buyer Tests:", function () {
     it("Owner is equal to default ethers.getSigners() address.", async function () {
       expect(await electricKeeperDeployed.Owner()).to.equal(owner.address);
     });
+    it("ElectricRateTennessee is 0", async function () {
+      expect(await electricKeeperDeployed.ElectricRateTennessee()).to.equal(0);
+    });
+  });
+
+  describe("ElectricRateTennesseeAPIMock()", function () {
+    it("Sets ElectricRateTennessee to 1013", async function () {
+      expect(
+        (await electricKeeperDeployed.ElectricRateTennesseeAPIMock()).toString()
+      ).to.equal("1013");
+    });
   });
 
   describe("onePennyUSDinMatic()", function () {
@@ -37,37 +48,40 @@ describe("Electric Keeper Buyer Tests:", function () {
         (await electricKeeperDeployed.onePennyUSDinMatic(0)).toString()
       ).to.equal("0");
     });
-    it("Expect > 0 when input > 0", async function () {
+    it("Expect > 0 when input > 0 and ElectricRateTennessee > 0 ", async function () {
+      const transactionCallAPI = await electricKeeperDeployed.ElectricRateTennesseeAPIMock();
+      const tx_receiptCallAPI = await transactionCallAPI.wait();
       expect(
         (await electricKeeperDeployed.onePennyUSDinMatic(1)).toString()
-      ).to.equal("7000000000000000");
+      ).to.equal("4052000000000000");
     });
   });
 
   describe("BuyElectricityTimeOn()", function () {
-    it("ledValue >= 8", async function () {
+    it("ledValue >= 8 fails", async function () {
       await expect(
         electricKeeperDeployed.BuyElectricityTimeOn(8, 1)
       ).to.be.revertedWith(
         "LED_VALUES_RED_0_BLUE_1_YELLOW_2_GREEN_3_PURPLE_4_ORANGE_5_PINK_6_WHITE_7."
       );
     });
-    it("ledValue == 7", async function () {
+    it("ledValue == 7 && minutesToHaveOn == 0 fails", async function () {
       await expect(
         electricKeeperDeployed.BuyElectricityTimeOn(7, 0)
       ).to.be.revertedWith(
-        "MUST_HAVE_MINUTES_GREATER_THAN_0_AND_MSG_VALUE=MINUTES*FEE."
+        "MUST_HAVE_MINUTES_AND_API_GREATER_THAN_0_AND_MSG_VALUE=MINUTES*FEE."
       );
     });
-    it("ledValue == 7 && minutesToHaveOn == 1 && msg.value == 0", async function () {
+    it("ledValue == 7 && minutesToHaveOn == 1 && msg.value == 0 fails", async function () {
       await expect(
         electricKeeperDeployed.BuyElectricityTimeOn(7, 1)
       ).to.be.revertedWith(
-        "MUST_HAVE_MINUTES_GREATER_THAN_0_AND_MSG_VALUE=MINUTES*FEE."
+        "MUST_HAVE_MINUTES_AND_API_GREATER_THAN_0_AND_MSG_VALUE=MINUTES*FEE."
       );
     });
-
     it("Pass buy 1 LED value", async function () {
+      const transactionCallAPI = await electricKeeperDeployed.ElectricRateTennesseeAPIMock();
+      const tx_receiptCallAPI = await transactionCallAPI.wait();
       let maticPrice =
         (await electricKeeperDeployed.onePennyUSDinMatic(1)) /
         1000000000000000000;
@@ -79,6 +93,8 @@ describe("Electric Keeper Buyer Tests:", function () {
       const tx_receipt = await transaction.wait();
     });
     it("Pass buy same LED renew", async function () {
+      const transactionCallAPI = await electricKeeperDeployed.ElectricRateTennesseeAPIMock();
+      const tx_receiptCallAPI = await transactionCallAPI.wait();
       let maticPrice =
         (await electricKeeperDeployed.onePennyUSDinMatic(1)) /
         1000000000000000000;
@@ -109,6 +125,8 @@ describe("Electric Keeper Buyer Tests:", function () {
       ).to.be.revertedWith("NO_EXPIRATION_YET");
     });
     it("owner user function call for OwnerManualExpirationOff", async () => {
+      const transactionCallAPI = await electricKeeperDeployed.ElectricRateTennesseeAPIMock();
+      const tx_receiptCallAPI = await transactionCallAPI.wait();
       let maticPrice =
         (await electricKeeperDeployed.onePennyUSDinMatic(1)) /
         1000000000000000000;
@@ -125,27 +143,6 @@ describe("Electric Keeper Buyer Tests:", function () {
       const transaction = await electricKeeperDeployed
         .connect(owner)
         .OwnerManualExpirationOff();
-      const tx_receipt = await transaction.wait();
-    });
-  });
-
-  describe("BuyTestEightMinuteCountdown()", function () {
-    it("Fail if MSG.VALUE=0.", async function () {
-      await expect(
-        BuyDemoEightMinutesDeployed.BuyTestEightMinuteCountdown()
-      ).to.be.revertedWith(
-        "MUST_HAVE_MSG_VALUE=36*FEE."
-      );
-    });
-    it("Pass if MSG.VALUE=onePennyUSDinMatic(36)", async function () {
-      let maticPrice =
-        (await electricKeeperDeployed.onePennyUSDinMatic(36)) /
-        1000000000000000000;
-      const transaction = await BuyDemoEightMinutesDeployed
-        .connect(buyer1)
-        .BuyTestEightMinuteCountdown({
-          value: ethers.utils.parseEther(maticPrice.toString()),
-        });
       const tx_receipt = await transaction.wait();
     });
   });
@@ -173,6 +170,8 @@ describe("Electric Keeper Buyer Tests:", function () {
       );
     });
     it("Pass if requested LED is on", async function () {
+      const transactionCallAPI = await electricKeeperDeployed.ElectricRateTennesseeAPIMock();
+      const tx_receiptCallAPI = await transactionCallAPI.wait();
       let maticPrice =
         (await electricKeeperDeployed.onePennyUSDinMatic(1)) /
         1000000000000000000;
@@ -210,6 +209,8 @@ describe("Electric Keeper Buyer Tests:", function () {
       );
     });
     it("Pass if requested LED is in Emeregency off state", async function () {
+      const transactionCallAPI = await electricKeeperDeployed.ElectricRateTennesseeAPIMock();
+      const tx_receiptCallAPI = await transactionCallAPI.wait();
       let maticPrice =
         (await electricKeeperDeployed.onePennyUSDinMatic(1)) /
         1000000000000000000;
@@ -223,6 +224,31 @@ describe("Electric Keeper Buyer Tests:", function () {
       const tx_receipt2 = await transaction2.wait();
       const transaction3 = await electricKeeperDeployed.OwnerEmergencySafeOn(7)
       const tx_receipt3 = await transaction3.wait();
+    });
+  });
+
+  describe("BuyTestEightMinuteCountdown()", function () {
+    it("Fail if MSG.VALUE=0.", async function () {
+      const transactionCallAPI = await electricKeeperDeployed.ElectricRateTennesseeAPIMock();
+      const tx_receiptCallAPI = await transactionCallAPI.wait();
+      await expect(
+        BuyDemoEightMinutesDeployed.BuyTestEightMinuteCountdown()
+      ).to.be.revertedWith(
+        "MUST_HAVE_MSG_VALUE=36*FEE."
+      );
+    });
+    it("Pass if MSG.VALUE=onePennyUSDinMatic(36)", async function () {
+      const transactionCallAPI = await electricKeeperDeployed.ElectricRateTennesseeAPIMock();
+      const tx_receiptCallAPI = await transactionCallAPI.wait();
+      let maticPrice =
+        (await electricKeeperDeployed.onePennyUSDinMatic(36)) /
+        1000000000000000000;
+      const transaction = await BuyDemoEightMinutesDeployed
+        .connect(buyer1)
+        .BuyTestEightMinuteCountdown({
+          value: ethers.utils.parseEther(maticPrice.toString()),
+        });
+      const tx_receipt = await transaction.wait();
     });
   });
 });
