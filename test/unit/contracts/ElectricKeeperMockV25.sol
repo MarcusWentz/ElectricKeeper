@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.12;
 
-//import "@chainlink/contracts/src/v0.8/KeeperCompatible.sol";
-//import "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
-//import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+// import "@chainlink/contracts/src/v0.8/KeeperCompatible.sol";
+// import "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
+// import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
-contract ElectricKeeperMock { //is KeeperCompatibleInterface,ChainlinkClient {
+contract ElectricKeeperMock { // is KeeperCompatibleInterface,ChainlinkClient {
 
-//    using Chainlink for Chainlink.Request;
-//    AggregatorV3Interface internal priceFeed;
+    // using Chainlink for Chainlink.Request;
+    // AggregatorV3Interface internal priceFeed;
 
     uint public ElectricRateTennessee; //Resolution is $0.0000
     struct STATE{ uint Voltage; uint ExpirationTimeUNIX; }
@@ -17,9 +17,9 @@ contract ElectricKeeperMock { //is KeeperCompatibleInterface,ChainlinkClient {
     event VoltageChange();
 
     constructor() {
-        // setPublicChainlinkToken();
+        // setChainlinkToken(0x326C977E6efc84E512bB9C30f76E30c160eD06FB);
         Owner = msg.sender;
-        // priceFeed = AggregatorV3Interface(0x9326BFA02ADD2366b30bacB125260Af641031331); //ETH/USD on Kovan network.
+        // priceFeed = AggregatorV3Interface(0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada); //MATIC/USD on Polygon Testnet Mumbai network.
     }
 
     modifier onlyOwner() {
@@ -32,24 +32,27 @@ contract ElectricKeeperMock { //is KeeperCompatibleInterface,ChainlinkClient {
         _;
     }
 
-//    function requestElectricRateTennessee() public returns (bytes32 requestId) {
-//        Chainlink.Request memory request = buildChainlinkRequest("c51694e71fa94217b0f4a71b2a6b565a", address(this), this.fulfill.selector); //UINT
-//        request.add("get", "https://developer.nrel.gov/api/utility_rates/v3.json?api_key=DEMO_KEY&lat=35&lon=-85");
-//        request.add("path", "outputs.residential");
-//        int timesAmount = 10000;
-//        request.addInt("times", timesAmount);
-//        return sendChainlinkRequestTo(0xF405B99ACa8578B9eb989ee2b69D518aaDb90c1F, request, 10**16); //0.01 LINK
-//    }
-// function fulfill(bytes32 _requestId, uint256 _electricRateTennessee) public recordChainlinkFulfillment(_requestId) {
-//     ElectricRateTennessee = _electricRateTennessee;
-// }
+    // function requestElectricRateTennessee() public returns (bytes32 requestId) {
+    //     Chainlink.Request memory request = buildChainlinkRequest("bbf0badad29d49dc887504bacfbb905b", address(this), this.fulfill.selector); //UINT
+    //     request.add("get", "https://developer.nrel.gov/api/utility_rates/v3.json?api_key=DEMO_KEY&lat=35&lon=-85");
+    //     request.add("path", "outputs.residential");
+    //     int timesAmount = 10000;
+    //     request.addInt("times", timesAmount);
+    //     return sendChainlinkRequestTo(0xc8D925525CA8759812d0c299B90247917d4d4b7C, request, 10**16); //0.01 LINK
+    // }
+
+    // function fulfill(bytes32 _requestId, uint256 _electricRateTennessee) public recordChainlinkFulfillment(_requestId) {
+    //     ElectricRateTennessee = _electricRateTennessee;
+    // }
+
 
    function ElectricRateTennesseeAPIMock() public {
        ElectricRateTennessee = 1013;
    }
 
-    function onePennyUSDinMatic(uint scaleMinutes) public view returns (uint) {
-        return (ElectricRateTennessee*scaleMinutes*uint(4*10**14))/(100);
+    function feeInPenniesUSDinMatic(uint scaleMinutes) public view returns (uint) {
+        // (uint80 roundID, int price, uint startedAt, uint timeStamp, uint80 answeredInRound) = priceFeed.latestRoundData();
+        return (ElectricRateTennessee*scaleMinutes*uint(7*10**15))/(100);
     }
 
     function expirationOccured() public view returns(bool) {
@@ -62,7 +65,7 @@ contract ElectricKeeperMock { //is KeeperCompatibleInterface,ChainlinkClient {
     }
 
     function BuyElectricityTimeOn(uint ledValue, uint minutesToHaveOn) public payable validLEDvalues(ledValue) {
-        require(minutesToHaveOn*ElectricRateTennessee > 0 && msg.value == (onePennyUSDinMatic(minutesToHaveOn)), "MUST_HAVE_MINUTES_AND_API_GREATER_THAN_0_AND_MSG_VALUE=MINUTES*FEE.");
+        require(minutesToHaveOn*ElectricRateTennessee > 0 && msg.value == (feeInPenniesUSDinMatic(minutesToHaveOn)), "MUST_HAVE_MINUTES_AND_API_GREATER_THAN_0_AND_MSG_VALUE=MINUTES*FEE.");
         if(LED[ledValue].Voltage == 0) {
             LED[ledValue].Voltage = 1;
             LED[ledValue].ExpirationTimeUNIX = block.timestamp + (60*minutesToHaveOn);
@@ -123,9 +126,9 @@ contract BuyDemoEightMinutesMock {
     }
 
     function BuyTestEightMinuteCountdown() public payable {
-       require(msg.value == electricKeeperInstance.onePennyUSDinMatic(36), "MUST_HAVE_MSG_VALUE=36*FEE.");
+       require(msg.value == electricKeeperInstance.feeInPenniesUSDinMatic(36), "MUST_HAVE_MSG_VALUE=36*FEE.");
        for(uint ledValue = 0; ledValue < 8; ledValue++ ) {
-            electricKeeperInstance.BuyElectricityTimeOn{value: electricKeeperInstance.onePennyUSDinMatic(ledValue+1)}(ledValue,ledValue+1);
+            electricKeeperInstance.BuyElectricityTimeOn{value: electricKeeperInstance.feeInPenniesUSDinMatic(ledValue+1)}(ledValue,ledValue+1);
         }
     }
 }
