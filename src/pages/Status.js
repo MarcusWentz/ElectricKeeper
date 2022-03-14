@@ -163,8 +163,7 @@ const Status = () => {
           paddingTop: "100px",
         }}
       >
-        You have to connect to the Mumbai Polygon test network in order to view
-        the status page!
+        Connect to Mumbai Polygon test network and wait to see the status table.
         {errorMsg !== "" ? (
           <ErrorModal
             showToastFromProp={"Loading Data ..."}
