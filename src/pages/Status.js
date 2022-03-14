@@ -46,7 +46,6 @@ const Status = () => {
       let orange = await electricKeeperContract.methods.LED(5).call();
       let pink = await electricKeeperContract.methods.LED(6).call();
       let white = await electricKeeperContract.methods.LED(7).call();
-      console.log(blue, "wat isblue? The deep questions in life");
       setVoltageExpirationRed(red);
       setVoltageExpirationBlue(blue);
       setVoltageExpirationYellow(yellow);
@@ -59,7 +58,10 @@ const Status = () => {
     loadBlockchainData();
   }, [account]);
 
-  console.log(voltageExpirationBlue, "what is red?");
+  console.log(
+    voltageExpirationRed,
+    "<-- voltageExpirationRed.ExpirationTimeUNIX variable value"
+  );
 
   let allColorsLoaded =
     voltageExpirationRed.Voltage &&
@@ -100,74 +102,42 @@ const Status = () => {
               <tr className="btn-hover color-red">
                 <th scope="row">0</th>
                 <td>{voltageExpirationRed.Voltage}</td>
-                <td>
-                  {voltageExpirationRed.ExpirationTimeUNIX === "0"
-                    ? "expired"
-                    : timeConverter(voltageExpirationRed.ExpirationTimeUNIX)}
-                </td>
+                <td>{timeConverter(voltageExpirationRed)}</td>
               </tr>
               <tr className="btn-hover color-blue">
                 <th scope="row">1</th>
                 <td>{voltageExpirationBlue.Voltage}</td>
-                <td>
-                  {voltageExpirationBlue.ExpirationTimeUNIX === "0"
-                    ? "expired"
-                    : timeConverter(voltageExpirationBlue.ExpirationTimeUNIX)}
-                </td>
+                <td>{timeConverter(voltageExpirationBlue)}</td>
               </tr>
               <tr className="btn-hover color-yellow">
                 <th scope="row">2</th>
                 <td>{voltageExpirationYellow.Voltage}</td>
-                <td>
-                  {voltageExpirationYellow.ExpirationTimeUNIX === "0"
-                    ? "expired"
-                    : timeConverter(voltageExpirationYellow.ExpirationTimeUNIX)}
-                </td>
+                <td>{timeConverter(voltageExpirationYellow)}</td>
               </tr>
               <tr className="btn-hover color-green">
                 <th scope="row">3</th>
                 <td>{voltageExpirationGreen.Voltage}</td>
-                <td>
-                  {voltageExpirationGreen.ExpirationTimeUNIX === "0"
-                    ? "expired"
-                    : timeConverter(voltageExpirationGreen.ExpirationTimeUNIX)}
-                </td>
+                <td>{timeConverter(voltageExpirationGreen)}</td>
               </tr>
               <tr className="btn-hover color-purple">
                 <th scope="row">4</th>
                 <td>{voltageExpirationPurple.Voltage}</td>
-                <td>
-                  {voltageExpirationPurple.ExpirationTimeUNIX === "0"
-                    ? "expired"
-                    : timeConverter(voltageExpirationPurple.ExpirationTimeUNIX)}
-                </td>
+                <td>{timeConverter(voltageExpirationPurple)}</td>
               </tr>
               <tr className="btn-hover color-orange">
                 <th scope="row">5</th>
                 <td>{voltageExpirationOrange.Voltage}</td>
-                <td>
-                  {voltageExpirationOrange.ExpirationTimeUNIX === "0"
-                    ? "expired"
-                    : timeConverter(voltageExpirationOrange.ExpirationTimeUNIX)}
-                </td>
+                <td>{timeConverter(voltageExpirationOrange)}</td>
               </tr>
               <tr className="btn-hover color-pink">
                 <th scope="row">6</th>
                 <td>{voltageExpirationPink.Voltage}</td>
-                <td>
-                  {voltageExpirationPink.ExpirationTimeUNIX === "0"
-                    ? "expired"
-                    : timeConverter(voltageExpirationPink.ExpirationTimeUNIX)}
-                </td>
+                <td>{timeConverter(voltageExpirationPink)}</td>
               </tr>{" "}
               <tr className="btn-hover color-white">
                 <th scope="row">7</th>
                 <td>{voltageExpirationWhite.Voltage}</td>
-                <td>
-                  {voltageExpirationWhite.ExpirationTimeUNIX === "0"
-                    ? "expired"
-                    : timeConverter(voltageExpirationWhite.ExpirationTimeUNIX)}
-                </td>
+                <td>{timeConverter(voltageExpirationWhite)}</td>
               </tr>
             </tbody>
           </table>
@@ -183,7 +153,18 @@ const Status = () => {
     );
   } else
     return (
-      <>
+      <div
+        class="row"
+        style={{
+          color: "#ffdd9e",
+          width: "70%",
+          marginLeft: "auto",
+          marginRight: "auto",
+          paddingTop: "100px",
+        }}
+      >
+        You have to connect to the Mumbai Polygon test network in order to view
+        the status page!
         {errorMsg !== "" ? (
           <ErrorModal
             showToastFromProp={"Loading Data ..."}
@@ -191,34 +172,42 @@ const Status = () => {
             errorMsg={errorMsg}
           ></ErrorModal>
         ) : null}
-      </>
+      </div>
     );
 };
 
-function timeConverter(UNIX_timestamp) {
-  var a = new Date(UNIX_timestamp * 1000);
-  var months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-  var year = a.getFullYear();
-  var month = months[a.getMonth()];
-  var date = a.getDate();
-  var hour = a.getHours();
-  var min = a.getMinutes();
-  var sec = a.getSeconds();
-  var time =
-    date + " " + month + " " + year + " " + hour + ":" + min + ":" + sec;
-  return time;
+function timeConverter(obj) {
+  console.log(obj, "whole obj");
+  if (obj.Voltage === "0") {
+    return "expired";
+  } else if (obj.Voltage === "1") {
+    var a = new Date(obj.ExpirationTimeUNIX * 1000);
+    var months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var date = a.getDate();
+    var hour = a.getHours();
+    var min = a.getMinutes();
+    var sec = a.getSeconds();
+    var time =
+      date + " " + month + " " + year + " " + hour + ":" + min + ":" + sec;
+    return time;
+  } else if (obj.Voltage === "2") {
+    console.log("Do i get here=");
+    return "Reserved seconds: " + obj.ExpirationTimeUNIX;
+  }
 }
 export default Status;
