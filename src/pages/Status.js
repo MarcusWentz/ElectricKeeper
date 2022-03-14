@@ -46,7 +46,7 @@ const Status = () => {
       let orange = await electricKeeperContract.methods.LED(5).call();
       let pink = await electricKeeperContract.methods.LED(6).call();
       let white = await electricKeeperContract.methods.LED(7).call();
-      console.log(blue, "wat isblue?");
+      console.log(blue, "wat isblue? The deep questions in life");
       setVoltageExpirationRed(red);
       setVoltageExpirationBlue(blue);
       setVoltageExpirationYellow(yellow);

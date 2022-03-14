@@ -27,7 +27,15 @@ export default function Buy({ degree, userLocation, basic }) {
     voltageExpirationAndLatestBuyerObject,
     setVoltageExpirationAndLatestBuyerObject,
   ] = useState({});
-
+  const [voltageExpirationRed, setVoltageExpirationRed] = useState(-1);
+  const [voltageExpirationBlue, setVoltageExpirationBlue] = useState(-1);
+  const [voltageExpirationYellow, setVoltageExpirationYellow] = useState(-1);
+  const [voltageExpirationGreen, setVoltageExpirationGreen] = useState(-1);
+  const [voltageExpirationPurple, setVoltageExpirationPurple] = useState(-1);
+  const [voltageExpirationOrange, setVoltageExpirationOrange] = useState(-1);
+  const [voltageExpirationPink, setVoltageExpirationPink] = useState(-1);
+  const [voltageExpirationWhite, setVoltageExpirationWhite] = useState(-1);
+  const [colorSet, setColorSet] = useState("00000000");
   const { userAccountAddress, setUserAccountAddress } =
     React.useContext(DataContext);
 
@@ -42,6 +50,9 @@ export default function Buy({ degree, userLocation, basic }) {
         window.location.reload();
       });
     }
+
+    const configureColorSet = () => {};
+
     const loadBlockchainData = async () => {
       const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
       //const network = await web3.eth.net.getNetworkType();
@@ -68,9 +79,22 @@ export default function Buy({ degree, userLocation, basic }) {
 
       console.log(buyDemoEightMinutesContract, "This is DEMO contract");
 
-      //if (account) {
-      let voltageExpirationAndLatestBuyerObject =
-        await electricKeeperContract.methods.LED(0).call();
+      let red = await electricKeeperContract.methods.LED(0).call();
+      let blue = await electricKeeperContract.methods.LED(1).call();
+      let yellow = await electricKeeperContract.methods.LED(2).call();
+      let green = await electricKeeperContract.methods.LED(3).call();
+      let purple = await electricKeeperContract.methods.LED(4).call();
+      let orange = await electricKeeperContract.methods.LED(5).call();
+      let pink = await electricKeeperContract.methods.LED(6).call();
+      let white = await electricKeeperContract.methods.LED(7).call();
+      setVoltageExpirationRed(red);
+      setVoltageExpirationBlue(blue);
+      setVoltageExpirationYellow(yellow);
+      setVoltageExpirationGreen(green);
+      setVoltageExpirationPurple(purple);
+      setVoltageExpirationOrange(orange);
+      setVoltageExpirationPink(pink);
+      setVoltageExpirationWhite(white);
 
       setVoltageExpirationAndLatestBuyerObject(
         voltageExpirationAndLatestBuyerObject
@@ -212,13 +236,44 @@ export default function Buy({ degree, userLocation, basic }) {
     }
   };
 
+  const renderColorSetInColor = (colorSet) => {
+    var n = colorSet.toString(2);
+    n = "00000000".substr(n.length) + n;
+    let chars = Array.from(n);
+    console.log(chars);
+    return (
+      <>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+            width: "100%",
+            marginLeft: "10px",
+          }}
+        >
+          <div>
+            <p className="vrf-numbers color-white">{chars[0]}</p>
+            <p className="vrf-numbers color-pink">{chars[1]}</p>
+            <p className="vrf-numbers color-orange">{chars[2]}</p>
+            <p className="vrf-numbers color-purple">{chars[3]}</p>
+            <p className="vrf-numbers color-green">{chars[4]}</p>
+            <p className="vrf-numbers color-yellow">{chars[5]}</p>
+            <p className="vrf-numbers color-blue">{chars[6]}</p>
+            <p className="vrf-numbers color-red">{chars[7]}</p>
+          </div>
+        </div>
+      </>
+    );
+  };
+
   const renderInputBox = () => {
     return (
       <>
         <div
           style={{
             marginBottom: 150,
-            marginTop: 50,
             display: "flex",
             alignItems: "center",
             flexDirection: "column",
@@ -263,7 +318,9 @@ export default function Buy({ degree, userLocation, basic }) {
                 Cost: <br></br>{" "}
               </b>
               <b>{estimatedMatic()} </b>
-              <br></br>matic
+              <br />
+              matic
+              <br />
             </p>
             click apartment number (LED color) to power
           </label>
@@ -294,26 +351,20 @@ export default function Buy({ degree, userLocation, basic }) {
           >
             domino 8 minute demo
           </button>
-          <p>
-            {" "}
-            LED 0 Voltage: {voltageExpirationAndLatestBuyerObject.Voltage}
-            <b></b>
-          </p>
-          <p>
-            LED 0 ExpirationTimeUNIX:{" "}
-            {voltageExpirationAndLatestBuyerObject.ExpirationTimeUNIX}
-            <b></b>
-            <b></b>
-          </p>
-          {/* <p>
-            {" "}
-            Latest Buyer: {voltageExpirationAndLatestBuyerObject.LatestBuyer}
-            <b></b>
-          </p> */}
         </div>
       </>
     );
   };
+
+  let allColorsLoaded =
+    voltageExpirationRed.Voltage &&
+    voltageExpirationBlue.Voltage &&
+    voltageExpirationYellow.Voltage &&
+    voltageExpirationGreen.Voltage &&
+    voltageExpirationPurple.Voltage &&
+    voltageExpirationOrange.Voltage &&
+    voltageExpirationPink.Voltage &&
+    voltageExpirationWhite.Voltage;
 
   return (
     <div class="container">
@@ -324,6 +375,20 @@ export default function Buy({ degree, userLocation, basic }) {
             buy
           </h1>
           <p>minutes of electricity</p>
+          {renderColorSetInColor(
+            allColorsLoaded
+              ? [
+                  voltageExpirationWhite.Voltage,
+                  voltageExpirationPink.Voltage,
+                  voltageExpirationOrange.Voltage,
+                  voltageExpirationPurple.Voltage,
+                  voltageExpirationGreen.Voltagea,
+                  voltageExpirationYellow.Voltage,
+                  voltageExpirationBlue.Voltage,
+                  voltageExpirationRed.Voltage,
+                ].join("")
+              : colorSet
+          )}
           <div className="row">{renderInputBox()}</div>
         </div>
       </div>
