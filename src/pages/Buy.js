@@ -108,7 +108,7 @@ export default function Buy({ degree, userLocation, basic }) {
 
       if (electricKeeperContract !== null) {
         electricKeeperContract.methods
-          .onePennyUSDinMatic(inputAmount)
+          .feeInPenniesUSDinMatic(inputAmount)
           .call()
           .then((data) => {
             setLatestPriceOfMatic_1p(web3.utils.fromWei(data));
@@ -127,7 +127,7 @@ export default function Buy({ degree, userLocation, basic }) {
     if (electricKeeperContract !== null && inputAmount !== "") {
       let web3 = new Web3(window.web3.currentProvider);
       electricKeeperContract.methods
-        .onePennyUSDinMatic(inputAmount)
+        .feeInPenniesUSDinMatic(inputAmount)
         .call()
         .then((data) => {
           setLatestPriceOfMatic_1p(web3.utils.fromWei(data));
@@ -203,7 +203,7 @@ export default function Buy({ degree, userLocation, basic }) {
       if (electricKeeperContract !== null) {
         let web3 = new Web3(window.web3.currentProvider);
         electricKeeperContract.methods
-          .onePennyUSDinMatic(36)
+          .feeInPenniesUSDinMatic(36)
           .call()
           .then((data) => {
             console.log(data);
