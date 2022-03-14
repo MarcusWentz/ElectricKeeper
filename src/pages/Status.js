@@ -110,7 +110,7 @@ const Status = () => {
                 <th scope="row">1</th>
                 <td>{voltageExpirationBlue.Voltage}</td>
                 <td>
-                  {voltageExpirationRed.ExpirationTimeUNIX === "0"
+                  {voltageExpirationBlue.ExpirationTimeUNIX === "0"
                     ? "expired"
                     : timeConverter(voltageExpirationBlue.ExpirationTimeUNIX)}
                 </td>
