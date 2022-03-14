@@ -367,7 +367,8 @@ export default function Buy({ degree, userLocation, basic }) {
     voltageExpirationWhite.Voltage;
 
   return (
-    <div class="container">
+    <div class="container" style={{ height: "80vh", overflow: "hidden" }}>
+      {" "}
       <div class="row">
         <div>
           <h1>
@@ -399,7 +400,6 @@ export default function Buy({ degree, userLocation, basic }) {
           errorMsg={errorMsg}
         ></ErrorModal>
       ) : null}
-
       {successMsg ? (
         <FlashSuccess show msg={successMsg} onClose={() => setSuccessMsg("")} />
       ) : (
