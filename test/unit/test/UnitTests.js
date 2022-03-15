@@ -210,7 +210,7 @@ describe("Electric Keeper Buyer Tests:", function () {
         "VOLTAGE_NOT_IN_EMERGENCY_OFF_STATE."
       );
     });
-    it("Pass if requested LED is in Emeregency off state", async function () {
+    it("Pass if requested LED is in Emergency off state", async function () {
       const transactionCallAPI = await electricKeeperDeployed.ElectricRateTennesseeAPIMock();
       const tx_receiptCallAPI = await transactionCallAPI.wait();
       let maticPrice =
