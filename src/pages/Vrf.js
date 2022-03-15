@@ -176,7 +176,7 @@ export default function Vrf({}) {
         <div style={{marginBottom: 50}}>
         <button
           style={{ width: 400 }}
-          className="btn-hover color-electric"
+          className="btn-hover color-blue"
           onClick={() => handleRandomNrCall()}
         >
           request 2 random VRFv2 numbers
