@@ -20,7 +20,7 @@ https://rinkeby.zkscan.io/explorer/transactions/0x42d6f786023160c1b6980f3993b757
 
 <img src="https://github.com/MarcusWentz/ElectricKeeper/blob/main/images/animation4.gif" alt="Test"/>
 <img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/overview7.png" alt="Overview"/>
-<img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/wiring3.png" alt="Wiring"/>
+<img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/wiring4.png" alt="Wiring"/>
 
 Hardware: 
 
