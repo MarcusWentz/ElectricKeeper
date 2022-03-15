@@ -102,7 +102,7 @@ export default function Buy({ degree, userLocation, basic }) {
       let tennesseeRate = await electricKeeperContract.methods
         .ElectricRateTennessee()
         .call();
-      setElectricRateTennessee(tennesseeRate);
+      setElectricRateTennessee(tennesseeRate/10000);
 
       setVoltageExpirationAndLatestBuyerObject(
         voltageExpirationAndLatestBuyerObject
@@ -287,7 +287,7 @@ export default function Buy({ degree, userLocation, basic }) {
             >
               Chainlink API<br></br>Electric Rate from National Renewable Energy
               Laboratory for Tennessee:<br></br>
-              {electricRateTennessee}/minute
+              ${electricRateTennessee}/minute
             </label>
             <input
               type="number"
