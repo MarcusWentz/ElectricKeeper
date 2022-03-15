@@ -4,10 +4,8 @@ import Web3 from "web3";
 import ErrorModal from "../components/ErrorModal";
 import FlashSuccess from "../components/flashSuccess";
 import { Web3ReactProvider, useWeb3React } from "@web3-react/core";
-import {
-  ELECTRICKEEPER_ABI,
-  ELECTRICKEEPER_CONTRACT_ADDRESS,
-} from "../config";
+import { ELECTRICKEEPER_ABI, ELECTRICKEEPER_CONTRACT_ADDRESS } from "../config";
+import { CHAINLINK_ABI, CHAINLINK_CONTRACT_ADDRESS } from "../config";
 
 import { DataContext } from "../DataContext";
 
@@ -15,7 +13,7 @@ import { DataContext } from "../DataContext";
 //MetaMask wallet shown/button if connect
 //Dropdown for network switch statements
 
-export default function Owner({}) {
+export default function Owner() {
   const [electricKeeperContract, setElectricKeeperContract] = useState(null);
 
   const [LEDValue, setLEDValue] = useState();
@@ -96,7 +94,6 @@ export default function Owner({}) {
     }
   };
 
-
   const handleRequestElectricRateTennessee = () => {
     try {
       let web3 = new Web3(window.web3.currentProvider);
@@ -118,7 +115,6 @@ export default function Owner({}) {
       setErrorMsg(msg);
     }
   };
-
 
   const handleEmergencySafeAndDangerOffAndOn = (ledValue, safeOrDanger) => {
     console.log(ledValue, "ledvaaaaaaaal");
@@ -183,7 +179,8 @@ export default function Owner({}) {
             }}
             htmlFor="minutes"
           >
-            expiration present: <br></br> {expirationOccurred ? "true" : "false"}
+            expiration present: <br></br>{" "}
+            {expirationOccurred ? "true" : "false"}
           </label>
           <button
             style={{ width: 400 }}
@@ -231,13 +228,18 @@ export default function Owner({}) {
           >
             emergency safe on
           </button>{" "}
-          <p>Contract Link: <br></br>" ERC20 LINK (here: https://mumbai.polygonscan.com/address/0x326C977E6efc84E512bB9C30f76E30c160eD06FB#code) contract balanceOf(ElectricKeeperAddress)"<br></br>LINK</p>
+          <p>
+            Contract Link: <br></br>" ERC20 LINK (here:
+            https://mumbai.polygonscan.com/address/0x326C977E6efc84E512bB9C30f76E30c160eD06FB#code)
+            contract balanceOf(ElectricKeeperAddress)"<br></br>LINK
+          </p>
           <button
             style={{ width: 400 }}
             className="btn-hover color-blue"
-            onClick={() => handleRequestElectricRateTennessee() }
+            onClick={() => handleRequestElectricRateTennessee()}
           >
-            request API electric rate <br></br>(0.01 LINK or more needed in contract)
+            request API electric rate <br></br>(0.01 LINK or more needed in
+            contract)
           </button>
         </div>
         <br />

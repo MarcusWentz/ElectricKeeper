@@ -358,7 +358,10 @@ export default function Buy({ degree, userLocation, basic }) {
     voltageExpirationWhite.Voltage;
 
   return (
-    <div class="container" style={{ height: "80vh", overflow: "hidden" }}>
+    <div
+      class="container"
+      // style={{height: "80vh", overflow: "hidden"}}
+    >
       {" "}
       <div class="row">
         <div>
