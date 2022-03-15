@@ -207,6 +207,14 @@ export default function Owner({}) {
           >
             emergency safe on
           </button>{" "}
+          <p>Contract Link: <br></br>" ERC20 LINK (here: https://mumbai.polygonscan.com/address/0x326C977E6efc84E512bB9C30f76E30c160eD06FB#code) contract balanceOf(ElectricKeeperAddress)"<br></br>LINK</p>
+          <button
+            style={{ width: 400 }}
+            className="btn-hover color-blue"
+            onClick={() => handleEmergencySafeAndDangerOffAndOn(LEDValue, "safe") }
+          >
+            request API electric rate <br></br>(0.01 LINK or more needed in contract)
+          </button>
         </div>
         <br />
       </>
