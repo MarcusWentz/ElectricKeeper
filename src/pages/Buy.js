@@ -36,6 +36,8 @@ export default function Buy({ degree, userLocation, basic }) {
   const [voltageExpirationPink, setVoltageExpirationPink] = useState(-1);
   const [voltageExpirationWhite, setVoltageExpirationWhite] = useState(-1);
   const [colorSet, setColorSet] = useState("00000000");
+  const [electricRateTennessee, setElectricRateTennessee] = useState(0);
+
   const { userAccountAddress, setUserAccountAddress } =
     React.useContext(DataContext);
 
@@ -77,8 +79,8 @@ export default function Buy({ degree, userLocation, basic }) {
       setElectricKeeperContract(electricKeeperContract);
       setBuyDemoEightMinutesContract(buyDemoEightMinutesContract);
 
-      console.log(buyDemoEightMinutesContract, "This is DEMO contract");
 
+      //Get all the LED Value states from contract
       let red = await electricKeeperContract.methods.LED(0).call();
       let blue = await electricKeeperContract.methods.LED(1).call();
       let yellow = await electricKeeperContract.methods.LED(2).call();
@@ -96,15 +98,15 @@ export default function Buy({ degree, userLocation, basic }) {
       setVoltageExpirationPink(pink);
       setVoltageExpirationWhite(white);
 
+      //Get the tenesse electric rate cost from contract
+      let tennesseeRate = await electricKeeperContract.methods
+        .ElectricRateTennessee()
+        .call();
+      setElectricRateTennessee(tennesseeRate);
+
       setVoltageExpirationAndLatestBuyerObject(
         voltageExpirationAndLatestBuyerObject
       );
-      console.log(voltageExpirationAndLatestBuyerObject, "VOOOOLT OBJ");
-      console.log(
-        "ONLY one expir",
-        voltageExpirationAndLatestBuyerObject.ExpirationTimeUNIX
-      );
-      //}
 
       if (electricKeeperContract !== null) {
         electricKeeperContract.methods
@@ -112,8 +114,6 @@ export default function Buy({ degree, userLocation, basic }) {
           .call()
           .then((data) => {
             setLatestPriceOfMatic_1p(web3.utils.fromWei(data));
-            console.log(data);
-            console.log(web3.utils.fromWei(data));
           })
           .catch((err) => {
             console.log(err);
@@ -131,8 +131,6 @@ export default function Buy({ degree, userLocation, basic }) {
         .call()
         .then((data) => {
           setLatestPriceOfMatic_1p(web3.utils.fromWei(data));
-          console.log(data);
-          console.log(web3.utils.fromWei(data));
         })
         .catch((err) => {
           console.log(err);
@@ -167,8 +165,6 @@ export default function Buy({ degree, userLocation, basic }) {
   };
 
   async function handleBuyButtonClick(colorNumber) {
-    console.log("You chose the color:", colorNumber);
-    console.log(account, "account in BUY handle click");
     try {
       let web3 = new Web3(window.web3.currentProvider);
       let amountOfMaticToPay = await estimatedMatic();
@@ -199,7 +195,6 @@ export default function Buy({ degree, userLocation, basic }) {
 
   const handleBuyDemoEightMinutes = () => {
     try {
-      console.log(buyDemoEightMinutesContract, "account in BUY handle click");
       if (electricKeeperContract !== null) {
         let web3 = new Web3(window.web3.currentProvider);
         electricKeeperContract.methods
@@ -240,7 +235,6 @@ export default function Buy({ degree, userLocation, basic }) {
     var n = colorSet.toString(2);
     n = "00000000".substr(n.length) + n;
     let chars = Array.from(n);
-    console.log(chars);
     return (
       <>
         <div
@@ -268,6 +262,7 @@ export default function Buy({ degree, userLocation, basic }) {
     );
   };
 
+  console.log(electricRateTennessee, 'RAAAAATE')
   const renderInputBox = () => {
     return (
       <>
@@ -290,7 +285,9 @@ export default function Buy({ degree, userLocation, basic }) {
               }}
               htmlFor="minutes"
             >
-              Chainlink API<br></br>Electric Rate from National Renewable Energy Laboratory for Tennessee:<br></br>"electricKeeperContract.methods.ElectricRateTennessee().call();"/minute
+              Chainlink API<br></br>Electric Rate from National Renewable Energy
+              Laboratory for Tennessee:<br></br>
+              {electricRateTennessee}/minute
             </label>
             <input
               type="number"
