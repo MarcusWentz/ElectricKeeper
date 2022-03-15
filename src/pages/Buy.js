@@ -165,7 +165,7 @@ export default function Buy({ degree, userLocation, basic }) {
   async function handleBuyButtonClick(colorNumber) {
     try {
       let web3 = new Web3(window.web3.currentProvider);
-      let amountOfMaticToPay = await estimatedMatic();
+      let amountOfMaticToPay = estimatedMatic();
       console.log("estimatedMatic " + amountOfMaticToPay);
       web3.eth
         .sendTransaction({
