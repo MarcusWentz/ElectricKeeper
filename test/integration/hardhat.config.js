@@ -1,5 +1,6 @@
 require("@nomiclabs/hardhat-ethers");
 require('solidity-coverage');
+// require("@nomiclabs/hardhat-etherscan");
 
 const MUMBAI_RPC_URL = process.env.mumbaiInfuraAPI
 const PRIVATE_KEY = process.env.devTestnetPrivateKey
@@ -14,6 +15,9 @@ module.exports = {
       accounts: [PRIVATE_KEY]
     }
   },
+  // etherscan: {
+  //   apiKey: process.env.PolyscanApiKey
+  // },
   solidity: {
     compilers: [{version: "0.8.0"},
     {version: "0.8.7"},
