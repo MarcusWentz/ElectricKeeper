@@ -96,6 +96,30 @@ export default function Owner({}) {
     }
   };
 
+
+  const handleRequestElectricRateTennessee = () => {
+    try {
+      let web3 = new Web3(window.web3.currentProvider);
+
+      web3.eth
+        .sendTransaction({
+          to: ELECTRICKEEPER_CONTRACT_ADDRESS,
+          data: electricKeeperContract.methods
+            .requestElectricRateTennessee()
+            .encodeABI(),
+          from: account,
+        })
+        .then(() => {
+          setSuccessMsg("Manual expiration off");
+        });
+    } catch (err) {
+      const msg = "Connect your wallet to buy";
+      console.log(err, msg);
+      setErrorMsg(msg);
+    }
+  };
+
+
   const handleEmergencySafeAndDangerOffAndOn = (ledValue, safeOrDanger) => {
     console.log(ledValue, "ledvaaaaaaaal");
     if (ledValue >= 0 && ledValue <= 7) {
@@ -211,7 +235,7 @@ export default function Owner({}) {
           <button
             style={{ width: 400 }}
             className="btn-hover color-blue"
-            onClick={() => handleEmergencySafeAndDangerOffAndOn(LEDValue, "safe") }
+            onClick={() => handleRequestElectricRateTennessee() }
           >
             request API electric rate <br></br>(0.01 LINK or more needed in contract)
           </button>
