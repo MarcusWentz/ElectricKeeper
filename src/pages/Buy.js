@@ -35,8 +35,7 @@ export default function Buy({ degree, userLocation, basic }) {
   const [voltageExpirationOrange, setVoltageExpirationOrange] = useState(-1);
   const [voltageExpirationPink, setVoltageExpirationPink] = useState(-1);
   const [voltageExpirationWhite, setVoltageExpirationWhite] = useState(-1);
-  const [colorSet, setColorSet] = useState("00000000");
-  const [electricRateTennessee, setElectricRateTennessee] = useState(0);
+  const [electricRateTennessee, setElectricRateTennessee] = useState("?");
 
   const { userAccountAddress, setUserAccountAddress } =
     React.useContext(DataContext);
@@ -137,7 +136,7 @@ export default function Buy({ degree, userLocation, basic }) {
     }
     return latestPriceOfMatic_1p && inputAmount !== ""
       ? latestPriceOfMatic_1p.toString()
-      : "0";
+      : "?";
   };
 
   const colorNumberToColor = (colorNumber) => {
@@ -422,14 +421,14 @@ export default function Buy({ degree, userLocation, basic }) {
               </div>
             ) : (
               <div>
-                <p className="vrf-numbers color-white">0</p>
-                <p className="vrf-numbers color-pink">0</p>
-                <p className="vrf-numbers color-orange">0</p>
-                <p className="vrf-numbers color-purple">0</p>
-                <p className="vrf-numbers color-green">0</p>
-                <p className="vrf-numbers color-yellow">0</p>
-                <p className="vrf-numbers color-blue">0</p>
-                <p className="vrf-numbers color-red">0</p>
+                <p className="vrf-numbers color-white">?</p>
+                <p className="vrf-numbers color-pink">?</p>
+                <p className="vrf-numbers color-orange">?</p>
+                <p className="vrf-numbers color-purple">?</p>
+                <p className="vrf-numbers color-green">?</p>
+                <p className="vrf-numbers color-yellow">?</p>
+                <p className="vrf-numbers color-blue">?</p>
+                <p className="vrf-numbers color-red">?</p>
               </div>
             )}
           </div>
