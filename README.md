@@ -5,7 +5,7 @@ An automated electric grid.
 Video demo [__NEED TO RECORD AGAIN WITH FRONTEND AND HALF LIFE VOX SOUNDS ___]: https://www.youtube.com/watch?v=949bsTmufhI
 
 Powered by a Raspberry Pi 4, which is controlled by a hybrid smart contract using Chainlink Keepers to automate turning off LEDs for electric bill expirations 
-[with sound alerts using Half Life's VOX (Black Mesa Announcement System).
+[with sound alerts using Half Life's VOX (Black Mesa Announcement System). Chainlink API/pricefeeds are used to get real world electric rate data and convert it in terms of MATIC/USD on Polygon.
 
 ElectricKeeper verified Etherscan (Mobile Device Interface): [_____DO THIS AFTER ALL UNIT TESTING IS DONE ____]
 
