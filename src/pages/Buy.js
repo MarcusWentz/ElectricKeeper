@@ -290,7 +290,7 @@ export default function Buy({ degree, userLocation, basic }) {
               }}
               htmlFor="minutes"
             >
-              $0.01/minute
+              Chainlink API<br></br>Electric Rate from National Renewable Energy Laboratory for Tennessee:<br></br>"electricKeeperContract.methods.ElectricRateTennessee().call();"/minute
             </label>
             <input
               type="number"
