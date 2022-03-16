@@ -192,7 +192,7 @@ export default function Vrf({}) {
           className="btn-hover color-blue"
           onClick={() => handleURL()}
         >
-           chainlink VRFv2 Subscription Status [link to URL click https://vrf.chain.link/rinkeby/529]
+           chainlink VRFv2 Subscription Status
         </button>
         </div>
         {colorSet1 && colorSet2 ? (
