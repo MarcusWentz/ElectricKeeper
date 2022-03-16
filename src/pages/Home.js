@@ -16,7 +16,13 @@ const Home = () => {
             policies. Chainlink Keepers automates policy expiration detection
             and state changes
           </h3>
-          <img src={asset} className={"flickerOn"} alt="" width="800px" />
+          <img
+            src={asset}
+            className={"flickerOn"}
+            alt=""
+            width="800px"
+            style={{ marginTop: "-40px" }}
+          />
 
           <div class="col-sm-12 col-lg-4  col-xl-3 text-center">
             <div
