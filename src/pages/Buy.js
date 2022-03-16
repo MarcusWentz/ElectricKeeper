@@ -268,7 +268,6 @@ export default function Buy({ degree, userLocation, basic }) {
       <>
         <div
           style={{
-            marginBottom: 150,
             display: "flex",
             alignItems: "center",
             flexDirection: "column",
