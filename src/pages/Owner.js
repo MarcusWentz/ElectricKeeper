@@ -89,6 +89,10 @@ export default function Owner() {
 
   useEffect(() => {}, []);
 
+  const handleURL = () => {
+     window.open('https://keepers.chain.link/mumbai/983');
+  };
+
   const handleManualExpirationOff = () => {
     try {
       let web3 = new Web3(window.web3.currentProvider);
@@ -254,11 +258,10 @@ export default function Owner() {
           <button
             style={{ width: 400 }}
             className="btn-hover color-blue"
-            onClick={() =>
-              handleEmergencySafeAndDangerOffAndOn(LEDValue, "safe")
-            }
+            onClick={() => handleURL()}
+
           >
-            chainlink keepers status [pop up url to https://keepers.chain.link/mumbai/983]
+            chainlink keepers status
           </button>
 
           <br />
