@@ -149,6 +149,17 @@ const Status = () => {
             errorMsg={errorMsg}
           ></ErrorModal>
         ) : null}
+        <div
+          style={{
+            position: "absolute",
+            backgroundColor: "blue",
+            opacity: 0,
+            width: "100vw",
+            height: "60vh",
+            top: "20vh",
+            left: 0,
+          }}
+        ></div>
       </div>
     );
   } else

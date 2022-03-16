@@ -604,6 +604,10 @@ th {
   border-width: 0;
 }
 
+th {
+  font-size: 20px;
+}
+
 .gradiantbkg {
   background: linear-gradient(
     to bottom,
