@@ -87,13 +87,14 @@ const Status = () => {
         <div class="center">
           <div
             style={{
-              position: "relative",
+              position: "absolute",
               backgroundColor: "blue",
               opacity: 0,
-              width: "100vw",
-              height: "80%",
-              top: "20%",
+              width: "100%",
+              height: "500px",
+              top: "200px",
               left: 0,
+              zIndex: 1,
             }}
           ></div>
           <table
@@ -102,7 +103,7 @@ const Status = () => {
               background: "#fddd9e",
               borderRadius: 30,
               border: "none",
-              marginTop: "-18%",
+              marginTop: "",
             }}
           >
             <thead>
