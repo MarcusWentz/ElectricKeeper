@@ -22,6 +22,14 @@ export default function Owner() {
     useState();
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
+  const [voltageExpirationRed, setVoltageExpirationRed] = useState(-1);
+  const [voltageExpirationBlue, setVoltageExpirationBlue] = useState(-1);
+  const [voltageExpirationYellow, setVoltageExpirationYellow] = useState(-1);
+  const [voltageExpirationGreen, setVoltageExpirationGreen] = useState(-1);
+  const [voltageExpirationPurple, setVoltageExpirationPurple] = useState(-1);
+  const [voltageExpirationOrange, setVoltageExpirationOrange] = useState(-1);
+  const [voltageExpirationPink, setVoltageExpirationPink] = useState(-1);
+  const [voltageExpirationWhite, setVoltageExpirationWhite] = useState(-1);
   const { userAccountAddress, setUserAccountAddress } =
     React.useContext(DataContext);
 
@@ -57,6 +65,23 @@ export default function Owner() {
       );
       setElectricKeeperContract(electricKeeperContract);
 
+      let red = await electricKeeperContract.methods.LED(0).call();
+      let blue = await electricKeeperContract.methods.LED(1).call();
+      let yellow = await electricKeeperContract.methods.LED(2).call();
+      let green = await electricKeeperContract.methods.LED(3).call();
+      let purple = await electricKeeperContract.methods.LED(4).call();
+      let orange = await electricKeeperContract.methods.LED(5).call();
+      let pink = await electricKeeperContract.methods.LED(6).call();
+      let white = await electricKeeperContract.methods.LED(7).call();
+      setVoltageExpirationRed(red);
+      setVoltageExpirationBlue(blue);
+      setVoltageExpirationYellow(yellow);
+      setVoltageExpirationGreen(green);
+      setVoltageExpirationPurple(purple);
+      setVoltageExpirationOrange(orange);
+      setVoltageExpirationPink(pink);
+      setVoltageExpirationWhite(white);
+
       console.log(electricKeeperContract, "This is electric contract");
       console.log(chainlinkContract.methods, "chainlinkContract");
 
@@ -90,7 +115,7 @@ export default function Owner() {
   useEffect(() => {}, []);
 
   const handleURL = () => {
-     window.open('https://keepers.chain.link/mumbai/983');
+    window.open("https://keepers.chain.link/mumbai/983");
   };
 
   const handleManualExpirationOff = () => {
@@ -107,6 +132,10 @@ export default function Owner() {
         })
         .then(() => {
           setSuccessMsg("Manual expiration off");
+          setTimeout(function () {
+            window.location.reload();
+            console.log("Timeout triggered!");
+          }, 4000);
         });
     } catch (err) {
       const msg = "Connect your wallet to buy";
@@ -129,6 +158,10 @@ export default function Owner() {
         })
         .then(() => {
           setSuccessMsg("Electric rate of Tennessee request sent");
+          setTimeout(function () {
+            window.location.reload();
+            console.log("Timeout triggered!");
+          }, 4000);
         });
     } catch (err) {
       const msg = "Connect your wallet to buy";
@@ -165,6 +198,10 @@ export default function Owner() {
                 ? "Emergancy turn off executed"
                 : "Emergency turn on executed"
             );
+            setTimeout(function () {
+              window.location.reload();
+              console.log("Timeout triggered!");
+            }, 4000);
           });
       } catch (err) {
         const msg = "Connect your wallet to buy";
@@ -234,7 +271,6 @@ export default function Owner() {
           >
             emergency safe on
           </button>{" "}
-
           <label
             style={{
               color: "#ffdd9a",
@@ -253,16 +289,13 @@ export default function Owner() {
           >
             manual expiration off
           </button>{" "}
-
           <button
             style={{ width: 400 }}
             className="btn-hover color-blue"
             onClick={() => handleURL()}
-
           >
             chainlink keepers status
           </button>
-
           <br />
           {Number(electricKeeperChainlinkBalance) >= 0.01 ? (
             <p
@@ -274,7 +307,10 @@ export default function Owner() {
             <p
               style={{ color: "#e96359", marginBottom: -10, fontSize: "16px" }}
             >
-              <b>Send 0.01 LINK to contrct for API request:<br></br>0x37160d3cB5834B090621AB2A86355493d808f45B</b>
+              <b>
+                Send 0.01 LINK to contrct for API request:<br></br>
+                0x37160d3cB5834B090621AB2A86355493d808f45B
+              </b>
             </p>
           )}
           <button
@@ -296,6 +332,16 @@ export default function Owner() {
     );
   };
 
+  let allColorsLoaded =
+    voltageExpirationRed.Voltage &&
+    voltageExpirationBlue.Voltage &&
+    voltageExpirationYellow.Voltage &&
+    voltageExpirationGreen.Voltage &&
+    voltageExpirationPurple.Voltage &&
+    voltageExpirationOrange.Voltage &&
+    voltageExpirationPink.Voltage &&
+    voltageExpirationWhite.Voltage;
+
   return (
     <div class="container">
       <div class="row">
@@ -304,6 +350,56 @@ export default function Owner() {
             <br></br>
             owner
           </h1>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexDirection: "column",
+              width: "100%",
+              marginLeft: "10px",
+            }}
+          >
+            {allColorsLoaded ? (
+              <div>
+                <p className="vrf-numbers color-white">
+                  {voltageExpirationWhite.Voltage}
+                </p>
+                <p className="vrf-numbers color-pink">
+                  {voltageExpirationPink.Voltage}
+                </p>
+                <p className="vrf-numbers color-orange">
+                  {voltageExpirationOrange.Voltage}
+                </p>
+                <p className="vrf-numbers color-purple">
+                  {voltageExpirationPurple.Voltage}
+                </p>
+                <p className="vrf-numbers color-green">
+                  {voltageExpirationGreen.Voltage}
+                </p>
+                <p className="vrf-numbers color-yellow">
+                  {voltageExpirationYellow.Voltage}
+                </p>
+                <p className="vrf-numbers color-blue">
+                  {voltageExpirationBlue.Voltage}
+                </p>
+                <p className="vrf-numbers color-red">
+                  {voltageExpirationRed.Voltage}
+                </p>
+              </div>
+            ) : (
+              <div>
+                <p className="vrf-numbers color-white">?</p>
+                <p className="vrf-numbers color-pink">?</p>
+                <p className="vrf-numbers color-orange">?</p>
+                <p className="vrf-numbers color-purple">?</p>
+                <p className="vrf-numbers color-green">?</p>
+                <p className="vrf-numbers color-yellow">?</p>
+                <p className="vrf-numbers color-blue">?</p>
+                <p className="vrf-numbers color-red">?</p>
+              </div>
+            )}
+          </div>
           <div className="row">{renderButton()}</div>
         </div>
       </div>
