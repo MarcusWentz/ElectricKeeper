@@ -84,14 +84,15 @@ const Status = () => {
           paddingTop: "100px",
         }}
       >
+        <h1>Status</h1>
         <div class="center">
           <div
             style={{
               position: "absolute",
               backgroundColor: "blue",
-              opacity: 0,
               width: "100%",
-              height: "500px",
+              opacity: 0,
+              height: "600px",
               top: "200px",
               left: 0,
               zIndex: 1,
