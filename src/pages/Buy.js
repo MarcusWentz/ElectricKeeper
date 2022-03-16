@@ -372,7 +372,7 @@ export default function Buy({ degree, userLocation, basic }) {
         <div>
           <h1>
             <br></br>
-            buy
+            Buy
           </h1>
           <p>minutes of electricity</p>
           {/* {renderColorSetInColor( */}

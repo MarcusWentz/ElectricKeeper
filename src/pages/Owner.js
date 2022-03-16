@@ -348,7 +348,7 @@ export default function Owner() {
         <div>
           <h1>
             <br></br>
-            owner
+            Owner
           </h1>
           <div
             style={{
@@ -358,6 +358,7 @@ export default function Owner() {
               flexDirection: "column",
               width: "100%",
               marginLeft: "10px",
+              marginBottom: "-50px",
             }}
           >
             {allColorsLoaded ? (

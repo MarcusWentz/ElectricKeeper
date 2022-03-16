@@ -137,7 +137,7 @@ export default function Vrf({}) {
   };
 
   const handleURL = () => {
-     window.open('https://vrf.chain.link/rinkeby/529');
+    window.open("https://vrf.chain.link/rinkeby/529");
   };
 
   const renderColorSetInColor = (colorSet) => {
@@ -175,38 +175,37 @@ export default function Vrf({}) {
       <div class="row">
         <h1>
           <br></br>
-          lightshow
+          Lightshow
         </h1>
-        <div style={{marginBottom: 5}}>
-        <button
-          style={{ width: 400 }}
-          className="btn-hover color-blue"
-          onClick={() => handleRandomNrCall()}
-        >
-          chainlink VRFv2 request 2 random numbers
-        </button>
+        <div style={{ marginBottom: 5 }}>
+          <button
+            style={{ width: 400 }}
+            className="btn-hover color-blue"
+            onClick={() => handleRandomNrCall()}
+          >
+            chainlink VRFv2 request 2 random numbers
+          </button>
         </div>
-        <div style={{marginBottom: 50}}>
-        <button
-          style={{ width: 400 }}
-          className="btn-hover color-blue"
-          onClick={() => handleURL()}
-        >
-           chainlink VRFv2 Subscription Status
-        </button>
+        <div style={{ marginBottom: 50 }}>
+          <button
+            style={{ width: 400 }}
+            className="btn-hover color-blue"
+            onClick={() => handleURL()}
+          >
+            chainlink VRFv2 Subscription Status
+          </button>
         </div>
         {colorSet1 && colorSet2 ? (
           <div>
             <p>
               &nbsp;&nbsp;&nbsp;
-             <b>{colorSet1}</b>
+              <b>{colorSet1}</b>
               &nbsp;&nbsp;&nbsp;
               {renderColorSetInColor(colorSet1)}
             </p>
             <p>
               &nbsp;&nbsp;&nbsp;
               <b>{colorSet2}</b>
-
               &nbsp;&nbsp;&nbsp;
               {/* {colorSet2.toString(2)} */}
               {renderColorSetInColor(colorSet2)}
