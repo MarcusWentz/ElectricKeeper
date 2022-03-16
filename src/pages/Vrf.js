@@ -179,7 +179,16 @@ export default function Vrf({}) {
           className="btn-hover color-blue"
           onClick={() => handleRandomNrCall()}
         >
-          request 2 random VRFv2 numbers
+          chainlink VRFv2 request 2 random numbers
+        </button>
+        </div>
+        <div style={{marginBottom: 50}}>
+        <button
+          style={{ width: 400 }}
+          className="btn-hover color-blue"
+          onClick={() => handleRandomNrCall()}
+        >
+           chainlink VRFv2 Subscription Status [link to URL click https://vrf.chain.link/rinkeby/529]
         </button>
         </div>
         {colorSet1 && colorSet2 ? (
