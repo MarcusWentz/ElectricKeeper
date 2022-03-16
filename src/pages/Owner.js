@@ -250,18 +250,17 @@ export default function Owner() {
             emergency safe on
           </button>{" "}
           <br />
-          {Number(electricKeeperChainlinkBalance) > 0 ? (
+          {Number(electricKeeperChainlinkBalance) >= 0.01 ? (
             <p
               style={{ color: "#ffdd9e", marginBottom: -10, fontSize: "14px" }}
             >
-              ElectricKeeper LINK balance: &nbsp;&nbsp;
-              {electricKeeperChainlinkBalance}
+              Contract has enough LINK for API request now
             </p>
           ) : (
             <p
               style={{ color: "#e96359", marginBottom: -10, fontSize: "16px" }}
             >
-              <b>Send ≥ 0.01 LINK to ElectricKeeper</b>
+              <b>Send 0.01 LINK to contrct for API request:<br></br>0x37160d3cB5834B090621AB2A86355493d808f45B</b>
             </p>
           )}
           <button
