@@ -249,6 +249,16 @@ export default function Owner() {
           >
             emergency safe on
           </button>{" "}
+          <button
+            style={{ width: 400 }}
+            className="btn-hover color-blue"
+            onClick={() =>
+              handleEmergencySafeAndDangerOffAndOn(LEDValue, "safe")
+            }
+          >
+            chainlink keepers status [pop up url to https://keepers.chain.link/mumbai/983]
+          </button>
+
           <br />
           {Number(electricKeeperChainlinkBalance) >= 0.01 ? (
             <p
@@ -274,7 +284,7 @@ export default function Owner() {
                   )
             }
           >
-            request API electric rate <br></br>{" "}
+            chainlink request API electric rate <br></br>{" "}
           </button>
         </div>
         <br />
