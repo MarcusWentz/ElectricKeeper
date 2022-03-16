@@ -240,8 +240,8 @@ export default function Owner() {
             }}
             htmlFor="minutes"
           >
-            expiration present: <br></br>{" "}
-            {expirationOccurred ? "true" : "false"}
+            expiration present:
+            {expirationOccurred ? " true" : " false"}
           </label>
           <button
             style={{ width: 400 }}
