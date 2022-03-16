@@ -200,24 +200,6 @@ export default function Owner() {
             }}
             htmlFor="minutes"
           >
-            expiration present: <br></br>{" "}
-            {expirationOccurred ? "true" : "false"}
-          </label>
-          <button
-            style={{ width: 400 }}
-            className="btn-hover color-electric"
-            onClick={() => handleManualExpirationOff()}
-          >
-            manual expiration off
-          </button>{" "}
-          <label
-            style={{
-              color: "#ffdd9a",
-              marginRight: "20px",
-              fontSize: "13px",
-            }}
-            htmlFor="minutes"
-          >
             emergency LED value:
           </label>
           <input
@@ -249,6 +231,26 @@ export default function Owner() {
           >
             emergency safe on
           </button>{" "}
+
+          <label
+            style={{
+              color: "#ffdd9a",
+              marginRight: "20px",
+              fontSize: "13px",
+            }}
+            htmlFor="minutes"
+          >
+            expiration present: <br></br>{" "}
+            {expirationOccurred ? "true" : "false"}
+          </label>
+          <button
+            style={{ width: 400 }}
+            className="btn-hover color-electric"
+            onClick={() => handleManualExpirationOff()}
+          >
+            manual expiration off
+          </button>{" "}
+
           <button
             style={{ width: 400 }}
             className="btn-hover color-blue"
