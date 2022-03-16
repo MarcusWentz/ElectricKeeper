@@ -85,9 +85,25 @@ const Status = () => {
         }}
       >
         <div class="center">
+          <div
+            style={{
+              position: "relative",
+              backgroundColor: "blue",
+              opacity: 0,
+              width: "100vw",
+              height: "80%",
+              top: "20%",
+              left: 0,
+            }}
+          ></div>
           <table
             class="table table-hover btn-hover color-electric"
-            style={{ background: "#fddd9e", borderRadius: 30, border: "none" }}
+            style={{
+              background: "#fddd9e",
+              borderRadius: 30,
+              border: "none",
+              marginTop: "-18%",
+            }}
           >
             <thead>
               <tr>
@@ -149,17 +165,6 @@ const Status = () => {
             errorMsg={errorMsg}
           ></ErrorModal>
         ) : null}
-        <div
-          style={{
-            position: "absolute",
-            backgroundColor: "blue",
-            opacity: 0,
-            width: "100vw",
-            height: "60vh",
-            top: "20vh",
-            left: 0,
-          }}
-        ></div>
       </div>
     );
   } else
