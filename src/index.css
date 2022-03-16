@@ -329,7 +329,7 @@ p {
   );
 }
 .btn-disabled::hover {
-  cursor: no-drop;
+  cursor: not-allowed;
   background-image: linear-gradient(
     to right,
     #9acee3,
