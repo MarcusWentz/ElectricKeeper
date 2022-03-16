@@ -5,7 +5,7 @@ var chai = require('chai');
 const BN = require('bn.js');
 chai.use(require('chai-bn')(BN));
 
-  describe('ElectricKeeper API Test', async function () {
+  describe('Mumbai ElectricKeeper Integration Test', async function () {
 
     let apiConsumer
 
@@ -14,10 +14,10 @@ chai.use(require('chai-bn')(BN));
       apiConsumer = await APIConsumer.deploy();
       await apiConsumer.deployed();
     })
-    it('requestElectricRateTennessee() updates ElectricRateTennessee.', async () => {
+    it('API and Prciefeed Return > 0', async () => {
       const accounts = await ethers.getSigners()
       const signer = accounts[0]
-      const linkTokenContract = new ethers.Contract('0x326C977E6efc84E512bB9C30f76E30c160eD06FB',LinkTokenABI, signer)
+      const linkTokenContract = new ethers.Contract('0x326C977E6efc84E512bB9C30f76E30c160eD06FB', LinkTokenABI, signer)
       var transferTransaction = await linkTokenContract.transfer(apiConsumer.address,'10000000000000000')
       await transferTransaction.wait()
       console.log('hash:' + transferTransaction.hash)
@@ -28,5 +28,8 @@ chai.use(require('chai-bn')(BN));
       const resultElectricRateTennessee = await apiConsumer.ElectricRateTennessee()
       console.log("ElectricRateTennessee: ", new ethers.BigNumber.from(resultElectricRateTennessee._hex).toString())
       expect(new ethers.BigNumber.from(resultElectricRateTennessee._hex).toString()).to.be.a.bignumber.that.is.greaterThan(new ethers.BigNumber.from(0).toString())
+      const resultFeeInPennies = await apiConsumer.feeInPenniesUSDinMatic(1)
+      console.log("feeInPenniesUSDinMatic: ", new ethers.BigNumber.from(resultFeeInPennies._hex).toString())
+      expect(new ethers.BigNumber.from(resultFeeInPennies._hex).toString()).to.be.a.bignumber.that.is.greaterThan(new ethers.BigNumber.from(0).toString())
     })
   })

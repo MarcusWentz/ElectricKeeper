@@ -85,9 +85,26 @@ const Status = () => {
         }}
       >
         <div class="center">
+          <div
+            style={{
+              position: "absolute",
+              backgroundColor: "blue",
+              opacity: 0,
+              width: "100%",
+              height: "500px",
+              top: "200px",
+              left: 0,
+              zIndex: 1,
+            }}
+          ></div>
           <table
             class="table table-hover btn-hover color-electric"
-            style={{ background: "#fddd9e", borderRadius: 30, border: "none" }}
+            style={{
+              background: "#fddd9e",
+              borderRadius: 30,
+              border: "none",
+              marginTop: "",
+            }}
           >
             <thead>
               <tr>

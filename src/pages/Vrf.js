@@ -136,6 +136,10 @@ export default function Vrf({}) {
     }
   };
 
+  const handleURL = () => {
+     window.open('https://vrf.chain.link/rinkeby/529');
+  };
+
   const renderColorSetInColor = (colorSet) => {
     var n = colorSet.toString(2);
     n = "00000000".substr(n.length) + n;
@@ -173,13 +177,22 @@ export default function Vrf({}) {
           <br></br>
           lightshow
         </h1>
-        <div style={{marginBottom: 50}}>
+        <div style={{marginBottom: 5}}>
         <button
           style={{ width: 400 }}
           className="btn-hover color-blue"
           onClick={() => handleRandomNrCall()}
         >
-          request 2 random VRFv2 numbers
+          chainlink VRFv2 request 2 random numbers
+        </button>
+        </div>
+        <div style={{marginBottom: 50}}>
+        <button
+          style={{ width: 400 }}
+          className="btn-hover color-blue"
+          onClick={() => handleURL()}
+        >
+           chainlink VRFv2 Subscription Status
         </button>
         </div>
         {colorSet1 && colorSet2 ? (

@@ -35,8 +35,7 @@ export default function Buy({ degree, userLocation, basic }) {
   const [voltageExpirationOrange, setVoltageExpirationOrange] = useState(-1);
   const [voltageExpirationPink, setVoltageExpirationPink] = useState(-1);
   const [voltageExpirationWhite, setVoltageExpirationWhite] = useState(-1);
-  const [colorSet, setColorSet] = useState("00000000");
-  const [electricRateTennessee, setElectricRateTennessee] = useState(0);
+  const [electricRateTennessee, setElectricRateTennessee] = useState("?");
 
   const { userAccountAddress, setUserAccountAddress } =
     React.useContext(DataContext);
@@ -79,7 +78,6 @@ export default function Buy({ degree, userLocation, basic }) {
       setElectricKeeperContract(electricKeeperContract);
       setBuyDemoEightMinutesContract(buyDemoEightMinutesContract);
 
-
       //Get all the LED Value states from contract
       let red = await electricKeeperContract.methods.LED(0).call();
       let blue = await electricKeeperContract.methods.LED(1).call();
@@ -102,7 +100,7 @@ export default function Buy({ degree, userLocation, basic }) {
       let tennesseeRate = await electricKeeperContract.methods
         .ElectricRateTennessee()
         .call();
-      setElectricRateTennessee(tennesseeRate);
+      setElectricRateTennessee(tennesseeRate / 10000);
 
       setVoltageExpirationAndLatestBuyerObject(
         voltageExpirationAndLatestBuyerObject
@@ -138,7 +136,7 @@ export default function Buy({ degree, userLocation, basic }) {
     }
     return latestPriceOfMatic_1p && inputAmount !== ""
       ? latestPriceOfMatic_1p.toString()
-      : "0";
+      : "?";
   };
 
   const colorNumberToColor = (colorNumber) => {
@@ -167,7 +165,7 @@ export default function Buy({ degree, userLocation, basic }) {
   async function handleBuyButtonClick(colorNumber) {
     try {
       let web3 = new Web3(window.web3.currentProvider);
-      let amountOfMaticToPay = await estimatedMatic();
+      let amountOfMaticToPay = estimatedMatic();
       console.log("estimatedMatic " + amountOfMaticToPay);
       web3.eth
         .sendTransaction({
@@ -232,9 +230,6 @@ export default function Buy({ degree, userLocation, basic }) {
   };
 
   const renderColorSetInColor = (colorSet) => {
-    var n = colorSet.toString(2);
-    n = "00000000".substr(n.length) + n;
-    let chars = Array.from(n);
     return (
       <>
         <div
@@ -248,21 +243,21 @@ export default function Buy({ degree, userLocation, basic }) {
           }}
         >
           <div>
-            <p className="vrf-numbers color-white">{chars[0]}</p>
-            <p className="vrf-numbers color-pink">{chars[1]}</p>
-            <p className="vrf-numbers color-orange">{chars[2]}</p>
-            <p className="vrf-numbers color-purple">{chars[3]}</p>
-            <p className="vrf-numbers color-green">{chars[4]}</p>
-            <p className="vrf-numbers color-yellow">{chars[5]}</p>
-            <p className="vrf-numbers color-blue">{chars[6]}</p>
-            <p className="vrf-numbers color-red">{chars[7]}</p>
+            <p className="vrf-numbers color-white">{colorSet[1]}</p>
+            <p className="vrf-numbers color-pink">{colorSet[0]}</p>
+            <p className="vrf-numbers color-orange">{colorSet[2]}</p>
+            <p className="vrf-numbers color-purple">{colorSet[3]}</p>
+            <p className="vrf-numbers color-green">{colorSet[4]}</p>
+            <p className="vrf-numbers color-yellow">{colorSet[5]}</p>
+            <p className="vrf-numbers color-blue">{colorSet[6]}</p>
+            <p className="vrf-numbers color-red">{colorSet[7]}</p>
           </div>
         </div>
       </>
     );
   };
 
-  console.log(electricRateTennessee, 'RAAAAATE')
+  console.log(electricRateTennessee, "RAAAAATE");
   const renderInputBox = () => {
     return (
       <>
@@ -285,8 +280,7 @@ export default function Buy({ degree, userLocation, basic }) {
               htmlFor="minutes"
             >
               Chainlink API<br></br>Electric Rate from National Renewable Energy
-              Laboratory for Tennessee:<br></br>
-              {electricRateTennessee}/minute
+              Laboratory for Tennessee:<br></br>${electricRateTennessee}/minute
             </label>
             <input
               type="number"
@@ -363,7 +357,10 @@ export default function Buy({ degree, userLocation, basic }) {
     voltageExpirationWhite.Voltage;
 
   return (
-    <div class="container" style={{ height: "80vh", overflow: "hidden" }}>
+    <div
+      class="container"
+      // style={{height: "80vh", overflow: "hidden"}}
+    >
       {" "}
       <div class="row">
         <div>
@@ -372,20 +369,72 @@ export default function Buy({ degree, userLocation, basic }) {
             buy
           </h1>
           <p>minutes of electricity</p>
-          {renderColorSetInColor(
-            allColorsLoaded
-              ? [
-                  voltageExpirationWhite.Voltage,
-                  voltageExpirationPink.Voltage,
-                  voltageExpirationOrange.Voltage,
-                  voltageExpirationPurple.Voltage,
-                  voltageExpirationGreen.Voltagea,
-                  voltageExpirationYellow.Voltage,
-                  voltageExpirationBlue.Voltage,
-                  voltageExpirationRed.Voltage,
-                ].join("")
-              : colorSet
-          )}
+          {/* {renderColorSetInColor( */}
+          {/*   allColorsLoaded */}
+          {/*     ? [ */}
+          {/*         voltageExpirationWhite.Voltage, */}
+          {/*         voltageExpirationPink.Voltage, */}
+          {/*         voltageExpirationOrange.Voltage, */}
+          {/*         voltageExpirationPurple.Voltage, */}
+          {/*         voltageExpirationGreen.Voltagea, */}
+          {/*         voltageExpirationYellow.Voltage, */}
+          {/*         voltageExpirationBlue.Voltage, */}
+          {/*         voltageExpirationRed.Voltage, */}
+          {/*       ].join("") */}
+          {/*     : colorSet */}
+          {/* )} */}
+
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexDirection: "column",
+              width: "100%",
+              marginLeft: "10px",
+            }}
+          >
+            {allColorsLoaded ? (
+              <div>
+                <p className="vrf-numbers color-white">
+                  {voltageExpirationWhite.Voltage}
+                </p>
+                <p className="vrf-numbers color-pink">
+                  {voltageExpirationPink.Voltage}
+                </p>
+                <p className="vrf-numbers color-orange">
+                  {voltageExpirationOrange.Voltage}
+                </p>
+                <p className="vrf-numbers color-purple">
+                  {voltageExpirationPurple.Voltage}
+                </p>
+                <p className="vrf-numbers color-green">
+                  {voltageExpirationGreen.Voltage}
+                </p>
+                <p className="vrf-numbers color-yellow">
+                  {voltageExpirationYellow.Voltage}
+                </p>
+                <p className="vrf-numbers color-blue">
+                  {voltageExpirationBlue.Voltage}
+                </p>
+                <p className="vrf-numbers color-red">
+                  {voltageExpirationRed.Voltage}
+                </p>
+              </div>
+            ) : (
+              <div>
+                <p className="vrf-numbers color-white">?</p>
+                <p className="vrf-numbers color-pink">?</p>
+                <p className="vrf-numbers color-orange">?</p>
+                <p className="vrf-numbers color-purple">?</p>
+                <p className="vrf-numbers color-green">?</p>
+                <p className="vrf-numbers color-yellow">?</p>
+                <p className="vrf-numbers color-blue">?</p>
+                <p className="vrf-numbers color-red">?</p>
+              </div>
+            )}
+          </div>
+
           <div className="row">{renderInputBox()}</div>
         </div>
       </div>

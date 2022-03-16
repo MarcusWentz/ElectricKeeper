@@ -4,10 +4,8 @@ import Web3 from "web3";
 import ErrorModal from "../components/ErrorModal";
 import FlashSuccess from "../components/flashSuccess";
 import { Web3ReactProvider, useWeb3React } from "@web3-react/core";
-import {
-  ELECTRICKEEPER_ABI,
-  ELECTRICKEEPER_CONTRACT_ADDRESS,
-} from "../config";
+import { ELECTRICKEEPER_ABI, ELECTRICKEEPER_CONTRACT_ADDRESS } from "../config";
+import { CHAINLINK_ABI, CHAINLINK_CONTRACT_ADDRESS } from "../config";
 
 import { DataContext } from "../DataContext";
 
@@ -15,12 +13,13 @@ import { DataContext } from "../DataContext";
 //MetaMask wallet shown/button if connect
 //Dropdown for network switch statements
 
-export default function Owner({}) {
+export default function Owner() {
   const [electricKeeperContract, setElectricKeeperContract] = useState(null);
 
   const [LEDValue, setLEDValue] = useState();
   const [expirationOccurred, setExpirationOccurred] = useState();
-
+  const [electricKeeperChainlinkBalance, setElectricKeeperChainlinkBalance] =
+    useState();
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
   const { userAccountAddress, setUserAccountAddress } =
@@ -52,9 +51,14 @@ export default function Owner({}) {
         ELECTRICKEEPER_ABI,
         ELECTRICKEEPER_CONTRACT_ADDRESS
       );
+      const chainlinkContract = new web3.eth.Contract(
+        CHAINLINK_ABI,
+        CHAINLINK_CONTRACT_ADDRESS
+      );
       setElectricKeeperContract(electricKeeperContract);
 
       console.log(electricKeeperContract, "This is electric contract");
+      console.log(chainlinkContract.methods, "chainlinkContract");
 
       if (electricKeeperContract !== null) {
         electricKeeperContract.methods
@@ -67,12 +71,27 @@ export default function Owner({}) {
           .catch((err) => {
             console.log(err);
           });
+        if (chainlinkContract !== null) {
+          chainlinkContract.methods
+            .balanceOf(ELECTRICKEEPER_CONTRACT_ADDRESS)
+            .call()
+            .then((data) => {
+              setElectricKeeperChainlinkBalance(web3.utils.fromWei(data));
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
       }
     };
     loadBlockchainData();
   }, [account]);
 
   useEffect(() => {}, []);
+
+  const handleURL = () => {
+     window.open('https://keepers.chain.link/mumbai/983');
+  };
 
   const handleManualExpirationOff = () => {
     try {
@@ -96,7 +115,6 @@ export default function Owner({}) {
     }
   };
 
-
   const handleRequestElectricRateTennessee = () => {
     try {
       let web3 = new Web3(window.web3.currentProvider);
@@ -110,7 +128,7 @@ export default function Owner({}) {
           from: account,
         })
         .then(() => {
-          setSuccessMsg("Manual expiration off");
+          setSuccessMsg("Electric rate of Tennessee request sent");
         });
     } catch (err) {
       const msg = "Connect your wallet to buy";
@@ -118,7 +136,6 @@ export default function Owner({}) {
       setErrorMsg(msg);
     }
   };
-
 
   const handleEmergencySafeAndDangerOffAndOn = (ledValue, safeOrDanger) => {
     console.log(ledValue, "ledvaaaaaaaal");
@@ -161,6 +178,10 @@ export default function Owner({}) {
     }
   };
 
+  const electricPriceBtn =
+    Number(electricKeeperChainlinkBalance) > 0
+      ? "btn-hover color-blue"
+      : "btn-disabled color-blue";
   //READ/GET value only:expirationOccured();
 
   const renderButton = () => {
@@ -175,23 +196,6 @@ export default function Owner({}) {
             flexDirection: "column",
           }}
         >
-          <label
-            style={{
-              color: "#ffdd9a",
-              marginRight: "20px",
-              fontSize: "13px",
-            }}
-            htmlFor="minutes"
-          >
-            expiration present: <br></br> {expirationOccurred ? "true" : "false"}
-          </label>
-          <button
-            style={{ width: 400 }}
-            className="btn-hover color-electric"
-            onClick={() => handleManualExpirationOff()}
-          >
-            manual expiration off
-          </button>{" "}
           <label
             style={{
               color: "#ffdd9a",
@@ -231,13 +235,61 @@ export default function Owner({}) {
           >
             emergency safe on
           </button>{" "}
-          <p>Contract Link: <br></br>" ERC20 LINK (here: https://mumbai.polygonscan.com/address/0x326C977E6efc84E512bB9C30f76E30c160eD06FB#code) contract balanceOf(ElectricKeeperAddress)"<br></br>LINK</p>
+
+          <label
+            style={{
+              color: "#ffdd9a",
+              marginRight: "20px",
+              fontSize: "13px",
+            }}
+            htmlFor="minutes"
+          >
+            expiration present:
+            {expirationOccurred ? " true" : " false"}
+          </label>
+          <button
+            style={{ width: 400 }}
+            className="btn-hover color-electric"
+            onClick={() => handleManualExpirationOff()}
+          >
+            manual expiration off
+          </button>{" "}
+
           <button
             style={{ width: 400 }}
             className="btn-hover color-blue"
-            onClick={() => handleRequestElectricRateTennessee() }
+            onClick={() => handleURL()}
+
           >
-            request API electric rate <br></br>(0.01 LINK or more needed in contract)
+            chainlink keepers status
+          </button>
+
+          <br />
+          {Number(electricKeeperChainlinkBalance) >= 0.01 ? (
+            <p
+              style={{ color: "#ffdd9e", marginBottom: -10, fontSize: "14px" }}
+            >
+              Contract has enough LINK for API request now
+            </p>
+          ) : (
+            <p
+              style={{ color: "#e96359", marginBottom: -10, fontSize: "16px" }}
+            >
+              <b>Send 0.01 LINK to contrct for API request:<br></br>0x37160d3cB5834B090621AB2A86355493d808f45B</b>
+            </p>
+          )}
+          <button
+            style={{ width: 400 }}
+            className={electricPriceBtn}
+            onClick={() =>
+              Number(electricKeeperChainlinkBalance) > 0
+                ? handleRequestElectricRateTennessee()
+                : setErrorMsg(
+                    "ElectricKeeper (0x37160d3cB5834B090621AB2A86355493d808f45B) LINK balance (need 0.01 LINK for request)"
+                  )
+            }
+          >
+            chainlink request API electric rate <br></br>{" "}
           </button>
         </div>
         <br />
