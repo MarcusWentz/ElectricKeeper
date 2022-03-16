@@ -189,7 +189,6 @@ export default function Owner() {
       <>
         <div
           style={{
-            marginBottom: 150,
             marginTop: 50,
             display: "flex",
             alignItems: "center",
