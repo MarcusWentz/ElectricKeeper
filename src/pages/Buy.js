@@ -70,6 +70,7 @@ export default function Buy({ degree, userLocation, basic }) {
         ELECTRICKEEPER_ABI,
         ELECTRICKEEPER_CONTRACT_ADDRESS
       );
+
       const buyDemoEightMinutesContract = new web3.eth.Contract(
         BUY_DEMO_EIGHT_MINUTES_ABI,
         BUY_DEMO_EIGHT_MINUTES_CONTRACT_ADDRESS
@@ -183,6 +184,11 @@ export default function Buy({ degree, userLocation, basic }) {
             } of electricity
           for the ${colorNumberToColor(colorNumber)} LED`
           );
+
+          setTimeout(function () {
+            window.location.reload();
+            console.log("Timeout triggered!");
+          }, 4000);
         });
     } catch (err) {
       const msg = "Connect your wallet to buy";
