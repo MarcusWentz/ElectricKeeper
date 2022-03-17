@@ -69,7 +69,9 @@ function App() {
   };
 
   return (
-    <DataContext.Provider value={{ userAccountAddress: userAccountAddress, errorMsg: "" }}>
+    <DataContext.Provider
+      value={{ userAccountAddress: userAccountAddress, errorMsg: "" }}
+    >
       {isMobile ? (
         ""
       ) : (
@@ -79,27 +81,19 @@ function App() {
         />
       )}
       <main>
-
- {/*        {isMobile ? (
+        {/*        {isMobile ? (
           <MobileDetected />
         ) : ( */}
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/buy" element={<Buy />} />
-            <Route path="/status" element={<Status />} />
-            <Route path="/vrf" element={<VRF />} />
-            <Route path="/owner" element={<Owner />} />
-
-
-            <Route path="/error" element={<MobileDetected />} />
-          </Routes>
-    {/*     )} */}
-        
-
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/buy" element={<Buy />} />
+          <Route path="/status" element={<Status />} />
+          <Route path="/vrf" element={<VRF />} />
+          <Route path="/owner" element={<Owner />} />
+          <Route path="/error" element={<MobileDetected />} />
+        </Routes>
+        {/*     )} */}
       </main>
-   
-
-
     </DataContext.Provider>
   );
 }

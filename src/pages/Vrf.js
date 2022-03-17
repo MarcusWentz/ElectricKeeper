@@ -87,6 +87,9 @@ export default function Vrf({}) {
         setErrorMsg("Must be on the Rinkeby test network");
         //Error message here
       }
+      window.ethereum.on("chainChanged", () => {
+        window.location.reload();
+      });
 
       //Load the smart contract
 
@@ -212,9 +215,17 @@ export default function Vrf({}) {
             </p>
           </div>
         ) : (
-          <div>
-            <p>
-              <b>?</b>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              // background: "blue",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <div>
+              <p>?</p>
               <p className="vrf-numbers color-white">?</p>
               <p className="vrf-numbers color-pink">?</p>
               <p className="vrf-numbers color-orange">?</p>
@@ -223,9 +234,9 @@ export default function Vrf({}) {
               <p className="vrf-numbers color-yellow">?</p>
               <p className="vrf-numbers color-blue">?</p>
               <p className="vrf-numbers color-red">?</p>
-            </p>
-            <p>
-              <b>?</b>
+            </div>
+            <div>
+              <p>?</p>
               <p className="vrf-numbers color-white">?</p>
               <p className="vrf-numbers color-pink">?</p>
               <p className="vrf-numbers color-orange">?</p>
@@ -234,7 +245,7 @@ export default function Vrf({}) {
               <p className="vrf-numbers color-yellow">?</p>
               <p className="vrf-numbers color-blue">?</p>
               <p className="vrf-numbers color-red">?</p>
-            </p>
+            </div>
           </div>
         )}
         {/* <p><b></b>{colorSet2}</p> */}
