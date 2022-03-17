@@ -5,22 +5,11 @@ var chai = require('chai');
 const BN = require('bn.js');
 chai.use(require('chai-bn')(BN));
 
-  describe('Mumbai ElectricKeeper Integration Test', async function () {
-
-    let apiConsumer
-
-    beforeEach(async () => {
-      const APIConsumer = await ethers.getContractFactory('ElectricKeeper');
-      apiConsumer = await APIConsumer.deploy();
-      await apiConsumer.deployed();
-    })
-    
+  describe('Rinkeby VRFv2 Light Show Integration Test', async function () {
     it('VRFv2 Light Show Returns Random Numbers', async () => {
       const accounts = await ethers.getSigners()
       const signer = accounts[0]
       const lightShowContract = new ethers.Contract('0xD111A5E51034A17505f82547Ad3508EbCFc7c405', LightShowABI, signer)
-//       let firstRandomWord = await lightShowContract.twoRandomWords(0)
-//       console.log('     First Random Word: ' + new ethers.BigNumber.from(firstRandomWord._hex).toString())
       var requestTransaction = await lightShowContract.requestRandomWords()
       console.log('hash:' + requestTransaction.hash)
       await new Promise(resolve => setTimeout(resolve, 300000))

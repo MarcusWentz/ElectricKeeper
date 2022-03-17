@@ -2,16 +2,21 @@ require("@nomiclabs/hardhat-ethers");
 require('solidity-coverage');
 // require("@nomiclabs/hardhat-etherscan");
 
-const MUMBAI_RPC_URL = process.env.mumbaiInfuraAPI
-const PRIVATE_KEY = process.env.devTestnetPrivateKey
+const MUMBAI_RPC_URL = process.env.MUMBAI_API_KEY
+const RINKEBY_RPC_URL = process.env.RINKEBY_API_KEY
+const PRIVATE_KEY = process.env.PRVIATE_KEY
 
 module.exports = {
-  defaultNetwork: "mumbai",
+  defaultNetwork: "rinkeby",
   networks: {
     hardhat: {
     },
     mumbai: {
       url: MUMBAI_RPC_URL,
+      accounts: [PRIVATE_KEY]
+    },
+    rinkeby: {
+      url: RINKEBY_RPC_URL,
       accounts: [PRIVATE_KEY]
     }
   },
