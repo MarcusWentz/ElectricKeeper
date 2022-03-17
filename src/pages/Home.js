@@ -1,6 +1,9 @@
 import asset from "../assets/homeScreenImg.png";
 import Footer from "../components/Footer";
-import EthLogo from "../assets/svg/eth_logo.svg";
+import eye from "../assets/png/eye.png";
+import house from "../assets/png/house.png";
+import fireworks from "../assets/png/fireworks.png";
+import gear from "../assets/png/gear.png";
 
 const Home = () => {
   const renderLandingPage = () => {
@@ -33,23 +36,11 @@ const Home = () => {
               className="p-3 pb-5 shadow-sm rounded h-100 w-100 d-inline-block position-relative mb-sm-2"
             >
               <div class=" text-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="44"
-                  height="44"
-                  fill="#ffdd9e"
-                  class="bi bi-cart-plus"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z" />
-                  <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
-                </svg>
+                <img src={eye} alt="" width={60} />
                 <br></br>
                 <h3 class="display-6 py-3">Status</h3>
               </div>
-              <p>
-              View unit voltage and expiration states.
-              </p>
+              <p>View unit voltage and expiration states.</p>
               <p>
                 <a href="/#/status">
                   <button
@@ -73,23 +64,11 @@ const Home = () => {
               className="p-3 pb-5 shadow-sm rounded h-100 w-100 d-inline-block position-relative mb-sm-2"
             >
               <div class=" text-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="44"
-                  height="44"
-                  fill="#ffdd9e"
-                  class="bi bi-cart-plus"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z" />
-                  <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
-                </svg>
+                <img src={house} alt="" width={60} />
                 <br></br>
                 <h3 class="display-6 py-3">Buy</h3>
               </div>
-              <p>
-              Buy electricity for a unit.
-              </p>
+              <p>Buy electricity for a unit.</p>
               <p>
                 <a href="/#/buy">
                   <button
@@ -113,22 +92,13 @@ const Home = () => {
               class="p-3 pb-5  shadow-sm rounded h-100 w-100 d-inline-block position-relative mb-2"
             >
               <div class=" text-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="44"
-                  height="44"
-                  fill="currentColor"
-                  class="bi bi-person-badge"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M6.5 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                  <path d="M4.5 0A2.5 2.5 0 0 0 2 2.5V14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2.5A2.5 2.5 0 0 0 11.5 0h-7zM3 2.5A1.5 1.5 0 0 1 4.5 1h7A1.5 1.5 0 0 1 13 2.5v10.795a4.2 4.2 0 0 0-.776-.492C11.392 12.387 10.063 12 8 12s-3.392.387-4.224.803a4.2 4.2 0 0 0-.776.492V2.5z" />
-                </svg>
+                <img src={gear} alt="" width={60} />
                 <br></br>
                 <h3 class="display-6 py-3">Owner</h3>
               </div>
               <p>
-              Emergency on and off control, manual expiration shut off and Chainlink Keeper and API maintenance.
+                Emergency on and off control, manual expiration shut off and
+                Chainlink Keeper and API maintenance.
               </p>
               <p>
                 <a href="/#/owner">
@@ -153,22 +123,11 @@ const Home = () => {
               class="p-3 pb-5  shadow-sm rounded h-100 w-100 d-inline-block position-relative mb-2"
             >
               <div class=" text-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="44"
-                  height="44"
-                  fill="currentColor"
-                  class="bi bi-lightbulb"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1z" />
-                </svg>
+                <img src={fireworks} alt="" width={70} />
                 <br></br>
                 <h3 class="display-6 py-3">Lightshow</h3>
               </div>
-              <p>
-              Chainlink VRFv2 lightshow in 8 bit representation.
-              </p>
+              <p>Chainlink VRFv2 lightshow in 8 bit representation.</p>
               <p>
                 <a href="/#/vrf">
                   <button
