@@ -2,7 +2,6 @@ import asset from "../assets/homeScreenImg.png";
 import Footer from "../components/Footer";
 import eye from "../assets/png/eye.png";
 import house from "../assets/png/house.png";
-import dice from "../assets/png/dice.png";
 import gear from "../assets/png/gear.png";
 
 const Home = () => {
