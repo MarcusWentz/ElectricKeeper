@@ -2,7 +2,7 @@ import asset from "../assets/homeScreenImg.png";
 import Footer from "../components/Footer";
 import eye from "../assets/png/eye.png";
 import house from "../assets/png/house.png";
-import fireworks from "../assets/png/fireworks.png";
+import dice from "../assets/png/dice.png";
 import gear from "../assets/png/gear.png";
 
 const Home = () => {
@@ -118,12 +118,22 @@ const Home = () => {
               style={{
                 border: "2px solid orange",
                 color: "#ffdd9e",
-                borderRadius: 80,
+                borderRadius: 806,
               }}
               class="p-3 pb-5  shadow-sm rounded h-100 w-100 d-inline-block position-relative mb-2"
             >
               <div class=" text-center">
-                <img src={fireworks} alt="" width={70} />
+                {/* <img src={dice} alt="" width={60} /> */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="50"
+                  height="50"
+                  fill="#ffa500"
+                  class="bi bi-dice-5-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M3 0a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V3a3 3 0 0 0-3-3H3zm2.5 4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm8 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zM12 13.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM5.5 12a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zM8 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                </svg>
                 <br></br>
                 <h3 class="display-6 py-3">Lightshow</h3>
               </div>
