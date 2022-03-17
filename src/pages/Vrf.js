@@ -212,7 +212,30 @@ export default function Vrf({}) {
             </p>
           </div>
         ) : (
-          ""
+          <div>
+            <p>
+              <b>?</b>
+              <p className="vrf-numbers color-white">?</p>
+              <p className="vrf-numbers color-pink">?</p>
+              <p className="vrf-numbers color-orange">?</p>
+              <p className="vrf-numbers color-purple">?</p>
+              <p className="vrf-numbers color-green">?</p>
+              <p className="vrf-numbers color-yellow">?</p>
+              <p className="vrf-numbers color-blue">?</p>
+              <p className="vrf-numbers color-red">?</p>
+            </p>
+            <p>
+              <b>?</b>
+              <p className="vrf-numbers color-white">?</p>
+              <p className="vrf-numbers color-pink">?</p>
+              <p className="vrf-numbers color-orange">?</p>
+              <p className="vrf-numbers color-purple">?</p>
+              <p className="vrf-numbers color-green">?</p>
+              <p className="vrf-numbers color-yellow">?</p>
+              <p className="vrf-numbers color-blue">?</p>
+              <p className="vrf-numbers color-red">?</p>
+            </p>
+          </div>
         )}
         {/* <p><b></b>{colorSet2}</p> */}
         <p></p>
