@@ -8,7 +8,7 @@ const contractDefined_JS = new web3.eth.Contract(contractABI_JS, contractAddress
 
 //https://github.com/sarfata/pi-blaster
 //Build and install directly from source
-// var piblaster = require('pi-blaster.js');
+var piblaster = require('pi-blaster.js');
 const timeMilliSec = 1000; //2 seconds per value
 const pulseWidthMin = 0.00;
 const pulseWidthMax = 0.35;
@@ -40,10 +40,10 @@ async function updateLights() {
               for(let ledValue = 0; ledValue < 8; ledValue++ ) {
                   if(  (ArrayStorage[i]&(2**(ledValue))) == (2**(ledValue)) ){
                     console.log("COLOR " + objectLED['color'][ledValue] + " PIN " + objectLED['pin'][ledValue] + " ON!" )
-                    // piblaster.setPwm(objectLED['pin'][j], pulseWidthMax);
+                    piblaster.setPwm(objectLED['pin'][ledValue], pulseWidthMax);
                   } else {
                     console.log("COLOR " + objectLED['color'][ledValue]  + " PIN " +  objectLED['pin'][ledValue] + " OFF!" )
-                    // piblaster.setPwm(objectLED['pin'][j], pulseWidthMin);
+                    piblaster.setPwm(objectLED['pin'][ledValue], pulseWidthMin);
                   }
               }
               await timeout(timeMilliSec)
