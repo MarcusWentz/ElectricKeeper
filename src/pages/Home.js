@@ -23,7 +23,46 @@ const Home = () => {
             width="800px"
             style={{ marginTop: "-40px" }}
           />
-
+          <div class="col-sm-12 col-lg-4  col-xl-3 text-center">
+            <div
+              style={{
+                border: "2px solid orange",
+                color: "#ffdd9e",
+                borderRadius: 80,
+              }}
+              className="p-3 pb-5 shadow-sm rounded h-100 w-100 d-inline-block position-relative mb-sm-2"
+            >
+              <div class=" text-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="44"
+                  height="44"
+                  fill="#ffdd9e"
+                  class="bi bi-cart-plus"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z" />
+                  <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                </svg>
+                <br></br>
+                <h3 class="display-6 py-3">Status</h3>
+              </div>
+              <p>
+              View unit voltage and expiration states.
+              </p>
+              <p>
+                <a href="/#/status">
+                  <button
+                    type="button"
+                    style={{ marginLeft: 20 }}
+                    class="btn-hover color-electric position-absolute bottom-0 start-0"
+                  >
+                    Status
+                  </button>
+                </a>
+              </p>
+            </div>
+          </div>
           <div class="col-sm-12 col-lg-4  col-xl-3 text-center">
             <div
               style={{
@@ -49,8 +88,7 @@ const Home = () => {
                 <h3 class="display-6 py-3">Buy</h3>
               </div>
               <p>
-                Go to the buy page to start buying your electricity from our
-                smart contract electrical grid
+              Buy electricity for a unit.
               </p>
               <p>
                 <a href="/#/buy">
@@ -90,9 +128,7 @@ const Home = () => {
                 <h3 class="display-6 py-3">Owner</h3>
               </div>
               <p>
-                If you are the owner of this smart contract electrical grid, you
-                can go to the owner page and check if there is an expiration
-                present
+              Emergency on and off control, manual expiration shut off and Chainlink Keeper and API maintenance.
               </p>
               <p>
                 <a href="/#/owner">
@@ -131,8 +167,7 @@ const Home = () => {
                 <h3 class="display-6 py-3">Lightshow</h3>
               </div>
               <p>
-                Check out our lightshow which is built using the new Chainlink
-                VRFv2
+              Chainlink VRFv2 lightshow in 8 bit representation.
               </p>
               <p>
                 <a href="/#/vrf">
