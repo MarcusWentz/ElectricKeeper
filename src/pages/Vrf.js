@@ -56,6 +56,8 @@ export default function Vrf({}) {
   const [colorSet2, setColorSet2] = useState();
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
+  const [refreshCount, setRefreshCount] = useState(0);
+
   const { account } = useWeb3React();
 
   let ArrayStorage = [];
@@ -96,7 +98,7 @@ export default function Vrf({}) {
       eventListener();
     };
     loadBlockchainData();
-  }, []);
+  }, [refreshCount]);
 
   const eventListener = () => {
     contractDefined_JS.events
@@ -112,6 +114,7 @@ export default function Vrf({}) {
         //Do a wait 30s here
         console.log("eventlistner triggered!");
         window.location.reload();
+        setRefreshCount(1);
       })
       .on("changed", function (eventResult) {
         // remove event from local database
