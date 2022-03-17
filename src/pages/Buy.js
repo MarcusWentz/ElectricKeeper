@@ -36,6 +36,7 @@ export default function Buy({ degree, userLocation, basic }) {
   const [voltageExpirationPink, setVoltageExpirationPink] = useState(-1);
   const [voltageExpirationWhite, setVoltageExpirationWhite] = useState(-1);
   const [electricRateTennessee, setElectricRateTennessee] = useState("?");
+  const [refreshCount, setRefreshCount] = useState(0);
 
   const { userAccountAddress, setUserAccountAddress } =
     React.useContext(DataContext);
@@ -120,7 +121,7 @@ export default function Buy({ degree, userLocation, basic }) {
       }
     };
     loadBlockchainData();
-  }, [account]);
+  }, [account, refreshCount]);
 
   const estimatedMatic = () => {
     if (electricKeeperContract !== null && inputAmount !== "") {
@@ -186,7 +187,8 @@ export default function Buy({ degree, userLocation, basic }) {
           );
 
           setTimeout(function () {
-            window.location.reload();
+            //window.location.reload();
+            setRefreshCount(1);
             console.log("Timeout triggered!");
           }, 4000);
         });

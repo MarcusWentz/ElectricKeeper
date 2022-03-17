@@ -30,6 +30,8 @@ export default function Owner() {
   const [voltageExpirationOrange, setVoltageExpirationOrange] = useState(-1);
   const [voltageExpirationPink, setVoltageExpirationPink] = useState(-1);
   const [voltageExpirationWhite, setVoltageExpirationWhite] = useState(-1);
+  const [refreshCount, setRefreshCount] = useState(0);
+
   const { userAccountAddress, setUserAccountAddress } =
     React.useContext(DataContext);
 
@@ -110,7 +112,7 @@ export default function Owner() {
       }
     };
     loadBlockchainData();
-  }, [account]);
+  }, [account, refreshCount]);
 
   useEffect(() => {}, []);
 
@@ -133,7 +135,8 @@ export default function Owner() {
         .then(() => {
           setSuccessMsg("Manual expiration off");
           setTimeout(function () {
-            window.location.reload();
+            //window.location.reload();
+            setRefreshCount(1);
             console.log("Timeout triggered!");
           }, 4000);
         });
@@ -159,7 +162,8 @@ export default function Owner() {
         .then(() => {
           setSuccessMsg("Electric rate of Tennessee request sent");
           setTimeout(function () {
-            window.location.reload();
+            //window.location.reload();
+            setRefreshCount(2);
             console.log("Timeout triggered!");
           }, 4000);
         });
@@ -199,7 +203,8 @@ export default function Owner() {
                 : "Emergency turn on executed"
             );
             setTimeout(function () {
-              window.location.reload();
+              // window.location.reload();
+              setRefreshCount(3);
               console.log("Timeout triggered!");
             }, 4000);
           });
