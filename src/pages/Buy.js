@@ -188,7 +188,7 @@ export default function Buy({ degree, userLocation, basic }) {
 
           setTimeout(function () {
             //window.location.reload();
-            setRefreshCount(1);
+            setRefreshCount(refreshCount + 1);
             console.log("Timeout triggered!");
           }, 4000);
         });

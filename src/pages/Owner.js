@@ -136,7 +136,7 @@ export default function Owner() {
           setSuccessMsg("Manual expiration off");
           setTimeout(function () {
             //window.location.reload();
-            setRefreshCount(1);
+            setRefreshCount(refreshCount + 1);
             console.log("Timeout triggered!");
           }, 4000);
         });
@@ -163,7 +163,7 @@ export default function Owner() {
           setSuccessMsg("Electric rate of Tennessee request sent");
           setTimeout(function () {
             //window.location.reload();
-            setRefreshCount(2);
+            setRefreshCount(refreshCount + 1);
             console.log("Timeout triggered!");
           }, 4000);
         });
@@ -204,7 +204,7 @@ export default function Owner() {
             );
             setTimeout(function () {
               // window.location.reload();
-              setRefreshCount(3);
+              setRefreshCount(refreshCount + 1);
               console.log("Timeout triggered!");
             }, 4000);
           });

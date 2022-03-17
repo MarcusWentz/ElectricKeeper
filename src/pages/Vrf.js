@@ -114,7 +114,7 @@ export default function Vrf({}) {
         //Do a wait 30s here
         console.log("eventlistner triggered!");
         window.location.reload();
-        setRefreshCount(1);
+        setRefreshCount(refreshCount + 1);
       })
       .on("changed", function (eventResult) {
         // remove event from local database
