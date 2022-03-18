@@ -1,13 +1,14 @@
 # ElectricKeeper (ETHDenver 2022)
 
-An automated electric grid.
+An automated electric grid powered by a Raspberry Pi 4, which is controlled by a hybrid smart contract using Chainlink Keepers to automate turning off LEDs for electric bill expirations [with sound alerts using Half Life's VOX (Black Mesa Announcement System).
 
-Video demo [__NEED TO RECORD AGAIN WITH FRONTEND AND HALF LIFE VOX SOUNDS ___]: https://www.youtube.com/watch?v=949bsTmufhI
+Chainlink API/pricefeeds are used to get real world electric rate API data from the National Renewable Energy Laboratory and convert it in terms of MATIC/USD on Polygon.
 
-Powered by a Raspberry Pi 4, which is controlled by a hybrid smart contract using Chainlink Keepers to automate turning off LEDs for electric bill expirations 
-[with sound alerts using Half Life's VOX (Black Mesa Announcement System). Chainlink API/pricefeeds are used to get real world electric rate data and convert it in terms of MATIC/USD on Polygon.
+Bonus project: Chainlink VRFv2 lightshow, with events logged on zkSync with 1 WEI deposits.
 
-Bonus project: Chainlink VRFv2 lightshow, with events logged on zkSync with 1 WEI deposits [ ___ VIDEO DEMO COMING SOON! ____].
+Video demo (early) [__NEED TO RECORD AGAIN WITH FRONTEND AND HALF LIFE VOX SOUNDS ___]: https://www.youtube.com/watch?v=949bsTmufhI
+
+VRFv2 Lighshow: [ ___ VIDEO DEMO COMING VERY SOON! ____].
 
 Website hosted on Fleek [IPFS+Filecoin]: https://electrickeeper.on.fleek.co/#/
 
