@@ -6,9 +6,11 @@ Chainlink API/pricefeeds are used to get real world electric rate API data from 
 
 Bonus project: Chainlink VRFv2 lightshow, with events logged on zkSync with 1 WEI deposits.
 
-Video demo (early) [__NEED TO RECORD AGAIN WITH FRONTEND AND HALF LIFE VOX SOUNDS ___]: https://www.youtube.com/watch?v=949bsTmufhI
+Final presentation: [___COMING SOON!___]
 
-VRFv2 Lighshow: [ ___ VIDEO DEMO COMING VERY SOON! ____].
+Early demo: https://www.youtube.com/watch?v=949bsTmufhI
+
+VRFv2 Lighshow: https://github.com/MarcusWentz/ElectricKeeper
 
 Website hosted on Fleek [IPFS+Filecoin]: https://electrickeeper.on.fleek.co/#/
 
