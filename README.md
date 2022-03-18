@@ -14,16 +14,14 @@ VRFv2 Lighshow: https://www.youtube.com/watch?v=ebFQsx9WYGg
 
 Website hosted on Fleek [IPFS+Filecoin]: https://electrickeeper.on.fleek.co/#/
 
-ElectricKeeper verified Etherscan using Hardhat and Polyscan API key: https://mumbai.polygonscan.com/address/0x37160d3cB5834B090621AB2A86355493d808f45B#code
+Presentation slides: https://docs.google.com/presentation/d/1cRC4lI-hXJ0S35Tm_BWMym4Wqitvkxw0HylvKsHX4m4/edit?usp=sharing
 
-Skynet backup site: https://10009tgoq1i5qfk2fgnasv7m8ngk78or2e63n7aee6slpdd83bdiu38.siasky.net/#/
+ElectricKeeper verified Etherscan using Hardhat and Polyscan API key: https://mumbai.polygonscan.com/address/0x37160d3cB5834B090621AB2A86355493d808f45B#code
 
 zkSync [Rinkeby] event counter example: [1 WEI = 1 event]:
 https://rinkeby.zkscan.io/explorer/transactions/0x42d6f786023160c1b6980f3993b75702007be00d2575c97034f6831067e78227
 
-<img src="https://github.com/MarcusWentz/ElectricKeeper/blob/main/images/animation4.gif" alt="Test"/>
-<img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/overview7.png" alt="Overview"/>
-<img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/wiring5.png" alt="Wiring"/>
+Skynet backup site: https://10009tgoq1i5qfk2fgnasv7m8ngk78or2e63n7aee6slpdd83bdiu38.siasky.net/#/
 
 Hardware: 
 
@@ -33,4 +31,6 @@ Hardware:
 
 -330 ohm resistor (current limiting safety) [Quantity: 8]
 
-Presentation slides: https://docs.google.com/presentation/d/1cRC4lI-hXJ0S35Tm_BWMym4Wqitvkxw0HylvKsHX4m4/edit?usp=sharing
+<img src="https://github.com/MarcusWentz/ElectricKeeper/blob/main/images/animation4.gif" alt="Test"/>
+<img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/overview7.png" alt="Overview"/>
+<img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/wiring5.png" alt="Wiring"/>
