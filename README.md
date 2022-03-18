@@ -10,7 +10,7 @@ Final presentation: [___COMING SOON!___]
 
 Early demo: https://www.youtube.com/watch?v=949bsTmufhI
 
-VRFv2 Lighshow: https://github.com/MarcusWentz/ElectricKeeper
+VRFv2 Lighshow: https://www.youtube.com/watch?v=ebFQsx9WYGg
 
 Website hosted on Fleek [IPFS+Filecoin]: https://electrickeeper.on.fleek.co/#/
 
