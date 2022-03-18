@@ -221,6 +221,11 @@ export default function Buy({ degree, userLocation, basic }) {
                 })
                 .then(() => {
                   setSuccessMsg("8 Minute Demo Starting!");
+                  setTimeout(function () {
+                    //window.location.reload();
+                    setRefreshCount(refreshCount + 1);
+                    console.log("Timeout triggered!");
+                  }, 4000);
                 });
             } catch (err) {
               const msg = "Connect your wallet to buy";
