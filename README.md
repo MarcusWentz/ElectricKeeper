@@ -6,7 +6,9 @@ Chainlink API/pricefeeds are used to get real world electric rate API data from 
 
 Bonus project: Chainlink VRFv2 lightshow, with events logged on zkSync with 1 WEI deposits.
 
-Full demo Under 4 Minutes: https://www.youtube.com/watch?v=uv-hdp4cg8k
+Links:
+
+Full demo Under 4 Minutes: https://www.youtube.com/watch?v=nY3aTCN5Xdg
 
 Original early demo: https://www.youtube.com/watch?v=949bsTmufhI
 
