@@ -8,11 +8,7 @@ Bonus project: Chainlink VRFv2 lightshow, with events logged on zkSync with 1 WE
 
 Links:
 
-Full demo Under 4 Minutes: https://www.youtube.com/watch?v=nY3aTCN5Xdg
-
-Original early demo: https://www.youtube.com/watch?v=949bsTmufhI
-
-VRFv2 Lighshow: https://www.youtube.com/watch?v=ebFQsx9WYGg
+Demo under 4 minutes: https://www.youtube.com/watch?v=c58BTOQUQmM
 
 Website hosted on Fleek [IPFS+Filecoin]: https://electrickeeper.on.fleek.co/#/
 
@@ -20,18 +16,19 @@ Presentation slides: https://docs.google.com/presentation/d/1cRC4lI-hXJ0S35Tm_BW
 
 ElectricKeeper verified Etherscan using Hardhat and Polyscan API key: https://mumbai.polygonscan.com/address/0x37160d3cB5834B090621AB2A86355493d808f45B#code
 
-zkSync [Rinkeby] event counter example: [1 WEI = 1 event]:
-https://rinkeby.zkscan.io/explorer/transactions/0x42d6f786023160c1b6980f3993b75702007be00d2575c97034f6831067e78227
+zkSync [Rinkeby] event counter example: [1 WEI = 1 event]: https://rinkeby.zkscan.io/explorer/transactions/0x42d6f786023160c1b6980f3993b75702007be00d2575c97034f6831067e78227
 
 Skynet backup site: https://10009tgoq1i5qfk2fgnasv7m8ngk78or2e63n7aee6slpdd83bdiu38.siasky.net/#/
 
-Hardware: 
+Hardware:
 
 -Raspberry Pi 4 [Quantity: 1]
 
 -LED (Red, Blue, Green, Yellow, Purple, Orange, Pink, White) [Quantity: 1 each]
 
 -330 ohm resistor (current limiting safety) [Quantity: 8]
+
+Bounties: Chainlink, Polygon, Coinbase, IPFS, Skynet
 
 <img src="https://github.com/MarcusWentz/ElectricKeeper/blob/main/images/animation4.gif" alt="Test"/>
 <img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/overview7.png" alt="Overview"/>
