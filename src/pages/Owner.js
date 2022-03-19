@@ -133,7 +133,7 @@ export default function Owner() {
           from: account,
         })
         .then(() => {
-          setSuccessMsg("Manual expiration off");
+          setSuccessMsg("Manual expiration off executed");
           setTimeout(function () {
             //window.location.reload();
             setRefreshCount(refreshCount + 1);
@@ -199,8 +199,8 @@ export default function Owner() {
           .then(() => {
             setSuccessMsg(
               safeOrDanger === "safe"
-                ? "Emergancy turn off executed"
-                : "Emergency turn on executed"
+                ? "Emergancy turn on executed"
+                : "Emergency turn off executed"
             );
             setTimeout(function () {
               // window.location.reload();
