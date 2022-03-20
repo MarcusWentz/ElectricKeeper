@@ -8,7 +8,7 @@ Bonus project: Chainlink VRFv2 lightshow, with events logged on zkSync with 1 WE
 
 Links:
 
-Demo under 4 minutes: https://www.youtube.com/watch?v=rYhftS-oai0
+Demo under 4 minutes: https://www.youtube.com/watch?v=5GfzCKUT_UM
 
 Website hosted on Fleek [IPFS+Filecoin]: https://electrickeeper.on.fleek.co/#/
 
