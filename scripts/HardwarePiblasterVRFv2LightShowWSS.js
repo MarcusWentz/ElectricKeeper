@@ -7,48 +7,63 @@ const contractDefined_JS = new web3.eth.Contract(contractABI_JS, contractAddress
 
 //https://github.com/sarfata/pi-blaster
 //Build and install directly from source
-// var piblaster = require('pi-blaster.js');
-var player = require('play-sound')(opts = {})
-const timeMilliSec = 1000;
+var piblaster = require('pi-blaster.js');
+const timeMilliSec = 1000; //2 seconds per value
 const pulseWidthMin = 0.00;
 const pulseWidthMax = 0.35;
 
 let objectLED = {"pin":   [21   ,25    ,23      ,22     ,24      ,27      ,17    ,18     ],
                  "color": ['RED','BLUE','YELLOW','GREEN','PURPLE','ORANGE','PINK','WHITE']}
 
+let ArrayStorage = [];
+
 function timeout(ms) {
 	return new Promise(resolve => setTimeout(resolve,ms));
 }
 
-async function VoltageAlert() {
-    player.play('VoltageAlertDetected.mp3', function(err){if (err) throw err})
-    await timeout(1500)
-    console.log("Event detected. Waiting for an event...:")
-
+async function updateLights() {
+ while(true){
+   if(ArrayStorage.length == 0){
+     for(let randomNumbers = 0; randomNumbers < 2; randomNumbers++ ) {
+       console.log("API CALL")
+       contractDefined_JS.methods.twoRandomWords(randomNumbers).call((err, balance) => {
+          ArrayStorage.push((balance%255)+1)
+        })
+        await timeout(timeMilliSec)
+      }
+    }
+    if(ArrayStorage.length > 0){
+      for(let randomNumbers = 0; randomNumbers < 2; randomNumbers++ ) {
+            for(let i = 0 ; i < 2 ; i++) {
+              console.log(ArrayStorage[i])
+              for(let ledValue = 0; ledValue < 8; ledValue++ ) {
+                  if(  (ArrayStorage[i]&(2**(ledValue))) == (2**(ledValue)) ){
+                    console.log("COLOR " + objectLED['color'][ledValue] + " PIN " + objectLED['pin'][ledValue] + " ON!" )
+                    piblaster.setPwm(objectLED['pin'][ledValue], pulseWidthMax);
+                  } else {
+                    console.log("COLOR " + objectLED['color'][ledValue]  + " PIN " +  objectLED['pin'][ledValue] + " OFF!" )
+                    piblaster.setPwm(objectLED['pin'][ledValue], pulseWidthMin);
+                  }
+              }
+              await timeout(timeMilliSec)
+            }
+      }
+    }
+  }
 }
 
-console.log("Waiting for an event...:")
+console.log("Contract starting value:")
+updateLights()
 
 contractDefined_JS.events.lightShowUpdate({ //Subscribe to event.
      fromBlock: 'latest'
  }, function(error, eventResult){})
  .on('data', function(eventResult){
    console.log("EVENT DETECTED! NEW STATE VALUE: ")
-   VoltageAlert()
+   ArrayStorage = []; //WIPE LAST VALUES THEN UPDATE AGAIN.
+   updateLights();  //Call the get function to get the most accurate present state for the value.
    })
  .on('changed', function(eventResult){
      // remove event from local database
  })
  .on('error', console.error);
-
-// contractDefined_JS.events.VoltageChange({ //Subscribe to event.
-//      fromBlock: 'latest'
-//  }, function(error, eventResult){})
-//  .on('data', function(eventResult){
-//    console.log("EVENT DETECTED! NEW STATE VALUE: ")
-//    VoltageAlert();  //Call the get function to get the most accurate present state for the value.
-//    })
-//  .on('changed', function(eventResult){
-//      // remove event from local database
-//  })
-//  .on('error', console.error);
