@@ -33,7 +33,7 @@ contract ElectricKeeper is FunctionsClient , KeeperCompatibleInterface , Owned ,
     modifier validLEDvalues(uint256 ledValue) {
         // // LED VALUE RANGE IS 0 TO 7.
         // require(ledValue < 8, "LED_VALUES_RED_0_BLUE_1_YELLOW_2_GREEN_3_PURPLE_4_ORANGE_5_PINK_6_WHITE_7.");
-        if(ledValue > 7) revert invalidLedValue();
+        if(ledValue > 7) revert InvalidLedValue();
         _;
     }
     
@@ -68,7 +68,7 @@ contract ElectricKeeper is FunctionsClient , KeeperCompatibleInterface , Owned ,
     function BuyElectricityTimeOn(uint256 ledValue, uint256 minutesToHaveOn) public payable validLEDvalues(ledValue) {
         // @dev Save the results from feeInEth(minutesToHaveOn) to avoid doing conversions every call. 
         uint256 feeInEthCurrent = feeInEth(minutesToHaveOn);       
-        require(minutesToHaveOn*electricRateTennesseePennies > 0, "ORACLE AND TIME MUST BE GREATER THAN 0.");        
+        if(minutesToHaveOn*electricRateTennesseePennies == 0) revert OracleValueZero();  
         if(msg.value < feeInEthCurrent) revert MsgValueTooSmall();  
         if(LED[ledValue].Voltage == 0) {
             LED[ledValue].Voltage = 1;
