@@ -42,6 +42,10 @@ https://automation.chain.link/base-sepolia/6976140241006677940633811321582792914
 
 https://vrf.chain.link/base-sepolia#/side-drawer/subscription/68525784575784028549400487869170823443065725663892698488721142391582194014312
 
+### Base Sepolia Pricefeeds
+
+https://docs.chain.link/data-feeds/price-feeds/addresses?network=base&page=1#base-sepolia-testnet
+
 ## Foundry Forge Commands
 
 ### Install Chainlink Library
