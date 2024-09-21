@@ -34,6 +34,10 @@ Bounties: Chainlink, Polygon, Coinbase, IPFS, Skynet
 ```
 forge install smartcontractkit/chainlink-brownie-contracts --no-commit
 ```
+### Install Solmate Library
+```
+forge install rari-capital/solmate --no-commit
+```
 ### Deploy and verify LightShowVRF
 ```
 forge create src/LightShowVRF.sol:LightShowVRF \

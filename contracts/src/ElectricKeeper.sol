@@ -9,31 +9,31 @@ import {KeeperCompatibleInterface} from "chainlink/v0.8/KeeperCompatible.sol";
 // import "contracts/v0.8/ChainlinkClient.sol";
 import {ChainlinkClient,Chainlink} from "chainlink/v0.8/ChainlinkClient.sol"; 
 import {AggregatorV3Interface} from  "chainlink/v0.8/interfaces/AggregatorV3Interface.sol";
+import {Owned} from "solmate/auth/Owned.sol";
 
-contract ElectricKeeper is KeeperCompatibleInterface, ChainlinkClient { 
+contract ElectricKeeper is KeeperCompatibleInterface, ChainlinkClient , Owned { 
 
     using Chainlink for Chainlink.Request;
     AggregatorV3Interface internal priceFeed;
 
-    uint public ElectricRateTennessee; //Resolution is $0.0000
-    struct STATE{ uint Voltage; uint ExpirationTimeUNIX; }
-    mapping(uint => STATE) public LED; 
-    address public immutable Owner;
+    uint256 public ElectricRateTennessee; //Resolution is $0.0000
+
+    mapping(uint256 => STATE) public LED; 
+   
+    struct STATE{ 
+        uint256 Voltage; 
+        uint256 ExpirationTimeUNIX; 
+    }
+
     event VoltageChange();
 
-    constructor() {
+    constructor() Owned(msg.sender) {
         _setChainlinkToken(0x326C977E6efc84E512bB9C30f76E30c160eD06FB);
-        Owner = msg.sender;
         priceFeed = AggregatorV3Interface(0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada); //MATIC/USD on Polygon Testnet Mumbai network.
     }
 
-    modifier onlyOwner() {
-        require(msg.sender == Owner, "ONLY_OWNER_WALLET_ADDRESS_HAS_ACCESS.");
-        _;
-    }
-
-    modifier validLEDvalues(uint ledValue) {
-        require(ledValue >= 0 && ledValue < 8, "LED_VALUES_RED_0_BLUE_1_YELLOW_2_GREEN_3_PURPLE_4_ORANGE_5_PINK_6_WHITE_7.");
+    modifier validLEDvalues(uint256 ledValue) {
+        require(ledValue < 8, "LED_VALUES_RED_0_BLUE_1_YELLOW_2_GREEN_3_PURPLE_4_ORANGE_5_PINK_6_WHITE_7.");
         _;
     }
 
@@ -50,15 +50,15 @@ contract ElectricKeeper is KeeperCompatibleInterface, ChainlinkClient {
         ElectricRateTennessee = _electricRateTennessee;
     }
 
-    function feeInPenniesUSDinMatic(uint scaleMinutes) public view returns (uint) {
+    function feeInPenniesUSDinMatic(uint256 scaleMinutes) public view returns (uint256) {
         // (uint80 roundID, int price, uint startedAt, uint timeStamp, uint80 answeredInRound) = priceFeed.latestRoundData();
-        ( , int price, , , ) = priceFeed.latestRoundData();
+        ( , int256 price, , , ) = priceFeed.latestRoundData();
 
-        return (ElectricRateTennessee*scaleMinutes*uint( (10**24) / price ))/(100);
+        return (ElectricRateTennessee*scaleMinutes*uint256( (10**24) / price ))/(100);
     }
 
     function expirationOccured() public view returns(bool) {
-        for(uint ledValue = 0; ledValue < 8; ledValue++ ) {
+        for(uint256 ledValue = 0; ledValue < 8; ledValue++ ) {
             if((LED[ledValue].Voltage == 1 && block.timestamp > LED[ledValue].ExpirationTimeUNIX)){
                 return true;
             }
@@ -75,7 +75,7 @@ contract ElectricKeeper is KeeperCompatibleInterface, ChainlinkClient {
             LED[ledValue].ExpirationTimeUNIX  += (60*minutesToHaveOn); 
         }
         emit VoltageChange();
-        payable(Owner).transfer(address(this).balance);
+        payable(owner).transfer(address(this).balance);
     }
 
     function checkUpkeep(bytes calldata) external override returns (bool upkeepNeeded, bytes memory) {
@@ -94,7 +94,7 @@ contract ElectricKeeper is KeeperCompatibleInterface, ChainlinkClient {
 
     function OwnerManualExpirationOff() public onlyOwner {
         require(expirationOccured() , "NO_EXPIRATION_YET.");
-        for(uint ledValue = 0; ledValue < 8; ledValue++) {
+        for(uint256 ledValue = 0; ledValue < 8; ledValue++) {
             if(LED[ledValue].Voltage == 1 && block.timestamp > LED[ledValue].ExpirationTimeUNIX){
                 LED[ledValue].Voltage  = 0;
                 LED[ledValue].ExpirationTimeUNIX = 0;
@@ -103,14 +103,14 @@ contract ElectricKeeper is KeeperCompatibleInterface, ChainlinkClient {
         emit VoltageChange();
     }
 
-    function OwnerEmergencyDangerOff(uint ledValue) public onlyOwner validLEDvalues(ledValue) {
+    function OwnerEmergencyDangerOff(uint256 ledValue) public onlyOwner validLEDvalues(ledValue) {
         require(LED[ledValue].Voltage == 1, "VOLTAGE_NOT_ON.");
         LED[ledValue].Voltage  = 2;
         LED[ledValue].ExpirationTimeUNIX -= block.timestamp;
         emit VoltageChange();
     }
 
-    function OwnerEmergencySafeOn(uint ledValue) public onlyOwner validLEDvalues(ledValue) {
+    function OwnerEmergencySafeOn(uint256 ledValue) public onlyOwner validLEDvalues(ledValue) {
         require(LED[ledValue].Voltage == 2, "VOLTAGE_NOT_IN_EMERGENCY_OFF_STATE.");
         LED[ledValue].Voltage  = 1;
         LED[ledValue].ExpirationTimeUNIX += block.timestamp;
@@ -119,18 +119,18 @@ contract ElectricKeeper is KeeperCompatibleInterface, ChainlinkClient {
 
 }
 
-contract BuyDemoEightMinutes {
+// contract BuyDemoEightMinutes {
 
-    ElectricKeeper electricKeeperInstance;
+//     ElectricKeeper electricKeeperInstance;
 
-    constructor(ElectricKeeper electricKeeperAddress) {
-        electricKeeperInstance = ElectricKeeper(electricKeeperAddress);
-    }
+//     constructor(ElectricKeeper electricKeeperAddress) {
+//         electricKeeperInstance = ElectricKeeper(electricKeeperAddress);
+//     }
 
-    function BuyTestEightMinuteCountdown() public payable {
-       require(msg.value == electricKeeperInstance.feeInPenniesUSDinMatic(36), "MUST_HAVE_MSG_VALUE=36*FEE.");
-       for(uint ledValue = 0; ledValue < 8; ledValue++ ) {
-            electricKeeperInstance.BuyElectricityTimeOn{value: electricKeeperInstance.feeInPenniesUSDinMatic(ledValue+1)}(ledValue,ledValue+1);
-        }
-    }
-}
+//     function BuyTestEightMinuteCountdown() public payable {
+//        require(msg.value == electricKeeperInstance.feeInPenniesUSDinMatic(36), "MUST_HAVE_MSG_VALUE=36*FEE.");
+//        for(uint ledValue = 0; ledValue < 8; ledValue++ ) {
+//             electricKeeperInstance.BuyElectricityTimeOn{value: electricKeeperInstance.feeInPenniesUSDinMatic(ledValue+1)}(ledValue,ledValue+1);
+//         }
+//     }
+// }
