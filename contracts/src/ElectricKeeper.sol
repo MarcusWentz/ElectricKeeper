@@ -66,16 +66,27 @@ contract ElectricKeeper is FunctionsClient , KeeperCompatibleInterface , Owned ,
     }
 
     function BuyElectricityTimeOn(uint256 ledValue, uint256 minutesToHaveOn) public payable validLEDvalues(ledValue) {
-        require(minutesToHaveOn*electricRateTennesseePennies > 0, "ORACLE AND TIME MUST BE GREATER THAN 0.");
-        require(feeInEth(minutesToHaveOn) == msg.value, "MSG.VALUE LESS THAN feeInEth");
+        // @dev Save the results from feeInEth(minutesToHaveOn) to avoid doing conversions every call. 
+        uint256 feeInEthCurrent = feeInEth(minutesToHaveOn);       
+        require(minutesToHaveOn*electricRateTennesseePennies > 0, "ORACLE AND TIME MUST BE GREATER THAN 0.");        
+        if(msg.value < feeInEthCurrent) revert MsgValueTooSmall();  
         if(LED[ledValue].Voltage == 0) {
             LED[ledValue].Voltage = 1;
             LED[ledValue].ExpirationTimeUNIX = block.timestamp + (60*minutesToHaveOn); 
         } else {
             LED[ledValue].ExpirationTimeUNIX  += (60*minutesToHaveOn); 
         }
+        // @dev Send the refund amount to the user.
+        // Based on this ENS design pattern for ETHRegistrarController.renew():
+        // https://github.com/ensdomains/ens-contracts/blob/staging/contracts/ethregistrar/ETHRegistrarController.sol#L217-L224
+        if(msg.value > feeInEthCurrent) { 
+            (bool sentUser, ) = payable(msg.sender).call{value: msg.value -  feeInEthCurrent}("");
+            if(sentUser == false) revert EtherNotSent(); 
+        }
+        // @notice Send the payment to the owner.
+        (bool sentOwner, ) = payable(owner).call{value: address(this).balance}("");
+        if(sentOwner == false) revert EtherNotSent();     
         emit VoltageChange();
-        payable(owner).transfer(address(this).balance);
     }
 
     function checkUpkeep(bytes calldata) external override returns (bool upkeepNeeded, bytes memory) {

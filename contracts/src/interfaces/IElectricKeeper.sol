@@ -4,8 +4,10 @@ pragma solidity 0.8.26;
 interface IElectricKeeper {
     // custom errors
     error invalidLedValue();
+    error MsgValueTooSmall();
+    error EtherNotSent();
     error UnexpectedRequestID(bytes32 requestId);
-
+    
     // events
     event VoltageChange();
     event Response(
