@@ -46,3 +46,11 @@ forge create src/LightShowVRF.sol:LightShowVRF \
 --etherscan-api-key $basescanApiKey \
 --verify 
 ```
+### Deploy and verify LightShowVRF
+```
+forge create src/LightShowVRF.sol:LightShowVRF \
+--private-key $devTestnetPrivateKey \
+--rpc-url $baseSepoliaHTTPS \
+--etherscan-api-key $basescanApiKey \
+--verify 
+```
