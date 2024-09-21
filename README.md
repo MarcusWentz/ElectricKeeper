@@ -27,3 +27,17 @@ Bounties: Chainlink, Polygon, Coinbase, IPFS, Skynet
 <img src="https://github.com/MarcusWentz/ElectricKeeper/blob/main/images/animation4.gif" alt="Test"/>
 <img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/overview7.png" alt="Overview"/>
 <img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/wiring5.png" alt="Wiring"/>
+
+## Foundry Forge Commands
+
+### Install Chainlink Library
+```
+forge install smartcontractkit/chainlink-brownie-contracts --no-commit
+```
+
+
+forge create src/LightShowVRF.sol:LightShowVRF \
+--private-key $devTestnetPrivateKey \
+--rpc-url $baseSepoliaHTTPS \
+--etherscan-api-key $basescanApiKey= \
+--verify 
