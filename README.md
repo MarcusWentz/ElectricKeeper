@@ -28,15 +28,15 @@ Bounties: Chainlink, Polygon, Coinbase, IPFS, Skynet
 <img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/overview7.png" alt="Overview"/>
 <img src="https://github.com/MarcusWentz/ElectricalEthereum/blob/main/images/wiring5.png" alt="Wiring"/>
 
-## Chainlink Functions Subscription
+## Chainlink Functions Subscription Logs
 
 https://functions.chain.link/base-sepolia/178
 
-## Chainlink Keepers Subscription
+## Chainlink Keepers Subscription Logs
 
 https://automation.chain.link/base-sepolia/69761402410066779406338113215827929141133647589445634376958149518916539286487
 
-## Chainlink VRF Version 2.5 Subscription
+## Chainlink VRF Version 2.5 Subscription Logs
 
 https://vrf.chain.link/base-sepolia#/side-drawer/subscription/68525784575784028549400487869170823443065725663892698488721142391582194014312
 
