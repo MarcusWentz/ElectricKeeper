@@ -57,7 +57,7 @@ contract ElectricKeeper is FunctionsClient , KeeperCompatibleInterface , Owned ,
 
     function expirationOccured() public view returns(bool) {
         for(uint256 ledValue = 0; ledValue < 8; ledValue++ ) {
-            if((LED[ledValue].Voltage == 1 && block.timestamp > LED[ledValue].ExpirationTimeUNIX)){
+            if(LED[ledValue].Voltage == 1 && block.timestamp > LED[ledValue].ExpirationTimeUNIX){
                 return true;
             }
         }
