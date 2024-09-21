@@ -34,10 +34,11 @@ Bounties: Chainlink, Polygon, Coinbase, IPFS, Skynet
 ```
 forge install smartcontractkit/chainlink-brownie-contracts --no-commit
 ```
-
-
+### Deploy and verify LightShowVRF
+```
 forge create src/LightShowVRF.sol:LightShowVRF \
 --private-key $devTestnetPrivateKey \
 --rpc-url $baseSepoliaHTTPS \
---etherscan-api-key $basescanApiKey= \
+--etherscan-api-key $basescanApiKey \
 --verify 
+```

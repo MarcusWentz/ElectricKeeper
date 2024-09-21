@@ -5,16 +5,19 @@ pragma solidity 0.8.26;
 import {VRFConsumerBaseV2Plus} from "chainlink/v0.8/vrf/dev/VRFConsumerBaseV2Plus.sol";
 // import {VRFV2PlusClient} from "@chainlink/contracts@1.2.0/src/v0.8/vrf/dev/libraries/VRFV2PlusClient.sol";
 import {VRFV2PlusClient} from "chainlink/v0.8/vrf/dev/libraries/VRFV2PlusClient.sol";
-
+import {ILightShowVRF} from "./interfaces/ILightShowVRF.sol";
 // Chainlink VRF Version 2.5
 
 // Modified from:
 // https://docs.chain.link/vrf/v2-5/subscription/get-a-random-number#analyzing-the-contract
 
-contract LightShowVRF is VRFConsumerBaseV2Plus {
+contract LightShowVRF is VRFConsumerBaseV2Plus , ILightShowVRF {
 
     // Your subscription ID.
     uint256 public immutable s_subscriptionId;
+
+    // Base Sepolia network info:
+    // https://docs.chain.link/vrf/v2-5/supported-networks#base-sepolia-testnet
 
     // Sepolia coordinator. For other networks,
     // see https://docs.chain.link/vrf/v2-5/supported-networks#configurations
@@ -25,7 +28,10 @@ contract LightShowVRF is VRFConsumerBaseV2Plus {
     // see https://docs.chain.link/vrf/v2-5/supported-networks#configurations
     bytes32 public constant s_keyHash = 0x9e1344a1247c8a1785d0a4681a27152bffdb43666ae5bf7d14d24a5efd44bf71;
 
-    uint256 public constant subscriptionId = 72389253805527075937027092326569883592663018042762663521211001736142580971570;
+    // Setup subscription to create subscriptionId here:
+    // https://vrf.chain.link/base-sepolia
+
+    uint256 public constant subscriptionId = 68525784575784028549400487869170823443065725663892698488721142391582194014312;
     // Depends on the number of requested values that you want sent to the
     // fulfillRandomWords() function. Storing each word costs about 20,000 gas,
     // so 40,000 is a safe default for this example contract. Test and adjust
@@ -45,9 +51,6 @@ contract LightShowVRF is VRFConsumerBaseV2Plus {
     uint32 public constant numWords = 2;
 
     uint256[] public twoRandomWords;
-
-    event randomRequest(uint256 indexed requestId);
-    event randomNumberResult(uint256 indexed requestId, uint256[] indexed result);
 
     constructor() VRFConsumerBaseV2Plus(vrfCoordinator) {
         s_subscriptionId = subscriptionId;
@@ -92,6 +95,7 @@ contract LightShowVRF is VRFConsumerBaseV2Plus {
     ) internal override {
         twoRandomWords = randomWords;
         emit randomNumberResult(requestId, randomWords);
+        emit lightShowUpdate();
     }
 
 }
