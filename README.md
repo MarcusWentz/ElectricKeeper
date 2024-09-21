@@ -14,10 +14,6 @@ Website hosted on Fleek [IPFS+Filecoin]: https://electrickeeper.on.fleek.co/#/
 
 Presentation slides: https://docs.google.com/presentation/d/1cRC4lI-hXJ0S35Tm_BWMym4Wqitvkxw0HylvKsHX4m4/edit?usp=sharing
 
-ElectricKeeper verified Etherscan using Hardhat and Polyscan API key: https://mumbai.polygonscan.com/address/0x37160d3cB5834B090621AB2A86355493d808f45B#code
-
-zkSync [Rinkeby] event counter example: [1 WEI = 1 event]: https://rinkeby.zkscan.io/explorer/transactions/0x42d6f786023160c1b6980f3993b75702007be00d2575c97034f6831067e78227
-
 Hardware:
 
 -Raspberry Pi 4 [Quantity: 1]
