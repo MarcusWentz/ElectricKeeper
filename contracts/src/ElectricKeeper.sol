@@ -17,8 +17,6 @@ contract ElectricKeeper is FunctionsClient , KeeperCompatibleInterface , Owned ,
 
     AggregatorV3Interface internal priceFeedETHforUSD;
 
-    uint256 public ElectricRateTennessee; //Resolution is $0.0000
-
     mapping(uint256 => STATE) public LED; 
    
     struct STATE{ 
@@ -43,12 +41,20 @@ contract ElectricKeeper is FunctionsClient , KeeperCompatibleInterface , Owned ,
     //     ElectricRateTennessee = _electricRateTennessee;
     // }
 
-    function feeInPenniesUSDinEth(uint256 scaleMinutes) public view returns (uint256) {
+    function getLatestEthUsdPennies() public view returns (uint256) {
         // (uint80 roundID, int price, uint startedAt, uint timeStamp, uint80 answeredInRound) = priceFeed.latestRoundData();
         ( , int256 price, , , ) = priceFeedETHforUSD.latestRoundData();
-
-        return (ElectricRateTennessee*scaleMinutes*uint256( (10**24) / price ))/(100);
+        uint256 scaleToPennies = uint256(price)/1000000;
+        return scaleToPennies;
     }
+
+
+    function feeInEth(uint256 scaleMinutes) public view returns (uint256) {
+        uint256 ratio =  ( electricRateTennesseePennies *( 1 ether ) )/ getLatestEthUsdPennies();
+        uint256 ratioScaledByTime = scaleMinutes*ratio;
+        return ratioScaledByTime;
+    }
+
 
     function expirationOccured() public view returns(bool) {
         for(uint256 ledValue = 0; ledValue < 8; ledValue++ ) {
@@ -59,8 +65,9 @@ contract ElectricKeeper is FunctionsClient , KeeperCompatibleInterface , Owned ,
         return false;
     }
 
-    function BuyElectricityTimeOn(uint ledValue, uint minutesToHaveOn) public payable validLEDvalues(ledValue) {
-        require(minutesToHaveOn*ElectricRateTennessee > 0 && msg.value == (feeInPenniesUSDinEth(minutesToHaveOn)), "MUST_HAVE_MINUTES_AND_API_GREATER_THAN_0_AND_MSG_VALUE=MINUTES*FEE.");
+    function BuyElectricityTimeOn(uint256 ledValue, uint256 minutesToHaveOn) public payable validLEDvalues(ledValue) {
+        require(minutesToHaveOn*electricRateTennesseePennies > 0, "ORACLE AND TIME MUST BE GREATER THAN 0.");
+        require(feeInEth(minutesToHaveOn) == msg.value, "MSG.VALUE LESS THAN feeInEth");
         if(LED[ledValue].Voltage == 0) {
             LED[ledValue].Voltage = 1;
             LED[ledValue].ExpirationTimeUNIX = block.timestamp + (60*minutesToHaveOn); 
@@ -120,7 +127,7 @@ contract ElectricKeeper is FunctionsClient , KeeperCompatibleInterface , Owned ,
     bytes public s_lastError;
 
     // State variable to store the returned character information
-    uint256 public wtiUsdPenniesPriceOracle; 
+    uint256 public electricRateTennesseePennies; 
 
     // // Custom error type
     // error UnexpectedRequestID(bytes32 requestId);
@@ -202,11 +209,11 @@ contract ElectricKeeper is FunctionsClient , KeeperCompatibleInterface , Owned ,
         }
         // Update the contract's state variables with the response and any errors
         s_lastResponse = response;
-        wtiUsdPenniesPriceOracle = abi.decode(response, (uint256));
+        electricRateTennesseePennies = abi.decode(response, (uint256));
         s_lastError = err;
 
         // Emit an event to log the response
-        emit Response(requestId, wtiUsdPenniesPriceOracle, s_lastResponse, s_lastError);
+        emit Response(requestId, electricRateTennesseePennies, s_lastResponse, s_lastError);
     }
 
 }
@@ -220,9 +227,9 @@ contract ElectricKeeper is FunctionsClient , KeeperCompatibleInterface , Owned ,
 //     }
 
 //     function BuyTestEightMinuteCountdown() public payable {
-//        require(msg.value == electricKeeperInstance.feeInPenniesUSDinEth(36), "MUST_HAVE_MSG_VALUE=36*FEE.");
+//        require(msg.value == electricKeeperInstance.feeInEth(36), "MUST_HAVE_MSG_VALUE=36*FEE.");
 //        for(uint ledValue = 0; ledValue < 8; ledValue++ ) {
-//             electricKeeperInstance.BuyElectricityTimeOn{value: electricKeeperInstance.feeInPenniesUSDinEth(ledValue+1)}(ledValue,ledValue+1);
+//             electricKeeperInstance.BuyElectricityTimeOn{value: electricKeeperInstance.feeInEth(ledValue+1)}(ledValue,ledValue+1);
 //         }
 //     }
 // }

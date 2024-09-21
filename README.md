@@ -46,9 +46,9 @@ forge create src/LightShowVRF.sol:LightShowVRF \
 --etherscan-api-key $basescanApiKey \
 --verify 
 ```
-### Deploy and verify LightShowVRF
+### Deploy and verify ElectricKeeper
 ```
-forge create src/LightShowVRF.sol:LightShowVRF \
+forge create src/ElectricKeeper.sol:ElectricKeeper \
 --private-key $devTestnetPrivateKey \
 --rpc-url $baseSepoliaHTTPS \
 --etherscan-api-key $basescanApiKey \
