@@ -17,9 +17,9 @@ contract ElectricKeeper is FunctionsClient , KeeperCompatibleInterface , Owned ,
 
     AggregatorV3Interface internal priceFeedETHforUSD;
 
-    mapping(uint256 => STATE) public LED; 
+    mapping(uint256 => ledStatus) public LED; 
    
-    struct STATE{ 
+    struct ledStatus { 
         uint256 Voltage; 
         uint256 ExpirationTimeUNIX; 
     }
