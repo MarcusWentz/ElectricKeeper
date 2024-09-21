@@ -150,45 +150,22 @@ contract ElectricKeeper is FunctionsClient , KeeperCompatibleInterface , Owned ,
 
     // return Functions.encodeUint256()
     
-    string constant javascriptSourceCode = "const apiResponse = await Functions.makeHttpRequest({url: `https://query1.finance.yahoo.com/v8/finance/chart/CL=F`}); if (apiResponse.error) {console.error(apiResponse.error);throw Error('Request failed');} const { data } = apiResponse; console.log('API response data:'); const wtiUsdRaw = (data.chart.result[0].meta.regularMarketPrice); console.log(wtiUsdRaw); const wtiUsdTypeIntScaled = Math.round(wtiUsdRaw*100); console.log(wtiUsdTypeIntScaled); return Functions.encodeUint256(wtiUsdTypeIntScaled);"
-    // "// Test in :"
-    // "// https://functions.chain.link/playground"
-    // "const apiResponse = await Functions.makeHttpRequest({url: `https://query1.finance.yahoo.com/v8/finance/chart/CL=F`});"
-    // "if (apiResponse.error) {console.error(apiResponse.error);throw Error('Request failed');}"
-    // "const { data } = apiResponse;"
-    // "console.log('API response data:');"
-    // "const wtiUsdRaw = (data.chart.result[0].meta.regularMarketPrice);"
-    // "console.log(wtiUsdRaw);"
-    // "const wtiUsdTypeIntScaled = Math.round(wtiUsdRaw*100);"
-    // "console.log(wtiUsdTypeIntScaled);"
-    // "return Functions.encodeUint256(wtiUsdTypeIntScaled);"
-    // "// Format the Function script with the following "
-    // "// tool to add quotes for each line for Solidity:"
-    // "// https://onlinetexttools.com/add-quotes-to-lines"
+    string constant javascriptSourceCode = "const apiResponse = await Functions.makeHttpRequest({url: `https://developer.nrel.gov/api/utility_rates/v3.json?api_key=DEMO_KEY&lat=35&lon=-85`}); if (apiResponse.error) {console.error(apiResponse.error);throw Error('Request failed');} const { data } = apiResponse; console.log('API response data:'); const electricityRateRaw = (data.outputs.residential); console.log(electricityRateRaw); const electricityRateRawIntScaled = Math.round(electricityRateRaw*100); console.log(electricityRateRawIntScaled); return Functions.encodeUint256(electricityRateRawIntScaled);";
 
-    // return Functions.encodeString();
-
-    // string constant javascriptSourceCode = "const apiResponse = await Functions.makeHttpRequest({url: `https://query1.finance.yahoo.com/v8/finance/chart/CL=F`}); if (apiResponse.error) {console.error(apiResponse.error);throw Error('Request failed');} const { data } = apiResponse; console.log('API response data:'); const wtiUsdRaw = (data.chart.result[0].meta.regularMarketPrice); console.log(wtiUsdRaw); const wtiUsdTypeIntScaled = Math.round(wtiUsdRaw*100); console.log(wtiUsdTypeIntScaled); return Functions.encodeString(wtiUsdTypeIntScaled.toString());"
-    // "// Test in :"
-        // "// https://functions.chain.link/playground"
-        // "const apiResponse = await Functions.makeHttpRequest({"
-        // "  url: `https://query1.finance.yahoo.com/v8/finance/chart/CL=F`"
-        // "})"
-        // "if (apiResponse.error) {"
-        // "  console.error(apiResponse.error)"
-        // "  throw Error('Request failed');"
-        // "}"
-        // "const { data } = apiResponse;"
-        // "console.log('API response data:');"
-        // "const wtiUsdRaw = (data.chart.result[0].meta.regularMarketPrice);"
-        // "console.log(wtiUsdRaw);"
-        // "const wtiUsdTypeIntScaled = Math.round(wtiUsdRaw*100);"
-        // "console.log(wtiUsdTypeIntScaled);"
-        // "return Functions.encodeString(wtiUsdTypeIntScaled.toString());"
-        // "// Format the Function script with the following "
-        // "// tool to add quotes for each line for Solidity:"
-        // "// https://onlinetexttools.com/add-quotes-to-lines"
-    ;
+    // // Test in :
+    // // https://functions.chain.link/playground
+    // const apiResponse = await Functions.makeHttpRequest({url: `https://developer.nrel.gov/api/utility_rates/v3.json?api_key=DEMO_KEY&lat=35&lon=-85`});
+    // if (apiResponse.error) {console.error(apiResponse.error);throw Error('Request failed');}
+    // const { data } = apiResponse;
+    // console.log('API response data:');
+    // const electricityRateRaw = (data.outputs.residential);
+    // console.log(electricityRateRaw);
+    // const electricityRateRawIntScaled = Math.round(electricityRateRaw*100);
+    // console.log(electricityRateRawIntScaled);
+    // return Functions.encodeUint256(electricityRateRawIntScaled);
+    // // Format the Function script with the following 
+    // // tool to add quotes for each line for Solidity:
+    // // https://onlinetexttools.com/add-quotes-to-lines
 
     /**
      * @notice Sends an HTTP request for character information
