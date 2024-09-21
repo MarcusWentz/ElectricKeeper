@@ -32,7 +32,6 @@ contract ElectricKeeper is FunctionsClient , KeeperCompatibleInterface , Owned ,
 
     modifier validLEDvalues(uint256 ledValue) {
         // // LED VALUE RANGE IS 0 TO 7.
-        // require(ledValue < 8, "LED_VALUES_RED_0_BLUE_1_YELLOW_2_GREEN_3_PURPLE_4_ORANGE_5_PINK_6_WHITE_7.");
         if(ledValue > 7) revert InvalidLedValue();
         _;
     }
@@ -65,7 +64,7 @@ contract ElectricKeeper is FunctionsClient , KeeperCompatibleInterface , Owned ,
         return false;
     }
 
-    function BuyElectricityTimeOn(uint256 ledValue, uint256 minutesToHaveOn) public payable validLEDvalues(ledValue) {
+    function buyElectricityTimeOn(uint256 ledValue, uint256 minutesToHaveOn) public payable validLEDvalues(ledValue) {
         // @dev Save the results from feeInEth(minutesToHaveOn) to avoid doing conversions every call. 
         uint256 feeInEthCurrent = feeInEth(minutesToHaveOn);       
         if(minutesToHaveOn*electricRateTennesseePennies == 0) revert OracleValueZero();  
@@ -103,8 +102,8 @@ contract ElectricKeeper is FunctionsClient , KeeperCompatibleInterface , Owned ,
         emit VoltageChange();
     }
 
-    function OwnerManualExpirationOff() public onlyOwner {
-        require(expirationOccured() , "NO_EXPIRATION_YET.");
+    function ownerManualExpirationOff() public onlyOwner {
+        if(expirationOccured() == false) revert NoExpirationYet();
         for(uint256 ledValue = 0; ledValue < 8; ledValue++) {
             if(LED[ledValue].Voltage == 1 && block.timestamp > LED[ledValue].ExpirationTimeUNIX){
                 LED[ledValue].Voltage  = 0;
@@ -114,15 +113,15 @@ contract ElectricKeeper is FunctionsClient , KeeperCompatibleInterface , Owned ,
         emit VoltageChange();
     }
 
-    function OwnerEmergencyDangerOff(uint256 ledValue) public onlyOwner validLEDvalues(ledValue) {
-        require(LED[ledValue].Voltage == 1, "VOLTAGE_NOT_ON.");
+    function ownerEmergencyDangerOff(uint256 ledValue) public onlyOwner validLEDvalues(ledValue) {
+        if(LED[ledValue].Voltage != 1) revert VoltageNotOn();
         LED[ledValue].Voltage  = 2;
         LED[ledValue].ExpirationTimeUNIX -= block.timestamp;
         emit VoltageChange();
     }
 
-    function OwnerEmergencySafeOn(uint256 ledValue) public onlyOwner validLEDvalues(ledValue) {
-        require(LED[ledValue].Voltage == 2, "VOLTAGE_NOT_IN_EMERGENCY_OFF_STATE.");
+    function ownerEmergencySafeOn(uint256 ledValue) public onlyOwner validLEDvalues(ledValue) {
+        if(LED[ledValue].Voltage != 2) revert VoltageNotInEmergencyOffState();
         LED[ledValue].Voltage  = 1;
         LED[ledValue].ExpirationTimeUNIX += block.timestamp;
         emit VoltageChange();

@@ -7,6 +7,9 @@ interface IElectricKeeper {
     error OracleValueZero();
     error MsgValueTooSmall();
     error EtherNotSent();
+    error NoExpirationYet();
+    error VoltageNotOn();
+    error VoltageNotInEmergencyOffState();
     error UnexpectedRequestID(bytes32 requestId);
     
     // events
