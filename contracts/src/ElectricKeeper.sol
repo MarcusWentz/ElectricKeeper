@@ -10,8 +10,9 @@ import {KeeperCompatibleInterface} from "chainlink/v0.8/KeeperCompatible.sol";
 import {ChainlinkClient,Chainlink} from "chainlink/v0.8/ChainlinkClient.sol"; 
 import {AggregatorV3Interface} from  "chainlink/v0.8/interfaces/AggregatorV3Interface.sol";
 import {Owned} from "solmate/auth/Owned.sol";
+import {IElectricKeeper} from "./interfaces/IElectricKeeper.sol";
 
-contract ElectricKeeper is KeeperCompatibleInterface, ChainlinkClient , Owned { 
+contract ElectricKeeper is KeeperCompatibleInterface, ChainlinkClient , Owned , IElectricKeeper { 
 
     using Chainlink for Chainlink.Request;
     AggregatorV3Interface internal priceFeed;
@@ -25,15 +26,15 @@ contract ElectricKeeper is KeeperCompatibleInterface, ChainlinkClient , Owned {
         uint256 ExpirationTimeUNIX; 
     }
 
-    event VoltageChange();
-
     constructor() Owned(msg.sender) {
         _setChainlinkToken(0x326C977E6efc84E512bB9C30f76E30c160eD06FB);
         priceFeed = AggregatorV3Interface(0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada); //MATIC/USD on Polygon Testnet Mumbai network.
     }
 
     modifier validLEDvalues(uint256 ledValue) {
-        require(ledValue < 8, "LED_VALUES_RED_0_BLUE_1_YELLOW_2_GREEN_3_PURPLE_4_ORANGE_5_PINK_6_WHITE_7.");
+        // // LED VALUE RANGE IS 0 TO 7.
+        // require(ledValue < 8, "LED_VALUES_RED_0_BLUE_1_YELLOW_2_GREEN_3_PURPLE_4_ORANGE_5_PINK_6_WHITE_7.");
+        if(ledValue > 7) revert invalidLedValue();
         _;
     }
 
