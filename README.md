@@ -46,6 +46,12 @@ https://vrf.chain.link/base-sepolia#/side-drawer/subscription/685257845757840285
 
 https://docs.chain.link/data-feeds/price-feeds/addresses?network=base&page=1#base-sepolia-testnet
 
+## Base Sepolia Deployments
+
+### ElectricKeeper.sol
+
+https://sepolia.basescan.org/address/0x1dd241b92b7656f6bc34433966cfca1f37c444d9#code
+
 ## Foundry Forge Commands
 
 ### Install Chainlink Library
