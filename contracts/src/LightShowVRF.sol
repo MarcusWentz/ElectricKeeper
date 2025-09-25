@@ -19,7 +19,7 @@ contract LightShowVRF is VRFConsumerBaseV2Plus , ILightShowVRF {
     // Base Sepolia network info:
     // https://docs.chain.link/vrf/v2-5/supported-networks#base-sepolia-testnet
 
-    // Sepolia coordinator. For other networks,
+    // Base Sepolia coordinator. For other networks,
     // see https://docs.chain.link/vrf/v2-5/supported-networks#configurations
     address public constant vrfCoordinator = 0x5C210eF41CD1a72de73bF76eC39637bB0d3d7BEE;
 
